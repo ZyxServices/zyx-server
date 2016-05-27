@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>tiyujia-parent</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>zyx-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>tiyujia-parent</groupId>
@@ -21,36 +21,36 @@
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-common</artifactId>
-			<version>${common.version}</version>
+			<version>${zyx.common.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
-			<version>${dao.version}</version>
+			<version>${zyx.dao.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-config</artifactId>
-			<version>${config.version}</version>
+			<version>${zyx.config.version}</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-core</artifactId>
-			<version>${core.version}</version>
+			<version>${zyx.core.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-dao</artifactId>
-			<version>${dao.version}</version>
+			<version>${zyx.dao.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-file</artifactId>
-			<version>${file.version}</version>
+			<version>${zyx.file.version}</version>
 		</dependency>
 
 		<dependency>

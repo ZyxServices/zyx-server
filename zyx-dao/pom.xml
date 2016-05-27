@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
-			<artifactId>common</artifactId>
+			<artifactId>zyx-common</artifactId>
 			<version>${zyx.common.version}</version>
 		</dependency>
 
