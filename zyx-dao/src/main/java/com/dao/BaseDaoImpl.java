@@ -44,7 +44,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	 * 可以调用sessionTemplate完成数据库操作.
 	 */
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	protected SqlSessionTemplate sessionTemplate;
 
 	public SqlSessionTemplate getSessionTemplate() {
 		return sessionTemplate;

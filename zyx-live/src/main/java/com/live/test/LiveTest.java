@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.common.enums.LiveLab;
 import com.common.enums.LiveType;
 import com.entity.live.LiveInfo;
-import com.service.live.LiveInfoService;
+import com.service.live.impl.LiveInfoServiceImpl;
 
 public class LiveTest {
 
@@ -21,7 +21,7 @@ public class LiveTest {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
 			System.out.println(context.getApplicationName());
 			context.start();
-			LiveInfoService liveInfoServie=(LiveInfoService) context.getBean("liveInfoService");
+			LiveInfoServiceImpl liveInfoServie=(LiveInfoServiceImpl) context.getBean("liveInfoService");
 			System.out.println(liveInfoServie);
 			
 			LiveInfo liveInfo = new LiveInfo();

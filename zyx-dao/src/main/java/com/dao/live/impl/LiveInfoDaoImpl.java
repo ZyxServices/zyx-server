@@ -6,7 +6,7 @@ import com.dao.BaseDaoImpl;
 import com.dao.live.LiveInfoDao;
 import com.entity.live.LiveInfo;
 
-@Repository("liveInfo")
+@Repository("liveInfoDao")
 public class LiveInfoDaoImpl extends BaseDaoImpl<LiveInfo> implements LiveInfoDao{
 
 }
