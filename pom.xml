@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>tiyujia-parent</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>zyx-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>parent</name>
-    <description>parent</description>
+    <name>zyx-parent</name>
+    <description>zyx-parent</description>
     <modules>
         <module>zyx-common</module>
         <module>zyx-core</module>
@@ -24,13 +24,16 @@
     </modules>
 
     <properties>
+        <maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <common.version>0.0.1-SNAPSHOT</common.version>
-        <config.version>0.0.1-SNAPSHOT</config.version>
-        <core.version>0.0.1-SNAPSHOT</core.version>
-        <dao.version>0.0.1-SNAPSHOT</dao.version>
-        <file.version>0.0.1-SNAPSHOT</file.version>
+        <zyx.common.version>0.0.1-SNAPSHOT</zyx.common.version>
+        <zyx.config.version>0.0.1-SNAPSHOT</zyx.config.version>
+        <zyx.core.version>0.0.1-SNAPSHOT</zyx.core.version>
+        <zyx.dao.version>0.0.1-SNAPSHOT</zyx.dao.version>
+        <zyx.file.version>0.0.1-SNAPSHOT</zyx.file.version>
+        <zyx.entity.version>0.0.1-SNAPSHOT</zyx.entity.version>
+        <zyx.services.version>0.0.1-SNAPSHOT</zyx.services.version>
 
 
         <!-- facade projects -->
@@ -44,6 +47,14 @@
 
 
         <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>3.2.4.RELEASE</spring.version>
+        <mybatis.spring.version>1.2.4</mybatis.spring.version>
+        <mysql.version>5.1.32</mysql.version>
+        <pagehelper.version>4.1.4</pagehelper.version>
+        <mybatis.version>3.3.1</mybatis.version>
+        <mapper.version>3.3.6</mapper.version>
 
     </properties>
 

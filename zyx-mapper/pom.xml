@@ -4,23 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>tiyujia-parent</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>zyx-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>tiyujia-parent</groupId>
   <artifactId>zyx-mapper</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>zyx-mapper</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.2.4.RELEASE</spring.version>
-    <mybatis.spring.version>1.2.4</mybatis.spring.version>
-    <mysql.version>5.1.32</mysql.version>
-      <pagehelper.version>4.1.4</pagehelper.version>
-       <mybatis.version>3.3.1</mybatis.version>
-        <mapper.version>3.3.6</mapper.version>
-  </properties>
   <dependencies>
     <dependency>
             <groupId>junit</groupId>
