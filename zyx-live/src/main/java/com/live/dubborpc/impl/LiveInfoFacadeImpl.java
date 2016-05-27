@@ -3,7 +3,7 @@ package com.live.dubborpc.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.entity.live.LiveInfo;
+import com.zyx.entity.live.LiveInfo;
 import com.live.dubborpc.LiveInfoFacade;
 
 @Service("liveInfoFacade")

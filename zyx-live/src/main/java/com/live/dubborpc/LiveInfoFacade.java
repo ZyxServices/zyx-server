@@ -1,6 +1,6 @@
 package com.live.dubborpc;
 
-import com.entity.live.LiveInfo;
+import com.zyx.entity.live.LiveInfo;
 
 public interface LiveInfoFacade {
 	public void create ();

@@ -2,7 +2,7 @@ package com.mobileservice.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.dao.BaseDaoImpl;
+import com.zyx.dao.BaseDaoImpl;
 import com.mobileservice.dao.UserDao;
 import com.mobileservice.entity.User;
 @Repository("userDao")

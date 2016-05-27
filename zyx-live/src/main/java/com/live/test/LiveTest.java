@@ -6,10 +6,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.common.enums.LiveLab;
-import com.common.enums.LiveType;
-import com.entity.live.LiveInfo;
-import com.service.live.impl.LiveInfoServiceImpl;
+import com.zyx.common.enums.LiveLab;
+import com.zyx.common.enums.LiveType;
+import com.zyx.entity.live.LiveInfo;
+import com.zyx.service.live.impl.LiveInfoServiceImpl;
 
 public class LiveTest {
 

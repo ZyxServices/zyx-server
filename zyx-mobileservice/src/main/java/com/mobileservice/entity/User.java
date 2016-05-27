@@ -2,7 +2,7 @@ package com.mobileservice.entity;
 
 import java.util.Date;
 
-import com.entity.BaseEntity;
+import com.zyx.entity.BaseEntity;
 
 
 /**
