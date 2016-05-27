@@ -21,7 +21,8 @@
         <module>zyx-mapper</module>
         <module>zyx-entity</module>
         <module>zyx-utils</module>
-        <module>zyx-user</module>
+        <module>zyx-dubbo-user</module>
+        <module>zyx-dubbo-activity</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
         <zyx.entity.version>0.0.1-SNAPSHOT</zyx.entity.version>
         <zyx.services.version>0.0.1-SNAPSHOT</zyx.services.version>
         <zyx.user.version>0.0.1-SNAPSHOT</zyx.user.version>
+        <zyx.activity.version>0.0.1-SNAPSHOT</zyx.activity.version>
 
 
         <!-- facade projects -->
