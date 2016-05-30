@@ -3,24 +3,21 @@ package com.live.dubborpc.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.live.dubborpc.LiveInfoFacade;
+import com.live.dubborpc.TextLiveItemFacade;
 import com.zyx.entity.live.LiveInfo;
-import com.zyx.service.live.LiveInfoService;
+import com.zyx.service.live.TextLiveItemService;
 
-@Service("liveInfoFacade")
-public class LiveInfoFacadeImpl implements LiveInfoFacade {
+@Service("textLiveItemFacade")
+public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 
 	@Autowired
-	LiveInfoService liveInfoService;
+	TextLiveItemService textLiveItemService;
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public LiveInfo getById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
