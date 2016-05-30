@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.live.dao.impl.LiveInfoDaoImpl">
+<mapper namespace="com.dao.live.impl.LiveInfoDaoImpl">
 
 	<!-- 用户信息表 -->
 	<sql id="liveInfo"> t_live </sql>
@@ -17,9 +17,13 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="LiveInfo" keyProperty="id" useGeneratedKeys="true">
-		insert into <include refid="liveInfo"/>(type,start,end,userId,title,lab,bgmUrl)
-		values (#{type},#{start},#{end},#{userId},#{title},#{lab},#{bgmUrl})
+		insert into <include refid="liveInfo"/>(isPublic,type,createTime,start,end,userId,title,lab,bgmUrl,vedioUrl)
+		values (#{isPublic},#{type},#{createTime},#{start},#{end},#{userId},#{title},#{lab},#{bgmUrl},#{vedioUrl})
 	</insert>
+	
+	<select id="getById" parameterType="int" resultType="LiveInfo">
+		select * from <include refid="liveInfo"/> where id=${id}
+	</select>
 	
 	<!-- <update id="update" parameterType="User">
 		update <include refid="user"/>

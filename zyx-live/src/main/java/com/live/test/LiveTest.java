@@ -23,15 +23,20 @@ public class LiveTest {
 			context.start();
 			LiveInfoServiceImpl liveInfoServie=(LiveInfoServiceImpl) context.getBean("liveInfoService");
 			System.out.println(liveInfoServie);
-			
+//			
 			LiveInfo liveInfo = new LiveInfo();
+			liveInfo.setPublic(true);
 			liveInfo.setType(LiveType.TEXT.getType());
+			liveInfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			liveInfo.setStart(new Timestamp(System.currentTimeMillis()));
 			liveInfo.setStart(new Timestamp(System.currentTimeMillis()+1000*60*60*10));
 			liveInfo.setLab(LiveLab.NBA.getTab());
 			liveInfo.setTitle("敏敏吃饭");
+			liveInfo.setVedioUrl("http");
 			
 			liveInfoServie.save(liveInfo);
+			
+//			liveInfoServie.get(1);
 			
 		} catch (Exception e) {
 			log.error("== DubboProvider context start error:",e);

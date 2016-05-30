@@ -6,23 +6,35 @@ import com.zyx.entity.BaseEntity;
 
 
 public class LiveInfo extends BaseEntity {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3026184978520410936L;
+	private boolean isPublic;
 	private int type;
+	private Timestamp createTime;
 	private Timestamp start;
 	private Timestamp end;
 	private int userId;
 	private String title;
 	private int lab;
 	private String bgmUrl;
-	
+	private String vedioUrl;
+	public boolean isPublic() {
+		return isPublic;
+	}
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 	public int getType() {
 		return type;
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 	public Timestamp getStart() {
 		return start;
@@ -59,6 +71,12 @@ public class LiveInfo extends BaseEntity {
 	}
 	public void setBgmUrl(String bgmUrl) {
 		this.bgmUrl = bgmUrl;
+	}
+	public String getVedioUrl() {
+		return vedioUrl;
+	}
+	public void setVedioUrl(String vedioUrl) {
+		this.vedioUrl = vedioUrl;
 	}
 	
 	

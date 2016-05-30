@@ -9,7 +9,7 @@
     <description>zyx-parent</description>
     <modules>
         <module>zyx-common</module>
-        <module>zyx-core</module>
+        
         <module>zyx-config</module>
         <module>zyx-mobileservice</module>
         <module>zyx-dao</module>
@@ -20,6 +20,8 @@
         <module>zyx-service</module>
         <module>zyx-mapper</module>
         <module>zyx-entity</module>
+        
+        <module>zyx-core</module>
         <module>zyx-utils</module>
         <module>zyx-dubbo-user</module>
         <module>zyx-dubbo-activity</module>

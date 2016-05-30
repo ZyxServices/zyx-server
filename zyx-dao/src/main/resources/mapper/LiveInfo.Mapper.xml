@@ -21,6 +21,10 @@
 		values (#{type},#{start},#{end},#{userId},#{title},#{lab},#{bgmUrl})
 	</insert>
 	
+	<select id="getById" parameterType="int" resultType="LiveInfo">
+		select * from <include refid="liveInfo"/> where id=${id}
+	</select>
+	
 	<!-- <update id="update" parameterType="User">
 		update <include refid="user"/>
 		<set>			

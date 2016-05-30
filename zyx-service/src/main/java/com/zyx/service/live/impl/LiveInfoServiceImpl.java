@@ -14,7 +14,6 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 	@Autowired
 	public LiveInfoServiceImpl(LiveInfoDao liveInfoDao) {
 		super(liveInfoDao);
-		System.out.println(liveInfoDao);
 		this.liveInfoDao = liveInfoDao;
 	}
 }

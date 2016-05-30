@@ -145,6 +145,8 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	 * @return T .
 	 */
 	public T getById(long id) {
+		System.out.println("***********base dao getById************");
+//		return null;
 		return sessionTemplate.selectOne(getStatement(SQL_GET_BY_ID), id);
 	}
 
