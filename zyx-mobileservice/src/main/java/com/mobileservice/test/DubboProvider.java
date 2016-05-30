@@ -14,18 +14,19 @@ public class DubboProvider {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
 			System.out.println(context.getApplicationName());
 			context.start();
+			System.in.read();
 		} catch (Exception e) {
 			log.error("== DubboProvider context start error:",e);
 		}
-		synchronized (DubboProvider.class) {
-			while (true) {
-				try {
-					DubboProvider.class.wait();
-				} catch (InterruptedException e) {
-					log.error("== synchronized error:",e);
-				}
-			}
-		}
+//		synchronized (DubboProvider.class) {
+//			while (true) {
+//				try {
+//					DubboProvider.class.wait();
+//				} catch (InterruptedException e) {
+//					log.error("== synchronized error:",e);
+//				}
+//			}
+//		}
 	}
     
 }

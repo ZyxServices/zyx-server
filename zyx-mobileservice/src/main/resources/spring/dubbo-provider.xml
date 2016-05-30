@@ -18,4 +18,6 @@
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.mobileservice.dubborpc.UserFacade" ref="userFacade" />
 
+	<bean id="userFacade" class="com.mobileservice.dubborpc.impl.UserFacadeImpl"/>
+
 </beans>  
