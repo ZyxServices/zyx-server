@@ -9,6 +9,13 @@
   </parent>
   <artifactId>zyx-mapper</artifactId>
   <dependencies>
+  
+  
+        <dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-entity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
     <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

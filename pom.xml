@@ -25,6 +25,8 @@
         <module>zyx-utils</module>
         <module>zyx-dubbo-user</module>
         <module>zyx-dubbo-activity</module>
+         
+        <module>zyx-rpc-shop</module>
     </modules>
 
     <properties>

@@ -76,7 +76,7 @@
                 <value>classpath:mapper/*.xml</value>
             </array>
         </property>
-        <property name="typeAliasesPackage" value="com.zyx.mapper.model"/>
+        <property name="typeAliasesPackage" value="com.zyx.mapper.model,com.zyx.entity.shop"/>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">

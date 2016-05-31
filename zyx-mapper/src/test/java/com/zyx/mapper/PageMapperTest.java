@@ -1,29 +1,8 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014 abel533@gmail.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+
 
 package com.zyx.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zyx.entity.shop.Goods;
 import com.zyx.mapper.dao.CountryMapper;
 import com.zyx.mapper.dao.UserInfoMapper;
 import com.zyx.mapper.model.Country;
 import com.zyx.mapper.model.UserInfo;
+import com.zyx.mapper.service.CountryService;
+import com.zyx.mapper.service.GoodsService;
 
 import tk.mybatis.mapper.entity.Example;
 
@@ -56,8 +38,12 @@ public class PageMapperTest extends BasicTest {
 
     @Autowired
     private SqlSession sqlSession;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private CountryService countryService;
 
-    @Test
+   // @Test
     public void test(){
         CountryMapper countryMapper = sqlSession.getMapper(CountryMapper.class);
         Example example = new Example(Country.class);
@@ -74,11 +60,31 @@ public class PageMapperTest extends BasicTest {
     	List<UserInfo>  us =usermapper.selectAll();
     	System.out.println("----------------------us"+us.size());
     }
-    @Test
+  //  @Test
     public void test1(){
-    	UserInfoMapper usermapper = sqlSession.getMapper(UserInfoMapper.class);
-    	List<UserInfo>  us =usermapper.selectAll();
-    	System.out.println("----------------------us"+us.size());
+    	Country CC = countryService.selectByKey(1);
+    	System.out.println(CC);
     	 
     }
+    
+ // @Test
+    public void test2(){
+    	Goods gg = new Goods();
+    	gg.setCreateTime(new Date());
+    //	gg.setVersion(1);
+    	gg.setTitle("1111");
+    	gg.setDesc("joihklhkjhkjhahahah1111");
+    	gg.setType(1);
+    	gg.setPrice(55f);
+    	gg.setScope(55);
+    	goodsService.save(gg);
+    	
+    }
+   
+ @Test
+   public void test3(){
+	   Goods gg= goodsService.selectByKey(10);
+	   System.out.println(gg);
+   	
+   }
 }

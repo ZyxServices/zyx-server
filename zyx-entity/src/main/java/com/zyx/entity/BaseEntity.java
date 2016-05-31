@@ -3,6 +3,15 @@ package com.zyx.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.apache.ibatis.type.JdbcType;
+
+import tk.mybatis.mapper.annotation.ColumnType;
+
 /**
  * 
  * @描述: 基础实体类，包含各实体公用属性 .
@@ -13,12 +22,16 @@ public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/** 主键ID **/
+	    @Id
+	    @Column(name = "id")
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @ColumnType(jdbcType = JdbcType.INTEGER)
 	private Long id;
 	
-	/** 版本号 **/
-	private Integer version = 0;
 	
 	/** 创建时间 **/
+	 @Column
+	 @ColumnType(jdbcType = JdbcType.DATE)
 	private Date createTime;
 	
 	
@@ -32,15 +45,6 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	/** 版本号 **/
-	public Integer getVersion() {
-		return version;
-	}
-
-	/** 版本号 **/
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 
 	/** 创建时间 **/
 	public Date getCreateTime() {
