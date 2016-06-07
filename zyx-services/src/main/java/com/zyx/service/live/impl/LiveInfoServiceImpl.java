@@ -16,4 +16,5 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		super(liveInfoDao);
 		this.liveInfoDao = liveInfoDao;
 	}
+
 }

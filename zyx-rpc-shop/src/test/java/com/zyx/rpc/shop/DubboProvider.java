@@ -12,7 +12,7 @@ public class DubboProvider {
 		try {
 			System.out.println("-------------------------");
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
-			System.out.println(context.getApplicationName());
+//			System.out.println(context.getApplicationName());
 			context.start();
 			System.in.read();
 		} catch (Exception e) {

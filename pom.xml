@@ -17,7 +17,7 @@
 
 
         <module>zyx-live</module>
-        <module>zyx-service</module>
+        <module>zyx-services</module>
         <module>zyx-mapper</module>
         <module>zyx-entity</module>
         
@@ -27,6 +27,7 @@
         <module>zyx-dubbo-activity</module>
          
         <module>zyx-rpc-shop</module>
+        <module>zyx-dubbo-concern</module>
     </modules>
 
     <properties>
@@ -41,6 +42,7 @@
         <zyx.services.version>0.0.1-SNAPSHOT</zyx.services.version>
         <zyx.user.version>0.0.1-SNAPSHOT</zyx.user.version>
         <zyx.activity.version>0.0.1-SNAPSHOT</zyx.activity.version>
+        <zyx.mapper.version>0.0.1-SNAPSHOT</zyx.mapper.version>
 
 
         <!-- facade projects -->

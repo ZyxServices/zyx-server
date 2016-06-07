@@ -72,13 +72,10 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
-            <array>
                 <value>classpath:mapper/*.xml</value>
-            </array>
         </property>
         <property name="typeAliasesPackage" value="com.zyx.mapper.model,com.zyx.entity.shop"/>
         <property name="plugins">
-            <array>
                 <bean class="com.github.pagehelper.PageHelper">
                     <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
                     <property name="properties">
@@ -88,7 +85,6 @@
                         </value>
                     </property>
                 </bean>
-            </array>
         </property>
     </bean>
 
