@@ -3,17 +3,18 @@ package com.zyx.concren.impl;
 import com.zyx.concren.ConcrenInfoService;
 import com.zyx.entity.playground.Concern;
 import com.zyx.mapper.service.ConcrenService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 
 /**
  * Created by XiaoWei on 2016/6/7.
  */
-@Service
+@Service("concrenInfoService")
 public class ConcrenInfoServiceImpl implements ConcrenInfoService {
 
-    @Resource
+	@Autowired
     private ConcrenService concrenService;
 
     @Override
