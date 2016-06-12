@@ -7,4 +7,5 @@ import com.zyx.entity.playground.Concern;
  */
 public interface ConcrenInfoService {
     void Add(Concern concern);
+    void custom();
 }

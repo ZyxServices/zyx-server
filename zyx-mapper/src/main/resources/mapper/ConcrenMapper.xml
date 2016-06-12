@@ -33,7 +33,6 @@
     <result column="topicTitle" property="topicTitle" jdbcType="VARCHAR" />
     <result column="topicVisible" property="topicVisible" jdbcType="INTEGER" />
     <result column="topicZan" property="topicZan" jdbcType="INTEGER" />
-
   </resultMap>
 
 </mapper>

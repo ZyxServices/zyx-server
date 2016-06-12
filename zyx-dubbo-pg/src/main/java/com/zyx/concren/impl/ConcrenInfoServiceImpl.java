@@ -18,6 +18,11 @@ public class ConcrenInfoServiceImpl implements ConcrenInfoService {
     private ConcrenService concrenService;
 
     @Override
+    public void custom() {
+        concrenService.custom();
+    }
+
+    @Override
     public void Add(Concern concern) {
         concrenService.save(concern);
     }

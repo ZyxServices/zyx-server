@@ -10,4 +10,8 @@ import org.springframework.stereotype.Service;
 @Service("concrenService")
 public class ConcrenServicImpl extends BaseService<Concern> implements ConcrenService {
 
+    @Override
+    public void custom() {
+
+    }
 }

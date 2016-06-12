@@ -16,7 +16,7 @@ public class DubboProvider {
     public static void main(String[] args) {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
-            System.out.println(context.getApplicationName());
+//            System.out.println(context.getApplicationName());
             context.start();
             System.in.read();
         } catch (IOException e) {

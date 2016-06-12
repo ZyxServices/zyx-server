@@ -27,7 +27,7 @@
         <module>zyx-dubbo-activity</module>
          
         <module>zyx-rpc-shop</module>
-        <module>zyx-dubbo-concern</module>
+        <module>zyx-dubbo-pg</module>
     </modules>
 
     <properties>
