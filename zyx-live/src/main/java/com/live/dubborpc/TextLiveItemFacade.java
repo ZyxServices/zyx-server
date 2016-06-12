@@ -1,9 +1,11 @@
 package com.live.dubborpc;
 
-import com.zyx.entity.live.LiveInfo;
-
 public interface TextLiveItemFacade {
+	/**
+	 * 创建直播
+	 * @param liveInfo
+	 */
 	public void create ();
-	public LiveInfo getById(int id);
+//	public LiveInfo getById(int id);
 
 }

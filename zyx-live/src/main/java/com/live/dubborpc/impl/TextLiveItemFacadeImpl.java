@@ -16,9 +16,5 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 	public void create() {
 	}
 
-	@Override
-	public LiveInfo getById(int id) {
-		return null;
-	}
 
 }

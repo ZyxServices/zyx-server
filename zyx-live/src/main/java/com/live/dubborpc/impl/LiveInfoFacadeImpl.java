@@ -12,16 +12,18 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
 	@Autowired
 	LiveInfoService liveInfoService;
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public LiveInfo getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void create(LiveInfo  liveInfo) {
+
+		liveInfoService.save(liveInfo);
 	}
+
+//	@Override
+//	public LiveInfo getById(int id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 
 }
