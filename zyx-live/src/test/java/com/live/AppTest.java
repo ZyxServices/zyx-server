@@ -1,7 +1,7 @@
 package com.live;
 
 
-import com.zyx.impl.live.LiveInfoServiceImpl;
+import com.zyx.service.live.impl.LiveInfoServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
