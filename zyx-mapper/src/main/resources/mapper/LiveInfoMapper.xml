@@ -3,7 +3,7 @@
 <mapper namespace="com.zyx.service.live.LiveInfoService">
 
 	<!-- 用户信息表 -->
-	<sql id="liveInfo"> t_live </sql>
+	<!-- <sql id="liveInfo"> t_live </sql> -->
 
 	<resultMap id="LiveInfo" type="com.zyx.entity.live.LiveInfo">
 		<id column="id" property="id" />
@@ -16,7 +16,7 @@
 		<id column="bgmUrl" property="bgmUrl" />
 	</resultMap>
 
-	<insert id="LiveInfo_add" parameterType="com.zyx.entity.live.LiveInfo"
+	<!-- <insert id="LiveInfo_add" parameterType="com.zyx.entity.live.LiveInfo"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="liveInfo" />
@@ -30,7 +30,7 @@
 		select * from
 		<include refid="liveInfo" />
 		where id=${id}
-	</select>
+	</select> -->
 
 	<!-- <update id="update" parameterType="User"> update <include refid="user"/> 
 		<set> name=#{name}, nick=#{nick}, passWord=#{passWord}, phone=#{phone}, url=#{url}, 

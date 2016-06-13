@@ -5,11 +5,14 @@ import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
+
 import java.util.Date;
 
 /**
  * Created by XiaoWei on 2016/6/3.
  */
+
 public class Concern extends BaseEntity {
     private static final long serialVersionUID = 1L;
     @Column
