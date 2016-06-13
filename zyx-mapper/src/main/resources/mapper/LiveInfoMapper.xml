@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyx.dao.live.impl.LiveInfoDaoImpl">
+<mapper namespace="com.zyx.mapper.live.LiveInfoMapper">
 
 	<!-- 用户信息表 -->
-	<sql id="textLiveItem"> t_live_item_text </sql>
+	<sql id="liveInfo"> t_live </sql>
 
-	<resultMap id="textLiveItem" type="com.zyx.entity.live.TextLiveItem">
+	<resultMap id="LiveInfo" type="com.zyx.entity.live.LiveInfo">
 		<id column="id" property="id" />
-		<id column="liveId" property="live_id" />
-		<id column="createTime" property="create_time" />
-		<id column="content" property="content" />
-		<id column="imgUrl" property="img_url" />
+		<id column="type" property="type" />
+		<id column="start" property="start" />
+		<id column="end" property="end" />
+		<id column="userId" property="userId" />
+		<id column="title" property="title" />
+		<id column="lab" property="lab" />
+		<id column="bgmUrl" property="bgmUrl" />
 	</resultMap>
 
-	<insert id="TextLiveItem_add" parameterType="com.zyx.entity.live.TextLiveItem"
+	<insert id="LiveInfo_add" parameterType="com.zyx.entity.live.LiveInfo"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into
-		<include refid="textLiveItem" />
-		(live_id,create_time,content,img_url)
+		<include refid="liveInfo" />
+		(isPublic,type,createTime,start,end,userId,title,lab,bgmUrl,vedioUrl)
 		values
-		(#{lvieId},#{createTime},#{content},#{imgUrl})
+		(#{isPublic},#{type},#{createTime},#{start},#{end},#{userId},#{title},#{lab},#{bgmUrl},#{vedioUrl})
 	</insert>
 
+
+	<select id="getById" parameterType="int" resultType="LiveInfo">
+		select * from
+		<include refid="liveInfo" />
+		where id=${id}
+	</select>
 
 	<!-- <update id="update" parameterType="User"> update <include refid="user"/> 
 		<set> name=#{name}, nick=#{nick}, passWord=#{passWord}, phone=#{phone}, url=#{url}, 

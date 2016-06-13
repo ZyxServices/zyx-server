@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>tiyujia-parent</groupId>
 		<artifactId>zyx-parent</artifactId>
@@ -12,32 +11,138 @@
 	<artifactId>zyx-services</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-dao</artifactId>
-			<version>${zyx.dao.version}</version>
-		</dependency>
+		<!-- <dependency> <groupId>tiyujia-parent</groupId> <artifactId>zyx-dao</artifactId> 
+			<version>${zyx.dao.version}</version> </dependency> -->
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-config</artifactId>
 			<version>${zyx.config.version}</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-entity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!--web -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!--spring-oxm依赖 -->
+		<!-- <dependency> <groupId>org.codehaus.castor</groupId> <artifactId>castor-xml</artifactId> 
+			<version>1.3.3</version> </dependency> spring-json依赖 <dependency> <groupId>com.fasterxml.jackson.core</groupId> 
+			<artifactId>jackson-databind</artifactId> <version>2.4.2</version> </dependency> 
+			<dependency> <groupId>com.fasterxml.jackson.dataformat</groupId> <artifactId>jackson-dataformat-xml</artifactId> 
+			<version>2.4.2</version> </dependency> -->
+		<!--spring-aop依赖 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+
+		<!--上传文件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!--mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
+			<artifactId>druid</artifactId>
+			<version>1.0.11</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
+
+		<!--Mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis.spring.version}</version>
+		</dependency>
+		<!-- Mybatis Generator -->
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.2</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<!--分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+		<!--通用Mapper -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>${mapper.version}</version>
+		</dependency>
+		<!---->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
 		</dependency>
 
 		<dependency>
@@ -75,37 +180,32 @@
 			<artifactId>spring-expression</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		<!--<dependency>-->
-		<!--<groupId>org.springframework</groupId>-->
-		<!--<artifactId>spring-core</artifactId>-->
-		<!--<version>${org.springframework.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework</groupId>-->
-		<!--<artifactId>spring-aspects</artifactId>-->
-		<!--<version>${org.springframework.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework</groupId>-->
-		<!--<artifactId>spring-instrument</artifactId>-->
-		<!--<version>${org.springframework.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework</groupId>-->
-		<!--<artifactId>spring-instrument-tomcat</artifactId>-->
-		<!--<version>${org.springframework.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework</groupId>-->
-		<!--<artifactId>spring-jms</artifactId>-->
-		<!--<version>${org.springframework.version}</version>-->
-		<!--</dependency>-->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework</groupId> -->
+		<!--<artifactId>spring-core</artifactId> -->
+		<!--<version>${org.springframework.version}</version> -->
+		<!--</dependency> -->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework</groupId> -->
+		<!--<artifactId>spring-aspects</artifactId> -->
+		<!--<version>${org.springframework.version}</version> -->
+		<!--</dependency> -->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework</groupId> -->
+		<!--<artifactId>spring-instrument</artifactId> -->
+		<!--<version>${org.springframework.version}</version> -->
+		<!--</dependency> -->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework</groupId> -->
+		<!--<artifactId>spring-instrument-tomcat</artifactId> -->
+		<!--<version>${org.springframework.version}</version> -->
+		<!--</dependency> -->
+		<!--<dependency> -->
+		<!--<groupId>org.springframework</groupId> -->
+		<!--<artifactId>spring-jms</artifactId> -->
+		<!--<version>${org.springframework.version}</version> -->
+		<!--</dependency> -->
 
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.12</version>
-		</dependency>
 
 	</dependencies>
 	<build>
@@ -161,7 +261,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -204,7 +304,7 @@
 						<configuration>
 							<type>jar</type>
 							<includeTypes>jar</includeTypes>
-							<useUniqueVersions>false</useUniqueVersions>
+							<!--<useUniqueVersions>false</useUniqueVersions>-->
 							<outputDirectory>
 								${project.build.directory}/lib
 							</outputDirectory>

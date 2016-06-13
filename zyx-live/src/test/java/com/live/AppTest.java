@@ -40,7 +40,7 @@ public class AppTest extends TestCase {
 			System.out.println("-------------------------");
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 					"classpath:spring/spring-context.xml");
-			System.out.println(context.getApplicationName());
+//			System.out.println(context.getApplicationName());
 			context.start();
 			LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl) context.getBean("liveInfoService");
 			System.out.println(liveInfoServie);
