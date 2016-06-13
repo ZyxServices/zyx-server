@@ -1,5 +1,6 @@
 package com.zyx.entity.activity;
 
+import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
@@ -16,11 +17,7 @@ import java.util.Date;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.entity.activity
  */
-public class ActivityMember {
-
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer id;
+public class ActivityMember extends BaseEntity {
 
     /**
      * 活动ID
@@ -71,14 +68,6 @@ public class ActivityMember {
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String memberInfo;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getActivityId() {
         return activityId;
@@ -139,7 +128,6 @@ public class ActivityMember {
     @Override
     public String toString() {
         return "ActivityMember{" +
-                "id=" + id +
                 ", activityId=" + activityId +
                 ", userId=" + userId +
                 ", userNick='" + userNick + '\'' +

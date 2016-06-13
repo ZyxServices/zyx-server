@@ -1,6 +1,7 @@
 package com.dubborpc.activity.impl;
 
 import com.dubborpc.activity.ActivityFacade;
+import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.service.activity.ActivityService;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,15 @@ public class ActivityFacadeimpl implements ActivityFacade {
     private ActivityService activityService;
 
     @Override
-    public Map<String, Object> insertActivity(String title, String desc, String image, String startTime, String endTime, String lastTime, String maxPeople,
-                                              String visible, String phone, String price, String type, String address, String examine, String memberTemplate) {
-        return activityService.insterActivity(title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate);
+    public Map<String, Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
+                                              Long endTime, Long lastTime, Integer maxPeople, Integer visible,
+                                              String phone, Double price, Integer type, String address, Integer examine,
+                                              String memberTemplate) {
+        return activityService.insterActivity(createId, title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate);
+    }
+
+    @Override
+    public Map<String, Object> queryActivity(QueryActivityParm parm) {
+        return activityService.queryActivity(parm);
     }
 }
