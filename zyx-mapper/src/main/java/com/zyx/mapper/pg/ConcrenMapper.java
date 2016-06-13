@@ -1,6 +1,6 @@
-package com.zyx.mapper.shop;
+package com.zyx.mapper.pg;
 
-import com.zyx.entity.playground.Concern;
+import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.BaseMapper;
 
 /**

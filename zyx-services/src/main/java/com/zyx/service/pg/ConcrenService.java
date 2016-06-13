@@ -1,6 +1,6 @@
 package com.zyx.service.pg;
 
-import com.zyx.entity.playground.Concern;
+import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseService;
 
 /**

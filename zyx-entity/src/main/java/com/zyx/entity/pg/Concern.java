@@ -1,4 +1,4 @@
-package com.zyx.entity.playground;
+package com.zyx.entity.pg;
 
 import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;

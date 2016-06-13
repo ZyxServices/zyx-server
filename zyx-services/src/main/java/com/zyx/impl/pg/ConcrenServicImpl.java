@@ -3,7 +3,7 @@ package com.zyx.impl.pg;
 
 import org.springframework.stereotype.Service;
 
-import com.zyx.entity.playground.Concern;
+import com.zyx.entity.pg.Concern;
 import com.zyx.impl.BaseServiceImpl;
 import com.zyx.service.pg.ConcrenService;
 

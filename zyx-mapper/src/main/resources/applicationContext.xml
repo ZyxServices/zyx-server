@@ -74,7 +74,7 @@
         <property name="mapperLocations">
                 <value>classpath:mapper/*.xml</value>
         </property>
-        <property name="typeAliasesPackage" value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.playground"/>
+        <property name="typeAliasesPackage" value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.pg"/>
         <property name="plugins">
                 <bean class="com.github.pagehelper.PageHelper">
                     <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->

@@ -2,7 +2,7 @@ package com.zyx.dao.concren.impl;
 
 import com.zyx.dao.BaseDaoImpl;
 import com.zyx.dao.concren.ConcernDAO;
-import com.zyx.entity.playground.Concern;
+import com.zyx.entity.pg.Concern;
 import org.springframework.stereotype.Repository;
 
 /**
