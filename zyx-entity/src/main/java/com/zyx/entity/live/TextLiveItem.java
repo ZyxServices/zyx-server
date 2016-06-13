@@ -1,9 +1,16 @@
 package com.zyx.entity.live;
 
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Table;
+
+import org.apache.ibatis.type.JdbcType;
 
 import com.zyx.entity.BaseEntity;
 
+import tk.mybatis.mapper.annotation.ColumnType;
+
+
+@Table(name="t_live_item_text")
 public class TextLiveItem extends BaseEntity{
 
 	
@@ -11,21 +18,20 @@ public class TextLiveItem extends BaseEntity{
 	
 	private static final long serialVersionUID = 5254933749194981402L;
 	
-	private long lvieId;
-	private Timestamp createTime;
+	@Column
+	@ColumnType(jdbcType = JdbcType.BIGINT)
+	private long liveId;
+	@Column
+	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String content;
+	@Column
+	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String imgUrl;
-	public long getLvieId() {
-		return lvieId;
+	public long getLiveId() {
+		return liveId;
 	}
-	public void setLvieId(long lvieId) {
-		this.lvieId = lvieId;
-	}
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
+	public void setLvieId(long liveId) {
+		this.liveId = liveId;
 	}
 	public String getContent() {
 		return content;

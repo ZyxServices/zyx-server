@@ -9,7 +9,7 @@
            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd  
            http://www.springframework.org/schema/context  
            http://www.springframework.org/schema/context/spring-context-3.2.xsd"
-	default-autowire="byName" default-lazy-init="false">
+	default-lazy-init="false">
 
 	<!-- 采用注释的方式配置bean -->
 	<context:annotation-config />
@@ -21,8 +21,9 @@
 	<context:property-placeholder location="classpath:jdbc.properties,classpath:service.properties" />
 
 	<!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />	
-	
-	<import resource="classpath:spring/applicationContext.xml" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<import resource="classpath:applicationContext.xml" />
 	<import resource="classpath:spring/dubbo-provider.xml" />
+	
 </beans>

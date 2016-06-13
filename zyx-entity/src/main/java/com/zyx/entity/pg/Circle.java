@@ -53,15 +53,6 @@ public class Circle extends BaseEntity {
         this.createId = createId;
     }
 
-    @Override
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public Integer getState() {
         return state;

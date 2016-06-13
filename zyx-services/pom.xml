@@ -11,6 +11,21 @@
 	<artifactId>zyx-services</artifactId>
 
 	<dependencies>
+		<!-- <dependency> <groupId>tiyujia-parent</groupId> <artifactId>zyx-dao</artifactId>
+			<version>${zyx.dao.version}</version> </dependency> -->
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-constants</artifactId>
+			<version>${zyx.constants.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-config</artifactId>
+			<version>${zyx.config.version}</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>

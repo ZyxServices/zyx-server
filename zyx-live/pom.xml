@@ -28,7 +28,6 @@
 			<version>${zyx.core.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-file</artifactId>
