@@ -1,17 +1,9 @@
 package com.live;
 
-import java.sql.Timestamp;
 
+import com.zyx.impl.LiveInfoServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.alibaba.dubbo.common.json.JSON;
-import com.zyx.common.enums.LiveLab;
-import com.zyx.common.enums.LiveType;
-import com.zyx.entity.live.LiveInfo;
-import com.zyx.entity.live.TextLiveItem;
-import com.zyx.service.live.TextLiveItemService;
-import com.zyx.service.live.impl.LiveInfoServiceImpl;
-import com.zyx.service.live.impl.TextLiveItemServiceImpl;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

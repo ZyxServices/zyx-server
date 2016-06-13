@@ -14,8 +14,14 @@
         <dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${zyx.entity.version}</version>
 		</dependency>
+
+      <dependency>
+          <groupId>tiyujia-parent</groupId>
+          <artifactId>zyx-services</artifactId>
+          <version>${zyx.services.version}</version>
+      </dependency>
     <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

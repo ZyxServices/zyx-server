@@ -11,3 +11,4 @@ target/
 *.iml
 *.class
 *.log
+lib/
