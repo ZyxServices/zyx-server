@@ -3,7 +3,7 @@ package com.zyx.concren.impl;
 import com.zyx.concren.ConcrenInfoService;
 import com.zyx.entity.playground.Concern;
 
-import com.zyx.service.shop.ConcrenService;
+import com.zyx.service.pg.ConcrenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

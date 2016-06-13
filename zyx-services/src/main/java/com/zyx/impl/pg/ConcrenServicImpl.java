@@ -1,11 +1,11 @@
-package com.zyx.impl;
+package com.zyx.impl.pg;
 
 
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.playground.Concern;
 import com.zyx.impl.BaseServiceImpl;
-import com.zyx.service.shop.ConcrenService;
+import com.zyx.service.pg.ConcrenService;
 
 /**
  * Created by XiaoWei on 2016/6/7.

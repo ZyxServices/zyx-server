@@ -1,4 +1,4 @@
-package com.zyx.impl;
+package com.zyx.impl.shop;
 
 
 import org.springframework.stereotype.Service;
