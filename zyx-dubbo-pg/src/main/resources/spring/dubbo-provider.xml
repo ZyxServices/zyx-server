@@ -20,7 +20,7 @@
 
 	<dubbo:service interface="com.zyx.service.pg.ConcrenService" ref="concrenService" />
 
-	<!--<dubbo:service interface="com.zyx.service.pg.CircleService" ref="circleService" />-->
+	<dubbo:service interface="com.zyx.service.pg.CircleService" ref="circleService" />
 
 
 
