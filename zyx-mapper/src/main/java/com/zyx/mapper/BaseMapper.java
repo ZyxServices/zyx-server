@@ -13,6 +13,6 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * @version V1.0  
  * Copyright (c)2012 chantsoft-版权所有
  */
-public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
+public interface BaseMapper<T> extends Mapper<T>, MySqlMapper<T> {
 
 }

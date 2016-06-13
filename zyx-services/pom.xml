@@ -22,6 +22,12 @@
 			<artifactId>zyx-config</artifactId>
 			<version>${zyx.config.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-mapper</artifactId>
+			<version>${zyx.config.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -75,6 +81,11 @@
 			<artifactId>spring-expression</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.2</version>
+        </dependency>
 		<!--<dependency>-->
 		<!--<groupId>org.springframework</groupId>-->
 		<!--<artifactId>spring-core</artifactId>-->
