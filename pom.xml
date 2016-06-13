@@ -11,8 +11,6 @@
         <module>zyx-common</module>
         
         <module>zyx-config</module>
-        <module>zyx-mobileservice</module>
-        <module>zyx-dao</module>
         <module>zyx-file</module>
 
 
