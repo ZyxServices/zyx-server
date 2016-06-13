@@ -10,10 +10,4 @@ import com.zyx.service.impl.BaseServiceImpl;
 
 @Service("textLiveItemService")
 public class TextLiveItemServiceImpl extends BaseServiceImpl<TextLiveItem> implements TextLiveItemService {
-	TextLiveItemDao textLiveItemDao;
-	@Autowired
-	public TextLiveItemServiceImpl(TextLiveItemDao textLiveItemDao) {
-		super(textLiveItemDao);
-		this.textLiveItemDao = textLiveItemDao;
-	}
 }

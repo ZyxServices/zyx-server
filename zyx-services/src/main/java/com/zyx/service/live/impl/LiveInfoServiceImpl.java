@@ -10,11 +10,5 @@ import com.zyx.service.live.LiveInfoService;
 
 @Service("liveInfoService")
 public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements LiveInfoService{
-	LiveInfoDao liveInfoDao;
-	@Autowired
-	public LiveInfoServiceImpl(LiveInfoDao liveInfoDao) {
-		super(liveInfoDao);
-		this.liveInfoDao = liveInfoDao;
-	}
 
 }

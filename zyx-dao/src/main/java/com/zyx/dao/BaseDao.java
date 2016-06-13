@@ -27,6 +27,13 @@ public interface BaseDao<T> {
 	 * @return id .
 	 */
 	long insert(T entity);
+	
+	/**
+	 * 根据实体名称查找插入方法
+	 * @param entity
+	 * @return
+	 */
+	long add(T entity);
 
 	/**
 	 * 批量保存对象.

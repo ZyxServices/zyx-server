@@ -9,11 +9,11 @@ public class LiveInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -3026184978520410936L;
 	private boolean isPublic;
-	private int type;
+	private long type;
 	private Timestamp createTime;
 	private Timestamp start;
 	private Timestamp end;
-	private int userId;
+	private long userId;
 	private String title;
 	private int lab;
 	private String bgmUrl;
@@ -24,7 +24,7 @@ public class LiveInfo extends BaseEntity {
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
-	public int getType() {
+	public long getType() {
 		return type;
 	}
 	public void setType(int type) {
@@ -48,7 +48,7 @@ public class LiveInfo extends BaseEntity {
 	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {

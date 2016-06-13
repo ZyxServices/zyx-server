@@ -29,6 +29,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	protected static final Logger log = LoggerFactory.getLogger(BaseDaoImpl.class);
 
 	public static final String SQL_INSERT = "insert";
+	public static final String SQL_ADD = "_add";
 	public static final String SQL_BATCH_INSERT = "batchInsert";
 	public static final String SQL_UPDATE = "update";
 	public static final String SQL_BATCH_UPDATE = "batchUpdate";
@@ -67,6 +68,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	 */
 	public long insert(T entity) {
 
+		System.out.println("插入："+getStatement(SQL_INSERT));
 		int result = sessionTemplate.insert(getStatement(SQL_INSERT), entity);
 
 		if (result <= 0) {
@@ -79,6 +81,30 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 
 		return result;
 	}
+	
+	/**
+	 * 保存对象.
+	 * 
+	 * @param entity
+	 *            .
+	 * @return id .
+	 */
+	public long add(T entity) {
+
+		System.out.println("插入："+getEntityStatement(entity.getClass().getSimpleName(),SQL_ADD));
+		int result = sessionTemplate.insert(entity.getClass().getSimpleName()+SQL_ADD, entity);
+
+		if (result <= 0) {
+			throw BizException.DB_INSERT_RESULT_0.newInstance("数据库操作,insert返回0.{%s}", getEntityStatement(entity.getClass().getSimpleName(),SQL_ADD));
+		}
+
+		if (entity != null && entity.getId() != null && result > 0) {
+			return entity.getId();
+		}
+
+		return result;
+	}
+
 
 	/**
 	 * 批量保存对象.
@@ -145,7 +171,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	 * @return T .
 	 */
 	public T getById(long id) {
-		System.out.println("***********base dao getById************");
+//		System.out.println("***********base dao getById************");
 //		return null;
 		return sessionTemplate.selectOne(getStatement(SQL_GET_BY_ID), id);
 	}
@@ -231,6 +257,15 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		String name = this.getClass().getName();
 		StringBuffer sb = new StringBuffer();
 		sb.append(name).append(".").append(sqlId);
+		String statement = sb.toString();
+
+		return statement;
+	}
+	
+	public String getEntityStatement(String clazzName,String sqlId) {
+		String name = this.getClass().getName();
+		StringBuffer sb = new StringBuffer();
+		sb.append(name).append(".").append(clazzName+sqlId);
 		String statement = sb.toString();
 
 		return statement;

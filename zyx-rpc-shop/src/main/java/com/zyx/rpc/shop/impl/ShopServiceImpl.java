@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.shop.Goods;
-import com.zyx.mapper.service.GoodsService;
 import com.zyx.rpc.shop.ShopService;
+import com.zyx.service.shop.GoodsService;
 @Service("shopService")
 public class ShopServiceImpl implements ShopService {
 	@Autowired
