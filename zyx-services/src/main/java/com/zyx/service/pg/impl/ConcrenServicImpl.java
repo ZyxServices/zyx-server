@@ -4,7 +4,7 @@ package com.zyx.service.pg.impl;
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.pg.Concern;
-import com.zyx.service.impl.BaseServiceImpl;
+import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcrenService;
 
 /**
@@ -13,8 +13,4 @@ import com.zyx.service.pg.ConcrenService;
 @Service("concrenService")
 public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcrenService {
 
-    @Override
-    public void custom() {
-
-    }
 }

@@ -11,24 +11,10 @@
 	<artifactId>zyx-services</artifactId>
 
 	<dependencies>
-		<!-- <dependency> <groupId>tiyujia-parent</groupId> <artifactId>zyx-dao</artifactId> 
-			<version>${zyx.dao.version}</version> </dependency> -->
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-config</artifactId>
-			<version>${zyx.config.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-mapper</artifactId>
-			<version>${zyx.config.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${zyx.entity.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

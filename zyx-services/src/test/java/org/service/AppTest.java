@@ -3,7 +3,6 @@ package org.service;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zyx.service.live.LiveInfoService;
-import com.zyx.service.live.impl.LiveInfoServiceImpl;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

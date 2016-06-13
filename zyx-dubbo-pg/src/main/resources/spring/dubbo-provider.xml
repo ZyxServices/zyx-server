@@ -7,7 +7,7 @@
             http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 	<!-- 提供方应用信息，用于计算依赖关系 -->
-	<dubbo:application name="concernService" />
+	<dubbo:application name="pgService" />
 
 	<!-- 使用zookeeper注册中心暴露服务地址 -->
 	<dubbo:registry protocol="zookeeper" address="112.74.78.74:2182" />
@@ -16,7 +16,13 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 		
 	
-	 <dubbo:service interface="com.zyx.concren.ConcrenInfoService" ref="concrenInfoService" />
+	 <!--<dubbo:service interface="com.zyx.concren.PgService" ref="pgService" />-->
+
+	<dubbo:service interface="com.zyx.service.pg.ConcrenService" ref="concrenService" />
+
+	<dubbo:service interface="com.zyx.service.pg.CircleService" ref="circleService" />
+
+
 
 
 </beans>  
