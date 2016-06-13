@@ -1,8 +1,9 @@
 package org.service;
 
-import com.zyx.impl.live.LiveInfoServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.zyx.service.live.LiveInfoService;
+import com.zyx.service.live.impl.LiveInfoServiceImpl;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -37,7 +38,7 @@ public class AppTest extends TestCase {
 				"classpath:applicationContext.xml");
 //		System.out.println(context.getApplicationName());
 		context.start();
-		LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl) context.getBean("liveInfoService");
+		LiveInfoService liveInfoServie = (LiveInfoService) context.getBean("liveInfoService");
 		System.out.println(liveInfoServie);
 		assertTrue(true);
 	}

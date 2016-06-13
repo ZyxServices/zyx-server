@@ -10,19 +10,12 @@
 	</parent>
 	<artifactId>zyx-mapper</artifactId>
 	<dependencies>
-
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
 			<version>${zyx.entity.version}</version>
 		</dependency>
 
-      <dependency>
-          <groupId>tiyujia-parent</groupId>
-          <artifactId>zyx-services</artifactId>
-          <version>${zyx.services.version}</version>
-      </dependency>
     <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
