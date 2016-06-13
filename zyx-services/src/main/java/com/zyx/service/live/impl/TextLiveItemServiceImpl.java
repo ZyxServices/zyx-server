@@ -1,9 +1,10 @@
-package com.zyx.impl.live;
+package com.zyx.service.live.impl;
+
+import org.springframework.stereotype.Service;
 
 import com.zyx.entity.live.TextLiveItem;
-import com.zyx.impl.BaseServiceImpl;
+import com.zyx.service.impl.BaseServiceImpl;
 import com.zyx.service.live.TextLiveItemService;
-import org.springframework.stereotype.Service;
 
 @Service("textLiveItemService")
 public class TextLiveItemServiceImpl extends BaseServiceImpl<TextLiveItem> implements TextLiveItemService {

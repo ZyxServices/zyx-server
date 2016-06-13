@@ -22,6 +22,11 @@
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-mapper</artifactId>
+			<version>${zyx.config.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -101,7 +106,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
@@ -140,10 +145,8 @@
 			<version>${mapper.version}</version>
 		</dependency>
 		<!---->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>com.alibaba</groupId> <artifactId>dubbo</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -304,7 +307,7 @@
 						<configuration>
 							<type>jar</type>
 							<includeTypes>jar</includeTypes>
-							<!--<useUniqueVersions>false</useUniqueVersions>-->
+							<!--<useUniqueVersions>false</useUniqueVersions> -->
 							<outputDirectory>
 								${project.build.directory}/lib
 							</outputDirectory>

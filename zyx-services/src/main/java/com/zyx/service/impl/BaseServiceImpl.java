@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.zyx.impl;
+package com.zyx.service.impl;
 
 import java.util.List;
 
