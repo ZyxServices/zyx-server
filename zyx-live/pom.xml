@@ -30,12 +30,6 @@
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-dao</artifactId>
-			<version>${zyx.dao.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-file</artifactId>
 			<version>${zyx.file.version}</version>
 		</dependency>

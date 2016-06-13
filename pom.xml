@@ -26,6 +26,7 @@
          
         <module>zyx-rpc-shop</module>
         <module>zyx-dubbo-pg</module>
+        <module>zyx-constants</module>
     </modules>
 
     <properties>
@@ -41,7 +42,7 @@
         <zyx.user.version>0.0.1-SNAPSHOT</zyx.user.version>
         <zyx.activity.version>0.0.1-SNAPSHOT</zyx.activity.version>
         <zyx.mapper.version>0.0.1-SNAPSHOT</zyx.mapper.version>
-
+        <zyx.constants.version>0.0.1-SNAPSHOT</zyx.constants.version>
 
         <!-- facade projects -->
         <!-- 移动端接口 -->

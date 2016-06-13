@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
-			<version>${zyx.dao.version}</version>
+			<version>${zyx.entity.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
@@ -54,12 +54,6 @@
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-core</artifactId>
 			<version>${zyx.core.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-dao</artifactId>
-			<version>${zyx.dao.version}</version>
 		</dependency>
 
 		<dependency>
