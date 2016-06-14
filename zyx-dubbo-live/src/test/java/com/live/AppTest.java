@@ -71,6 +71,7 @@ public class AppTest extends TestCase {
 			liveInfo.setCreateTime(now);
 			liveInfo.setStart(now);
 			liveInfo.setStart(now);
+
 			liveInfo.setLab(LiveLab.NBA.getTab());
 			liveInfo.setTitle("······");
 //			

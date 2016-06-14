@@ -17,7 +17,7 @@ import java.util.Map;
  * @title com.dubborpc.activity.impl
  */
 @Service("activityFacade")
-public class ActivityFacadeimpl implements ActivityFacade {
+public class ActivityFacadeImpl implements ActivityFacade {
 
     @Resource
     private ActivityService activityService;
@@ -33,5 +33,10 @@ public class ActivityFacadeimpl implements ActivityFacade {
     @Override
     public Map<String, Object> queryActivity(QueryActivityParm parm) {
         return activityService.queryActivity(parm);
+    }
+
+    @Override
+    public Map<String, Object> queryActivityMember(Integer id) {
+        return activityService.queryActivityMember(id);
     }
 }

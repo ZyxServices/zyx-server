@@ -20,11 +20,13 @@ public interface AuthActivityConstants {
     /*************************活动返回码****************************************/
 
     //活动发布失败
-    int AUTH_SUCCESS_10000 = 10000;
+    int AUTH_ERROR_10000 = 10000;
     //活动已被关闭
-    int AUTH_SUCCESS_10001 = 10001;
+    int AUTH_ERROR_10001 = 10001;
     //查无数据
-    int AUTH_SUCCESS_10002 = 10002;
+    int AUTH_ERROR_10002 = 10002;
     //分页参数无效
-    int AUTH_SUCCESS_10003 = 10003;
+    int AUTH_ERROR_10003 = 10003;
+    //活动报名失败
+    int AUTH_ERROR_10004 = 10004;
 }

@@ -7,6 +7,7 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -23,11 +24,11 @@ import java.util.Date;
 public class Activity extends BaseEntity {
 
     /**
-     * 创建者
+     * 创建者(用户ID)
      */
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer create_id;
+    private Integer userId;
 
     /**
      * 活动标题
@@ -41,42 +42,42 @@ public class Activity extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String img_urls;
+    private String imgUrls;
 
     /**
      * 活动描述
      */
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String desc_content;
+    private String descContent;
 
     /**
      * 活动开始时间
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Long start_time;
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long startTime;
 
     /**
      * 活动结束时间
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Long end_time;
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long endTime;
 
     /**
      * 报名截至时间
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Long last_time;
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long lastTime;
 
     /**
      * 活动人数上限
      */
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer max_people;
+    private Integer maxPeople;
 
     /**
      * 活动可见范围 0 所有可见, 1 朋友可见
@@ -112,7 +113,7 @@ public class Activity extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String target_url;
+    private String targetUrl;
 
     /**
      * 活动地址
@@ -126,7 +127,7 @@ public class Activity extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer activity_type;
+    private Integer activityType;
 
     /**
      * 活动是否需要审核（活动发起者审核）
@@ -141,15 +142,14 @@ public class Activity extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String member_template;
+    private String memberTemplate;
 
-
-    public Integer getCreate_id() {
-        return create_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setCreate_id(Integer create_id) {
-        this.create_id = create_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -160,52 +160,52 @@ public class Activity extends BaseEntity {
         this.title = title;
     }
 
-    public String getImg_urls() {
-        return img_urls;
+    public String getImgUrls() {
+        return imgUrls;
     }
 
-    public void setImg_urls(String img_urls) {
-        this.img_urls = img_urls;
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
-    public String getDesc_content() {
-        return desc_content;
+    public String getDescContent() {
+        return descContent;
     }
 
-    public void setDesc_content(String desc_content) {
-        this.desc_content = desc_content;
+    public void setDescContent(String descContent) {
+        this.descContent = descContent;
     }
 
-    public Long getStart_time() {
-        return start_time;
+    public Long getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(Long start_time) {
-        this.start_time = start_time;
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
     }
 
-    public Long getEnd_time() {
-        return end_time;
+    public Long getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(Long end_time) {
-        this.end_time = end_time;
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
-    public Long getLast_time() {
-        return last_time;
+    public Long getLastTime() {
+        return lastTime;
     }
 
-    public void setLast_time(Long last_time) {
-        this.last_time = last_time;
+    public void setLastTime(Long lastTime) {
+        this.lastTime = lastTime;
     }
 
-    public Integer getMax_people() {
-        return max_people;
+    public Integer getMaxPeople() {
+        return maxPeople;
     }
 
-    public void setMax_people(Integer max_people) {
-        this.max_people = max_people;
+    public void setMaxPeople(Integer maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
     public Integer getVisible() {
@@ -240,12 +240,12 @@ public class Activity extends BaseEntity {
         this.type = type;
     }
 
-    public String getTarget_url() {
-        return target_url;
+    public String getTargetUrl() {
+        return targetUrl;
     }
 
-    public void setTarget_url(String target_url) {
-        this.target_url = target_url;
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
     }
 
     public String getAddress() {
@@ -256,12 +256,12 @@ public class Activity extends BaseEntity {
         this.address = address;
     }
 
-    public Integer getActivity_type() {
-        return activity_type;
+    public Integer getActivityType() {
+        return activityType;
     }
 
-    public void setActivity_type(Integer activity_type) {
-        this.activity_type = activity_type;
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
     }
 
     public Integer getExamine() {
@@ -272,34 +272,34 @@ public class Activity extends BaseEntity {
         this.examine = examine;
     }
 
-    public String getMember_template() {
-        return member_template;
+    public String getMemberTemplate() {
+        return memberTemplate;
     }
 
-    public void setMember_template(String member_template) {
-        this.member_template = member_template;
+    public void setMemberTemplate(String memberTemplate) {
+        this.memberTemplate = memberTemplate;
     }
 
     @Override
     public String toString() {
         return "Activity{" +
-                "create_id=" + create_id +
+                "userId=" + userId +
                 ", title='" + title + '\'' +
-                ", img_urls='" + img_urls + '\'' +
-                ", desc_content='" + desc_content + '\'' +
-                ", start_time=" + start_time +
-                ", end_time=" + end_time +
-                ", last_time=" + last_time +
-                ", max_people=" + max_people +
+                ", imgUrls='" + imgUrls + '\'' +
+                ", descContent='" + descContent + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", lastTime=" + lastTime +
+                ", maxPeople=" + maxPeople +
                 ", visible=" + visible +
                 ", phone='" + phone + '\'' +
                 ", price=" + price +
                 ", type=" + type +
-                ", target_url='" + target_url + '\'' +
+                ", targetUrl='" + targetUrl + '\'' +
                 ", address='" + address + '\'' +
-                ", activity_type=" + activity_type +
+                ", activityType=" + activityType +
                 ", examine=" + examine +
-                ", member_template='" + member_template + '\'' +
+                ", memberTemplate='" + memberTemplate + '\'' +
                 '}';
     }
 }
