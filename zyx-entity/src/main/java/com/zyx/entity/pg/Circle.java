@@ -21,9 +21,6 @@ public class Circle extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer createId;
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Date createTime;
-    @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer state;
     //    private String circleMaster;

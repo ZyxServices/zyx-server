@@ -15,11 +15,11 @@
 			<artifactId>zyx-entity</artifactId>
 			<version>${zyx.entity.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-services</artifactId>
-			<version>${zyx.services.version}</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>tiyujia-parent</groupId>-->
+			<!--<artifactId>zyx-services</artifactId>-->
+			<!--<version>${zyx.services.version}</version>-->
+		<!--</dependency>-->
 
     <dependency>
             <groupId>junit</groupId>
