@@ -47,9 +47,9 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setDesc_content(desc);
             activity.setImg_urls(image);
 
-            activity.setStart_time(new Date(startTime * 1000));
-            activity.setEnd_time(new Date(endTime * 1000));
-            activity.setLast_time(new Date(lastTime * 1000));
+            activity.setStart_time(startTime);
+            activity.setEnd_time(endTime);
+            activity.setLast_time(lastTime);
 
             activity.setMax_people(maxPeople);
             activity.setVisible(visible);
@@ -70,7 +70,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 activity.setMember_template("");
             }
             activity.setActivity_type(1);
-            activity.setCreateTime(Timestamp.valueOf(new Date().toString()));
+            activity.setCreateTime(new Date().getTime());
         } else {
             map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
@@ -93,6 +93,22 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
         Map<String, Object> map = new HashMap<String, Object>();
         if(parm != null && parm.getPageNumber() != null && parm.getPage() != null){
+            if(parm.getPageNumber() == 0){
+                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_SUCCESS_10003);
+                map.put(AuthConstants.AUTH_ERRORMSG, "分页参数无效");
+                return map;
+            }
+            Integer pageNumber = parm.getPageNumber();
+            Integer page = parm.getPage();
+            if (page == 0) page = 1;
+            if (page == 1) {
+                parm.setPage(pageNumber - 1);
+                parm.setPageNumber(0);
+            } else {
+                parm.setPageNumber(pageNumber);
+                parm.setPage((pageNumber * page) - 1);
+            }
+
             List<Activity> activities = activityMapper.queryActivity(parm);
 
             if(activities.size() > 0){

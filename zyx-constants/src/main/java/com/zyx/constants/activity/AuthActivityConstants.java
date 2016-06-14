@@ -25,4 +25,6 @@ public interface AuthActivityConstants {
     int AUTH_SUCCESS_10001 = 10001;
     //查无数据
     int AUTH_SUCCESS_10002 = 10002;
+    //分页参数无效
+    int AUTH_SUCCESS_10003 = 10003;
 }

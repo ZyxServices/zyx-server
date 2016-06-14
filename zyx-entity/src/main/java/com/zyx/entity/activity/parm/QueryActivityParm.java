@@ -1,5 +1,7 @@
 package com.zyx.entity.activity.parm;
 
+import java.io.Serializable;
+
 /**
  * Created by Rainbow on 16-6-13.
  *
@@ -8,7 +10,7 @@ package com.zyx.entity.activity.parm;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.entity.activity.parm
  */
-public class QueryActivityParm {
+public class QueryActivityParm implements Serializable{
 
     private Integer createId;
     private Integer id;
@@ -55,4 +57,6 @@ public class QueryActivityParm {
     public void setPage(Integer page) {
         this.page = page;
     }
+
+
 }

@@ -30,8 +30,8 @@ public class BaseEntity implements Serializable {
 
 	/** 创建时间 **/
 	@Column
-	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
-	private Timestamp createTime;
+	@ColumnType(jdbcType = JdbcType.BIGINT)
+	private Long createTime;
 
 	/** 主键ID **/
 	public Long getId() {
@@ -44,12 +44,12 @@ public class BaseEntity implements Serializable {
 	}
 
 	/** 创建时间 **/
-	public Timestamp getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
 	/** 创建时间 **/
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 }
