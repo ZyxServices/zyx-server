@@ -15,6 +15,11 @@
 			<artifactId>zyx-entity</artifactId>
 			<version>${zyx.entity.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-vo</artifactId>
+			<version>${zyx.vo.version}</version>
+		</dependency>
 		<!--<dependency>-->
 			<!--<groupId>tiyujia-parent</groupId>-->
 			<!--<artifactId>zyx-services</artifactId>-->
