@@ -19,8 +19,8 @@ public class LiveInfo extends BaseEntity {
 	@ColumnType(jdbcType = JdbcType.BOOLEAN)
 	private boolean isPublic;
 	@Column
-	@ColumnType(jdbcType = JdbcType.TINYINT)
-	private long type;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private int type;
 	@Column
 	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
 	private Timestamp start;
@@ -34,7 +34,7 @@ public class LiveInfo extends BaseEntity {
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String title;
 	@Column
-	@ColumnType(jdbcType = JdbcType.TINYINT)
+	@ColumnType(jdbcType = JdbcType.INTEGER)
 	private int lab;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
@@ -51,7 +51,7 @@ public class LiveInfo extends BaseEntity {
 		this.isPublic = isPublic;
 	}
 
-	public long getType() {
+	public int getType() {
 		return type;
 	}
 
@@ -79,7 +79,7 @@ public class LiveInfo extends BaseEntity {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 

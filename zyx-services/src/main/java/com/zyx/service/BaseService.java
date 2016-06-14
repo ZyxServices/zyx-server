@@ -46,5 +46,8 @@ public interface BaseService<T> {
 
     List<T> selectByExample(Object example);
 
+    List<T> select(T record);
+    
+    int selectCount(T record);
     //TODO 其他...
 }

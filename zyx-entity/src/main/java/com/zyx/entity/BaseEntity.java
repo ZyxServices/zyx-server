@@ -2,7 +2,6 @@ package com.zyx.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -31,8 +30,8 @@ public class BaseEntity implements Serializable {
 
 	/** 创建时间 **/
 	@Column
-	@ColumnType(jdbcType = JdbcType.DATE)
-	private Date createTime;
+	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
+	private Timestamp createTime;
 
 	/** 主键ID **/
 	public Long getId() {
@@ -45,12 +44,12 @@ public class BaseEntity implements Serializable {
 	}
 
 	/** 创建时间 **/
-	public Date getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
 
 	/** 创建时间 **/
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 }
