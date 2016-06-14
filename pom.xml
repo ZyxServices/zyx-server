@@ -27,6 +27,7 @@
         <module>zyx-rpc-shop</module>
         <module>zyx-dubbo-pg</module>
         <module>zyx-constants</module>
+        <module>zyx-vo</module>
     </modules>
 
     <properties>
