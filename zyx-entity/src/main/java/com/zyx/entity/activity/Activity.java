@@ -55,21 +55,21 @@ public class Activity extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.DATE)
-    private Date start_time;
+    private Long start_time;
 
     /**
      * 活动结束时间
      */
     @Column
     @ColumnType(jdbcType = JdbcType.DATE)
-    private Date end_time;
+    private Long end_time;
 
     /**
      * 报名截至时间
      */
     @Column
     @ColumnType(jdbcType = JdbcType.DATE)
-    private Date last_time;
+    private Long last_time;
 
     /**
      * 活动人数上限
@@ -176,27 +176,27 @@ public class Activity extends BaseEntity {
         this.desc_content = desc_content;
     }
 
-    public Date getStart_time() {
+    public Long getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(Long start_time) {
         this.start_time = start_time;
     }
 
-    public Date getEnd_time() {
+    public Long getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(Long end_time) {
         this.end_time = end_time;
     }
 
-    public Date getLast_time() {
+    public Long getLast_time() {
         return last_time;
     }
 
-    public void setLast_time(Date last_time) {
+    public void setLast_time(Long last_time) {
         this.last_time = last_time;
     }
 

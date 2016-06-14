@@ -31,12 +31,18 @@
 			<version>${zyx.config.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>
 			<version>${zyx.entity.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-utils</artifactId>
+			<version>${zyx.utils.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

@@ -76,5 +76,19 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return mapper.selectByExample(example);
     }
 
+	@Override
+	public List<T> select(T record) {
+		// TODO Auto-generated method stub
+		return mapper.select(record);
+	}
+
+	@Override
+	public int selectCount(T record) {
+		// TODO Auto-generated method stub
+		return mapper.selectCount(record);
+	}
+	
     //TODO 其他...
+    
+    
 }

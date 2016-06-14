@@ -1,7 +1,5 @@
 package com.zyx.entity.live;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Table;
 
@@ -13,29 +11,34 @@ import tk.mybatis.mapper.annotation.ColumnType;
 
 @Table(name = "t_live")
 public class LiveInfo extends BaseEntity {
-
-	private static final long serialVersionUID = -3026184978520410936L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	@Column
 	@ColumnType(jdbcType = JdbcType.BOOLEAN)
-	private boolean isPublic;
+	private Boolean isPublic;
 	@Column
-	@ColumnType(jdbcType = JdbcType.TINYINT)
-	private long type;
-	@Column
-	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
-	private Timestamp start;
-	@Column
-	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
-	private Timestamp end;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer type;
 	@Column
 	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private long userId;
+	private Long start;
+	@Column
+	@ColumnType(jdbcType = JdbcType.BIGINT)
+	private Long end;
+	@Column
+	@ColumnType(jdbcType = JdbcType.BIGINT)
+	private Long userId;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String title;
 	@Column
-	@ColumnType(jdbcType = JdbcType.TINYINT)
-	private int lab;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer lab;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 
@@ -43,43 +46,43 @@ public class LiveInfo extends BaseEntity {
 
 	private String vedioUrl;
 
-	public boolean isPublic() {
+	public Boolean isPublic() {
 		return isPublic;
 	}
 
-	public void setPublic(boolean isPublic) {
+	public void setPublic(Boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 
-	public long getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
-	public Timestamp getStart() {
+	public Long getStart() {
 		return start;
 	}
 
-	public void setStart(Timestamp start) {
+	public void setStart(Long start) {
 		this.start = start;
 	}
 
-	public Timestamp getEnd() {
+	public Long getEnd() {
 		return end;
 	}
 
-	public void setEnd(Timestamp end) {
+	public void setEnd(Long end) {
 		this.end = end;
 	}
 
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -91,11 +94,11 @@ public class LiveInfo extends BaseEntity {
 		this.title = title;
 	}
 
-	public int getLab() {
+	public Integer getLab() {
 		return lab;
 	}
 
-	public void setLab(int lab) {
+	public void setLab(Integer lab) {
 		this.lab = lab;
 	}
 

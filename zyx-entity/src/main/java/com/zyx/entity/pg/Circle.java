@@ -19,20 +19,24 @@ public class Circle extends BaseEntity {
     private String title;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer createId;
+    private Integer create_id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer state;
     //    private String circleMaster;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer circleMasterId;
+    private Integer circle_master_id;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String details;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String headImgUrl;
+    private String head_img_url;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public String getTitle() {
         return title;
@@ -42,14 +46,13 @@ public class Circle extends BaseEntity {
         this.title = title;
     }
 
-    public Integer getCreateId() {
-        return createId;
+    public Integer getCreate_id() {
+        return create_id;
     }
 
-    public void setCreateId(Integer createId) {
-        this.createId = createId;
+    public void setCreate_id(Integer create_id) {
+        this.create_id = create_id;
     }
-
 
     public Integer getState() {
         return state;
@@ -59,12 +62,12 @@ public class Circle extends BaseEntity {
         this.state = state;
     }
 
-    public Integer getCircleMasterId() {
-        return circleMasterId;
+    public Integer getCircle_master_id() {
+        return circle_master_id;
     }
 
-    public void setCircleMasterId(Integer circleMasterId) {
-        this.circleMasterId = circleMasterId;
+    public void setCircle_master_id(Integer circle_master_id) {
+        this.circle_master_id = circle_master_id;
     }
 
     public String getDetails() {
@@ -75,11 +78,11 @@ public class Circle extends BaseEntity {
         this.details = details;
     }
 
-    public String getHeadImgUrl() {
-        return headImgUrl;
+    public String getHead_img_url() {
+        return head_img_url;
     }
 
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
+    public void setHead_img_url(String head_img_url) {
+        this.head_img_url = head_img_url;
     }
 }

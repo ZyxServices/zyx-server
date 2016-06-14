@@ -9,24 +9,20 @@
     <description>zyx-parent</description>
     <modules>
         <module>zyx-common</module>
-        
         <module>zyx-config</module>
         <module>zyx-file</module>
-
-
-        <module>zyx-live</module>
         <module>zyx-services</module>
         <module>zyx-mapper</module>
         <module>zyx-entity</module>
-        
         <module>zyx-core</module>
         <module>zyx-utils</module>
         <module>zyx-dubbo-user</module>
         <module>zyx-dubbo-activity</module>
-         
         <module>zyx-rpc-shop</module>
         <module>zyx-dubbo-pg</module>
+        <module>zyx-dubbo-live</module>
         <module>zyx-constants</module>
+        <module>zyx-vo</module>
     </modules>
 
     <properties>
@@ -43,7 +39,8 @@
         <zyx.activity.version>0.0.1-SNAPSHOT</zyx.activity.version>
         <zyx.mapper.version>0.0.1-SNAPSHOT</zyx.mapper.version>
         <zyx.constants.version>0.0.1-SNAPSHOT</zyx.constants.version>
-
+        <zyx.utils.version>0.0.1-SNAPSHOT</zyx.utils.version>
+        <zyx.vo.version>0.0.1-SNAPSHOT</zyx.vo.version>
         <!-- facade projects -->
         <!-- 移动端接口 -->
         <mobileservice.version>0.0.1-SNAPSHOT</mobileservice.version>
@@ -62,6 +59,15 @@
         <pagehelper.version>4.1.4</pagehelper.version>
         <mybatis.version>3.3.1</mybatis.version>
         <mapper.version>3.3.6</mapper.version>
+
+        <!-- SMS -->
+        <sms.id>995836</sms.id>
+        <sms.account>admin</sms.account>
+        <sms.password>1JKY7K</sms.password>
+        <sms.sendType>1</sms.sendType>
+        <sms.PostFixNumber></sms.PostFixNumber>
+
+
 
     </properties>
 
@@ -192,6 +198,11 @@
                 <version>1.2</version>
             </dependency>
             <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
                 <groupId>dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>1.6.1</version>
@@ -255,9 +266,14 @@
                 <version>2.5.3</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>1.3.4.RELEASE</version>
+            </dependency>
+            <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>2.4.2</version>
+                <version>2.4.1</version>
             </dependency>
 
             <!-- Common Dependency End -->

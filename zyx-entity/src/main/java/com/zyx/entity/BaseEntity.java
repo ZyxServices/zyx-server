@@ -1,8 +1,6 @@
 package com.zyx.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,11 @@ import tk.mybatis.mapper.annotation.ColumnType;
  */
 public class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3016616055266736380L;
+
 	/** 主键ID **/
 	@Id
 	@Column(name = "id")
@@ -31,8 +33,8 @@ public class BaseEntity implements Serializable {
 
 	/** 创建时间 **/
 	@Column
-	@ColumnType(jdbcType = JdbcType.DATE)
-	private Date createTime;
+	@ColumnType(jdbcType = JdbcType.BIGINT)
+	private Long createTime;
 
 	/** 主键ID **/
 	public Long getId() {
@@ -45,12 +47,12 @@ public class BaseEntity implements Serializable {
 	}
 
 	/** 创建时间 **/
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
 	/** 创建时间 **/
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 }
