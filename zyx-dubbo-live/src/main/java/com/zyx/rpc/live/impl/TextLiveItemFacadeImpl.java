@@ -1,10 +1,9 @@
-package com.live.dubborpc.impl;
+package com.zyx.rpc.live.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.live.dubborpc.TextLiveItemFacade;
-import com.zyx.entity.live.LiveInfo;
+import com.zyx.rpc.live.TextLiveItemFacade;
 import com.zyx.service.live.TextLiveItemService;
 
 @Service("textLiveItemFacade")

@@ -1,7 +1,6 @@
 package com.zyx.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -20,7 +19,11 @@ import tk.mybatis.mapper.annotation.ColumnType;
  */
 public class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3016616055266736380L;
+
 	/** 主键ID **/
 	@Id
 	@Column(name = "id")

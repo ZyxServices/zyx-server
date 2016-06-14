@@ -16,5 +16,5 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 		
 	<!-- 用户服务接口 -->
-	<dubbo:service interface="com.live.dubborpc.LiveInfoFacade" ref="liveInfoFacade" />
+	<dubbo:service interface="com.zyx.rpc.live.LiveInfoFacade" ref="liveInfoFacade" />
 </beans>  

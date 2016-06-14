@@ -1,24 +1,46 @@
 package com.zyx.vo.live;
 
-public class LiveInfoVo {
-	private Boolean distinct;
+import com.zyx.vo.BaseVo;
 
-	private String oredCriteria;
-	public Boolean getDistinct() {
-		return distinct;
-	}
+public class LiveInfoVo extends BaseVo {
 
-	public void setDistinct(Boolean distinct) {
-		this.distinct = distinct;
+	private Long createTime;
+	private Integer type;
+	private Long start;
+	private Long end;
+	private Integer lab;
+	public Long getCreateTime() {
+		return createTime;
 	}
-
-	public String getOredCriteria() {
-		return oredCriteria;
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
 	}
-
-	public void setOredCriteria(String oredCriteria) {
-		this.oredCriteria = oredCriteria;
+	public Integer getType() {
+		return type;
 	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	public Long getStart() {
+		return start;
+	}
+	public void setStart(Long start) {
+		this.start = start;
+	}
+	public Long getEnd() {
+		return end;
+	}
+	public void setEnd(Long end) {
+		this.end = end;
+	}
+	public Integer getLab() {
+		return lab;
+	}
+	public void setLab(Integer lab) {
+		this.lab = lab;
+	}
+	
+	
 	
 
 }

@@ -8,7 +8,7 @@
 		<artifactId>zyx-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>zyx-live</artifactId>
+	<artifactId>zyx-duboo-live</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>tiyujia-parent</groupId>

@@ -9,23 +9,18 @@
     <description>zyx-parent</description>
     <modules>
         <module>zyx-common</module>
-        
         <module>zyx-config</module>
         <module>zyx-file</module>
-
-
-        <module>zyx-live</module>
         <module>zyx-services</module>
         <module>zyx-mapper</module>
         <module>zyx-entity</module>
-        
         <module>zyx-core</module>
         <module>zyx-utils</module>
         <module>zyx-dubbo-user</module>
         <module>zyx-dubbo-activity</module>
-         
         <module>zyx-rpc-shop</module>
         <module>zyx-dubbo-pg</module>
+        <module>zyx-dubbo-live</module>
         <module>zyx-constants</module>
         <module>zyx-vo</module>
     </modules>
