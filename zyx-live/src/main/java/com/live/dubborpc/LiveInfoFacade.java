@@ -3,7 +3,12 @@ package com.live.dubborpc;
 import com.zyx.entity.live.LiveInfo;
 
 public interface LiveInfoFacade {
-	public void create (LiveInfo liveInfo);
+//	public void create (LiveInfo liveInfo);
 //	public LiveInfo getById(int id);
 
+	
+	
+	public void add(LiveInfo liveInfo);
+	public void update(LiveInfo liveInfo);
+//	public void get()
 }

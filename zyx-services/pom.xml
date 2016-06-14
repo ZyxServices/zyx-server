@@ -31,7 +31,6 @@
 			<version>${zyx.config.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-entity</artifactId>

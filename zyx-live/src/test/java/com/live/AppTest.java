@@ -1,9 +1,16 @@
 package com.live;
 
 
-import com.zyx.service.live.impl.LiveInfoServiceImpl;
+import java.sql.Timestamp;
+import java.util.List;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.zyx.common.enums.LiveLab;
+import com.zyx.common.enums.LiveType;
+import com.zyx.entity.live.LiveInfo;
+import com.zyx.service.live.impl.LiveInfoServiceImpl;
+import com.zyx.vo.live.LiveInfoVo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -43,19 +50,25 @@ public class AppTest extends TestCase {
 //			System.out.println(context.getApplicationName());
 			context.start();
 			LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl) context.getBean("liveInfoService");
+			LiveInfoVo liveInfoVo = new LiveInfoVo();
+			liveInfoVo.setDistinct(true);
+//			liveInfoVo.setOredCriteria("create_time");
+			List<LiveInfo> list = liveInfoServie.selectByExample(liveInfoVo);
+			
+			System.out.println(list);
 			System.out.println(liveInfoServie);
 			//
-//			LiveInfo liveInfo = new LiveInfo();
-//			liveInfo.setPublic(true);
-//			liveInfo.setType(LiveType.TEXT.getType());
-//			liveInfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
-//			liveInfo.setStart(new Timestamp(System.currentTimeMillis()));
-//			liveInfo.setStart(new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 10));
-//			liveInfo.setLab(LiveLab.NBA.getTab());
-//			liveInfo.setTitle("······");
-//			liveInfo.setVedioUrl("http");
-//
-//			liveInfoServie.add(liveInfo);
+			LiveInfo liveInfo = new LiveInfo();
+			liveInfo.setPublic(true);
+			liveInfo.setType(LiveType.TEXT.getType());
+			liveInfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			liveInfo.setStart(new Timestamp(System.currentTimeMillis()));
+			liveInfo.setStart(new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 10));
+			liveInfo.setLab(LiveLab.NBA.getTab());
+			liveInfo.setTitle("······");
+			liveInfo.setVedioUrl("http");
+
+			liveInfoServie.save(liveInfo);
 //			System.out.println("*******************");
 //			TextLiveItemService textLiveItemService = (TextLiveItemServiceImpl) context.getBean("textLiveItemService");
 //			
