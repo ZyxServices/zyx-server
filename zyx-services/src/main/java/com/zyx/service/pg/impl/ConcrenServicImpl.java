@@ -10,7 +10,7 @@ import com.zyx.service.pg.ConcrenService;
 /**
  * Created by XiaoWei on 2016/6/7.
  */
-@Service("concrenService")
+@Service
 public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcrenService {
 
 }

@@ -1,4 +1,4 @@
-package com.zyx.concren.test;
+package com.zyx.pg.test;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;

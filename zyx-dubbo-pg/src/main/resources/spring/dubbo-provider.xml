@@ -16,11 +16,11 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 		
 	
-	 <!--<dubbo:service interface="com.zyx.concren.PgService" ref="pgService" />-->
+	 <!--<dubbo:service interface="com.zyx.pgrvice" ref="pgService" />-->
 
-	<dubbo:service interface="com.zyx.service.pg.ConcrenService" ref="concrenService" />
+	<!--操场-->
+	<dubbo:service interface="com.zyx.pg.PgFacade" ref="pgFacade" />
 
-	<dubbo:service interface="com.zyx.service.pg.CircleService" ref="circleService" />
 
 
 

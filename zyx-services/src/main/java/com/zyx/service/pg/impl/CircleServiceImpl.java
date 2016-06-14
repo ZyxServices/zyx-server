@@ -1,24 +1,41 @@
 package com.zyx.service.pg.impl;
 
+import com.zyx.constants.AuthConstants;
 import com.zyx.entity.pg.Circle;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by XiaoWei on 2016/6/13.
  */
-@Service("circleService")
+@Service
 public class CircleServiceImpl extends BaseServiceImpl<Circle> implements CircleService {
     @Override
-    public void insertCircle(String title, Integer createId, Date createTime, Integer circleMasterId, String details, String headImgUrl) {
-        Circle insertCircle = new Circle();
-        insertCircle.setTitle(title);
-        insertCircle.setDetails(details);
-        insertCircle.setCreateId(createId);
-        save(insertCircle);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, String details, String headImgUrl) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Circle insertCircle = new Circle();
+            Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
+            Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
+            Optional.ofNullable(createId).ifPresent(insertCircle::setCreateId);
+            mapper.insert(insertCircle);
+            map.put(AuthConstants.AUTH_SUCCESS, AuthConstants.AUTH_SUCCESS_200);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.AUTH_SUCCESS_500);
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> circleMeet(Integer accountId, Integer circleId) {
+        return null;
     }
 }
