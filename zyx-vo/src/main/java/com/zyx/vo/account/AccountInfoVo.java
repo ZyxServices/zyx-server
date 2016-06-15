@@ -1,6 +1,6 @@
 package com.zyx.vo.account;
 
-import java.io.Serializable;
+import com.zyx.vo.BaseVo;
 
 /**
  * Created by WeiMinSheng on 2016/6/14.
@@ -10,8 +10,13 @@ import java.io.Serializable;
  *          Copyright (c)2016 tyj-版权所有
  * @title AccountInfoVo.java
  */
-public class AccountInfoVo implements Serializable {
-    private String id;
+public class AccountInfoVo extends BaseVo  {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String phone;
 

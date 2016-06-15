@@ -1,16 +1,20 @@
 package com.live;
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.zyx.common.enums.LiveLab;
 import com.zyx.common.enums.LiveType;
 import com.zyx.entity.live.LiveInfo;
+import com.zyx.entity.live.TextLiveItem;
+import com.zyx.rpc.live.TextLiveItemFacade;
+import com.zyx.service.live.TextLiveItemService;
 import com.zyx.service.live.impl.LiveInfoServiceImpl;
+import com.zyx.vo.live.TextLiveItemVo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -47,62 +51,71 @@ public class AppTest extends TestCase {
 		assertTrue(true);
 		try {
 			System.out.println("-------------------------");
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-					"classpath:spring-context.xml");
-//			System.out.println(context.getApplicationName());
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-context.xml");
+			// System.out.println(context.getApplicationName());
 			context.start();
-			LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl) context.getBean("liveInfoService");
-			LiveInfo sliveInfo = liveInfoServie.selectByKey(37L);
-			System.out.println(sliveInfo.getCreateTime());
-			
-//			LiveInfoVo liveInfoVo = new LiveInfoVo();
-//			liveInfoVo.setDistinct(true);
-//			liveInfoVo.setOredCriteria("create_time");
-//			List<LiveInfo> list = liveInfoServie.selectByExample(liveInfoVo);
-			
-//			System.out.println(list);
-//			System.out.println(liveInfoServie);
+			// LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl)
+			// context.getBean("liveInfoService");
+			// LiveInfo sliveInfo = liveInfoServie.selectByKey(37L);
+			// System.out.println(sliveInfo.getCreateTime());
+
+			// LiveInfoVo liveInfoVo = new LiveInfoVo();
+			// liveInfoVo.setDistinct(true);
+			// liveInfoVo.setOredCriteria("create_time");
+			// List<LiveInfo> list = liveInfoServie.selectByExample(liveInfoVo);
+
+			// System.out.println(list);
+			// System.out.println(liveInfoServie);
 			//
-			long now = System.currentTimeMillis();
-			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(now));
-			LiveInfo liveInfo = new LiveInfo();
-			liveInfo.setPublic(true);
-			liveInfo.setType(LiveType.TEXT.getType());
-			liveInfo.setCreateTime(now);
-			liveInfo.setStart(now);
-			liveInfo.setStart(now);
+			// long now = System.currentTimeMillis();
+			// System.out.println(new SimpleDateFormat("yyyy-MM-dd
+			// HH:mm:ss:SSS").format(now));
+			// LiveInfo liveInfo = new LiveInfo();
+			// liveInfo.setPublic(true);
+			// liveInfo.setType(LiveType.TEXT.getType());
+			// liveInfo.setCreateTime(now);
+			// liveInfo.setStart(now);
+			// liveInfo.setStart(now);
+			//
+			// liveInfo.setLab(LiveLab.NBA.getTab());
+			// liveInfo.setTitle("······");
+			//
+			////
+			// liveInfoServie.save(liveInfo);
 
-			liveInfo.setLab(LiveLab.NBA.getTab());
-			liveInfo.setTitle("······");
-//			
-////			
-//			liveInfoServie.save(liveInfo);
-			
-//			List<LiveInfo> list = liveInfoServie.select(liveInfo);
-//			System.out.println(list);
-//			System.out.println(liveInfoServie.selectCount(liveInfo));
-//			System.out.println("*******************");
-//			TextLiveItemService textLiveItemService = (TextLiveItemServiceImpl) context.getBean("textLiveItemService");
+			// List<LiveInfo> list = liveInfoServie.select(liveInfo);
+			// System.out.println(list);
+			// System.out.println(liveInfoServie.selectCount(liveInfo));
+			// System.out.println("*******************");
+			// TextLiveItemService textLiveItemService =
+			// (TextLiveItemServiceImpl) context.getBean("textLiveItemService");
 
-			
-//			Example qe = new Example(LiveInfo.class);
-//			Criteria criterira = qe.createCriteria();
-//			criterira.andEqualTo("lab", 1);
-//			List<LiveInfo> list = liveInfoServie.selectByExample(qe);
-//			System.out.println(list);
+			// Example qe = new Example(LiveInfo.class);
+			// Criteria criterira = qe.createCriteria();
+			// criterira.andEqualTo("lab", 1);
+			// List<LiveInfo> list = liveInfoServie.selectByExample(qe);
+			// System.out.println(list);
+			//
+			// for(LiveInfo info :list){
+			// System.out.println(info.getCreateTime());
+			// System.out.println(new SimpleDateFormat("yyyy-MM-dd
+			// HH:mm:ss:SSS").format(info.getCreateTime()));
+			// }
+
+//			TextLiveItemFacade textLiveItemFacade = (TextLiveItemFacade) context.getBean("textLiveItemFacade");
+//
+//			TextLiveItemVo textLiveItemVo = new TextLiveItemVo();
+//
+//			textLiveItemVo.setLiveId(1L);
+//			List<TextLiveItem> textList = textLiveItemFacade.getList(textLiveItemVo);
 //			
-//			for(LiveInfo info :list){
-//				System.out.println(info.getCreateTime());
-//				System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(info.getCreateTime()));
-//			}
-			
-			
-			
+//			System.out.println(textList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);
 		}
+		
 		synchronized (AppTest.class) {
 			while (true) {
 				try {
@@ -112,6 +125,6 @@ public class AppTest extends TestCase {
 				}
 			}
 		}
-		// 
+		//
 	}
 }

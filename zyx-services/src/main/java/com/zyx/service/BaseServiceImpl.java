@@ -57,6 +57,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     public int save(T entity) {
+//    	mapper.
         return mapper.insert(entity);
     }
 
@@ -78,13 +79,11 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
 	@Override
 	public List<T> select(T record) {
-		// TODO Auto-generated method stub
 		return mapper.select(record);
 	}
 
 	@Override
 	public int selectCount(T record) {
-		// TODO Auto-generated method stub
 		return mapper.selectCount(record);
 	}
 	

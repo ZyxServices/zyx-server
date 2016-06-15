@@ -1,19 +1,36 @@
 package com.zyx.vo.live;
 
+import java.util.List;
+
 import com.zyx.vo.BaseVo;
+import com.zyx.vo.common.TimeAreaVo;
 
 public class LiveInfoVo extends BaseVo {
 
-	private Long createTime;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private List<Integer> ids;
+	private Long userId;
+	private TimeAreaVo createTime;
 	private Integer type;
-	private Long start;
-	private Long end;
-	private Integer lab;
-	public Long getCreateTime() {
+	private TimeAreaVo start;
+	private TimeAreaVo end;
+	private List<Integer> labs;
+	public TimeAreaVo getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(TimeAreaVo createTime) {
 		this.createTime = createTime;
+	}
+	
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	public Integer getType() {
 		return type;
@@ -21,23 +38,30 @@ public class LiveInfoVo extends BaseVo {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Long getStart() {
+	public TimeAreaVo getStart() {
 		return start;
 	}
-	public void setStart(Long start) {
+	public void setStart(TimeAreaVo start) {
 		this.start = start;
 	}
-	public Long getEnd() {
+	public TimeAreaVo getEnd() {
 		return end;
 	}
-	public void setEnd(Long end) {
+	public void setEnd(TimeAreaVo end) {
 		this.end = end;
 	}
-	public Integer getLab() {
-		return lab;
+	public List<Integer> getLabs() {
+		return labs;
 	}
-	public void setLab(Integer lab) {
-		this.lab = lab;
+	public void setLabs(List<Integer> labs) {
+		this.labs = labs;
+		
+	}
+	public List<Integer> getIds() {
+		return ids;
+	}
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
 	}
 	
 	

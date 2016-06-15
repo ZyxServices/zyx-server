@@ -26,12 +26,12 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	}
 
 	@Override
-	public void update(LiveInfo liveInfo) {
+	public void updateNotNull(LiveInfo liveInfo) {
 		liveInfoService.updateNotNull(liveInfo);
 	}
 
 	@Override
-	public LiveInfo getById(long id) {
+	public LiveInfo getById(Long id) {
 		return liveInfoService.selectByKey(id);
 	}
 
@@ -39,10 +39,37 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	public List<LiveInfo> getList( LiveInfoVo liveInfoVo) {
 		Example example = new Example(LiveInfo.class);
 		Criteria criteria = example.createCriteria();
-		if(null!=liveInfoVo.getType()){
-			criteria.andEqualTo("type", liveInfoVo.getType());
+		
+		if(liveInfoVo.getIds()!=null&&!liveInfoVo.getIds().isEmpty()){
+			criteria.andIn("id", liveInfoVo.getIds());
+		}else{
+			if(null!=liveInfoVo.getType()){
+				criteria.andEqualTo("type", liveInfoVo.getType());
+			}
+			if(null!= liveInfoVo.getUserId()){
+				criteria.andEqualTo("userId", liveInfoVo.getUserId());
+			}
+			if(liveInfoVo.getLabs()!=null&&!liveInfoVo.getLabs().isEmpty()){
+				criteria.andIn("lab", liveInfoVo.getLabs());
+			}
+			if(liveInfoVo.getCreateTime()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getCreateTime().getStart(),liveInfoVo.getCreateTime().getStart() );
+			}
+			if(liveInfoVo.getStart()!=null){
+				criteria.andBetween("start", liveInfoVo.getStart().getStart(),liveInfoVo.getStart().getStart() );
+			}
+			if(liveInfoVo.getEnd()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getEnd().getStart(),liveInfoVo.getEnd().getStart() );
+			}
 		}
-		return liveInfoService.selectByExample(example);
+		
+		List<LiveInfo> list = liveInfoService.selectByExample(example);
+		return list;
+	}
+
+	@Override
+	public void delete(Long id) {
+		liveInfoService.delete(id);
 	}
 
 }
