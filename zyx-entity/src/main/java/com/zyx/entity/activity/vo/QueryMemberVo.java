@@ -41,7 +41,7 @@ public class QueryMemberVo implements Serializable{
      * 审核状态（默认为审核通过，如果发起者开启审核则不同）
      * true 通过， false 未通过
      */
-    private boolean examineType;
+    private Boolean examineType;
 
     /**
      * 报名者联系电话
@@ -93,11 +93,11 @@ public class QueryMemberVo implements Serializable{
         this.joinTime = joinTime;
     }
 
-    public boolean isExamineType() {
+    public Boolean getExamineType() {
         return examineType;
     }
 
-    public void setExamineType(boolean examineType) {
+    public void setExamineType(Boolean examineType) {
         this.examineType = examineType;
     }
 

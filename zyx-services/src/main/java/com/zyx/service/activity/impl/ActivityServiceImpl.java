@@ -63,7 +63,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 if (!memberTemplate.equals("")) {
                     activity.setMemberTemplate(memberTemplate);
                 } else {
-                    map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+                    map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
                     map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
                     return map;
                 }
@@ -73,7 +73,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setActivityType(1);
             activity.setCreateTime(System.currentTimeMillis());
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
@@ -122,7 +122,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 return map;
             }
         }else{
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
@@ -145,7 +145,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 return map;
             }
         }else{
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }

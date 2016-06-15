@@ -20,16 +20,22 @@ public interface AuthConstants {
      * 返回code信息
      ***************************************/
 
-    //参数缺省
-    int AUTH_SUCCESS_100 = 100;
+    //参数缺省,未知错误
+    int AUTH_ERROR_100 = 100;
     //成功
     int AUTH_SUCCESS_200 = 200;
     //
     int AUTH_SUCCESS_301 = 301;
     //
-    int AUTH_SUCCESS_404 = 404;
+    int AUTH_ERROR_404 = 404;
     //
-    int AUTH_SUCCESS_500 = 500;
+    int AUTH_ERROR_500 = 500;
+    //图片上传文件大于5MB
+    int AUTH_ERROR_901 = 901;
+    //文件上传失败
+    int AUTH_ERROR_902 = 902;
+    //文件格式错误
+    int AUTH_ERROR_903 = 903;
 
     // 登陆
     int ACCOUNT_LOGIN_SUCCESS = 10000;
@@ -38,22 +44,6 @@ public interface AuthConstants {
 
     int ACCOUNT_LOGIN_ERROR = 10002;
 
-    /**
-     * 验证码输入错误
-     */
-    int ACCOUNT_CODE_ERROR = 10003;
-    String ACCOUNT_CODE_ERROR_MSG = "验证码输入错误";
 
-    /**
-     * 注册用户失败，未知错误
-     */
-    int ACCOUNT_REGISTER_ERROR = 10004;
-    String ACCOUNT_REGISTER_ERROR_MSG = "注册用户失败，未知错误";
-
-    /**
-     * 注册用户失败，手机号已存在
-     */
-    int ACCOUNT_REGISTER_PHONE_ERROR = 10005;
-    String ACCOUNT_REGISTER_PHONE_ERROR_MSG = "注册用户失败，手机号已存在";
 
 }

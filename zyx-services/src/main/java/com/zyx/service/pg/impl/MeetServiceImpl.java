@@ -29,7 +29,7 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
             return map;
         }catch (Exception e){
             e.printStackTrace();
-            map.put(AuthConstants.AUTH_ERRORMSG,AuthConstants.AUTH_SUCCESS_500);
+            map.put(AuthConstants.AUTH_ERRORMSG,AuthConstants.AUTH_ERROR_500);
             return map;
         }
     }

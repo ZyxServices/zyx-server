@@ -29,4 +29,6 @@ public interface AuthActivityConstants {
     int AUTH_ERROR_10003 = 10003;
     //活动报名失败
     int AUTH_ERROR_10004 = 10004;
+    //活动报名信息已存在
+    int AUTH_ERROR_10005 = 10005;
 }

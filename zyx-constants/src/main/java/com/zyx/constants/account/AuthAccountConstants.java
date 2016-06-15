@@ -40,4 +40,22 @@ public interface AuthAccountConstants {
     int ACCOUNT_ERROR_CODE_50004 = 50004;
     String ACCOUNT_ERROR_CODE_50004_MSG = "重复登录";
 
+
+    /**
+     * 验证码输入错误
+     */
+    int ACCOUNT_CODE_ERROR = 10003;
+    String ACCOUNT_CODE_ERROR_MSG = "验证码输入错误";
+
+    /**
+     * 注册用户失败，未知错误
+     */
+    int ACCOUNT_REGISTER_ERROR = 10004;
+    String ACCOUNT_REGISTER_ERROR_MSG = "注册用户失败，未知错误";
+
+    /**
+     * 注册用户失败，手机号已存在
+     */
+    int ACCOUNT_REGISTER_PHONE_ERROR = 10005;
+    String ACCOUNT_REGISTER_PHONE_ERROR_MSG = "注册用户失败，手机号已存在";
 }

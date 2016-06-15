@@ -13,6 +13,19 @@
         <association column="activity_id" property="activity" javaType="Activity" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"/>
     </resultMap>
 
+    <resultMap id="activityMember" type="com.zyx.entity.activity.ActivityMember">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
+        <result column="user_nick" property="userNick" jdbcType="VARCHAR"/>
+        <result column="join_time" property="joinTime" jdbcType="BIGINT"/>
+        <result column="examine_type" property="examineType" jdbcType="TINYINT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="member_info" property="memberInfo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+
 
     <select id="queryActivityMemberInfo" parameterType="com.zyx.entity.activity.parm.QueryMemberParm"
             resultMap="queryMemberVo">

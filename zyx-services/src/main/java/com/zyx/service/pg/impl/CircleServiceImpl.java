@@ -30,7 +30,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             return map;
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.AUTH_SUCCESS_500);
+            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.AUTH_ERROR_500);
             return map;
         }
     }

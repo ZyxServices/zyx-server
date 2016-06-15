@@ -104,16 +104,16 @@ public class RegisterFacadeImpl implements RegisterFacade {
         Map<String, Object> map = new HashMap<String, Object>();
         String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
         if (!userLoginParam.getCode().equals(redis_code)) {
-            map.put(AuthConstants.AUTH_ERROR_CODE, AuthConstants.ACCOUNT_CODE_ERROR);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.ACCOUNT_CODE_ERROR_MSG);
+            map.put(AuthConstants.AUTH_ERROR_CODE, AuthAccountConstants.ACCOUNT_CODE_ERROR);
+            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_CODE_ERROR_MSG);
             return map;
         }
         // TODO:判断手机号是否已经注册
         AccountInfo accountInfo = new AccountInfo();
         int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
         if (count != 0) {// 手机号码重复
-            map.put(AuthConstants.AUTH_ERROR_CODE, AuthConstants.ACCOUNT_REGISTER_PHONE_ERROR);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.ACCOUNT_REGISTER_PHONE_ERROR_MSG);
+            map.put(AuthConstants.AUTH_ERROR_CODE, AuthAccountConstants.ACCOUNT_REGISTER_PHONE_ERROR);
+            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_REGISTER_PHONE_ERROR_MSG);
             return map;
         }
         accountInfo.setPhone(userLoginParam.getPhone());
@@ -122,8 +122,8 @@ public class RegisterFacadeImpl implements RegisterFacade {
         accountInfo.setCreateTime(System.currentTimeMillis());
         int result = accountInfoService.save(accountInfo);
         if (result == 0) {
-            map.put(AuthConstants.AUTH_ERROR_CODE, AuthConstants.ACCOUNT_REGISTER_ERROR);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.ACCOUNT_REGISTER_ERROR_MSG);
+            map.put(AuthConstants.AUTH_ERROR_CODE, AuthAccountConstants.ACCOUNT_REGISTER_ERROR);
+            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_REGISTER_ERROR_MSG);
         } else {
             map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
         }

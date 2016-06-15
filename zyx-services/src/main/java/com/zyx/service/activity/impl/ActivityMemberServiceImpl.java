@@ -43,12 +43,26 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
         if (parm.getActivityId() != null && parm.getUserId() != null
                 && parm.getMemberInfo() != null && parm.getUserNick() != null
                 && parm.getPhone() != null) {
+
+            QueryMemberParm queryMemberParm = new QueryMemberParm();
+            queryMemberParm.setActivityId(parm.getActivityId());
+            queryMemberParm.setUserId(parm.getUserId());
+
+            List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(queryMemberParm);
+            if (queryMemberVos.size() > 0 && queryMemberVos.get(0).getExamineType()) {
+                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10005);
+                map.put(AuthConstants.AUTH_ERRORMSG, "此用户已报名过此活动");
+                return map;
+            }
+
             ActivityMember activityMember = new ActivityMember();
 
             activityMember.setPhone(parm.getPhone());
             activityMember.setActivityId(parm.getActivityId());
             activityMember.setUserId(parm.getUserId());
             activityMember.setUserNick(parm.getUserNick());
+
+            activityMember.setMemberInfo(parm.getMemberInfo());
             activityMember.setJoinTime(System.currentTimeMillis());
             activityMember.setCreateTime(System.currentTimeMillis());
 
@@ -57,9 +71,6 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
             if (activity.getExamine() == 1) activityMember.setExamineType(false);
             else activityMember.setExamineType(true);
 
-            activityMember.setJoinTime(System.currentTimeMillis());
-            activityMember.setMemberInfo(parm.getMemberInfo());
-            activityMember.setCreateTime(System.currentTimeMillis());
 
             int insert = mapper.insert(activityMember);
             if(insert > 0){
@@ -72,7 +83,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
                 return map;
             }
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
@@ -84,7 +95,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
         Map<String, Object> map = new HashMap<String, Object>();
 
         if(parm.getActivityId() == null && parm.getUserId() == null){
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
