@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.rpc.live.LiveInfoFacade;
 import com.zyx.service.live.LiveInfoService;
@@ -53,13 +54,13 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 				criteria.andIn("lab", liveInfoVo.getLabs());
 			}
 			if(liveInfoVo.getCreateTime()!=null){
-				criteria.andBetween("createTime", liveInfoVo.getCreateTime().getStart(),liveInfoVo.getCreateTime().getStart() );
+				criteria.andBetween("createTime", liveInfoVo.getCreateTime().getStart(),liveInfoVo.getCreateTime().getEnd() );
 			}
 			if(liveInfoVo.getStart()!=null){
-				criteria.andBetween("start", liveInfoVo.getStart().getStart(),liveInfoVo.getStart().getStart() );
+				criteria.andBetween("start", liveInfoVo.getStart().getStart(),liveInfoVo.getStart().getEnd() );
 			}
 			if(liveInfoVo.getEnd()!=null){
-				criteria.andBetween("createTime", liveInfoVo.getEnd().getStart(),liveInfoVo.getEnd().getStart() );
+				criteria.andBetween("createTime", liveInfoVo.getEnd().getStart(),liveInfoVo.getEnd().getEnd() );
 			}
 		}
 		

@@ -6,14 +6,17 @@ import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.alibaba.dubbo.common.json.JSON;
+import com.alibaba.fastjson.JSON;
 import com.zyx.common.enums.LiveLab;
 import com.zyx.common.enums.LiveType;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.live.TextLiveItem;
+import com.zyx.rpc.live.LiveInfoFacade;
 import com.zyx.rpc.live.TextLiveItemFacade;
 import com.zyx.service.live.TextLiveItemService;
 import com.zyx.service.live.impl.LiveInfoServiceImpl;
+import com.zyx.vo.common.TimeAreaVo;
+import com.zyx.vo.live.LiveInfoVo;
 import com.zyx.vo.live.TextLiveItemVo;
 
 import junit.framework.Test;
@@ -54,15 +57,15 @@ public class AppTest extends TestCase {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-context.xml");
 			// System.out.println(context.getApplicationName());
 			context.start();
-			// LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl)
-			// context.getBean("liveInfoService");
-			// LiveInfo sliveInfo = liveInfoServie.selectByKey(37L);
-			// System.out.println(sliveInfo.getCreateTime());
+//			 LiveInfoServiceImpl liveInfoServie = (LiveInfoServiceImpl)
+//			 context.getBean("liveInfoService");
+////			 LiveInfo sliveInfo = liveInfoServie.selectByKey(37L);
+//			 System.out.println(sliveInfo.getCreateTime());
 
-			// LiveInfoVo liveInfoVo = new LiveInfoVo();
-			// liveInfoVo.setDistinct(true);
-			// liveInfoVo.setOredCriteria("create_time");
-			// List<LiveInfo> list = liveInfoServie.selectByExample(liveInfoVo);
+//			 LiveInfoVo liveInfoVo = new LiveInfoVo();
+//			 liveInfoVo.setDistinct(true);
+//			 liveInfoVo.setOredCriteria("create_time");
+//			 List<LiveInfo> list = liveInfoServie.selectByExample(liveInfoVo);
 
 			// System.out.println(list);
 			// System.out.println(liveInfoServie);
@@ -111,6 +114,16 @@ public class AppTest extends TestCase {
 //			
 //			System.out.println(textList);
 
+			 LiveInfoFacade liveInfoFacade = (LiveInfoFacade)context.getBean("liveInfoFacade");
+//			 LiveInfoVo liveInfoVo = new LiveInfoVo();
+//			 TimeAreaVo createTime = new TimeAreaVo();
+//			 createTime.setStart(1465890700790L);
+//			 createTime.setEnd(14658990700790L);
+//			liveInfoVo.setCreateTime(createTime);
+//			List<LiveInfo> list = liveInfoFacade.getList(liveInfoVo );
+//			System.out.println(com.alibaba.fastjson.JSON.toJSONString(list));
+			LiveInfo liveInfo = liveInfoFacade.getById(41L);
+			System.out.println(JSON.toJSONString(liveInfo));
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

@@ -1,6 +1,12 @@
 package com.zyx.vo.common;
 
-public class TimeAreaVo {
+import java.io.Serializable;
+
+public class TimeAreaVo implements Serializable{
+	
+	 /**serialVersionUID TODO*/ 
+	
+	private static final long serialVersionUID = 1L;
 	private Long start;
 	private Long end;
 	public Long getStart() {
