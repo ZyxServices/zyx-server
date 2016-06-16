@@ -37,13 +37,13 @@ public interface AuthConstants {
     //文件格式错误
     int AUTH_ERROR_903 = 903;
 
-    // 登陆
-    int ACCOUNT_LOGIN_SUCCESS = 10000;
+    // 信息发送失败
+    int AUTH_ERROR_60005 = 60005;
 
-    int ACCOUNT_INFO_ERROR = 10001;
+    //参数缺失
+    int AUTH_ERROR_60006 = 60006;
 
-    int ACCOUNT_LOGIN_ERROR = 10002;
-
-
+    // 未知错误
+    int AUTH_ERROR_60007 = 60007;
 
 }

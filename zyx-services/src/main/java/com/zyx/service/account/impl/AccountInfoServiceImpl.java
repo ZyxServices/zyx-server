@@ -37,4 +37,9 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.renewpwd(userLoginParam);
     }
+
+    @Override
+    public int updateAccountInfo(UserLoginParam userLoginParam) {
+        return 0;
+    }
 }

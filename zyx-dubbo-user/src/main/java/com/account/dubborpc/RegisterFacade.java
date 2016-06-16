@@ -13,14 +13,6 @@ import java.util.Map;
  * @title RegisterFacade.java
  */
 public interface RegisterFacade {
-    /**
-     * 发送验证码
-     *
-     * @param phone 手机号码
-     * @param msg   需要发送的自定义内容
-     * @return
-     */
-    int sendPhoneCode(String phone, String msg);
 
     /**
      * 注册
@@ -37,5 +29,13 @@ public interface RegisterFacade {
      * @return
      */
     Map<String, Object> renewpwd(UserLoginParam userLoginParam);
+
+    /**
+     * 忘记密码
+     *
+     * @param userLoginParam
+     * @return
+     */
+    Map<String, Object> retrievepwd(UserLoginParam userLoginParam);
 
 }

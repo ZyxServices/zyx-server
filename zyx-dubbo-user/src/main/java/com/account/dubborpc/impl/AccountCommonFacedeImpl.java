@@ -1,0 +1,101 @@
+package com.account.dubborpc.impl;
+
+import com.account.dubborpc.AccountCommonFacade;
+import com.zyx.constants.AuthConstants;
+import com.zyx.utils.HttpClientUtils;
+import com.zyx.utils.RandomUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by WeiMinSheng on 2016/6/15.
+ *
+ * @author WeiMinSheng
+ * @version V1.0
+ *          Copyright (c)2016 tyj-版权所有
+ * @title AccountCommonFacedeImpl.java
+ */
+public class AccountCommonFacedeImpl implements AccountCommonFacade {
+
+    private static final String CHARSET_UTF_8 = "UTF-8";
+
+    private static final String SEND_URL = "http://www.mxtong.net.cn/GateWay/Services.asmx/DirectSend";
+
+    @Autowired
+    protected RedisTemplate<String, String> jedisTemplate;
+
+    @Override
+    public Map<String, Object> sendPhoneCode(String phone, String message) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            String phone_code = jedisTemplate.opsForValue().get(phone);
+            if (phone_code != null) {// 存在验证码
+                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
+                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送过于频繁，短信发送失败！");
+                return map;
+            }
+
+            String random = RandomUtil.generateNumString(6);//  验证码
+
+            String content;
+            if (message != null && !message.equals("")) {
+                content = java.net.URLEncoder.encode(message + "【体育家】", "UTF-8");
+            } else {
+                content = java.net.URLEncoder.encode("验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！【体育家】", "UTF-8");
+            }
+            Properties props = new Properties();
+            props.load(new InputStreamReader(RegisterFacadeImpl.class.getClassLoader().getResourceAsStream("SMS.properties"), CHARSET_UTF_8));
+
+            Map<String, Object> props_map = new HashMap<String, Object>();
+            props_map.put("UserID", props.getProperty("sms.id"));
+            props_map.put("Account", props.getProperty("sms.account"));
+            props_map.put("Password", props.getProperty("sms.password"));
+            props_map.put("SendType", props.getProperty("sms.sendType"));
+            props_map.put("PostFixNumber", props.getProperty("sms.PostFixNumber"));
+            props_map.put("SendTime", "");
+            props_map.put("Phones", phone);
+            props_map.put("Content", content);
+
+            String request = null;
+            for (int i = 0; i < 3; i++) {
+                request = HttpClientUtils.postRequest(SEND_URL, props_map);
+                if (request != null) {
+                    break;
+                }
+            }
+            if (request == null) {
+                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
+                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送失败！");
+                return map;
+            }
+
+            int beginPoint = request.indexOf("<RetCode>");
+            int endPoint = request.indexOf("</RetCode>");
+
+            String substring = request.substring(beginPoint + 9, endPoint);
+            if (substring.equals("Sucess")) {
+                jedisTemplate.opsForValue().set("tyj_phone_code:" + phone, random, 30 * 60, TimeUnit.SECONDS);
+                jedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
+                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
+                map.put(AuthConstants.AUTH_SUCCESS, "验证码发送成功！！！");
+            } else {
+                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
+                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送失败！");
+            }
+            return map;
+        } catch (IOException e) {
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60007);
+            map.put(AuthConstants.AUTH_ERRORMSG, "未知错误,请重试");
+            return map;
+        }
+
+    }
+
+}

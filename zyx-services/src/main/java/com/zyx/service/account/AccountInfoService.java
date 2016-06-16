@@ -33,10 +33,19 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
 
 
     /**
-     * 修改密码
+     * 更新密码
      *
      * @param userLoginParam
      * @return
      */
     int renewpwd(UserLoginParam userLoginParam);
+
+
+    /**
+     * 修改信息
+     *
+     * @param userLoginParam
+     * @return
+     */
+    int updateAccountInfo(UserLoginParam userLoginParam);
 }

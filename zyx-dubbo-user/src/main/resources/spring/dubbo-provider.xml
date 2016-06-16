@@ -14,7 +14,12 @@
 
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20880" />
-		
+
+	<!-- 短信发送接口 -->
+	<dubbo:service interface="com.account.dubborpc.AccountCommonFacade" ref="accountCommonFacade" />
+
+	<bean id="accountCommonFacade" class="com.account.dubborpc.impl.AccountCommonFacedeImpl"></bean>
+
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.account.dubborpc.RegisterFacade" ref="registerFacade" />
 

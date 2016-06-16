@@ -28,4 +28,21 @@ public interface UserLoginFacade {
      * @return
      */
     Map<String, Object> signout(String token);
+
+    /**
+     * 刷新token
+     *
+     * @param token
+     * @return
+     */
+    Map<String, Object> refreshtoken(String token);
+
+    /**
+     * 用户签到
+     *
+     * @param token
+     * @param accountId
+     * @return
+     */
+    Map<String, Object> sign(String token, String accountId);
 }

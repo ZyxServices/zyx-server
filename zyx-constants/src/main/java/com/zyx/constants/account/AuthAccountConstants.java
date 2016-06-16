@@ -14,7 +14,7 @@ public interface AuthAccountConstants {
      * 未登录
      */
     int ACCOUNT_ERROR_CODE_50000 = 50000;
-    String ACCOUNT_ERROR_CODE_50000_MSG = "token失效";
+    String ACCOUNT_ERROR_CODE_50000_MSG = "用户token已经失效，请重新登录";
 
     /**
      * 用户名密码错误
@@ -40,12 +40,18 @@ public interface AuthAccountConstants {
     int ACCOUNT_ERROR_CODE_50004 = 50004;
     String ACCOUNT_ERROR_CODE_50004_MSG = "重复登录";
 
+    /**
+     * 注册用户失败，手机号已存在
+     */
+    int ACCOUNT_ERROR_CODE_50005 = 50005;
+    String ACCOUNT_ERROR_CODE_50005_MSG = "注册用户失败，手机号已注册";
+
 
     /**
      * 验证码输入错误
      */
-    int ACCOUNT_CODE_ERROR = 10003;
-    String ACCOUNT_CODE_ERROR_MSG = "验证码输入错误";
+    int ACCOUNT_ERROR_CODE_50006 = 50006;
+    String ACCOUNT_ERROR_CODE_50006_MSG = "验证码输入错误";
 
     /**
      * 注册用户失败，未知错误
@@ -53,9 +59,5 @@ public interface AuthAccountConstants {
     int ACCOUNT_REGISTER_ERROR = 10004;
     String ACCOUNT_REGISTER_ERROR_MSG = "注册用户失败，未知错误";
 
-    /**
-     * 注册用户失败，手机号已存在
-     */
-    int ACCOUNT_REGISTER_PHONE_ERROR = 10005;
-    String ACCOUNT_REGISTER_PHONE_ERROR_MSG = "注册用户失败，手机号已存在";
+
 }
