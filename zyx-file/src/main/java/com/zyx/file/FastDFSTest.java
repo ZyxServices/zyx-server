@@ -64,10 +64,10 @@ public class FastDFSTest {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		String [] strings = new String[]{"png","gif","jpeg","jpeg","jpg","bmp"};
-		System.out.println(Arrays.binarySearch(strings, "aaaa")!=-1);
+//		String [] strings = new String[]{"png","gif","jpeg","jpeg","jpg","bmp"};
+//		System.out.println(Arrays.binarySearch(strings, "aaaa")!=-1);
 //		System.out.println(FastDFSClient.class.getResource("/fdfs_client.conf").getFile());
-//		upload();
+		upload();
 		//download();
 	//	delete();
 

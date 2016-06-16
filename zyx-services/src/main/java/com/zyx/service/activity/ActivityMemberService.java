@@ -15,10 +15,11 @@ import java.util.Map;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.service.activity
  */
-public interface ActivityMemberService extends BaseService<ActivityMember>{
+public interface ActivityMemberService extends BaseService<ActivityMember> {
 
     /**
      * 活动报名信息添加
+     *
      * @param addMemberInfoParm
      * @return
      */
@@ -26,8 +27,17 @@ public interface ActivityMemberService extends BaseService<ActivityMember>{
 
     /**
      * 查询报名信息添加
+     *
      * @param queryMemberParm
      * @return
      */
     Map<String, Object> queryActivityMemberInfo(QueryMemberParm queryMemberParm);
+
+    /**
+     * 发起这审核报名
+     *
+     * @param id
+     * @return
+     */
+    Map<String, Object> updateMemberByExamine(Integer id);
 }

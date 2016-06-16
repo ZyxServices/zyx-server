@@ -1,6 +1,6 @@
-package com.dubborpc.activity.impl;
+package com.zyx.rpc.activity.impl;
 
-import com.dubborpc.activity.ActivityMemberFacade;
+import com.zyx.rpc.activity.ActivityMemberFacade;
 import com.zyx.entity.activity.parm.AddMemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.service.activity.ActivityMemberService;
@@ -31,5 +31,10 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     @Override
     public Map<String, Object> queryActivityMember(QueryMemberParm queryMemberParm) {
         return activityMemberService.queryActivityMemberInfo(queryMemberParm);
+    }
+
+    @Override
+    public Map<String, Object> updateMemberByExamine(Integer id) {
+        return activityMemberService.updateMemberByExamine(id);
     }
 }

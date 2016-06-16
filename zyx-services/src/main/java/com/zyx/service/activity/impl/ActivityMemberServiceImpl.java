@@ -73,17 +73,17 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
 
             int insert = mapper.insert(activityMember);
-            if(insert > 0){
+            if (insert > 0) {
                 map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
                 map.put(AuthConstants.AUTH_SUCCESS, "报名成功");
                 return map;
-            }else{
+            } else {
                 map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10004);
                 map.put(AuthConstants.AUTH_ERRORMSG, "报名失败");
                 return map;
             }
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
@@ -92,10 +92,10 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     @Override
     public Map<String, Object> queryActivityMemberInfo(QueryMemberParm parm) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
-        if(parm.getActivityId() == null && parm.getUserId() == null){
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_100);
+        if (parm.getActivityId() == null && parm.getUserId() == null) {
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
             map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
             return map;
         }
@@ -103,13 +103,34 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
         List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
 
-        if(queryMemberVos.size() > 0){
+        if (queryMemberVos!= null && queryMemberVos.size() > 0) {
             map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
             map.put(AuthConstants.AUTH_SUCCESS, queryMemberVos);
             return map;
-        }else{
+        } else {
             map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10002);
             map.put(AuthConstants.AUTH_ERRORMSG, "查无数据!");
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> updateMemberByExamine(Integer id) {
+
+        Map<String, Object> map = new HashMap<>();
+        if (id == null) {
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
+            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            return map;
+        }
+        int integer = activityMemberMapper.updateMemberByExamine(id);
+        if(integer > 0){
+            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
+            map.put(AuthConstants.AUTH_SUCCESS, "审核成功");
+            return map;
+        }else{
+            map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10004);
+            map.put(AuthConstants.AUTH_ERRORMSG, "审核失败");
             return map;
         }
     }

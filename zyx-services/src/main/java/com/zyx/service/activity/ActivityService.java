@@ -17,7 +17,6 @@ import java.util.Map;
 public interface ActivityService extends BaseService<Activity> {
 
     /**
-     *
      * @param createId       创建者ID
      * @param title          活动标题
      * @param desc           活动描述内容
@@ -42,6 +41,7 @@ public interface ActivityService extends BaseService<Activity> {
 
     /**
      * 多条条件查询活动
+     *
      * @param parm
      * @return
      */
@@ -49,6 +49,7 @@ public interface ActivityService extends BaseService<Activity> {
 
     /**
      * 查询活动发起者自定义报名模板
+     *
      * @param id
      * @return
      */

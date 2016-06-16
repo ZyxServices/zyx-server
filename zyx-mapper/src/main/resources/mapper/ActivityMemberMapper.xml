@@ -40,5 +40,7 @@
 
     </select>
 
-
+    <update id="updateMemberByExamine" parameterType="java.lang.Integer">
+        UPDATE activity_member SET examine_type = true where id = #{id}
+    </update>
 </mapper>

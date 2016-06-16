@@ -12,12 +12,16 @@ import java.text.SimpleDateFormat;
  */
 public interface AuthActivityConstants {
 
-    /****************常用常量*******************/
+    /****************
+     * 常用常量
+     *******************/
     String defaultDatePattern = "yyyy-MM-dd HH:mm:ss";
 
     SimpleDateFormat SDF = new SimpleDateFormat(defaultDatePattern);
 
-    /*************************活动返回码****************************************/
+    /*************************
+     * 活动返回码
+     ****************************************/
 
     //活动发布失败
     int AUTH_ERROR_10000 = 10000;

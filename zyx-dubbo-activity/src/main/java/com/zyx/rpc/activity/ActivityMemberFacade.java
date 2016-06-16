@@ -1,4 +1,4 @@
-package com.dubborpc.activity;
+package com.zyx.rpc.activity;
 
 import com.zyx.entity.activity.parm.AddMemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
@@ -17,6 +17,7 @@ public interface ActivityMemberFacade {
 
     /**
      * 活动报名信息添加
+     *
      * @param addMemberInfoParm
      * @return
      */
@@ -24,8 +25,17 @@ public interface ActivityMemberFacade {
 
     /**
      * 查询报名信息添加
+     *
      * @param queryMemberParm
      * @return
      */
     Map<String, Object> queryActivityMember(QueryMemberParm queryMemberParm);
+
+    /**
+     * 发起这审核报名
+     *
+     * @param id
+     * @return
+     */
+    Map<String, Object> updateMemberByExamine(Integer id);
 }

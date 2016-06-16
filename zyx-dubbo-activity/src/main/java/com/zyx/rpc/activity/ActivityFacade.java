@@ -1,4 +1,4 @@
-package com.dubborpc.activity;
+package com.zyx.rpc.activity;
 
 import com.zyx.entity.activity.parm.QueryActivityParm;
 
@@ -15,7 +15,6 @@ import java.util.Map;
 public interface ActivityFacade {
 
     /**
-     *
      * @param createId       创建者ID
      * @param title          活动标题
      * @param desc           活动描述内容
@@ -33,13 +32,14 @@ public interface ActivityFacade {
      * @param memberTemplate 报名活动模版
      * @return
      */
-    Map<String,Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
-                                      Long endTime, Long lastTime, Integer maxPeople, Integer visible,
-                                      String phone, Double price, Integer type, String address, Integer examine,
-                                      String memberTemplate);
+    Map<String, Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
+                                       Long endTime, Long lastTime, Integer maxPeople, Integer visible,
+                                       String phone, Double price, Integer type, String address, Integer examine,
+                                       String memberTemplate);
 
     /**
      * 多条条件查询活动
+     *
      * @param parm
      * @return
      */
@@ -47,6 +47,7 @@ public interface ActivityFacade {
 
     /**
      * 查询活动发起者自定义报名模板
+     *
      * @param id
      * @return
      */

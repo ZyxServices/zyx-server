@@ -23,8 +23,17 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
 
     /**
      * 查询报名详细信息
+     *
      * @param parm
      * @return
      */
     List<QueryMemberVo> queryActivityMemberInfo(QueryMemberParm parm);
+
+    /**
+     * 发起这审核报名
+     *
+     * @param id
+     * @return
+     */
+    int updateMemberByExamine(Integer id);
 }

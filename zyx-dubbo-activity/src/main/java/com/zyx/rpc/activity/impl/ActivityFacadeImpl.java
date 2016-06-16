@@ -1,6 +1,6 @@
-package com.dubborpc.activity.impl;
+package com.zyx.rpc.activity.impl;
 
-import com.dubborpc.activity.ActivityFacade;
+import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.service.activity.ActivityService;
 import org.springframework.stereotype.Service;

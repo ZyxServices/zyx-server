@@ -20,12 +20,18 @@ public interface AuthConstants {
      * 返回code信息
      ***************************************/
 
-    //参数缺省,未知错误
+    //未知错误
     int AUTH_ERROR_100 = 100;
     //成功
     int AUTH_SUCCESS_200 = 200;
-    //
-    int AUTH_SUCCESS_301 = 301;
+    //参数无效,参数缺省
+    int AUTH_ERROR_300 = 300;
+    //不合法的Token，一般是有其它相同终端登录
+    int AUTH_ERROR_301 = 307;
+    //过期的Token
+    int AUTH_ERROR_308 = 308;
+    //未认证，客户端没有传入合法的Cookie
+    int AUTH_RRROR_310 = 310;
     //
     int AUTH_ERROR_404 = 404;
     //
