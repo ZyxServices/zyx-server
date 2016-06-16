@@ -1,7 +1,7 @@
 package com.zyx.service.activity.impl;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.activity.AuthActivityConstants;
+import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.vo.MemberTemplate;
@@ -81,7 +81,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             map.put(Constants.SUCCESS_MSG, "发布成功");
             return map;
         } else {
-            map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10000);
+            map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10000);
             map.put(Constants.ERROR_MSG, "活动发布失败");
             return map;
         }
@@ -93,7 +93,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         Map<String, Object> map = new HashMap<String, Object>();
         if (parm != null && parm.getPageNumber() != null && parm.getPage() != null) {
             if (parm.getPageNumber() == 0) {
-                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10003);
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10003);
                 map.put(Constants.ERROR_MSG, "分页参数无效");
                 return map;
             }
@@ -115,7 +115,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 map.put(Constants.SUCCESS_MSG, activities);
                 return map;
             } else {
-                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10002);
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
                 map.put(Constants.ERROR_MSG, "查无数据");
                 return map;
             }
@@ -138,7 +138,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 map.put(Constants.SUCCESS_MSG, template);
                 return map;
             } else {
-                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10002);
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
                 map.put(Constants.ERROR_MSG, "查无数据");
                 return map;
             }

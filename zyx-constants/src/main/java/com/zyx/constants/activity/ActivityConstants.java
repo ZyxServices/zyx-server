@@ -19,6 +19,8 @@ public interface ActivityConstants {
 
     SimpleDateFormat SDF = new SimpleDateFormat(defaultDatePattern);
 
+    String AUTH_SUCCESS = "result";
+
     /*************************
      * 活动返回码
      ****************************************/
@@ -35,4 +37,6 @@ public interface ActivityConstants {
     int AUTH_ERROR_10004 = 10004;
     //活动报名信息已存在
     int AUTH_ERROR_10005 = 10005;
+    //活动报名信息审核失败
+    int AUTH_ERROR_10006 = 10006;
 }
