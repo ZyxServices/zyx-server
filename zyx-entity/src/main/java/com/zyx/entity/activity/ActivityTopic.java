@@ -5,6 +5,7 @@ import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -17,6 +18,7 @@ import java.util.Date;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.entity.activity
  */
+@Table(name = "activity_topic")
 public class ActivityTopic extends BaseEntity {
 
     /**
@@ -25,6 +27,13 @@ public class ActivityTopic extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer userId;
+
+    /**
+     * 活动id
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer activityId;
 
     /**
      * 动态类型 3 活动
@@ -51,22 +60,15 @@ public class ActivityTopic extends BaseEntity {
      * 动态发布时间
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Date topicDate;
-
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long topicDate;
     /**
-     * 浏览数
+     * 动态对应图片 每个图片以,号分割
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer browseNumber;
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String images;
 
-    /**
-     * 点赞数
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer Praise;
 
     public Integer getUserId() {
         return userId;
@@ -74,6 +76,14 @@ public class ActivityTopic extends BaseEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
     }
 
     public Integer getType() {
@@ -100,40 +110,32 @@ public class ActivityTopic extends BaseEntity {
         this.topicContent = topicContent;
     }
 
-    public Date getTopicDate() {
+    public Long getTopicDate() {
         return topicDate;
     }
 
-    public void setTopicDate(Date topicDate) {
+    public void setTopicDate(Long topicDate) {
         this.topicDate = topicDate;
     }
 
-    public Integer getBrowseNumber() {
-        return browseNumber;
+    public String getImages() {
+        return images;
     }
 
-    public void setBrowseNumber(Integer browseNumber) {
-        this.browseNumber = browseNumber;
-    }
-
-    public Integer getPraise() {
-        return Praise;
-    }
-
-    public void setPraise(Integer praise) {
-        Praise = praise;
+    public void setImages(String images) {
+        this.images = images;
     }
 
     @Override
     public String toString() {
         return "ActivityTopic{" +
-                ", userId=" + userId +
+                "userId=" + userId +
+                ", activityId=" + activityId +
                 ", type=" + type +
                 ", topicTitle='" + topicTitle + '\'' +
                 ", topicContent='" + topicContent + '\'' +
                 ", topicDate=" + topicDate +
-                ", browseNumber=" + browseNumber +
-                ", Praise=" + Praise +
+                ", images='" + images + '\'' +
                 '}';
     }
 }

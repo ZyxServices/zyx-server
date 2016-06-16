@@ -39,4 +39,8 @@ public interface ActivityConstants {
     int AUTH_ERROR_10005 = 10005;
     //活动报名信息审核失败
     int AUTH_ERROR_10006 = 10006;
+    //图片上传超过限定张数(client端使用)
+    int AUTH_ERROR_10007 = 10007;
+    //发布动态失败
+    int AUTH_ERROR_10008 = 10008;
 }

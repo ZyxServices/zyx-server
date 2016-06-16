@@ -307,7 +307,7 @@
 
     </dependencies>
     <build>
-        <finalName>concern</finalName>
+        <finalName>zyx-dubbo-activity</finalName>
         <resources>
             <resource>
                 <targetPath>${project.build.directory}/classes</targetPath>
