@@ -1,29 +1,13 @@
 package com.live;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
-import com.zyx.common.enums.LiveLab;
-import com.zyx.common.enums.LiveType;
 import com.zyx.entity.live.LiveInfo;
-import com.zyx.entity.live.TextLiveItem;
-import com.zyx.rpc.live.LiveInfoFacade;
-import com.zyx.rpc.live.TextLiveItemFacade;
-import com.zyx.service.live.TextLiveItemService;
-import com.zyx.service.live.impl.LiveInfoServiceImpl;
-import com.zyx.vo.common.TimeAreaVo;
-import com.zyx.vo.live.LiveInfoVo;
-import com.zyx.vo.live.TextLiveItemVo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
  * Unit test for simple App.
@@ -114,7 +98,7 @@ public class AppTest extends TestCase {
 //			
 //			System.out.println(textList);
 
-			 LiveInfoFacade liveInfoFacade = (LiveInfoFacade)context.getBean("liveInfoFacade");
+//			 LiveInfoFacade liveInfoFacade = (LiveInfoFacade)context.getBean("liveInfoFacade");
 //			 LiveInfoVo liveInfoVo = new LiveInfoVo();
 //			 TimeAreaVo createTime = new TimeAreaVo();
 //			 createTime.setStart(1465890700790L);
@@ -122,8 +106,8 @@ public class AppTest extends TestCase {
 //			liveInfoVo.setCreateTime(createTime);
 //			List<LiveInfo> list = liveInfoFacade.getList(liveInfoVo );
 //			System.out.println(com.alibaba.fastjson.JSON.toJSONString(list));
-			LiveInfo liveInfo = liveInfoFacade.getById(41L);
-			System.out.println(JSON.toJSONString(liveInfo));
+//			LiveInfo liveInfo = liveInfoFacade.getById(41L);
+//			System.out.println(JSON.toJSONString(liveInfo));
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);
