@@ -1,6 +1,6 @@
 package com.zyx.service.activity.impl;
 
-import com.zyx.constants.AuthConstants;
+import com.zyx.constants.Constants;
 import com.zyx.constants.activity.AuthActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
@@ -11,8 +11,6 @@ import com.zyx.service.activity.ActivityService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,8 +61,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 if (!memberTemplate.equals("")) {
                     activity.setMemberTemplate(memberTemplate);
                 } else {
-                    map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-                    map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+                    map.put(Constants.STATE, Constants.PARAM_ERROR);
+                    map.put(Constants.ERROR_MSG, "参数缺失");
                     return map;
                 }
             } else {
@@ -73,18 +71,18 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setActivityType(1);
             activity.setCreateTime(System.currentTimeMillis());
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
         Integer integer = mapper.insert(activity);
         if (integer > 0) {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-            map.put(AuthConstants.AUTH_SUCCESS, "发布成功");
+            map.put(Constants.STATE, Constants.SUCCESS);
+            map.put(Constants.SUCCESS_MSG, "发布成功");
             return map;
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10000);
-            map.put(AuthConstants.AUTH_ERRORMSG, "活动发布失败");
+            map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10000);
+            map.put(Constants.ERROR_MSG, "活动发布失败");
             return map;
         }
     }
@@ -95,8 +93,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         Map<String, Object> map = new HashMap<String, Object>();
         if (parm != null && parm.getPageNumber() != null && parm.getPage() != null) {
             if (parm.getPageNumber() == 0) {
-                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10003);
-                map.put(AuthConstants.AUTH_ERRORMSG, "分页参数无效");
+                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10003);
+                map.put(Constants.ERROR_MSG, "分页参数无效");
                 return map;
             }
             Integer pageNumber = parm.getPageNumber();
@@ -113,17 +111,17 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             List<Activity> activities = activityMapper.queryActivity(parm);
 
             if (activities.size() > 0) {
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-                map.put(AuthConstants.AUTH_SUCCESS, activities);
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(Constants.SUCCESS_MSG, activities);
                 return map;
             } else {
-                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10002);
-                map.put(AuthConstants.AUTH_ERRORMSG, "查无数据");
+                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10002);
+                map.put(Constants.ERROR_MSG, "查无数据");
                 return map;
             }
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
     }
@@ -136,17 +134,17 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         if (id != null && id > 0) {
             MemberTemplate template = activityMapper.queryActivityMember(id);
             if (template != null) {
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-                map.put(AuthConstants.AUTH_SUCCESS, template);
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(Constants.SUCCESS_MSG, template);
                 return map;
             } else {
-                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10002);
-                map.put(AuthConstants.AUTH_ERRORMSG, "查无数据");
+                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10002);
+                map.put(Constants.ERROR_MSG, "查无数据");
                 return map;
             }
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
     }

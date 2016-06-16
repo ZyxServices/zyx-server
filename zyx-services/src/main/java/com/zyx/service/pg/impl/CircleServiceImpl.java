@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.zyx.constants.Constants;
 import org.springframework.stereotype.Service;
 
-import com.zyx.constants.AuthConstants;
 import com.zyx.entity.pg.Circle;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
@@ -26,11 +26,11 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
             Optional.ofNullable(circleMasterId).ifPresent(insertCircle::setCircle_master_id);
             mapper.insert(insertCircle);
-            map.put(AuthConstants.AUTH_SUCCESS, AuthConstants.AUTH_SUCCESS_200);
+            map.put(Constants.STATE, Constants.SUCCESS);
             return map;
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthConstants.AUTH_ERROR_500);
+            map.put(Constants.STATE, Constants.ERROR_500);
             return map;
         }
     }

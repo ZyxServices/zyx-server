@@ -1,6 +1,6 @@
 package com.zyx.service.pg.impl;
 
-import com.zyx.constants.AuthConstants;
+import com.zyx.constants.Constants;
 import com.zyx.entity.pg.Meet;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.MeetService;
@@ -20,16 +20,16 @@ import java.util.Optional;
 public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetService {
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
-        Meet meet=new Meet();
-        Map<String,Object> map=new HashMap<>();
+        Meet meet = new Meet();
+        Map<String, Object> map = new HashMap<>();
         try {
             Optional.ofNullable(circleId).ifPresent(meet::setCircleId);
             Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
-            map.put(AuthConstants.AUTH_SUCCESS,AuthConstants.AUTH_SUCCESS_200);
+            map.put(Constants.STATE, Constants.SUCCESS);
             return map;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            map.put(AuthConstants.AUTH_ERRORMSG,AuthConstants.AUTH_ERROR_500);
+            map.put(Constants.STATE, Constants.ERROR_500);
             return map;
         }
     }

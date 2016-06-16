@@ -1,6 +1,6 @@
 package com.zyx.service.activity.impl;
 
-import com.zyx.constants.AuthConstants;
+import com.zyx.constants.Constants;
 import com.zyx.constants.activity.AuthActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.ActivityMember;
@@ -50,8 +50,8 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(queryMemberParm);
             if (queryMemberVos.size() > 0 && queryMemberVos.get(0).getExamineType()) {
-                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10005);
-                map.put(AuthConstants.AUTH_ERRORMSG, "此用户已报名过此活动");
+                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10005);
+                map.put(Constants.ERROR_MSG, "此用户已报名过此活动");
                 return map;
             }
 
@@ -74,17 +74,17 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             int insert = mapper.insert(activityMember);
             if (insert > 0) {
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-                map.put(AuthConstants.AUTH_SUCCESS, "报名成功");
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(Constants.SUCCESS_MSG, "报名成功");
                 return map;
             } else {
-                map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10004);
-                map.put(AuthConstants.AUTH_ERRORMSG, "报名失败");
+                map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10004);
+                map.put(Constants.ERROR_MSG, "报名失败");
                 return map;
             }
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
     }
@@ -95,8 +95,8 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
         Map<String, Object> map = new HashMap<>();
 
         if (parm.getActivityId() == null && parm.getUserId() == null) {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
 
@@ -104,12 +104,12 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
         List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
 
         if (queryMemberVos!= null && queryMemberVos.size() > 0) {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-            map.put(AuthConstants.AUTH_SUCCESS, queryMemberVos);
+            map.put(Constants.STATE, Constants.SUCCESS);
+            map.put(Constants.SUCCESS_MSG, queryMemberVos);
             return map;
         } else {
-            map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10002);
-            map.put(AuthConstants.AUTH_ERRORMSG, "查无数据!");
+            map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10002);
+            map.put(Constants.SUCCESS_MSG, "查无数据!");
             return map;
         }
     }
@@ -119,18 +119,18 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
         Map<String, Object> map = new HashMap<>();
         if (id == null) {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_300);
-            map.put(AuthConstants.AUTH_ERRORMSG, "参数缺失");
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
         }
         int integer = activityMemberMapper.updateMemberByExamine(id);
         if(integer > 0){
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-            map.put(AuthConstants.AUTH_SUCCESS, "审核成功");
+            map.put(Constants.STATE, Constants.SUCCESS);
+            map.put(Constants.SUCCESS_MSG, "审核成功");
             return map;
         }else{
-            map.put(AuthConstants.AUTH_STATE, AuthActivityConstants.AUTH_ERROR_10004);
-            map.put(AuthConstants.AUTH_ERRORMSG, "审核失败");
+            map.put(Constants.STATE, AuthActivityConstants.AUTH_ERROR_10004);
+            map.put(Constants.ERROR_MSG, "审核失败");
             return map;
         }
     }
