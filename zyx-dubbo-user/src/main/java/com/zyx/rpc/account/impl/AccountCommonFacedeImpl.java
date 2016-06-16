@@ -1,7 +1,7 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.account.AuthAccountConstants;
+import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.AccountCommonFacade;
 import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.RandomUtil;
@@ -38,8 +38,8 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
         try {
             String phone_code = jedisTemplate.opsForValue().get(phone);
             if (phone_code != null) {// 存在验证码
-                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50007);
-                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50007_MSG);
+                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50007);
+                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50007_MSG);
                 return map;
             }
 
@@ -72,8 +72,8 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
                 }
             }
             if (request == null) {
-                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009);
-                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
+                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50009);
+                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
                 return map;
             }
 
@@ -87,13 +87,13 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "验证码发送成功！！！");
             } else {
-                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009);
-                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
+                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50009);
+                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
             }
             return map;
         } catch (IOException e) {
-            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50008);
-            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50008_MSG);
+            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50008);
+            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50008_MSG);
             return map;
         }
 

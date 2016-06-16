@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.constants.activity
  */
-public interface AuthActivityConstants {
+public interface ActivityConstants {
 
     /****************
      * 常用常量
