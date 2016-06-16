@@ -17,4 +17,5 @@
 		
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.zyx.rpc.live.LiveInfoFacade" ref="liveInfoFacade" />
+	<dubbo:service interface="com.zyx.rpc.live.TextLiveItemFacade" ref="textLiveItemFacade" />
 </beans>  

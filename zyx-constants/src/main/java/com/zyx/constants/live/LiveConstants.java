@@ -19,7 +19,7 @@ public interface LiveConstants extends Constants{
 	/**
 	 * 不存在的直播
 	 */
-	int LIVE_NOT_EXIST = 10001;
+	int LIVE_NOT_EXIST = 20001;
 	
 	/**
 	 * 直播不存在
