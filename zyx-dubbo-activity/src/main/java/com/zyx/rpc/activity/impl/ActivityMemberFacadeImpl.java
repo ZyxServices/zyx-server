@@ -15,7 +15,7 @@ import java.util.Map;
  * @author SubDong
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title com.dubborpc.activity.impl
+ * @title com.rpc.activity.impl
  */
 @Service("activityMemberFacade")
 public class ActivityMemberFacadeImpl implements ActivityMemberFacade {

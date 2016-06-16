@@ -1,7 +1,8 @@
-package com.account.dubborpc.impl;
+package com.zyx.rpc.account.impl;
 
-import com.account.dubborpc.AccountCommonFacade;
-import com.zyx.constants.AuthConstants;
+import com.zyx.constants.Constants;
+import com.zyx.constants.account.AuthAccountConstants;
+import com.zyx.rpc.account.AccountCommonFacade;
 import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
         try {
             String phone_code = jedisTemplate.opsForValue().get(phone);
             if (phone_code != null) {// 存在验证码
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
-                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送过于频繁，短信发送失败！");
+                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50007);
+                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50007_MSG);
                 return map;
             }
 
@@ -71,8 +72,8 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
                 }
             }
             if (request == null) {
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
-                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送失败！");
+                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009);
+                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
                 return map;
             }
 
@@ -83,16 +84,16 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
             if (substring.equals("Sucess")) {
                 jedisTemplate.opsForValue().set("tyj_phone_code:" + phone, random, 30 * 60, TimeUnit.SECONDS);
                 jedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
-                map.put(AuthConstants.AUTH_SUCCESS, "验证码发送成功！！！");
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(Constants.SUCCESS_MSG, "验证码发送成功！！！");
             } else {
-                map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60005);
-                map.put(AuthConstants.AUTH_ERRORMSG, "短信发送失败！");
+                map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009);
+                map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
             }
             return map;
         } catch (IOException e) {
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_ERROR_60007);
-            map.put(AuthConstants.AUTH_ERRORMSG, "未知错误,请重试");
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50008);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50008_MSG);
             return map;
         }
 

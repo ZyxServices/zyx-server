@@ -1,9 +1,9 @@
-package com.account.dubborpc.impl;
+package com.zyx.rpc.account.impl;
 
-import com.account.dubborpc.UserLoginFacade;
-import com.zyx.constants.AuthConstants;
+import com.zyx.constants.Constants;
 import com.zyx.constants.account.AuthAccountConstants;
 import com.zyx.entity.account.UserMarkInfo;
+import com.zyx.rpc.account.UserLoginFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.UserLoginService;
 import com.zyx.service.account.UserMarkService;
@@ -44,22 +44,22 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         // 判断手机号码是否注册
         int count = accountInfoService.selectAccountByPhone(phone);
         if (count == 0) {// 未注册
-            map.put(AuthConstants.AUTH_STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50003);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50003);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
             return map;
         }
         // 判断是否已经登录
         String phoneTime = jedisTemplate.opsForValue().get("tyj_phone:" + phone);
         if (phoneTime != null) {
-            map.put(AuthConstants.AUTH_STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50004);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50004_MSG);
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50004);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50004_MSG);
             return map;
         }
 
         AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);
         if (accountInfo == null) {// 登陆失败
-            map.put(AuthConstants.AUTH_STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50001);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50001);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
             return map;
         }
 
@@ -67,7 +67,7 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         String token = UUID.randomUUID().toString().replaceAll("-", "");
         jedisTemplate.opsForValue().set("tyj_token:" + token, phone);
         jedisTemplate.opsForValue().set("tyj_phone:" + phone, System.currentTimeMillis() + "【" + token + "】");
-        map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
+        map.put(Constants.STATE, Constants.SUCCESS);
         Map<String, Object> map2 = new HashMap<String, Object>();
         map2.put("token", token);
         map2.put("tyj", accountInfo);
@@ -81,12 +81,12 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
         // 退出时的处理
         if (phone == null) {// token失效
-            map.put(AuthConstants.AUTH_STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
         } else {
             jedisTemplate.delete("tyj_token:" + token);
             jedisTemplate.delete("tyj_phone:" + phone);
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
+            map.put(Constants.STATE, Constants.SUCCESS);
         }
         return map;
     }
@@ -96,13 +96,13 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         Map<String, Object> map = new HashMap<String, Object>();
         String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
         if (phone == null) {// token已经失效
-            map.put(AuthConstants.AUTH_STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000);
-            map.put(AuthConstants.AUTH_ERRORMSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
+            map.put(Constants.STATE, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000);
+            map.put(Constants.ERROR_MSG, AuthAccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
         } else {
             String token_new = UUID.randomUUID().toString().replaceAll("-", "");
             jedisTemplate.delete("tyj_token:" + token);
             jedisTemplate.opsForValue().set("tyj_token:" + token_new, phone);
-            map.put(AuthConstants.AUTH_STATE, AuthConstants.AUTH_SUCCESS_200);
+            map.put(Constants.STATE, Constants.SUCCESS);
             map.put("refreshToken", token_new);
         }
         return map;

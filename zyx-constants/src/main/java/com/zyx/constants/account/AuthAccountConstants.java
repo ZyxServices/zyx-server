@@ -54,10 +54,27 @@ public interface AuthAccountConstants {
     String ACCOUNT_ERROR_CODE_50006_MSG = "验证码输入错误";
 
     /**
+     * 短信发送失败，短信发送过于频繁！！！
+     */
+    int ACCOUNT_ERROR_CODE_50007 = 50007;
+    String ACCOUNT_ERROR_CODE_50007_MSG = "短信发送失败，短信发送过于频繁！！！";
+
+    /**
+     * 短信发送失败，未知错误！！！
+     */
+    int ACCOUNT_ERROR_CODE_50008 = 50008;
+    String ACCOUNT_ERROR_CODE_50008_MSG = "短信发送失败，未知错误！！！";
+
+    /**
+     * 短信发送失败，短信服务器异常！！！
+     */
+    int ACCOUNT_ERROR_CODE_50009 = 50009;
+    String ACCOUNT_ERROR_CODE_50009_MSG = "短信发送失败，短信服务器异常！！！";
+
+    /**
      * 注册用户失败，未知错误
      */
-    int ACCOUNT_REGISTER_ERROR = 10004;
-    String ACCOUNT_REGISTER_ERROR_MSG = "注册用户失败，未知错误";
-
+    int ACCOUNT_ERROR_CODE_50010 = 50010;
+    String ACCOUNT_ERROR_CODE_50010_MSG = "注册用户失败，未知错误";
 
 }
