@@ -79,4 +79,17 @@ public interface AccountConstants extends Constants{
     int ACCOUNT_ERROR_CODE_50010 = 50010;
     String ACCOUNT_ERROR_CODE_50010_MSG = "注册用户失败，未知错误";
 
+    /**
+     * 发送验证码失败，手机号格式有误
+     */
+    int ACCOUNT_ERROR_CODE_50100 = 50100;
+    String ACCOUNT_ERROR_CODE_50100_MSG = "发送验证码失败，手机号格式有误";
+
+
+    /**
+     * ---------------------------常量---------------------------------------------
+     */
+    String TIMESTAMP_A = "timestamp_a";
+
+    String TIMESTAMP_B = "timestamp_b";
 }

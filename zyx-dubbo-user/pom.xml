@@ -319,7 +319,7 @@
 
     </dependencies>
     <build>
-        <finalName>mobileservice</finalName>
+        <finalName>zyx-dubbo-user</finalName>
         <resources>
             <resource>
                 <targetPath>${project.build.directory}/classes</targetPath>
