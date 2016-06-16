@@ -15,4 +15,12 @@
     </resultMap>
 
 
+    <select id="dynamicQuery" parameterType="com.zyx.entity.activity.parm.QueryTopicParm" resultMap="activityTopic">
+        SELECT * FROM activity_topic WHERE activity_id = #{activityId} ORDER BY create_time desc
+        <if test="pageNumber != null and pages != null">
+            limit #{pageNumber}, #{pages}
+        </if>
+
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.zyx.rpc.activity.impl;
 
 import com.zyx.entity.activity.parm.AddTopicParm;
+import com.zyx.entity.activity.parm.QueryTopicParm;
 import com.zyx.rpc.activity.ActivityTopicFacade;
 import com.zyx.service.activity.ActivityTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class ActivityTopicFacadeImpl implements ActivityTopicFacade {
     @Override
     public Map<String, Object> addActivityTopic(AddTopicParm addTopicParm) {
         return activityTopicService.addActivityTopic(addTopicParm);
+    }
+
+    @Override
+    public Map<String, Object> dynamicQuery(QueryTopicParm topicParm) {
+        return activityTopicService.dynamicQuery(topicParm);
     }
 }

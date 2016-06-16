@@ -2,6 +2,7 @@ package com.zyx.service.activity;
 
 import com.zyx.entity.activity.ActivityTopic;
 import com.zyx.entity.activity.parm.AddTopicParm;
+import com.zyx.entity.activity.parm.QueryTopicParm;
 import com.zyx.service.BaseService;
 
 import java.util.Map;
@@ -20,9 +21,18 @@ public interface ActivityTopicService extends BaseService<ActivityTopic> {
 
     /**
      * 查询报名信息添加
+     *
      * @param addTopicParm
      * @return
      */
     Map<String, Object> addActivityTopic(AddTopicParm addTopicParm);
+
+    /**
+     * 查询对应活动下到动态信息
+     *
+     * @param topicParm
+     * @return
+     */
+    Map<String, Object> dynamicQuery(QueryTopicParm topicParm);
 
 }

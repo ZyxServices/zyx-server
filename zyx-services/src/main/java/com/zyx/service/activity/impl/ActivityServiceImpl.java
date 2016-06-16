@@ -90,7 +90,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     @Override
     public Map<String, Object> queryActivity(QueryActivityParm parm) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         if (parm != null && parm.getPageNumber() != null && parm.getPage() != null) {
             if (parm.getPageNumber() == 0) {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10003);
@@ -101,7 +101,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             Integer page = parm.getPage();
             if (page == 0) page = 1;
             if (page == 1) {
-                parm.setPage(pageNumber - 1);
+                parm.setPage(pageNumber == 1 ? pageNumber : pageNumber - 1);
                 parm.setPageNumber(0);
             } else {
                 parm.setPageNumber(pageNumber);
