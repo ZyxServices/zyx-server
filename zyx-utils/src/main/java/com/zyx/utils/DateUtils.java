@@ -1,9 +1,12 @@
 package com.zyx.utils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 严格的日期转换setLenient(false);
@@ -277,10 +280,39 @@ public class DateUtils {
         return "未知";
     }
 
+    public static Timestamp getTodayStartTimeStamp() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return new Timestamp(calendar.getTimeInMillis());
+    }
+
+    public static long getMissDay(long t, long markTime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(t);
+        long currDay = calendar.get(Calendar.DAY_OF_YEAR);
+        calendar.setTimeInMillis(markTime);
+        long markDay = calendar.get(Calendar.DAY_OF_YEAR);
+        return currDay - markDay;
+    }
+
     public static void main(String[] args) {
         Date date = new Date();
         System.out.println(formatDateTime(date));
+        Timestamp s = getTodayStartTimeStamp();
+        System.out.println(s);
 
+        long t = System.currentTimeMillis();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(t);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        int currDay = calendar.get(Calendar.DAY_OF_YEAR);
+        long markTime = 1466073337277L;
+        calendar.setTimeInMillis(markTime);
+        int markDay = calendar.get(Calendar.DAY_OF_YEAR);
+        System.out.println(currDay - markDay);
     }
 
 }

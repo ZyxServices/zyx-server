@@ -28,4 +28,9 @@
 	<bean id="registerFacade" class="com.zyx.rpc.account.impl.RegisterFacadeImpl"/>
 
 	<bean id="userLoginFacade" class="com.zyx.rpc.account.impl.UserLoginFacadeImpl"/>
+
+	<!-- 用户签到接口 -->
+	<dubbo:service interface="com.zyx.rpc.account.MarkFacade" ref="markFacade" />
+
+	<bean id="markFacade" class="com.zyx.rpc.account.impl.MarkFacadeImpl"/>
 </beans>  

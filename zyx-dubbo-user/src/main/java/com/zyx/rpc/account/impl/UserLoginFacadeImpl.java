@@ -2,7 +2,6 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.entity.account.UserMarkInfo;
 import com.zyx.rpc.account.UserLoginFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.UserLoginService;
@@ -11,7 +10,6 @@ import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -106,27 +104,6 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
             map.put("refreshToken", token_new);
         }
         return map;
-    }
-
-    @Override
-    public Map<String, Object> sign(String token, String accountId) {
-        // 判断当天是否已经签到
-        String phone = jedisTemplate.opsForValue().get("tyj_sign:" + token);
-
-        UserMarkInfo userMarkInfo = new UserMarkInfo();
-        userMarkInfo.setUserId(Integer.parseInt(accountId));
-        Long t = System.currentTimeMillis();
-        userMarkInfo.setCreateTime(t);
-        userMarkInfo.setMarkTime(t);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(t);
-        String markString = String.valueOf(calendar.get(Calendar.DAY_OF_YEAR));
-        userMarkInfo.setMarkString(markString);
-        int result = userMarkService.save(userMarkInfo);
-        if (result == 0) {
-
-        }
-        return null;
     }
 
 }

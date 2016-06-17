@@ -1,38 +1,45 @@
-package com.zyx.entity.account;
+package com.zyx.entity.account.param;
 
-import com.zyx.entity.BaseEntity;
-import org.apache.ibatis.type.JdbcType;
-import tk.mybatis.mapper.annotation.ColumnType;
-
-import javax.persistence.Column;
-import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
- * Created by WeiMinSheng on 2016/6/15.
+ * Created by WeiMinSheng on 2016/6/16.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserMarkInfo.java
+ * @title UserMarkParam.java
  */
-@Table(name = "user_mark")
-public class UserMarkInfo extends BaseEntity {
+public class UserMarkParam implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer id;
+
+    private String token;
+
     private Integer userId;
 
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long markTime;
 
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String markHistory;
 
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer markCount;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Integer getUserId() {
         return userId;

@@ -2,6 +2,9 @@ package com.zyx.constants.account;
 
 import com.zyx.constants.Constants;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by WeiMinSheng on 2016/6/14.
  *
@@ -10,7 +13,7 @@ import com.zyx.constants.Constants;
  *          Copyright (c)2016 tyj-版权所有
  * @title AuthAccountConstants.java
  */
-public interface AccountConstants extends Constants{
+public interface AccountConstants extends Constants {
 
     /**
      * 未登录
@@ -87,9 +90,43 @@ public interface AccountConstants extends Constants{
 
 
     /**
+     * 该用户第一次签到，插入数据失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50200 = 50200;
+    String ACCOUNT_ERROR_CODE_50200_MSG = "该用户第一次签到，插入数据失败！！！";
+
+    /**
+     * 该用户今天已经签过到了，更新数据失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50201 = 50201;
+    String ACCOUNT_ERROR_CODE_50201_MSG = "该用户今天已经签过到了，更新数据失败！！！";
+
+    /**
+     * 该用户暂无签到数据！！！
+     */
+    int ACCOUNT_ERROR_CODE_50202 = 50202;
+    String ACCOUNT_ERROR_CODE_50202_MSG = "该用户暂无签到数据！！！";
+
+    /**
+     * 签到失败，更新数据失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50203 = 50203;
+    String ACCOUNT_ERROR_CODE_50203_MSG = "签到失败，更新数据失败！！！";
+
+    /**
      * ---------------------------常量---------------------------------------------
      */
-    String TIMESTAMP_A = "timestamp_a";
+    String TIMESTAMP_LONG = "timestamp_long";
 
-    String TIMESTAMP_B = "timestamp_b";
+    String TIMESTAMP_STRING = "timestamp_string";
+
+    String MARK_INFO = "mark_info";
+
+    /**
+     * 系统错误
+     */
+    Map<String, Object> MAP_500 = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.ERROR_500);
+        put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+    }};
 }

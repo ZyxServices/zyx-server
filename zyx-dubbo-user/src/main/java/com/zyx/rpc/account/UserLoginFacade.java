@@ -37,12 +37,4 @@ public interface UserLoginFacade {
      */
     Map<String, Object> refreshtoken(String token);
 
-    /**
-     * 用户签到
-     *
-     * @param token
-     * @param accountId
-     * @return
-     */
-    Map<String, Object> sign(String token, String accountId);
 }

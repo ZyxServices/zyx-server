@@ -25,5 +25,19 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zyx.mapper.account.UserMarkMapper">
+    <resultMap id="UserMarkMap" type="com.zyx.vo.account.MarkInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="mark_time" property="markTime" jdbcType="BIGINT"/>
+        <result column="mark_history" property="markHistory" jdbcType="BLOB"/>
+        <result column="mark_count" property="markCount" jdbcType="INTEGER"/>
+    </resultMap>
 
+    <select id="queryMarkInfo" parameterType="com.zyx.entity.account.UserMarkInfo" resultMap="UserMarkMap">
+        select * from user_mark where user_id = #{userId}
+    </select>
+
+    <update id="updateMarkInfo" parameterType="com.zyx.entity.account.param.UserMarkParam">
+        update user_mark set mark_time = #{markTime} , mark_history = #{markHistory} , mark_count = #{markCount} where id = #{id}
+    </update>
 </mapper>
