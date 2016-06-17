@@ -7,6 +7,7 @@ import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  *          Copyright (c)2016 tyj-版权所有
  * @title AccountCommonFacedeImpl.java
  */
+@Service("accountCommonFacade")
 public class AccountCommonFacedeImpl implements AccountCommonFacade {
 
     private static final String CHARSET_UTF_8 = "UTF-8";

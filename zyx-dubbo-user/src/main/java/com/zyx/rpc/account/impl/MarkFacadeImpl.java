@@ -14,6 +14,7 @@ import com.zyx.utils.DateUtils;
 import com.zyx.vo.account.MarkInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -27,7 +28,7 @@ import java.util.*;
  *          Copyright (c)2016 tyj-版权所有
  * @title MarkFacadeImpl.java
  */
-
+@Service("markFacade")
 public class MarkFacadeImpl implements MarkFacade {
 
     @Autowired

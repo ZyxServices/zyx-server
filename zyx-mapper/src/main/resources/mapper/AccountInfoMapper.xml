@@ -42,6 +42,9 @@
         <if test="password != null and password != ''">
             and password = #{password}
         </if>
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
     </select>
 
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">

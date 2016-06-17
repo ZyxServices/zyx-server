@@ -9,6 +9,7 @@ import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.CipherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -20,6 +21,7 @@ import java.util.*;
  *          Copyright (c)2016 tyj-版权所有
  * @ RegisterFacadeImpl.java
  */
+@Service("registerFacade")
 public class RegisterFacadeImpl implements RegisterFacade {
 
     @Autowired

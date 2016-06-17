@@ -9,6 +9,7 @@ import com.zyx.service.account.UserMarkService;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.UUID;
  *          Copyright (c)2016 tyj-版权所有
  * @title UserLoginFacadeImpl.java
  */
+@Service("userLoginFacade")
 public class UserLoginFacadeImpl implements UserLoginFacade {
 
     @Autowired
