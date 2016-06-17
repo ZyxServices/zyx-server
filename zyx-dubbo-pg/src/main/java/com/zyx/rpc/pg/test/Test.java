@@ -1,4 +1,4 @@
-package com.zyx.pg.test;
+package com.zyx.rpc.pg.test;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;

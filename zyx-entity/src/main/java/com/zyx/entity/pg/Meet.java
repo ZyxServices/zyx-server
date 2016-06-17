@@ -12,22 +12,22 @@ import javax.persistence.Table;
  */
 @Table(name = "meet")
 public class Meet extends BaseEntity {
-    private Integer circleId;
-    private Integer accountId;
+    private Integer circle_id;
+    private Integer account_id;
 
-    public Integer getCircleId() {
-        return circleId;
+    public Integer getCircle_id() {
+        return circle_id;
     }
 
-    public void setCircleId(Integer circleId) {
-        this.circleId = circleId;
+    public void setCircle_id(Integer circle_id) {
+        this.circle_id = circle_id;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getAccount_id() {
+        return account_id;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setAccount_id(Integer account_id) {
+        this.account_id = account_id;
     }
 }

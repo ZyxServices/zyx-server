@@ -25,6 +25,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
             Optional.ofNullable(circleMasterId).ifPresent(insertCircle::setCircle_master_id);
+            Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHead_img_url);
             mapper.insert(insertCircle);
             map.put(Constants.STATE, Constants.SUCCESS);
             return map;

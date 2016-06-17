@@ -23,8 +23,9 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
         Meet meet = new Meet();
         Map<String, Object> map = new HashMap<>();
         try {
-            Optional.ofNullable(circleId).ifPresent(meet::setCircleId);
-            Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
+            Optional.ofNullable(circleId).ifPresent(meet::setCircle_id);
+            Optional.ofNullable(accountId).ifPresent(meet::setAccount_id);
+            save(meet);
             map.put(Constants.STATE, Constants.SUCCESS);
             return map;
         } catch (Exception e) {

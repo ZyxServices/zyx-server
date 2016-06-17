@@ -19,7 +19,7 @@
 	 <!--<dubbo:service interface="com.zyx.pgrvice" ref="pgService" />-->
 
 	<!--操场-->
-	<dubbo:service interface="com.zyx.pg.PgFacade" ref="pgFacade" />
+	<dubbo:service interface="com.zyx.rpc.pg.PgFacade" ref="pgFacade" />
 
 
 

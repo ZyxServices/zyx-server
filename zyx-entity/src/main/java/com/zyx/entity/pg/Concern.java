@@ -16,33 +16,26 @@ public class Concern extends BaseEntity {
     private static final long serialVersionUID = 1L;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer userId;
+    private Integer user_id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String topicTitle;
+    private String topic_title;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String topicContent;
+    private String topic_content;
     @Column
-    @ColumnType(jdbcType = JdbcType.DATE)
-    private Date topicDate;
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String img_url;
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String video_url;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer topicVisible;
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer topicZan;
+    private Integer topic_visible;
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Integer getType() {
         return type;
@@ -52,43 +45,56 @@ public class Concern extends BaseEntity {
         this.type = type;
     }
 
-    public String getTopicTitle() {
-        return topicTitle;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public String getTopicContent() {
-        return topicContent;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public void setTopicContent(String topicContent) {
-        this.topicContent = topicContent;
+    public String getTopic_title() {
+        return topic_title;
     }
 
-    public Date getTopicDate() {
-        return topicDate;
+    public void setTopic_title(String topic_title) {
+        this.topic_title = topic_title;
     }
 
-    public void setTopicDate(Date topicDate) {
-        this.topicDate = topicDate;
+    public String getTopic_content() {
+        return topic_content;
     }
 
-    public Integer getTopicVisible() {
-        return topicVisible;
+    public void setTopic_content(String topic_content) {
+        this.topic_content = topic_content;
     }
 
-    public void setTopicVisible(Integer topicVisible) {
-        this.topicVisible = topicVisible;
+
+    public Integer getTopic_visible() {
+        return topic_visible;
     }
 
-    public Integer getTopicZan() {
-        return topicZan;
+    public void setTopic_visible(Integer topic_visible) {
+        this.topic_visible = topic_visible;
     }
 
-    public void setTopicZan(Integer topicZan) {
-        this.topicZan = topicZan;
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    public String getVideo_url() {
+        return video_url;
+    }
+
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
     }
 }

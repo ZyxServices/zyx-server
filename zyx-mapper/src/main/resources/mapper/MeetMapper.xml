@@ -27,8 +27,8 @@
 <mapper namespace="com.zyx.service.pg.MeetService" >
   <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Meet" >
     <id column="Id" property="id" jdbcType="INTEGER" />
-    <result column="circleId" property="circleId" jdbcType="INTEGER" />
-    <result column="accountId" property="accountId" jdbcType="INTEGER" />
+    <result column="circle_id" property="circleId" jdbcType="INTEGER" />
+    <result column="account_id" property="accountId" jdbcType="INTEGER" />
   </resultMap>
 
 </mapper>
