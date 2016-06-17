@@ -1,12 +1,15 @@
 package com.zyx.rpc.activity.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.rpc.activity.ActivityMemberFacade;
 import com.zyx.entity.activity.parm.AddMemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.service.activity.ActivityMemberService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,18 +26,44 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     @Resource
     private ActivityMemberService activityMemberService;
 
+    private static Logger loggers = Logger.getLogger(ActivityMemberFacadeImpl.class);
+
     @Override
     public Map<String, Object> addActivityMember(AddMemberInfoParm addMemberInfoParm) {
-        return activityMemberService.addActivityMember(addMemberInfoParm);
+        try {
+            return activityMemberService.addActivityMember(addMemberInfoParm);
+        } catch (Exception e) {
+            loggers.error(e);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
     }
 
     @Override
     public Map<String, Object> queryActivityMember(QueryMemberParm queryMemberParm) {
-        return activityMemberService.queryActivityMemberInfo(queryMemberParm);
+        try {
+            return activityMemberService.queryActivityMemberInfo(queryMemberParm);
+        } catch (Exception e) {
+            loggers.error(e);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
     }
 
     @Override
     public Map<String, Object> updateMemberByExamine(Integer id) {
-        return activityMemberService.updateMemberByExamine(id);
+        try {
+            return activityMemberService.updateMemberByExamine(id);
+        } catch (Exception e) {
+            loggers.error(e);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.zyx.rpc.activity;
 
 import com.zyx.entity.activity.parm.QueryActivityParm;
+import com.zyx.entity.activity.parm.QueryHistoryParm;
 
 import java.util.Map;
 
@@ -52,4 +53,13 @@ public interface ActivityFacade {
      * @return
      */
     Map<String, Object> queryActivityMember(Integer id);
+
+    /**
+     * 1  查询历史活动
+     * 2  时间范围查询活动
+     *
+     * @param history
+     * @return
+     */
+    Map<String, Object> queryActivityHistory(QueryHistoryParm history);
 }

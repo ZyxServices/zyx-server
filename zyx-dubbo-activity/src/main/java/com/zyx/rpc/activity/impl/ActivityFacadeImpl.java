@@ -1,11 +1,15 @@
 package com.zyx.rpc.activity.impl;
 
+import com.zyx.constants.Constants;
+import com.zyx.entity.activity.parm.QueryHistoryParm;
 import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.service.activity.ActivityService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +26,8 @@ public class ActivityFacadeImpl implements ActivityFacade {
     @Resource
     private ActivityService activityService;
 
+    private static Logger logger = Logger.getLogger(ActivityFacadeImpl.class);
+
     @Override
     public Map<String, Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
                                               Long endTime, Long lastTime, Integer maxPeople, Integer visible,
@@ -32,11 +38,41 @@ public class ActivityFacadeImpl implements ActivityFacade {
 
     @Override
     public Map<String, Object> queryActivity(QueryActivityParm parm) {
-        return activityService.queryActivity(parm);
+        try {
+            return activityService.queryActivity(parm);
+        } catch (Exception e) {
+            logger.error(e);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
     }
 
     @Override
     public Map<String, Object> queryActivityMember(Integer id) {
-        return activityService.queryActivityMember(id);
+        try {
+            return activityService.queryActivityMember(id);
+        } catch (Exception e) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            logger.error(e);
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryActivityHistory(QueryHistoryParm history) {
+        try {
+            return activityService.queryActivityHistory(history);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> map = new HashMap<String, Object>();
+            logger.error(e);
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
     }
 }

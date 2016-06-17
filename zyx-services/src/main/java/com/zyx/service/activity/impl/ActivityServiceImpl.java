@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
+import com.zyx.entity.activity.parm.QueryHistoryParm;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.service.BaseServiceImpl;
@@ -97,6 +98,12 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 map.put(Constants.ERROR_MSG, "分页参数无效");
                 return map;
             }
+            if ((parm.getStartTime() != null && parm.getEndTime() == null)
+                    || (parm.getEndTime() != null && parm.getStartTime() == null)) {
+                    map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10009);
+                    map.put(Constants.ERROR_MSG, "时间参数有误");
+                    return map;
+            }
             Integer pageNumber = parm.getPageNumber();
             Integer page = parm.getPage();
             if (page == 0) page = 1;
@@ -136,6 +143,44 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             if (template != null) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, template);
+                return map;
+            } else {
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
+                map.put(Constants.ERROR_MSG, "查无数据");
+                return map;
+            }
+        } else {
+            map.put(Constants.STATE, Constants.PARAM_ERROR);
+            map.put(Constants.ERROR_MSG, "参数缺失");
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryActivityHistory(QueryHistoryParm history) {
+        Map<String, Object> map = new HashMap<>();
+
+        if (history != null && history.getPageNumber() != null && history.getPageHis() != null) {
+            if (history.getPageNumber() == 0) {
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10003);
+                map.put(Constants.ERROR_MSG, "分页参数无效");
+                return map;
+            }
+            Integer pageNumber = history.getPageNumber();
+            Integer page = history.getPageHis();
+            if (page == 0) page = 1;
+            if (page == 1) {
+                history.setPageHis(pageNumber == 1 ? 9 : pageNumber - 1);
+                history.setPageNumber(0);
+            } else {
+                history.setPageNumber(pageNumber);
+                history.setPageHis((pageNumber * page) - 1);
+            }
+
+            List<Activity> activityHistory = activityMapper.queryActivityHistory(history);
+            if (activityHistory != null && activityHistory.size() > 0) {
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(Constants.SUCCESS_MSG, activityHistory);
                 return map;
             } else {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);

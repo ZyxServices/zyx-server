@@ -96,12 +96,12 @@ public interface Constants {
      */
     int REQUEST_UNAUTHORIZED = 401;
 
+    //文件类型 900+
+
     /**
      * 服务器错误
      */
     int ERROR_500 = 500;
-
-    //文件类型 900+
     /**
      * 图片上传文件大于5MB
      */

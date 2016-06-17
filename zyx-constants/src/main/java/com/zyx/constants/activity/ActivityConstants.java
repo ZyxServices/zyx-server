@@ -43,4 +43,6 @@ public interface ActivityConstants {
     int AUTH_ERROR_10007 = 10007;
     //发布动态失败
     int AUTH_ERROR_10008 = 10008;
+    //时间参数有误
+    int AUTH_ERROR_10009 = 10009;
 }

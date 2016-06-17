@@ -15,6 +15,8 @@ public class QueryActivityParm implements Serializable{
     private Integer createId;
     private Integer id;
     private String groupName;
+    private Long startTime;
+    private Long endTime;
     private Integer pageNumber;
     private Integer page;
 
@@ -58,5 +60,19 @@ public class QueryActivityParm implements Serializable{
         this.page = page;
     }
 
+    public Long getStartTime() {
+        return startTime;
+    }
 
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
+    }
 }

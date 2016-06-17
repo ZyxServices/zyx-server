@@ -32,6 +32,7 @@
 
     <select id="queryActivity" parameterType="com.zyx.entity.activity.parm.QueryActivityParm"
             resultMap="activity">
+        <![CDATA[
         select * from activity where 1=1
         <if test="id != null">
             AND id = #{id}
@@ -42,11 +43,15 @@
         <if test="groupName != null and groupName != ''">
             and group_name = #{groupName}
         </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            and create_time >= #{startTime}
+            and end_time <= #{endTime}
+        </if>
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
             limit #{pageNumber}, #{page}
         </if>
-
+        ]]>
     </select>
 
     <select id="queryActivityMember" parameterType="java.lang.Integer" resultMap="member_template">
@@ -55,6 +60,15 @@
 
     <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="activity">
         select * from activity where id = #{id}
+    </select>
+
+    <select id="queryActivityHistory" parameterType="com.zyx.entity.activity.parm.QueryHistoryParm"
+            resultMap="activity">
+        select * from activity where 1=1
+        ORDER BY create_time desc
+        <if test="pageNumber != null and pageHis != null">
+            limit #{pageNumber}, #{pageHis}
+        </if>
     </select>
 
 </mapper>
