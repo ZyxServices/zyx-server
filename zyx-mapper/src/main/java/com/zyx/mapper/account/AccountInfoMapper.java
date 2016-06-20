@@ -3,6 +3,7 @@ package com.zyx.mapper.account;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.vo.account.AccountInfoVo;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
     int selectAccountByPhone(String phone);
 
-    List<AccountInfo> selectAccountByParam(UserLoginParam userLoginParam);
+    List<AccountInfoVo> selectAccountByParam(UserLoginParam userLoginParam);
 
     int renewpwd(UserLoginParam userLoginParam);
 }

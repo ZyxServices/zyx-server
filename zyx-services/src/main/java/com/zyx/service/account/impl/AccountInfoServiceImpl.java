@@ -5,6 +5,7 @@ import com.zyx.entity.account.UserLoginParam;
 import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public List<AccountInfo> selectAccountByParam(UserLoginParam userLoginParam) {
+    public List<AccountInfoVo> selectAccountByParam(UserLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.selectAccountByParam(userLoginParam);
     }

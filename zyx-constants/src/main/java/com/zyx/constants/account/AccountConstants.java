@@ -114,6 +114,19 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50203_MSG = "签到失败，更新数据失败！！！";
 
     /**
+     * 无数据，查询失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50300 = 50300;
+    String ACCOUNT_ERROR_CODE_50300_MSG = "无数据，查询失败！！！";
+
+    /**
+     * 用户ID与用户不匹配，查询失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50301 = 50301;
+    String ACCOUNT_ERROR_CODE_50301_MSG = "用户ID与用户不匹配，查询失败！！！";
+
+
+    /**
      * ---------------------------常量---------------------------------------------
      */
     String TIMESTAMP_LONG = "timestamp_long";
@@ -128,5 +141,13 @@ public interface AccountConstants extends Constants {
     Map<String, Object> MAP_500 = new ConcurrentHashMap() {{
         put(Constants.STATE, Constants.ERROR_500);
         put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+    }};
+
+    /**
+     * 参数缺失
+     */
+    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.PARAM_MISS);
+        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
     }};
 }

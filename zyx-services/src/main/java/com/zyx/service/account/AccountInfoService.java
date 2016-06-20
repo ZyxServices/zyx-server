@@ -3,6 +3,7 @@ package com.zyx.service.account;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.service.BaseService;
+import com.zyx.vo.account.AccountInfoVo;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      * @param userLoginParam
      * @return
      */
-    List<AccountInfo> selectAccountByParam(UserLoginParam userLoginParam);
+    List<AccountInfoVo> selectAccountByParam(UserLoginParam userLoginParam);
 
 
     /**
