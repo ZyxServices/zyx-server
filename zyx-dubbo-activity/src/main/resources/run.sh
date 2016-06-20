@@ -1,1 +1,1 @@
-java -cp .:./lib/*:./conf com.zyx.rpc.activity.main.ActivityDubbo
+java -jar com.zyx.rpc.activity.main.ActivityDubbo

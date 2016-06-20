@@ -306,7 +306,7 @@
         <!-- dubbo 需要的jar end -->
 
     </dependencies>
-    <!--<build>
+    <build>
         <finalName>zyx-dubbo-activity</finalName>
         <resources>
             <resource>
@@ -318,7 +318,7 @@
                     <include>**/*.properties</include>
                 </includes>
             </resource>
-            &lt;!&ndash; 结合com.alibaba.dubbo.container.Main &ndash;&gt;
+            <!-- 结合com.alibaba.dubbo.container.Main -->
             <resource>
                 <targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
                 <directory>src/main/resources/spring</directory>
@@ -331,7 +331,7 @@
 
         <pluginManagement>
             <plugins>
-                &lt;!&ndash; 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 &ndash;&gt;
+                <!-- 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -359,7 +359,7 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            &lt;!&ndash; 打包jar文件时，配置manifest文件，加入lib包的jar依赖 &ndash;&gt;
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -368,7 +368,7 @@
                     <archive>
                         <manifest>
                             <mainClass>com.alibaba.dubbo.container.Main</mainClass>
-                            &lt;!&ndash; 打包时 MANIFEST.MF文件不记录的时间戳版本 &ndash;&gt;
+                            <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
                             <useUniqueVersions>false</useUniqueVersions>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
@@ -392,56 +392,11 @@
                         <configuration>
                             <type>jar</type>
                             <includeTypes>jar</includeTypes>
-                            &lt;!&ndash; <useUniqueVersions>false</useUniqueVersions> &ndash;&gt;
+                            <!-- <useUniqueVersions>false</useUniqueVersions> -->
                             <outputDirectory>
                                 ${project.build.directory}/lib
                             </outputDirectory>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>-->
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*.class</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/resources/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
