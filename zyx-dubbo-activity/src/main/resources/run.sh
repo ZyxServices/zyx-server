@@ -1,1 +1,1 @@
-java -jar com.zyx.rpc.activity.main.ActivityDubbo
+java -jar ../zyx-dubbo-activity.jar
