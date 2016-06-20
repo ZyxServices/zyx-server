@@ -26,11 +26,6 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
         try {
             Concern insertCern = new Concern();
             insertCern.setCreateTime(new Date().getTime());
-//            Optional.ofNullable(userId).ifPresent(s -> {
-//                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30000);
-//                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30000_MSG);
-//                return
-//            });
             Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopic_title);
             Optional.ofNullable(content).ifPresent(insertCern::setTopic_content);
             Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImg_url);

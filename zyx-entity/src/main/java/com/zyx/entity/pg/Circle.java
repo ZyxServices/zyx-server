@@ -11,6 +11,7 @@ import java.util.Date;
 /**
  * Created by XiaoWei on 2016/6/13.
  */
+//圈子实体
 @Table(name = "circle")
 public class Circle extends BaseEntity {
     private static final long serialVersionUID = 1L;
@@ -22,8 +23,11 @@ public class Circle extends BaseEntity {
     private Integer create_id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer state;
+    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见
     //    private String circleMaster;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer type;//圈子类型,0未普通圈子，1位明星圈子
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer circle_master_id;
@@ -84,5 +88,13 @@ public class Circle extends BaseEntity {
 
     public void setHead_img_url(String head_img_url) {
         this.head_img_url = head_img_url;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

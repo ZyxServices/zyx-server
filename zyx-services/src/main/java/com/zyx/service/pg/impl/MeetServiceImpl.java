@@ -6,6 +6,7 @@ import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.MeetService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +26,7 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
         try {
             Optional.ofNullable(circleId).ifPresent(meet::setCircle_id);
             Optional.ofNullable(accountId).ifPresent(meet::setAccount_id);
+            meet.setCreateTime(new Date().getTime());
             save(meet);
             map.put(Constants.STATE, Constants.SUCCESS);
             return map;

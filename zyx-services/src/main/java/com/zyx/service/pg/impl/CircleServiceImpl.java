@@ -1,5 +1,6 @@
 package com.zyx.service.pg.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -17,15 +18,19 @@ import com.zyx.service.pg.CircleService;
 @Service
 public class CircleServiceImpl extends BaseServiceImpl<Circle> implements CircleService {
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state, Integer type, String details, String headImgUrl) {
         Map<String, Object> map = new HashMap<>();
         try {
             Circle insertCircle = new Circle();
             Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
-            Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
             Optional.ofNullable(circleMasterId).ifPresent(insertCircle::setCircle_master_id);
+            Optional.ofNullable(state).ifPresent(insertCircle::setState);
+            Optional.ofNullable(type).ifPresent(insertCircle::setType);
+            Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHead_img_url);
+            insertCircle.setCreateTime(new Date().getTime());
+            insertCircle.setState(0);
             mapper.insert(insertCircle);
             map.put(Constants.STATE, Constants.SUCCESS);
             return map;

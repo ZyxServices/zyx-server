@@ -19,7 +19,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param details 内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String,Object> insertCircle(String title, Integer createId, Integer circleMasterId, String details, String headImgUrl);
+    Map<String,Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state,Integer type,String details, String headImgUrl);
 
     /**
      *
