@@ -7,6 +7,7 @@ import com.zyx.entity.account.UserLoginParam;
 import com.zyx.rpc.account.RegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.CipherUtil;
+import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class RegisterFacadeImpl implements RegisterFacade {
         }
         userLoginParam.setPhone(phone);
         userLoginParam.setPassword(CipherUtil.generatePassword(userLoginParam.getPassword()));
-        List<AccountInfo> list = accountInfoService.selectAccountByParam(userLoginParam);
+        List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
         if (list == null || list.size() == 0) {
             map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50001);
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
