@@ -316,6 +316,7 @@
                 <includes>
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
+                    <include>**/*.sh</include>
                 </includes>
             </resource>
             <!-- 结合com.alibaba.dubbo.container.Main -->
