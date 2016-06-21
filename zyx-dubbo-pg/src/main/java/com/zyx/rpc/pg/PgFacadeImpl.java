@@ -55,4 +55,9 @@ public class PgFacadeImpl implements PgFacade {
         return circleService.circleList(max);
     }
 
+    @Override
+    public Map<String, Object> starRandom(Integer type,Integer n) {
+        return concrenService.starRandom(type,n);
+    }
+
 }

@@ -64,4 +64,12 @@ public interface PgFacade {
      */
     Map<String, Object> circleList(Integer max);
 
+    /**
+     *  明星动态随机n条数据
+     *  @type 类型，1为个人，2为活动，3为明星
+     * @param n
+     * @return
+     */
+    Map<String,Object> starRandom(Integer type,Integer n);
+
 }

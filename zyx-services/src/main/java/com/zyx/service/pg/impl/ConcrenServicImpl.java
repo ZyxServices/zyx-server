@@ -3,16 +3,15 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.mapper.pg.ConcernMapper;
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcrenService;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import javax.annotation.Resource;
+import java.util.*;
 
 /**
  * Created by XiaoWei on 2016/6/7.
@@ -20,8 +19,11 @@ import java.util.Optional;
 @Service
 public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcrenService {
 
+    @Resource
+    private ConcernMapper concernMapper;
+
     @Override
-    public Map<String,Object> addCern(Integer userId,Integer type,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible) {
+    public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
         Map<String, Object> map = new HashMap<>();
         try {
             Concern insertCern = new Concern();
@@ -35,6 +37,22 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             Optional.ofNullable(visible).ifPresent(insertCern::setTopic_visible);
             save(insertCern);
             map.put(Constants.STATE, Constants.SUCCESS);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> starRandom(Integer type,Integer n) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Optional.ofNullable(n).orElse(10);
+            List<Concern> randomList = concernMapper.starRandom(type, n);
+            map.put(Constants.STATE, Constants.MSG_SUCCESS);
+            map.put(PgConstants.PG_RESULT, Optional.ofNullable(randomList).orElse(null));
             return map;
         } catch (Exception e) {
             e.printStackTrace();

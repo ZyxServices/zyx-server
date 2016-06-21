@@ -24,7 +24,7 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.service.pg.MyConcernService" >
+<mapper namespace="com.zyx.mapper.pg.MyConcernMapper" >
   <resultMap id="CircleResultMap" type="com.zyx.entity.pg.MyConcern" >
     <id column="Id" property="id" jdbcType="INTEGER" />
     <result column="concern_id" property="concernId" jdbcType="INTEGER" />
