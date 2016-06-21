@@ -1,6 +1,6 @@
 package com.zyx.mapper.pg;
 
-import com.zyx.entity.pg.Meet;
+import com.zyx.entity.pg.MyConcern;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
  * @author XiaoWei
  * @version V 1.0
  * @package com.zyx.mapper.pg
- * Create by XiaoWei on 2016/6/14
+ * Create by XiaoWei on 2016/6/20
  */
-@Repository("meetMapper")
-public interface MeetMapper extends BaseMapper<Meet> {
+@Repository("myConcernMapper")
+public interface MyConcernMapper extends BaseMapper<MyConcern> {
 }

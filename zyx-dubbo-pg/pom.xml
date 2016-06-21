@@ -301,7 +301,7 @@
 
 	</dependencies>
     <build>
-		<finalName>concern</finalName>
+		<finalName>pg</finalName>
 		<resources>
 			<resource>
 				<targetPath>${project.build.directory}/classes</targetPath>

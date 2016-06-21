@@ -1,7 +1,10 @@
 package com.zyx.entity.pg;
 
 import com.zyx.entity.BaseEntity;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
+import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
@@ -12,7 +15,11 @@ import javax.persistence.Table;
  */
 @Table(name = "meet")
 public class Meet extends BaseEntity {
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer circle_id;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer account_id;
 
     public Integer getCircle_id() {

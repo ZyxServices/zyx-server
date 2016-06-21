@@ -1,9 +1,6 @@
 package com.zyx.rpc.pg;
 
-import com.zyx.service.pg.CircleService;
-import com.zyx.service.pg.ConcrenService;
-import com.zyx.service.pg.MeetService;
-import com.zyx.service.pg.ZanService;
+import com.zyx.service.pg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +22,8 @@ public class PgFacadeImpl implements PgFacade {
     private MeetService meetService;
     @Autowired
     private ZanService zanService;
+    @Autowired
+    private MyConcernService myConcernService;
 
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
@@ -32,18 +31,28 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public     Map<String,Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state,Integer type,String details, String headImgUrl){
-        return circleService.insertCircle(title, createId, circleMasterId, state,type,details, headImgUrl);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state, Integer type, String details, String headImgUrl) {
+        return circleService.insertCircle(title, createId, circleMasterId, state, type, details, headImgUrl);
     }
 
     @Override
-    public Map<String, Object> addCern(Integer userId, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
-        return concrenService.addCern(userId, cernTitle, content, cernImgurl, videoUrl, visible);
+    public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
+        return concrenService.addCern(userId, type, cernTitle, content, cernImgurl, videoUrl, visible);
     }
 
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         return zanService.addZan(body_id, body_type, account_id);
+    }
+
+    @Override
+    public Map<String, Object> addMyConcern(Integer concernId, Integer concern_type, Integer accountId) {
+        return myConcernService.addMyConcern(concernId, concern_type, accountId);
+    }
+
+    @Override
+    public Map<String, Object> circleList(Integer max) {
+        return circleService.circleList(max);
     }
 
 }

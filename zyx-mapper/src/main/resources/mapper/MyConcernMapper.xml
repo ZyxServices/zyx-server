@@ -24,27 +24,11 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.pg.CircleMapper">
-    <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
-        <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="create_id" property="create_id" jdbcType="INTEGER"/>
-        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <result column="state" property="state" jdbcType="INTEGER"/>
-        <result column="circle_master" property="circle_master" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="INTEGER"/>
-        <result column="circle_master_id" property="circle_master_id" jdbcType="INTEGER"/>
-        <result column="details" property="details" jdbcType="VARCHAR"/>
-        <result column="head_img_url" property="head_img_url" jdbcType="VARCHAR"/>
-
-    </resultMap>
-
-    <select id="circleList" parameterType="java.lang.Integer" resultMap="CircleResultMap">
-        SELECT  * FROM circle WHERE  1=1
-        ORDER BY create_time DESC
-        <if test="_parameter !=null">
-            limit 0, #{_parameter,jdbcType=INTEGER}
-        </if>
-    </select>
+<mapper namespace="com.zyx.service.pg.MyConcernService" >
+  <resultMap id="CircleResultMap" type="com.zyx.entity.pg.MyConcern" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="concern_id" property="concernId" jdbcType="INTEGER" />
+    <result column="concern_type" property="concernType" jdbcType="INTEGER" />
+  </resultMap>
 
 </mapper>

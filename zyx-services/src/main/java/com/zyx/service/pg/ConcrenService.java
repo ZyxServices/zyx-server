@@ -9,5 +9,5 @@ import java.util.Map;
  * Created by XiaoWei on 2016/6/7.
  */
 public interface ConcrenService extends BaseService<Concern> {
-    Map<String,Object> addCern(Integer userId,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible);
+    Map<String,Object> addCern(Integer userId,Integer type,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible);
 }

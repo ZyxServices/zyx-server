@@ -19,7 +19,7 @@ public class Concern extends BaseEntity {
     private Integer user_id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer type;
+    private Integer type;//动态类型0为个人动态，1为活动动态，2为圈子动态...
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String topic_title;

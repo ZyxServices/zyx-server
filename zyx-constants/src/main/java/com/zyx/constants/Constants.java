@@ -99,13 +99,13 @@ public interface Constants {
     //文件类型 900+
 
     /**
-     * 服务器错误
-     */
-    int ERROR_500 = 500;
-    /**
      * 图片上传文件大于5MB
      */
     int AUTH_ERROR_901 = 901;
+    /**
+     * 服务器错误
+     */
+    int ERROR_500 = 500;
     /**
      * 文件上传失败
      */

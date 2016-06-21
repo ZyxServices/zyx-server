@@ -37,7 +37,7 @@ public interface PgFacade {
      * @param visible
      * @return
      */
-    Map<String,Object> addCern(Integer userId,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible);
+    Map<String,Object> addCern(Integer userId,Integer type,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible);
 
     /**
      * 各模块点赞
@@ -47,5 +47,21 @@ public interface PgFacade {
      * @return
      */
     Map<String,Object> addZan(Integer body_id,Integer body_type,Integer account_id);
+
+    /**
+     * 各主体添加关注
+     * @param concernId 主体id
+     * @param concern_type 主体类型
+     * @accountId 添加关注的人
+     * @return
+     */
+    Map<String,Object> addMyConcern(Integer concernId,Integer concern_type,Integer accountId);
+
+    /**
+     * 圈子列表
+     * @param max 指定最大条数为多少
+     * @return
+     */
+    Map<String, Object> circleList(Integer max);
 
 }

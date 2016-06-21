@@ -32,6 +32,9 @@
     <result column="topic_content" property="topicContent" jdbcType="VARCHAR" />
     <result column="topic_title" property="topicTitle" jdbcType="VARCHAR" />
     <result column="topic_visible" property="topicVisible" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="INTEGER" />
+    <result column="video_url" property="videoUrl" jdbcType="INTEGER" />
+    <result column="topic_visible" property="topicVisible" jdbcType="INTEGER" />
   </resultMap>
 
 </mapper>
