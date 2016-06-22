@@ -26,13 +26,12 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     CircleMapper circleMapper;
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state, Integer type, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
         Map<String, Object> map = new HashMap<>();
         try {
             Circle insertCircle = new Circle();
             Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
-            Optional.ofNullable(circleMasterId).ifPresent(insertCircle::setCircle_master_id);
             Optional.ofNullable(state).ifPresent(insertCircle::setState);
             Optional.ofNullable(type).ifPresent(insertCircle::setType);
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
@@ -67,5 +66,29 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             map.put(Constants.STATE, Constants.ERROR_500);
         }
         return map;
+    }
+
+    @Override
+    public Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id) {
+        Integer result = circleMapper.setMaster(circle_id, master_id, account_id);
+        Map<String, Object> resultMap = new HashMap<>();
+        if(circle_id==null){
+            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30001_MSG);
+            return resultMap;
+        }if(master_id==null){
+            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30002_MSG);
+            return resultMap;
+        }  if(account_id==null){
+            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30003_MSG);
+            return resultMap;
+        }
+        result = circleMapper.setMaster(circle_id, master_id, account_id);
+        if (result > 0) {
+            resultMap.put(Constants.STATE, Constants.SUCCESS);
+            return resultMap;
+        } else {
+            resultMap.put(Constants.STATE, Constants.ERROR_500);
+            return resultMap;
+        }
     }
 }

@@ -9,5 +9,15 @@ package com.zyx.constants.pg;
 public interface PgConstants {
     int PG_ERROR_CODE_30000 = 30000;
     String PG_ERROR_CODE_30000_MSG = "用户token已经失效，请重新登录";
+
+    int PG_ERROR_CODE_30001= 30001;
+    String PG_ERROR_CODE_30001_MSG = "圈子id不能为空";
+
+    int PG_ERROR_CODE_30002= 30002;
+    String PG_ERROR_CODE_30002_MSG = "圈主id不能为空";
+
+    int PG_ERROR_CODE_30003= 30003;
+    String PG_ERROR_CODE_30003_MSG = "设置人的id不能为空";
+
     String PG_RESULT = "result";
 }

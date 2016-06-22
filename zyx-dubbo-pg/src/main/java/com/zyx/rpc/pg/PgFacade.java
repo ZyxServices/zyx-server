@@ -17,14 +17,13 @@ public interface PgFacade {
      */
     Map<String,Object> addMeet(Integer  circleId, Integer accountId);
     /**
-     *
+     *发布圈子
      * @param title 圈子标题
      * @param createId 圈子创建者id
-     * @param circleMasterId 圈主
      * @param details 内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String,Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state,Integer type,String details, String headImgUrl);
+    Map<String,Object> insertCircle(String title, Integer createId, Integer state,Integer type,String details, String headImgUrl);
 
 
     /**
@@ -71,5 +70,25 @@ public interface PgFacade {
      * @return
      */
     Map<String,Object> starRandom(Integer type,Integer n);
+
+
+    /**
+     * 圈子发布帖子
+     * @param circle_id
+     * @param create_id
+     * @param title
+     * @param content
+     * @return
+     */
+    Map<String,Object> addCircleItem(Integer circle_id,Integer create_id,String title,String content);
+
+    /**
+     * 圈子设置圈主
+     * @param circle_id
+     * @param master_id
+     * @param account_id
+     * @return
+     */
+    Map<String,Object> setMaster(Integer circle_id,Integer master_id,Integer account_id);
 
 }

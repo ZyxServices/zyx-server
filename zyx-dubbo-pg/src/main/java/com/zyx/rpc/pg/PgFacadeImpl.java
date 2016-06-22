@@ -24,6 +24,8 @@ public class PgFacadeImpl implements PgFacade {
     private ZanService zanService;
     @Autowired
     private MyConcernService myConcernService;
+    @Autowired
+    private CircleItemService circleItemService;
 
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
@@ -31,8 +33,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state, Integer type, String details, String headImgUrl) {
-        return circleService.insertCircle(title, createId, circleMasterId, state, type, details, headImgUrl);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
+        return circleService.insertCircle(title, createId, state, type, details, headImgUrl);
     }
 
     @Override
@@ -56,8 +58,18 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> starRandom(Integer type,Integer n) {
-        return concrenService.starRandom(type,n);
+    public Map<String, Object> starRandom(Integer type, Integer n) {
+        return concrenService.starRandom(type, n);
+    }
+
+    @Override
+    public Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content) {
+        return circleItemService.addCircleItem(circle_id, create_id, title, content);
+    }
+
+    @Override
+    public Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id) {
+        return circleService.setMaster(circle_id, master_id, account_id);
     }
 
 }

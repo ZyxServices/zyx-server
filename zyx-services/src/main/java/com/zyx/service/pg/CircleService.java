@@ -14,11 +14,10 @@ public interface CircleService extends BaseService<Circle> {
     /**
      * @param title          圈子标题
      * @param createId       圈子创建者id
-     * @param circleMasterId 圈主
      * @param details        内容
      * @param headImgUrl     圈子头像url
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleMasterId, Integer state, Integer type, String details, String headImgUrl);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl);
 
     /**
      * 圈子签到
@@ -36,6 +35,15 @@ public interface CircleService extends BaseService<Circle> {
      * @return
      */
     Map<String, Object> circleList(Integer max);
+
+    /**
+     * 圈子设置圈主
+     * @param circle_id
+     * @param master_id
+     * @param account_id
+     * @return
+     */
+    Map<String,Object> setMaster(Integer circle_id,Integer master_id,Integer account_id);
 
 
 }
