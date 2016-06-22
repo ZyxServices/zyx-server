@@ -46,11 +46,10 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50004_MSG = "重复登录";
 
     /**
-     * 注册用户失败，手机号已存在
+     * 手机号已注册
      */
     int ACCOUNT_ERROR_CODE_50005 = 50005;
-    String ACCOUNT_ERROR_CODE_50005_MSG = "注册用户失败，手机号已注册";
-
+    String ACCOUNT_ERROR_CODE_50005_MSG = "手机号已注册";
 
     /**
      * 验证码输入错误
@@ -77,10 +76,16 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50009_MSG = "短信发送失败，短信服务器异常！！！";
 
     /**
-     * 注册用户失败，未知错误
+     * 服务器DB错误，注册用户失败！！！
      */
     int ACCOUNT_ERROR_CODE_50010 = 50010;
-    String ACCOUNT_ERROR_CODE_50010_MSG = "注册用户失败，未知错误";
+    String ACCOUNT_ERROR_CODE_50010_MSG = "服务器DB错误，注册用户失败！！！";
+
+    /**
+     * 非法注册的用户，注册用户失败！！！
+     */
+    int ACCOUNT_ERROR_CODE_50011 = 50011;
+    String ACCOUNT_ERROR_CODE_50011_MSG = "非法注册的用户，注册用户失败！！！";
 
     /**
      * 发送验证码失败，手机号格式有误
@@ -124,7 +129,6 @@ public interface AccountConstants extends Constants {
      */
     int ACCOUNT_ERROR_CODE_50301 = 50301;
     String ACCOUNT_ERROR_CODE_50301_MSG = "用户ID与用户不匹配，查询失败！！！";
-
 
     /**
      * ---------------------------常量---------------------------------------------
