@@ -3,6 +3,7 @@ package com.zyx.rpc.account.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.AccountCommonFacade;
+import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,23 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
     private static final String SEND_URL = "http://www.mxtong.net.cn/GateWay/Services.asmx/DirectSend";
 
     @Autowired
+    private AccountInfoService accountInfoService;
+
+    @Autowired
     protected RedisTemplate<String, String> jedisTemplate;
 
     @Override
     public Map<String, Object> sendPhoneCode(String phone, String message) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
+            // 判断手机号是否已经注册
+            int count = accountInfoService.selectAccountByPhone(phone);
+            if (count != 0) {// 手机号码重复
+                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
+                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
+                return map;
+            }
+
             String phone_code = jedisTemplate.opsForValue().get(phone);
             if (phone_code != null) {// 存在验证码
                 map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50007);
@@ -88,6 +100,7 @@ public class AccountCommonFacedeImpl implements AccountCommonFacade {
                 jedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "验证码发送成功！！！");
+                map.put("code", random);
             } else {
                 map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50009);
                 map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);

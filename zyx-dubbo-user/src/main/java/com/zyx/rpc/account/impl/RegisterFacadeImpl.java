@@ -11,6 +11,7 @@ import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -32,7 +33,7 @@ public class RegisterFacadeImpl implements RegisterFacade {
     protected RedisTemplate<String, String> jedisTemplate;
 
     @Override
-    public Map<String, Object> registerAccount(UserLoginParam userLoginParam) {
+    public Map<String, Object> validatePhoneCode(UserLoginParam userLoginParam) {
         Map<String, Object> map = new HashMap<String, Object>();
         // 判断手机号是否已经注册
         int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
@@ -49,11 +50,43 @@ public class RegisterFacadeImpl implements RegisterFacade {
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
             return map;
         }
+        // 验证成功
+        map.put(Constants.STATE, Constants.SUCCESS);
+        map.put("phone", userLoginParam.getPhone());
+        map.put("code", userLoginParam.getCode());
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> registerAccount(UserLoginParam userLoginParam) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        // 判断手机号是否已经注册
+        int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
+        if (count != 0) {// 手机号码重复
+            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
+            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
+            return map;
+        }
+
+        // 判断缓存中手机号码和验证码是否对应
+        String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
+//        if (!userLoginParam.getCode().equals(redis_code)) {
+//            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
+//            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
+//            return map;
+//        }
+
+        if (StringUtils.isEmpty(redis_code)) {
+            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50011);
+            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
+            return map;
+        }
 
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setPhone(userLoginParam.getPhone());
         accountInfo.setPassword(CipherUtil.generatePassword(userLoginParam.getPassword()));
-        accountInfo.setNickname("体育家【" + userLoginParam.getPhone() + "】");
+        accountInfo.setNickname(userLoginParam.getNickname());
+        accountInfo.setAvatar(userLoginParam.getAvatar());
         accountInfo.setCreateTime(System.currentTimeMillis());
         int result = accountInfoService.save(accountInfo);
         if (result == 0) {

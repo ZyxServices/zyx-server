@@ -33,6 +33,10 @@ public class UserLoginParam implements Serializable {
      */
     private String password2;
 
+    private String avatar;
+
+    private String nickname;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +83,21 @@ public class UserLoginParam implements Serializable {
 
     public void setPassword2(String password2) {
         this.password2 = password2;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }
