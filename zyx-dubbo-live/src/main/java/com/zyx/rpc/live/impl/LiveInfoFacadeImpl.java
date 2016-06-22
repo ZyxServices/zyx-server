@@ -21,13 +21,13 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	LiveInfoService liveInfoService;
 
 	@Override
-	public void add(LiveInfo liveInfo) {
+	public void add(String token,LiveInfo liveInfo) {
 
 		liveInfoService.save(liveInfo);
 	}
 
 	@Override
-	public void updateNotNull(LiveInfo liveInfo) {
+	public void updateNotNull(String token,LiveInfo liveInfo) {
 		liveInfoService.updateNotNull(liveInfo);
 	}
 
@@ -69,7 +69,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(String token,Long id) {
 		liveInfoService.delete(id);
 	}
 

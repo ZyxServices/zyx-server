@@ -19,7 +19,7 @@
 		<include refid="textLiveItem" />
 		(live_id,create_time,content,img_url)
 		values
-		(#{lvieId},#{createTime},#{content},#{imgUrl})
+		(#{liveId},#{createTime},#{content},#{imgUrl})
 	</insert>
 
 

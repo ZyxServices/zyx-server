@@ -15,7 +15,6 @@
 			<artifactId>zyx-entity</artifactId>
 			<version>${zyx.entity.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-vo</artifactId>

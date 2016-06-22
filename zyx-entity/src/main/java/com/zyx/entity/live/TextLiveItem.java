@@ -30,7 +30,7 @@ public class TextLiveItem extends BaseEntity{
 	public long getLiveId() {
 		return liveId;
 	}
-	public void setLvieId(long liveId) {
+	public void setLiveId(long liveId) {
 		this.liveId = liveId;
 	}
 	public String getContent() {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.live.BarrageMapper">
+
+	<resultMap id="BaseBarrage" type="com.zyx.entity.live.Barrage">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="BIGINT" />
+		<result column="live_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="nick_name" property="userId" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="avatar" property="avatar" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectTop" parameterType="com.zyx.vo.live.BarrageVo"
+		resultMap="BaseBarrage">
+		select * from t_barrage
+		order by
+		create_time
+		ASC
+		limit
+		#{offset},#{top}
+	</select>
+
+</mapper>

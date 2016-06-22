@@ -7,34 +7,46 @@ public class BaseVo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6076341704572702103L;
-	private boolean ifSort=false;
-	private boolean sortCol;
-	
-	private boolean ifPage=false;
-
-	public boolean isIfSort() {
+	private Boolean ifSort=false;
+	private String sortProperty;
+	private Boolean asc = true; 
+	private Boolean ifPage=false;
+	private Integer offset;
+	private Integer top;
+	public Boolean getIfSort() {
 		return ifSort;
 	}
-
-	public void setIfSort(boolean ifSort) {
+	public void setIfSort(Boolean ifSort) {
 		this.ifSort = ifSort;
 	}
-
-	public boolean isSortCol() {
-		return sortCol;
+	public String getSortProperty() {
+		return sortProperty;
 	}
-
-	public void setSortCol(boolean sortCol) {
-		this.sortCol = sortCol;
+	public void setSortProperty(String sortProperty) {
+		this.sortProperty = sortProperty;
 	}
-
-	public boolean isIfPage() {
+	public Boolean getIfPage() {
 		return ifPage;
 	}
-
-	public void setIfPage(boolean ifPage) {
+	public void setIfPage(Boolean ifPage) {
 		this.ifPage = ifPage;
 	}
-	
-	
+	public Integer getOffset() {
+		return offset;
+	}
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+	public Integer getTop() {
+		return top;
+	}
+	public void setTop(Integer top) {
+		this.top = top;
+	}
+	public Boolean getAsc() {
+		return asc;
+	}
+	public void setAsc(Boolean asc) {
+		this.asc = asc;
+	}
 }

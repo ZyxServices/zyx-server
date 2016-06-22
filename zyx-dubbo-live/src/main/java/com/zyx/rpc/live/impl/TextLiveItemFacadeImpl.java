@@ -44,13 +44,13 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 		if(textLiveItemVo.getLiveId()!=null){
 			criteria.andEqualTo("liveId", textLiveItemVo.getLiveId());
 		}
-//		if(textLiveItemVo.getStartTime()!=null&&textLiveItemVo.getEndTime()!=null){
-//			criteria.andBetween("createTime", textLiveItemVo.getStartTime(), textLiveItemVo.getEndTime());
-//		}else if(textLiveItemVo.getStartTime()!=null&&textLiveItemVo.getEndTime()==null){
-//			criteria.andGreaterThanOrEqualTo("createTime", textLiveItemVo.getStartTime());
-//		}else if(textLiveItemVo.getStartTime()!=null&&textLiveItemVo.getEndTime()!=null){
-//			criteria.andLessThanOrEqualTo("createTime", textLiveItemVo.getEndTime());
-//		}
+		if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()!=null){
+			criteria.andBetween("createTime", textLiveItemVo.getCreateTime().getStart(), textLiveItemVo.getCreateTime().getEnd());
+		}else if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()==null){
+			criteria.andGreaterThanOrEqualTo("createTime", textLiveItemVo.getCreateTime().getStart());
+		}else if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()!=null){
+			criteria.andLessThanOrEqualTo("createTime", textLiveItemVo.getCreateTime().getEnd());
+		}
 		return textLiveItemService.selectByExample(example);
 	}
 
@@ -59,11 +59,4 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 		textLiveItemService.delete(id);
 		
 	}
-//
-//	@Override
-//	public void batchDelete(List<Long> id) {
-////		textLiveItemService.
-//	}
-
-
 }

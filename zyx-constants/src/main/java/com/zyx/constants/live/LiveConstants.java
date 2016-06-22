@@ -16,10 +16,19 @@ import com.zyx.constants.Constants;
  */
 public interface LiveConstants extends Constants{
 
+	
 	/**
 	 * 不存在的直播
 	 */
 	int LIVE_NOT_EXIST = 20001;
+	
+	/**
+	 * 用户为实名认证
+	 */
+	int LIVE_NOT_REAL_NAME = 23000;
+	
+	////////////////////////////24000~24999参数问题
+	int LIVE_BARRAGE_NULL_CONTENT=24000;
 	
 	/**
 	 * 直播不存在

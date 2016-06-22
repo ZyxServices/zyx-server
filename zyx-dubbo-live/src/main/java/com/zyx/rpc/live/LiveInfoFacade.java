@@ -6,9 +6,52 @@ import com.zyx.entity.live.LiveInfo;
 import com.zyx.vo.live.LiveInfoVo;
 
 public interface LiveInfoFacade {
-	public void add(LiveInfo liveInfo);
-	public void updateNotNull(LiveInfo liveInfo);
+	/**
+	 * 
+	 * @param liveInfo
+	 * @description T添加直播 需要Token 验证
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午10:28:48
+	 */
+	public void add(String token,LiveInfo liveInfo);
+	/**
+	 * 
+	 * @param liveInfo
+	 * @description 更新直播 需要Token验证
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午10:29:15
+	 */
+	public void updateNotNull(String token,LiveInfo liveInfo);
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @description 获取直播 单个
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午10:30:44
+	 */
 	public LiveInfo getById(Long id);
+	/**
+	 * 
+	 * @param liveInfoVo
+	 * @return
+	 * @description 获取直播列表
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午10:30:21
+	 */
 	public List<LiveInfo> getList( LiveInfoVo liveInfoVo);
-	public void delete(Long id);
+	/**
+	 * 
+	 * @param token
+	 * @param id
+	 * @description 删除直播 需要Token验证
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午10:30:06
+	 */
+	public void delete(String token,Long id);
 }
