@@ -23,7 +23,7 @@ public class Circle extends BaseEntity {
     private Integer create_id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见
+    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除
     //    private String circleMaster;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)

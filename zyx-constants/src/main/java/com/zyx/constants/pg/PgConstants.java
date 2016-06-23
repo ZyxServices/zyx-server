@@ -19,5 +19,8 @@ public interface PgConstants {
     int PG_ERROR_CODE_30003= 30003;
     String PG_ERROR_CODE_30003_MSG = "设置人的id不能为空";
 
+    int PG_ERROR_CODE_30004= 30004;
+    String PG_ERROR_CODE_30004_MSG = "该圈子已经设置过圈主";
+
     String PG_RESULT = "result";
 }

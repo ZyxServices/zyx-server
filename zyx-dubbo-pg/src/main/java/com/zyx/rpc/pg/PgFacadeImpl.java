@@ -72,4 +72,9 @@ public class PgFacadeImpl implements PgFacade {
         return circleService.setMaster(circle_id, master_id, account_id);
     }
 
+    @Override
+    public Map<String, Object> delete(Integer circle_id) {
+        return circleService.delete(circle_id);
+    }
+
 }
