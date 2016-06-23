@@ -23,10 +23,10 @@ import java.util.concurrent.TimeUnit;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountCommonFacedeImpl.java
+ * @title AccountCommonFacadeImpl.java
  */
 @Service("accountCommonFacade")
-public class AccountCommonFacedeImpl implements AccountCommonFacade {
+public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
 

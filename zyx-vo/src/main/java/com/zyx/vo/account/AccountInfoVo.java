@@ -10,13 +10,13 @@ import com.zyx.vo.BaseVo;
  *          Copyright (c)2016 tyj-版权所有
  * @title AccountInfoVo.java
  */
-public class AccountInfoVo extends BaseVo  {
+public class AccountInfoVo extends BaseVo {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private String id;
+    private Integer id;
 
     private String phone;
 
@@ -28,11 +28,11 @@ public class AccountInfoVo extends BaseVo  {
 
     private String avatar;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

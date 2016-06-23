@@ -28,4 +28,7 @@
     <!-- 用户签到接口 -->
     <dubbo:service interface="com.zyx.rpc.account.MarkFacade" ref="markFacade"/>
 
+    <!-- 用户地址接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.AccountAddressFacade" ref="accountAddressFacade"/>
+
 </beans>

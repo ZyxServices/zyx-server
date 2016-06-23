@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.account.UserAddressMapper">
+    <resultMap id="UserAddressMap" type="com.zyx.vo.account.UserAddressVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="address_id" property="addressId" jdbcType="VARCHAR"/>
+        <result column="zip_code" property="zipCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAddressInfo" parameterType="com.zyx.entity.account.param.UserAddressParam"
+            resultMap="UserAddressMap">
+        select * from user_address where address_id = #{addressId}
+    </select>
+
+    <select id="queryAddressList" parameterType="com.zyx.entity.account.param.UserAddressParam"
+            resultMap="UserAddressMap">
+        select * from user_address where 1 = 1
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <update id="editReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+        update user_address set address_id = #{addressId}
+        <if test="receiver != null and receiver != ''">
+            , receiver = #{receiver}
+        </if>
+        <if test="phone != null and phone != ''">
+            , phone = #{phone}
+        </if>
+        <if test="zipCode != null and zipCode != ''">
+            , zip_code = #{zipCode}
+        </if>
+        <if test="content != null and content != ''">
+            , content = #{content}
+        </if>
+        where address_id = #{addressId}
+    </update>
+
+    <update id="setDefaultReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+        update user_address set status = 1 where address_id = #{addressId}
+    </update>
+
+    <update id="cancelDefaultReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+        update user_address set status = 0 where addressId != #{addressId} and user_id = #{userId}
+    </update>
+
+    <!-- 删除一条记录 -->
+    <delete id="deleteByAddressId" parameterType="com.zyx.entity.account.param.UserAddressParam">
+        delete from user_address where address_id = #{addressId}
+    </delete>
+
+</mapper>
