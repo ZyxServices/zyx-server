@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Rainbow on 16-6-12.
@@ -100,9 +101,9 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             }
             if ((parm.getStartTime() != null && parm.getEndTime() == null)
                     || (parm.getEndTime() != null && parm.getStartTime() == null)) {
-                    map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10009);
-                    map.put(Constants.ERROR_MSG, "时间参数有误");
-                    return map;
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10009);
+                map.put(Constants.ERROR_MSG, "时间参数有误");
+                return map;
             }
             Integer pageNumber = parm.getPageNumber();
             Integer page = parm.getPage();
@@ -178,9 +179,15 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             }
 
             List<Activity> activityHistory = activityMapper.queryActivityHistory(history);
-            if (activityHistory != null && activityHistory.size() > 0) {
+
+            List<Activity> activities = activityHistory
+                    .stream()
+                    .filter(e -> e != null && (e.getEndTime() - e.getStartTime()) <= 0)
+                    .collect(Collectors.toList());
+
+            if (activities != null && activities.size() > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(Constants.SUCCESS_MSG, activityHistory);
+                map.put(Constants.SUCCESS_MSG, activities);
                 return map;
             } else {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
