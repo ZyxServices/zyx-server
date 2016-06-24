@@ -41,7 +41,7 @@
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
-      <version>RELEASE</version>
+      <version>${pagehelper.version}</version>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
