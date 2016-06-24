@@ -1,0 +1,1 @@
+java -jar ../zyx-dubbo-user.jara
