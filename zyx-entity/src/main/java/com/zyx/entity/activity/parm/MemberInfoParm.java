@@ -10,7 +10,7 @@ import java.io.Serializable;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.entity.activity.parm
  */
-public class AddMemberInfoParm implements Serializable{
+public class MemberInfoParm implements Serializable{
 
     /**
      * 活动ID
