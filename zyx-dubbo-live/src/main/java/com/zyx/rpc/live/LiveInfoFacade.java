@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.vo.live.LiveInfoVo;
+import com.zyx.vo.live.LiveSearchVo;
 
 public interface LiveInfoFacade {
 	/**
@@ -44,6 +45,17 @@ public interface LiveInfoFacade {
 	 * @update 2016年6月22日 上午10:30:21
 	 */
 	public List<LiveInfo> getList( LiveInfoVo liveInfoVo);
+	
+	/**
+	 * 
+	 * @param liveSearchVo
+	 * @return
+	 * @description 搜索直播列表
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月22日 上午11:12:10
+	 */
+	public List<LiveInfo> searchList( LiveSearchVo liveSearchVo);
 	/**
 	 * 
 	 * @param token

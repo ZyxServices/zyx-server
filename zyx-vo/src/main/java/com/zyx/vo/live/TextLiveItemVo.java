@@ -1,7 +1,6 @@
 package com.zyx.vo.live;
 
 import com.zyx.vo.BaseVo;
-import com.zyx.vo.common.TimeAreaVo;
 
 
 /**
@@ -29,7 +28,8 @@ public class TextLiveItemVo extends BaseVo{
 	/**
 	 * 查询时间范围 开始时间
 	 */
-	private TimeAreaVo createTime;
+	private Long createTimeLower;
+	private Long createTimeUpper;
 
 
 	public Long getLiveId() {
@@ -40,13 +40,19 @@ public class TextLiveItemVo extends BaseVo{
 		this.liveId = liveId;
 	}
 
-	public TimeAreaVo getCreateTime() {
-		return createTime;
+	public Long getCreateTimeLower() {
+		return createTimeLower;
 	}
 
-	public void setCreateTime(TimeAreaVo createTime) {
-		this.createTime = createTime;
+	public void setCreateTimeLower(Long createTimeLower) {
+		this.createTimeLower = createTimeLower;
 	}
 
+	public Long getCreateTimeUpper() {
+		return createTimeUpper;
+	}
 
+	public void setCreateTimeUpper(Long createTimeUpper) {
+		this.createTimeUpper = createTimeUpper;
+	}
 }

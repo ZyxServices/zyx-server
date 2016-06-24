@@ -44,7 +44,4 @@ public interface TextLiveItemFacade {
 	 * @update 2016年6月15日 下午2:07:23
 	 */
 	public void deleteById(Long id);
-
-	
-//	public void batchDelete(List<Long> id);
 }

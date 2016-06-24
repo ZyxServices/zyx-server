@@ -6,12 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.zyx.entity.live.Barrage;
-import com.zyx.entity.live.LiveInfo;
-import com.zyx.rpc.live.LiveInfoFacade;
 import com.zyx.service.live.impl.BarrageServiceImpl;
-import com.zyx.vo.common.TimeAreaVo;
 import com.zyx.vo.live.BarrageVo;
-import com.zyx.vo.live.LiveInfoVo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

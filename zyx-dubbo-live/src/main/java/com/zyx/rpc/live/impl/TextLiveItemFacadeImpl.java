@@ -44,12 +44,12 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 		if(textLiveItemVo.getLiveId()!=null){
 			criteria.andEqualTo("liveId", textLiveItemVo.getLiveId());
 		}
-		if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()!=null){
-			criteria.andBetween("createTime", textLiveItemVo.getCreateTime().getStart(), textLiveItemVo.getCreateTime().getEnd());
-		}else if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()==null){
-			criteria.andGreaterThanOrEqualTo("createTime", textLiveItemVo.getCreateTime().getStart());
-		}else if(textLiveItemVo.getCreateTime().getStart()!=null&&textLiveItemVo.getCreateTime().getEnd()!=null){
-			criteria.andLessThanOrEqualTo("createTime", textLiveItemVo.getCreateTime().getEnd());
+		if(textLiveItemVo.getCreateTimeLower()!=null&&textLiveItemVo.getCreateTimeUpper()!=null){
+			criteria.andBetween("createTime", textLiveItemVo.getCreateTimeLower(),textLiveItemVo.getCreateTimeUpper() );
+		}else if(textLiveItemVo.getCreateTimeLower()!=null){
+			criteria.andBetween("createTime", textLiveItemVo.getCreateTimeLower(),System.currentTimeMillis() );
+		}else if(textLiveItemVo.getCreateTimeUpper()!=null){
+			criteria.andBetween("createTime", 0,textLiveItemVo.getCreateTimeUpper() );
 		}
 		return textLiveItemService.selectByExample(example);
 	}

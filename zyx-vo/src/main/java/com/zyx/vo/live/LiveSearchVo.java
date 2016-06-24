@@ -4,12 +4,16 @@ import com.zyx.vo.common.SearchVo;
 
 public class LiveSearchVo extends SearchVo{
 
-	private String lab;
+	
+	 /**serialVersionUID TODO*/ 
+	
+	private static final long serialVersionUID = 1L;
+	private Integer lab;
 	private String name;
-	public String getLab() {
+	public Integer getLab() {
 		return lab;
 	}
-	public void setLab(String lab) {
+	public void setLab(Integer lab) {
 		this.lab = lab;
 	}
 	public String getName() {

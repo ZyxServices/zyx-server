@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.rpc.live.LiveInfoFacade;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.vo.live.LiveInfoVo;
+import com.zyx.vo.live.LiveSearchVo;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -33,6 +33,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
 	@Override
 	public LiveInfo getById(Long id) {
+		System.out.println("***********************************");
 		return liveInfoService.selectByKey(id);
 	}
 
@@ -53,14 +54,26 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 			if(liveInfoVo.getLabs()!=null&&!liveInfoVo.getLabs().isEmpty()){
 				criteria.andIn("lab", liveInfoVo.getLabs());
 			}
-			if(liveInfoVo.getCreateTime()!=null){
-				criteria.andBetween("createTime", liveInfoVo.getCreateTime().getStart(),liveInfoVo.getCreateTime().getEnd() );
+			if(liveInfoVo.getCreateTimeLower()!=null&&liveInfoVo.getCreateTimeUpper()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getCreateTimeLower(),liveInfoVo.getCreateTimeUpper() );
+			}else if(liveInfoVo.getCreateTimeLower()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getCreateTimeLower(),System.currentTimeMillis() );
+			}else if(liveInfoVo.getCreateTimeUpper()!=null){
+				criteria.andBetween("createTime", 0,liveInfoVo.getCreateTimeUpper() );
 			}
-			if(liveInfoVo.getStart()!=null){
-				criteria.andBetween("start", liveInfoVo.getStart().getStart(),liveInfoVo.getStart().getEnd() );
+			if(liveInfoVo.getStartLower()!=null&&liveInfoVo.getStartUpper()!=null){
+				criteria.andBetween("start", liveInfoVo.getStartLower(),liveInfoVo.getStartUpper() );
+			}else if(liveInfoVo.getStartLower()!=null){
+				criteria.andBetween("start", liveInfoVo.getStartLower(),System.currentTimeMillis() );
+			}else if(liveInfoVo.getStartUpper()!=null){
+				criteria.andBetween("start", 0,liveInfoVo.getStartUpper() );
 			}
-			if(liveInfoVo.getEnd()!=null){
-				criteria.andBetween("createTime", liveInfoVo.getEnd().getStart(),liveInfoVo.getEnd().getEnd() );
+			if(liveInfoVo.getEndLower()!=null&&liveInfoVo.getEndUpper()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getEndLower(),liveInfoVo.getEndUpper() );
+			}else if(liveInfoVo.getEndLower()!=null){
+				criteria.andBetween("createTime", liveInfoVo.getEndLower(),System.currentTimeMillis() );
+			}else if(liveInfoVo.getEndUpper()!=null){
+				criteria.andBetween("createTime", 0,liveInfoVo.getEndUpper() );
 			}
 		}
 		
@@ -71,6 +84,12 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	@Override
 	public void delete(String token,Long id) {
 		liveInfoService.delete(id);
+	}
+
+	@Override
+	public List<LiveInfo> searchList(LiveSearchVo liveSearchVo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

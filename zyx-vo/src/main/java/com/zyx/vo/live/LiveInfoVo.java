@@ -3,7 +3,6 @@ package com.zyx.vo.live;
 import java.util.List;
 
 import com.zyx.vo.BaseVo;
-import com.zyx.vo.common.TimeAreaVo;
 
 public class LiveInfoVo extends BaseVo {
 
@@ -12,19 +11,16 @@ public class LiveInfoVo extends BaseVo {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<Integer> ids;
+	private List<Long> ids;
 	private Long userId;
-	private TimeAreaVo createTime;
+	private Long createTimeLower;
+	private Long createTimeUpper;
 	private Integer type;
-	private TimeAreaVo start;
-	private TimeAreaVo end;
+	private Long startUpper;
+	private Long startLower;
+	private Long endUpper;
+	private Long endLower;
 	private List<Integer> labs;
-	public TimeAreaVo getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(TimeAreaVo createTime) {
-		this.createTime = createTime;
-	}
 	
 	public Long getUserId() {
 		return userId;
@@ -38,18 +34,6 @@ public class LiveInfoVo extends BaseVo {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public TimeAreaVo getStart() {
-		return start;
-	}
-	public void setStart(TimeAreaVo start) {
-		this.start = start;
-	}
-	public TimeAreaVo getEnd() {
-		return end;
-	}
-	public void setEnd(TimeAreaVo end) {
-		this.end = end;
-	}
 	public List<Integer> getLabs() {
 		return labs;
 	}
@@ -57,14 +41,46 @@ public class LiveInfoVo extends BaseVo {
 		this.labs = labs;
 		
 	}
-	public List<Integer> getIds() {
+	public List<Long> getIds() {
 		return ids;
 	}
-	public void setIds(List<Integer> ids) {
+	public void setIds(List<Long> ids) {
 		this.ids = ids;
 	}
-	
-	
-	
-
+	public Long getCreateTimeLower() {
+		return createTimeLower;
+	}
+	public void setCreateTimeLower(Long createTimeLower) {
+		this.createTimeLower = createTimeLower;
+	}
+	public Long getCreateTimeUpper() {
+		return createTimeUpper;
+	}
+	public void setCreateTimeUpper(Long createTimeUpper) {
+		this.createTimeUpper = createTimeUpper;
+	}
+	public Long getStartUpper() {
+		return startUpper;
+	}
+	public void setStartUpper(Long startUpper) {
+		this.startUpper = startUpper;
+	}
+	public Long getStartLower() {
+		return startLower;
+	}
+	public void setStartLower(Long startLower) {
+		this.startLower = startLower;
+	}
+	public Long getEndUpper() {
+		return endUpper;
+	}
+	public void setEndUpper(Long endUpper) {
+		this.endUpper = endUpper;
+	}
+	public Long getEndLower() {
+		return endLower;
+	}
+	public void setEndLower(Long endLower) {
+		this.endLower = endLower;
+	}
 }

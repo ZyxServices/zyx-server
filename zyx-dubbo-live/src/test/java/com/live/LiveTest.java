@@ -3,7 +3,6 @@ package com.live;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
-import com.zyx.vo.common.TimeAreaVo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -38,15 +37,5 @@ public class LiveTest extends TestCase {
 		assertTrue(true);
 		
 
-		
-		TimeAreaVo timeArea = JSON.parseObject("{start:1,start:2}", TimeAreaVo.class);
-		
-		System.out.println(timeArea.getStart());
-		
-		List<Integer> list = JSON.parseArray("[1,2,3]", Integer.class);
-		for(Integer i :list){
-			System.out.println(i);
-		}
-		
 	}
 }
