@@ -6,7 +6,6 @@ import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.rpc.account.RegisterFacade;
 import com.zyx.service.account.AccountInfoService;
-import com.zyx.utils.CipherUtil;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -84,7 +83,7 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setPhone(userLoginParam.getPhone());
-        accountInfo.setPassword(CipherUtil.generatePassword(userLoginParam.getPassword()));
+        accountInfo.setPassword(userLoginParam.getPassword());
         accountInfo.setNickname(userLoginParam.getNickname());
         accountInfo.setAvatar(userLoginParam.getAvatar());
         accountInfo.setCreateTime(System.currentTimeMillis());
@@ -108,14 +107,14 @@ public class RegisterFacadeImpl implements RegisterFacade {
             return map;
         }
         userLoginParam.setPhone(phone);
-        userLoginParam.setPassword(CipherUtil.generatePassword(userLoginParam.getPassword()));
+        userLoginParam.setPassword(userLoginParam.getPassword());
         List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
         if (list == null || list.size() == 0) {
             map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50001);
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
             return map;
         }
-        userLoginParam.setPassword2(CipherUtil.generatePassword(userLoginParam.getPassword2()));
+        userLoginParam.setPassword2(userLoginParam.getPassword2());
         int result = accountInfoService.renewpwd(userLoginParam);
         if (result == 0) {
             map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50002);
@@ -132,22 +131,38 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
         // 判断缓存中手机号码和验证码是否对应
         String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
-        if (!userLoginParam.getCode().equals(redis_code)) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
+//        if (!userLoginParam.getCode().equals(redis_code)) {
+//            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
+//            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
+//            return map;
+//        }
+
+        if (StringUtils.isEmpty(redis_code)) {
+            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50011);
+            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
             return map;
         }
 
-        userLoginParam.setPassword2(CipherUtil.generatePassword(userLoginParam.getPassword2()));
+        // 验证密码是否输入一致
+        if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
+            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50012);
+            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50012);
+            return map;
+        }
+
+        userLoginParam.setPassword2(userLoginParam.getPassword2());
         int result = accountInfoService.renewpwd(userLoginParam);
         if (result == 0) {
             map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50002);
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
         } else {
+            jedisTemplate.delete("tyj_phone_code:" + userLoginParam.getPhone());
             String temp = jedisTemplate.opsForValue().get("tyj_phone:" + userLoginParam.getPhone());
-            String token = temp.substring(temp.indexOf("【") + 1, temp.indexOf("】"));
-            jedisTemplate.delete("tyj_phone:" + userLoginParam.getPhone());
-            jedisTemplate.delete("tyj_token:" + token);
+            if (temp != null) {
+                String token = temp.substring(temp.indexOf("【") + 1, temp.indexOf("】"));
+                jedisTemplate.delete("tyj_token:" + token);
+                jedisTemplate.delete("tyj_phone:" + userLoginParam.getPhone());
+            }
             map.put(Constants.STATE, Constants.SUCCESS);
         }
         return map;

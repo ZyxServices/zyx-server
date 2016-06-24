@@ -43,12 +43,12 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             // 判断手机号是否已经注册
-            int count = accountInfoService.selectAccountByPhone(phone);
-            if (count != 0) {// 手机号码重复
-                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
-                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
-                return map;
-            }
+//            int count = accountInfoService.selectAccountByPhone(phone);
+//            if (count != 0) {// 手机号码重复
+//                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
+//                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
+//                return map;
+//            }
 
             String phone_code = jedisTemplate.opsForValue().get(phone);
             if (phone_code != null) {// 存在验证码
@@ -107,9 +107,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
             }
             return map;
         } catch (IOException e) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50008);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50008_MSG);
-            return map;
+            return AccountConstants.MAP_500;
         }
 
     }

@@ -24,7 +24,7 @@ public class UserLoginServiceImpl extends BaseServiceImpl<UserLoginInfo> impleme
     public AccountInfoVo loginByPhoneAndPassword(String phone, String password) {
         UserLoginParam userLoginParam = new UserLoginParam();
         userLoginParam.setPhone(phone);
-        userLoginParam.setPassword(CipherUtil.generatePassword(password));
+        userLoginParam.setPassword(password);
         UserLoginMapper userLoginMapper = (UserLoginMapper) mapper;
         return userLoginMapper.loginByPhoneAndPassword(userLoginParam);
     }

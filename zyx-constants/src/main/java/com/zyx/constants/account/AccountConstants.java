@@ -82,10 +82,16 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50010_MSG = "服务器DB错误，注册用户失败！！！";
 
     /**
-     * 非法注册的用户，注册用户失败！！！
+     * 非法操作！！！验证码不存在
      */
     int ACCOUNT_ERROR_CODE_50011 = 50011;
-    String ACCOUNT_ERROR_CODE_50011_MSG = "非法注册的用户，注册用户失败！！！";
+    String ACCOUNT_ERROR_CODE_50011_MSG = "非法操作！！！验证码不存在";
+
+    /**
+     * 两次输入的密码不正确
+     */
+    int ACCOUNT_ERROR_CODE_50012 = 50012;
+    String ACCOUNT_ERROR_CODE_50012_MSG = "两次输入的密码不正确！！！";
 
     /**
      * 发送验证码失败，手机号格式有误
