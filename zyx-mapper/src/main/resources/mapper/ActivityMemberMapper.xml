@@ -43,4 +43,8 @@
     <update id="updateMemberByExamine" parameterType="java.lang.Integer">
         UPDATE activity_member SET examine_type = true where id = #{id}
     </update>
+
+    <delete id="delActivityMember" parameterType="com.zyx.entity.activity.parm.MemberInfoParm">
+        DELETE FROM activity_member WHERE user_id = #{userId} AND activity_id = #{activityId}
+    </delete>
 </mapper>

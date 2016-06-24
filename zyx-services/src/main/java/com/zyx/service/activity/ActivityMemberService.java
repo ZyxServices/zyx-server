@@ -1,7 +1,7 @@
 package com.zyx.service.activity;
 
 import com.zyx.entity.activity.ActivityMember;
-import com.zyx.entity.activity.parm.AddMemberInfoParm;
+import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.service.BaseService;
 
@@ -23,7 +23,15 @@ public interface ActivityMemberService extends BaseService<ActivityMember> {
      * @param addMemberInfoParm
      * @return
      */
-    Map<String, Object> addActivityMember(AddMemberInfoParm addMemberInfoParm);
+    Map<String, Object> addActivityMember(MemberInfoParm addMemberInfoParm);
+
+    /**
+     * 取消对应活动的报名
+     *
+     * @param memberInfoParm
+     * @return
+     */
+    Map<String, Object> delActivityMember(MemberInfoParm memberInfoParm);
 
     /**
      * 查询报名信息添加

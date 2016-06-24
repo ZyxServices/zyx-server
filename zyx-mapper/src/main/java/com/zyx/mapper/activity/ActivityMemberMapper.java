@@ -2,6 +2,7 @@ package com.zyx.mapper.activity;
 
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.ActivityMember;
+import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.entity.activity.vo.QueryMemberVo;
 import com.zyx.mapper.BaseMapper;
@@ -20,6 +21,14 @@ import java.util.Map;
  */
 @Repository("activityMemberMapper")
 public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
+
+    /**
+     * 取消对应活动的报名
+     *
+     * @param memberInfoParm
+     * @return
+     */
+    int delActivityMember(MemberInfoParm memberInfoParm);
 
     /**
      * 查询报名详细信息

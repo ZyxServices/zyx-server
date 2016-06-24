@@ -2,7 +2,7 @@ package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.rpc.activity.ActivityMemberFacade;
-import com.zyx.entity.activity.parm.AddMemberInfoParm;
+import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.service.activity.ActivityMemberService;
 import org.apache.log4j.Logger;
@@ -29,10 +29,23 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     private static Logger loggers = Logger.getLogger(ActivityMemberFacadeImpl.class);
 
     @Override
-    public Map<String, Object> addActivityMember(AddMemberInfoParm addMemberInfoParm) {
+    public Map<String, Object> addActivityMember(MemberInfoParm addMemberInfoParm) {
         try {
             return activityMemberService.addActivityMember(addMemberInfoParm);
         } catch (Exception e) {
+            loggers.error(e);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(Constants.STATE, Constants.ERROR_500);
+            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delActivityMember(MemberInfoParm memberInfoParm) {
+        try{
+            return activityMemberService.delActivityMember(memberInfoParm);
+        }catch (Exception e){
             loggers.error(e);
             Map<String, Object> map = new HashMap<String, Object>();
             map.put(Constants.STATE, Constants.ERROR_500);

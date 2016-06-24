@@ -4,7 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.ActivityMember;
-import com.zyx.entity.activity.parm.AddMemberInfoParm;
+import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.entity.activity.vo.QueryMemberVo;
 import com.zyx.mapper.activity.ActivityMapper;
@@ -36,7 +36,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
 
     @Override
-    public Map<String, Object> addActivityMember(AddMemberInfoParm parm) {
+    public Map<String, Object> addActivityMember(MemberInfoParm parm) {
 
         Map<String, Object> map = new HashMap<>();
 
@@ -83,6 +83,28 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
                 return map;
             }
         } else {
+            map.put(Constants.STATE, Constants.PARAM_MISS);
+            map.put(Constants.ERROR_MSG, "参数缺失");
+            return map;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delActivityMember(MemberInfoParm memberInfoParm) {
+        Map<String, Object> map = new HashMap<>();
+
+        if (memberInfoParm != null && memberInfoParm.getActivityId() != null && memberInfoParm.getUserId() != null) {
+            int member = activityMemberMapper.delActivityMember(memberInfoParm);
+            if(member > 0){
+                map.put(Constants.STATE, Constants.SUCCESS);
+                map.put(ActivityConstants.AUTH_SUCCESS, "取消对应报名成功");
+                return map;
+            }else{
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10004);
+                map.put(Constants.ERROR_MSG, "取消对应报名失败");
+                return map;
+            }
+        }else{
             map.put(Constants.STATE, Constants.PARAM_MISS);
             map.put(Constants.ERROR_MSG, "参数缺失");
             return map;
