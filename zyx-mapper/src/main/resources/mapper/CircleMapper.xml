@@ -39,15 +39,24 @@
 
     </resultMap>
 
-    <select id="circleList" parameterType="java.lang.Integer" resultMap="CircleResultMap">
-        SELECT * FROM circle WHERE 1=1
-        ORDER BY create_time DESC
-        <if test="_parameter !=null">
-            limit 0, #{_parameter,jdbcType=INTEGER}
+    <select id="circleList" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE state!=-1 ORDER BY create_time DESC
+        <if test="#{max} !=null">
+            limit 0, #{max}
         </if>
     </select>
+
+    <select id="existMaster" resultMap="CircleResultMap">
+        SELECT * FROM circle where id=#{id} and circle_master_id=#{master_id}
+    </select>
+
     <update id="setMaster">
         UPDATE circle SET circle_master_id = #{master_id} WHERE id=#{circle_id}
     </update>
+
+    <update id="deleteCircle">
+        UPDATE circle SET state=-1 WHERE id=#{circle_id}
+    </update>
+
 
 </mapper>

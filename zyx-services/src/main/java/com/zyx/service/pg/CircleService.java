@@ -12,10 +12,10 @@ import java.util.Map;
 public interface CircleService extends BaseService<Circle> {
 
     /**
-     * @param title          圈子标题
-     * @param createId       圈子创建者id
-     * @param details        内容
-     * @param headImgUrl     圈子头像url
+     * @param title      圈子标题
+     * @param createId   圈子创建者id
+     * @param details    内容
+     * @param headImgUrl 圈子头像url
      */
     Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl);
 
@@ -31,6 +31,7 @@ public interface CircleService extends BaseService<Circle> {
 
     /**
      * 圈子列表
+     *
      * @param max 指定最大条数为多少
      * @return
      */
@@ -38,12 +39,21 @@ public interface CircleService extends BaseService<Circle> {
 
     /**
      * 圈子设置圈主
+     *
      * @param circle_id
      * @param master_id
      * @param account_id
      * @return
      */
-    Map<String,Object> setMaster(Integer circle_id,Integer master_id,Integer account_id);
+    Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id);
+
+
+    /**
+     * 删除圈子
+     * @param circle_id
+     * @return
+     */
+    Map<String, Object> delete(Integer circle_id);
 
 
 }

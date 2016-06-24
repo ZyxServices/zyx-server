@@ -70,23 +70,48 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
     @Override
     public Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id) {
-        Integer result = circleMapper.setMaster(circle_id, master_id, account_id);
         Map<String, Object> resultMap = new HashMap<>();
-        if(circle_id==null){
-            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30001_MSG);
-            return resultMap;
-        }if(master_id==null){
-            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30002_MSG);
-            return resultMap;
-        }  if(account_id==null){
-            resultMap.put(Constants.MSG_ERROR,PgConstants.PG_ERROR_CODE_30003_MSG);
+        if (circle_id == null) {
+            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30001_MSG);
             return resultMap;
         }
-        result = circleMapper.setMaster(circle_id, master_id, account_id);
+        if (master_id == null) {
+            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30002_MSG);
+            return resultMap;
+        }
+        if (account_id == null) {
+            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30003_MSG);
+            return resultMap;
+        }
+        Circle existCircle = circleMapper.existMaster(circle_id, master_id);
+        if (existCircle != null) {
+            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30004_MSG);
+            return resultMap;
+        }
+        Integer result = circleMapper.setMaster(circle_id, master_id, account_id);
         if (result > 0) {
             resultMap.put(Constants.STATE, Constants.SUCCESS);
             return resultMap;
         } else {
+            resultMap.put(Constants.STATE, Constants.ERROR_500);
+            return resultMap;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delete(Integer circle_id) {
+        Map<String, Object> resultMap = new HashMap<>();
+        try {
+            Integer result = circleMapper.deleteCircle(circle_id);
+            if (result > 0) {
+                resultMap.put(Constants.STATE, Constants.SUCCESS);
+                return resultMap;
+            } else {
+                resultMap.put(Constants.STATE, Constants.ERROR);
+                return resultMap;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             resultMap.put(Constants.STATE, Constants.ERROR_500);
             return resultMap;
         }
