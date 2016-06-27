@@ -57,7 +57,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
                 return map;
             }
 
-            String random = RandomUtil.generateNumString(6);//  验证码
+            String random = RandomUtil.generateNumString(4);//  验证码
 
             String content;
             if (message != null && !message.equals("")) {
