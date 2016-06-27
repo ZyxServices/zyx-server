@@ -16,6 +16,8 @@ public class AccountInfoVo extends BaseVo {
      */
     private static final long serialVersionUID = 1L;
 
+    private static final String OBJECT_KEY = "TYJ_USER";
+
     private Integer id;
 
     private String phone;
@@ -74,5 +76,21 @@ public class AccountInfoVo extends BaseVo {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountInfoVo{" +
+                "avatar='" + avatar + '\'' +
+                ", sex=" + sex +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public static String getObjectKey() {
+        return OBJECT_KEY;
     }
 }

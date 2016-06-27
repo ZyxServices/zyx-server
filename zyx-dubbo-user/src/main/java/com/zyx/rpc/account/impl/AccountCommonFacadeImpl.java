@@ -4,8 +4,10 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.AccountCommonFacade;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.service.account.AccountRedisService;
 import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.RandomUtil;
+import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,9 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
     @Autowired
     protected RedisTemplate<String, String> jedisTemplate;
+
+    @Autowired
+    private AccountRedisService accountRedisService;
 
     @Override
     public Map<String, Object> sendPhoneCode(String phone, String message) {
@@ -117,6 +122,11 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
     public boolean validateToken(String token) {
         String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
         return !StringUtils.isEmpty(phone);
+    }
+
+    @Override
+    public AccountInfoVo getAccountVoByToken(String token) {
+        return accountRedisService.get(token);
     }
 
 }

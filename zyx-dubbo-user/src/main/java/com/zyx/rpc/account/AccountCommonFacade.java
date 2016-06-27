@@ -1,5 +1,7 @@
 package com.zyx.rpc.account;
 
+import com.zyx.vo.account.AccountInfoVo;
+
 import java.util.Map;
 
 /**
@@ -27,4 +29,6 @@ public interface AccountCommonFacade {
      * @return
      */
     boolean validateToken(String token);
+
+    AccountInfoVo getAccountVoByToken(String token);
 }

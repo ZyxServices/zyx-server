@@ -6,6 +6,7 @@ import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.rpc.account.RegisterFacade;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.service.account.AccountRedisService;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,6 +31,9 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
     @Autowired
     protected RedisTemplate<String, String> jedisTemplate;
+
+    @Autowired
+    private AccountRedisService accountRedisService;
 
     @Override
     public Map<String, Object> validatePhoneCode(UserLoginParam userLoginParam) {
@@ -162,6 +166,7 @@ public class RegisterFacadeImpl implements RegisterFacade {
                 String token = temp.substring(temp.indexOf("【") + 1, temp.indexOf("】"));
                 jedisTemplate.delete("tyj_token:" + token);
                 jedisTemplate.delete("tyj_phone:" + userLoginParam.getPhone());
+                accountRedisService.delete(userLoginParam.getPhone());
             }
             map.put(Constants.STATE, Constants.SUCCESS);
         }
