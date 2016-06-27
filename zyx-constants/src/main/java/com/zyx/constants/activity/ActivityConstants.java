@@ -45,4 +45,6 @@ public interface ActivityConstants {
     int AUTH_ERROR_10008 = 10008;
     //时间参数有误
     int AUTH_ERROR_10009 = 10009;
+    //取消对应报名失败
+    int AUTH_ERROR_10010 = 10010;
 }

@@ -100,7 +100,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
                 map.put(ActivityConstants.AUTH_SUCCESS, "取消对应报名成功");
                 return map;
             }else{
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10004);
+                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10010);
                 map.put(Constants.ERROR_MSG, "取消对应报名失败");
                 return map;
             }
