@@ -9,6 +9,7 @@ import com.zyx.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -110,6 +111,12 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
             return AccountConstants.MAP_500;
         }
 
+    }
+
+    @Override
+    public boolean validateToken(String token) {
+        String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
+        return !StringUtils.isEmpty(phone);
     }
 
 }

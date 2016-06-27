@@ -19,4 +19,12 @@ public interface AccountCommonFacade {
      * @return
      */
     Map<String, Object> sendPhoneCode(String phone, String msg);
+
+    /**
+     * 验证token是否存在,true存在,false不存在
+     *
+     * @param token token字符串
+     * @return
+     */
+    boolean validateToken(String token);
 }
