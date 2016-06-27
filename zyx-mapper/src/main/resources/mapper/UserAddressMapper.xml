@@ -67,7 +67,7 @@
     </update>
 
     <update id="cancelDefaultReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
-        update user_address set status = 0 where addressId != #{addressId} and user_id = #{userId}
+        update user_address set status = 0 where address_id != #{addressId} and user_id = #{userId}
     </update>
 
     <!-- 删除一条记录 -->
