@@ -126,7 +126,11 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
     @Override
     public AccountInfoVo getAccountVoByToken(String token) {
-        return accountRedisService.get(token);
+        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + token);
+        if (StringUtils.isEmpty(phone)) {
+            return null;
+        }
+        return accountRedisService.get(phone);
     }
 
 }
