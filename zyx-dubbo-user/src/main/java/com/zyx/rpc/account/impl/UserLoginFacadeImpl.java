@@ -52,7 +52,6 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
             return map;
         }
-        System.out.println(stringRedisTemplate);
         // 判断是否已经登录
         String phoneTime = stringRedisTemplate.opsForValue().get("tyj_phone:" + phone);
         if (phoneTime != null) {

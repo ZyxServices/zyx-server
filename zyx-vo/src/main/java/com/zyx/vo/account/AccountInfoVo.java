@@ -14,7 +14,7 @@ public class AccountInfoVo extends BaseVo {
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3007058842595308501L;
 
     private static final String OBJECT_KEY = "TYJ_USER";
 

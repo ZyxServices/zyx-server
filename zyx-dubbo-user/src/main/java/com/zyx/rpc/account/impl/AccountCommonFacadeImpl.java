@@ -39,7 +39,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
     private AccountInfoService accountInfoService;
 
     @Autowired
-    protected RedisTemplate<String, String> jedisTemplate;
+    protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Autowired
     private AccountRedisService accountRedisService;
@@ -56,7 +56,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 //                return map;
 //            }
 
-            String phone_code = jedisTemplate.opsForValue().get(phone);
+            String phone_code = stringRedisTemplate.opsForValue().get(phone);
             if (phone_code != null) {// 存在验证码
                 map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50007);
                 map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50007_MSG);
@@ -102,8 +102,8 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
             String substring = request.substring(beginPoint + 9, endPoint);
             if (substring.equals("Sucess")) {
-                jedisTemplate.opsForValue().set("tyj_phone_code:" + phone, random, 30 * 60, TimeUnit.SECONDS);
-                jedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
+                stringRedisTemplate.opsForValue().set("tyj_phone_code:" + phone, random, 30 * 60, TimeUnit.SECONDS);
+                stringRedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "验证码发送成功！！！");
                 map.put("code", random);
@@ -120,7 +120,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
     @Override
     public boolean validateToken(String token) {
-        String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
+        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + token);
         return !StringUtils.isEmpty(phone);
     }
 
