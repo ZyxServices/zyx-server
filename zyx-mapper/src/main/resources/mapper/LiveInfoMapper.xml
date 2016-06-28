@@ -41,10 +41,6 @@
 		order by
 		create_time
 		DESC
-		<if test="start!=null and end !=null">
-			limit
-			#{start},#{end}
-		</if>
 	</select>
 
 	<select id="selectLives" parameterType="com.zyx.vo.live.LiveInfoVo"

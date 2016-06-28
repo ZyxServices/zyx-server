@@ -58,7 +58,7 @@ public class BaseVo implements Serializable {
 	}
 
 	public Integer getStart() {
-		if (pageNo != null && pageSize != null && (pageNo * (pageSize-1) <= count)) {
+		if (pageNo != null && pageSize != null&&count!=null && (pageNo * (pageSize-1) <= count)) {
 			return pageSize * (pageNo - 1);
 		} else {
 			return start;
@@ -70,8 +70,8 @@ public class BaseVo implements Serializable {
 	}
 
 	public Integer getEnd() {
-		if (pageNo != null && pageSize != null && (pageNo * (pageSize-1) <= count)) {
-			return pageNo * pageSize >count?count:(pageSize * (pageNo) - 1);
+		if (pageNo != null&&count!=null && pageSize != null && (pageNo * (pageSize-1) <= count)) {
+			return pageNo * pageSize >count?count:(pageSize * (pageNo) );
 		} else {
 			return end;
 		}
