@@ -12,7 +12,12 @@ import java.io.Serializable;
  */
 public class MemberInfoParm implements Serializable{
 
-    /**
+    
+	 /**serialVersionUID TODO*/ 
+	
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 活动ID
      */
     private Integer activityId;
