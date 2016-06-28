@@ -12,9 +12,6 @@ import com.zyx.service.live.LiveInfoService;
 import com.zyx.vo.live.LiveInfoVo;
 import com.zyx.vo.live.LiveSearchVo;
 
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.entity.Example.Criteria;
-
 @Service("liveInfoFacade")
 public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
@@ -42,10 +39,15 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	@Override
 	public List<LiveInfo> getList(LiveInfoVo liveInfoVo) {
 		if (liveInfoVo.getPageNo() != null && (liveInfoVo.getPageSize() == null || liveInfoVo.getPageSize() < 1)) {
-			if (liveInfoVo.getPageSize() == null || liveInfoVo.getPageSize() < 1)
-				liveInfoVo.setPageSize(6);
+			liveInfoVo.setPageSize(6);
 		}
-		return liveInfoService.selectLives(liveInfoVo);
+		int count = liveInfoService.countLive(liveInfoVo);
+		if (count == 0)
+			return null;
+		else {
+			liveInfoVo.setCount(count);
+			return liveInfoService.selectLives(liveInfoVo);
+		}
 	}
 
 	@Override
