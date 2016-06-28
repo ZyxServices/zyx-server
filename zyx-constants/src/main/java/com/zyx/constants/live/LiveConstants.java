@@ -33,5 +33,10 @@ public interface LiveConstants extends Constants{
 	/**
 	 * 直播不存在
 	 */
-	String MSG_LIVE_NOT_EXIST = "this live is not exist";
+	String MSG_LIVE_NOT_EXIST = "当前直播不存在";
+	
+	String MSG_LIVE_BARRAGE_NULL_CONTENT = "直播弹幕无消息内容";
+	
+	
+	int PAGE_LAB_PAGE_SIZE= 4;
 }

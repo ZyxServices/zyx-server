@@ -19,8 +19,8 @@ public class LiveInfo extends BaseEntity {
 	 * 
 	 */
 	@Column
-	@ColumnType(jdbcType = JdbcType.BOOLEAN)
-	private Boolean isPublic;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer auth;
 	@Column
 	@ColumnType(jdbcType = JdbcType.INTEGER)
 	private Integer type;
@@ -41,17 +41,19 @@ public class LiveInfo extends BaseEntity {
 	private Integer lab;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
-
 	private String bgmUrl;
-
+	@Column
+	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String vedioUrl;
-
-	public Boolean isPublic() {
-		return isPublic;
+	@Column
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer status =0;
+	public Integer getAuth() {
+		return auth;
 	}
 
-	public void setPublic(Boolean isPublic) {
-		this.isPublic = isPublic;
+	public void setAuth(Integer auth) {
+		this.auth = auth;
 	}
 
 	public Integer getType() {
@@ -116,6 +118,14 @@ public class LiveInfo extends BaseEntity {
 
 	public void setVedioUrl(String vedioUrl) {
 		this.vedioUrl = vedioUrl;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.live;
+package com.zyx.rpc.live;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,13 +33,13 @@ import com.alibaba.dubbo.container.Container;
  * 
  * @author william.liangf
  */
-public class Main {
+public class LiveMain {
 
     public static final String CONTAINER_KEY = "dubbo.container";
 
     public static final String SHUTDOWN_HOOK_KEY = "dubbo.shutdown.hook";
     
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(LiveMain.class);
 
     private static final ExtensionLoader<Container> loader = ExtensionLoader.getExtensionLoader(Container.class);
     
@@ -68,9 +68,9 @@ public class Main {
 	                        } catch (Throwable t) {
 	                            logger.error(t.getMessage(), t);
 	                        }
-	                        synchronized (Main.class) {
+	                        synchronized (LiveMain.class) {
 	                            running = false;
-	                            Main.class.notify();
+	                            LiveMain.class.notify();
 	                        }
 	                    }
 	                }
@@ -87,10 +87,10 @@ public class Main {
             logger.error(e.getMessage(), e);
             System.exit(1);
         }
-        synchronized (Main.class) {
+        synchronized (LiveMain.class) {
             while (running) {
                 try {
-                    Main.class.wait();
+                    LiveMain.class.wait();
                 } catch (Throwable e) {
                 }
             }

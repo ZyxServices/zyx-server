@@ -1,20 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyx.service.live.LiveInfoService">
+<mapper namespace="com.zyx.mapper.live.LiveInfoMapper">
 
 	<!-- 用户信息表 -->
 	<!-- <sql id="liveInfo"> t_live </sql> -->
 
 	<resultMap id="LiveInfo" type="com.zyx.entity.live.LiveInfo">
 		<id column="id" property="id" />
+		<id column="creat_time" property="createTime" />
+		<id column="auth" property="auth" />
 		<id column="type" property="type" />
 		<id column="start" property="start" />
 		<id column="end" property="end" />
-		<id column="userId" property="userId" />
+		<id column="user_id" property="userId" />
 		<id column="title" property="title" />
 		<id column="lab" property="lab" />
-		<id column="bgmUrl" property="bgmUrl" />
+		<id column="bgm_url" property="bgmUrl" />
+		<id column="vedio_url" property="vedioUrl" />
+		<id column="status" property="status" />
 	</resultMap>
 
+	<select id="countLives" parameterType="com.zyx.vo.live.LiveInfoVo"
+		resultType="int">
+		select count(*)
+		from t_live
+		where
+		1=1
+		<if test="lab != null">
+			and
+			lab = #{lab}
+		</if>
+		<if test="userIds!=null">
+			and
+			user_id in
+			<foreach collection="userIds" index="index" item="tag" open="("
+				separator="," close=")">
+				#{tag}
+			</foreach>
+		</if>
+		order by
+		create_time
+		DESC
+	</select>
 
+	<select id="selectLives" parameterType="com.zyx.vo.live.LiveInfoVo"
+		resultMap="LiveInfo">
+		select *
+		from t_live
+		where
+		1=1
+		<if test="lab != null">
+			and
+			lab = #{lab}
+		</if>
+		<if test="userIds!=null">
+			and
+			user_id in
+			<foreach collection="userIds" index="index" item="tag" open="("
+				separator="," close=")">
+				#{tag}
+			</foreach>
+		</if>
+		order by
+		create_time
+		DESC
+		<if test="start!=null and end !=null">
+			limit
+			#{start},#{end}
+		</if>
+	</select>
 </mapper>

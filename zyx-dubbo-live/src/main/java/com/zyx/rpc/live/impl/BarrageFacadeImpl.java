@@ -16,7 +16,7 @@ public class BarrageFacadeImpl implements BarrageFacade{
 	@Autowired
 	BarrageService barrageService;
 	@Override
-	public void add(String token, Barrage barrage) {
+	public void add( Barrage barrage) {
 		barrageService.save(barrage);
 	}
 

@@ -10,23 +10,14 @@ public class LiveInfoVo extends BaseVo {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private List<Long> ids;
-	private Long userId;
-	private Long createTimeLower;
-	private Long createTimeUpper;
+	private List<Integer> userIds;
 	private Integer type;
-	private Long startUpper;
-	private Long startLower;
-	private Long endUpper;
-	private Long endLower;
-	private List<Integer> labs;
-	
-	public Long getUserId() {
-		return userId;
+	private Integer lab;
+	public List<Integer> getUserIds() {
+		return userIds;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserIds(List<Integer> userIds) {
+		this.userIds = userIds;
 	}
 	public Integer getType() {
 		return type;
@@ -34,53 +25,11 @@ public class LiveInfoVo extends BaseVo {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public List<Integer> getLabs() {
-		return labs;
+	public Integer getLab() {
+		return lab;
 	}
-	public void setLabs(List<Integer> labs) {
-		this.labs = labs;
+	public void setLab(Integer lab) {
+		this.lab = lab;
 		
-	}
-	public List<Long> getIds() {
-		return ids;
-	}
-	public void setIds(List<Long> ids) {
-		this.ids = ids;
-	}
-	public Long getCreateTimeLower() {
-		return createTimeLower;
-	}
-	public void setCreateTimeLower(Long createTimeLower) {
-		this.createTimeLower = createTimeLower;
-	}
-	public Long getCreateTimeUpper() {
-		return createTimeUpper;
-	}
-	public void setCreateTimeUpper(Long createTimeUpper) {
-		this.createTimeUpper = createTimeUpper;
-	}
-	public Long getStartUpper() {
-		return startUpper;
-	}
-	public void setStartUpper(Long startUpper) {
-		this.startUpper = startUpper;
-	}
-	public Long getStartLower() {
-		return startLower;
-	}
-	public void setStartLower(Long startLower) {
-		this.startLower = startLower;
-	}
-	public Long getEndUpper() {
-		return endUpper;
-	}
-	public void setEndUpper(Long endUpper) {
-		this.endUpper = endUpper;
-	}
-	public Long getEndLower() {
-		return endLower;
-	}
-	public void setEndLower(Long endLower) {
-		this.endLower = endLower;
 	}
 }
