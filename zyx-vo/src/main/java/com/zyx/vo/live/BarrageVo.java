@@ -20,10 +20,8 @@ public class BarrageVo extends BaseVo{
 	private static final long serialVersionUID = 1L;
 
 	private Long liveId;
-   
     private Long createTimeLower;
     private Long createTimeUpper;
-
 	public Long getLiveId() {
 		return liveId;
 	}

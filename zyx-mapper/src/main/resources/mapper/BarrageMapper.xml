@@ -18,8 +18,10 @@
 		order by
 		create_time
 		DESC
-		limit
-		#{offset},#{top}
+		<if test="start!=null and end !=null">
+			limit
+			#{start},#{end}
+		</if>
 	</select>
 
 </mapper>

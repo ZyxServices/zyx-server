@@ -2,8 +2,6 @@ package com.zyx.vo;
 
 import java.io.Serializable;
 
-import com.zyx.common.page.PageParam;
-
 public class BaseVo implements Serializable {
 	/**
 	 * 

@@ -22,6 +22,8 @@ public class BarrageFacadeImpl implements BarrageFacade{
 
 	@Override
 	public List<Barrage> getLast(BarrageVo barrageVo) {
+		barrageVo.setStart(0);
+		barrageVo.setEnd(10);
 		return barrageService.getTop(barrageVo);
 	}
 	
