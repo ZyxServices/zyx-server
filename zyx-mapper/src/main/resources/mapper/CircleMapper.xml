@@ -36,7 +36,8 @@
         <result column="circle_master_id" property="circle_master_id" jdbcType="INTEGER"/>
         <result column="details" property="details" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="head_img_url" jdbcType="VARCHAR"/>
-
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="circleList" resultMap="CircleResultMap">
@@ -57,6 +58,14 @@
     <update id="deleteCircle">
         UPDATE circle SET state=-1 WHERE id=#{circle_id}
     </update>
+
+    <update id="setTop">
+        UPDATE circle SET top=1 where id=#{circle_id}
+    </update>
+
+    <select id="top" resultMap="CircleResultMap">
+        SELECT * FROM circle where top=1 ORDER BY create_time DESC limit 0,#{max}
+    </select>
 
 
 </mapper>

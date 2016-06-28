@@ -1,6 +1,7 @@
 package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.Zan;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ZanService;
@@ -23,8 +24,23 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
         Map<String, Object> map = new HashMap<>();
         try {
             Zan zan = new Zan();
+            if (body_id == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30009);
+                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30009_MSG);
+                return map;
+            }
             Optional.ofNullable(body_id).ifPresent(zan::setBody_id);
+            if (body_type == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30017);
+                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30017_MSG);
+                return map;
+            }
             Optional.ofNullable(body_type).ifPresent(zan::setBody_type);
+            if (account_id == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30014);
+                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
+                return map;
+            }
             Optional.ofNullable(account_id).ifPresent(zan::setAccount_id);
             save(zan);
             map.put(Constants.STATE, Constants.SUCCESS);

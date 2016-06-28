@@ -24,23 +24,14 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.pg.CircleItemMapper">
-    <resultMap id="ConcernResultMap" type="com.zyx.entity.pg.CircleItem">
+<mapper namespace="com.zyx.mapper.pg.ReplyMapper">
+    <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Reply">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="circle_id" property="circle_id" jdbcType="INTEGER"/>
-        <result column="create_id" property="create_id" jdbcType="INTEGER"/>
-        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="reply_type" property="reply_type" jdbcType="INTEGER"/>
+        <result column="reply_id" property="reply_id" jdbcType="INTEGER"/>
+        <result column="reply_account_id" property="reply_account_id" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="hot" property="hot" jdbcType="VARCHAR"/>
-        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="reply_state" property="reply_state" jdbcType="INTEGER"/>
     </resultMap>
-
-    <select id="circleItemList" resultMap="ConcernResultMap">
-        SELECT * FROM circleItem
-        GROUP BY create_time
-        <if test="#{max} !=null">
-            limit 0, #{max}
-        </if>
-    </select>
 
 </mapper>

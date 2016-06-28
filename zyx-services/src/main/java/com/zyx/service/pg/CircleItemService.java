@@ -13,4 +13,6 @@ import java.util.Map;
  */
 public interface CircleItemService extends BaseService<CircleItem> {
     Map<String,Object> addCircleItem(Integer circle_id,Integer create_id,String title,String content);
+
+    Map<String,Object> circleItemList(Integer max);
 }

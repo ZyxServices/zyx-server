@@ -26,6 +26,8 @@ public class PgFacadeImpl implements PgFacade {
     private MyConcernService myConcernService;
     @Autowired
     private CircleItemService circleItemService;
+    @Autowired
+    private ReplyService replyService;
 
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
@@ -75,6 +77,26 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> delete(Integer circle_id) {
         return circleService.delete(circle_id);
+    }
+
+    @Override
+    public Map<String, Object> circleItemList(Integer max) {
+        return circleItemService.circleItemList(max);
+    }
+
+    @Override
+    public Map<String, Object> setTop(Integer circle) {
+        return circleService.setTop(circle);
+    }
+
+    @Override
+    public Map<String, Object> top(Integer max) {
+        return circleService.top(max);
+    }
+
+    @Override
+    public Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content) {
+        return replyService.addReply(reply_type, reply_id, account_id, content);
     }
 
 }

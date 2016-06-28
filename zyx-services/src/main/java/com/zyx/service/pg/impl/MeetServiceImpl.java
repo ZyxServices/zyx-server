@@ -1,6 +1,7 @@
 package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.Meet;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.MeetService;
@@ -24,7 +25,17 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
         Meet meet = new Meet();
         Map<String, Object> map = new HashMap<>();
         try {
+            if (circleId == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30001);
+                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30001_MSG);
+                return map;
+            }
             Optional.ofNullable(circleId).ifPresent(meet::setCircle_id);
+            if(accountId==null){
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30014);
+                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
+                return map;
+            }
             Optional.ofNullable(accountId).ifPresent(meet::setAccount_id);
             meet.setCreateTime(new Date().getTime());
             save(meet);

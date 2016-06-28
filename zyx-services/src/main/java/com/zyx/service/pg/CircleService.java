@@ -55,5 +55,19 @@ public interface CircleService extends BaseService<Circle> {
      */
     Map<String, Object> delete(Integer circle_id);
 
+    /**
+     * 圈子
+     * @param circle_id
+     * @return
+     */
+    Map<String,Object> setTop(Integer circle_id);
+
+    /**
+     * 圈子置顶数据
+     * @param max
+     * @return
+     */
+    Map<String,Object> top(Integer max);
+
 
 }

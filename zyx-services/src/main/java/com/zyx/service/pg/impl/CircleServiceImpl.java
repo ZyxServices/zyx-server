@@ -30,11 +30,46 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         Map<String, Object> map = new HashMap<>();
         try {
             Circle insertCircle = new Circle();
+            if (title == null || Objects.equals(title, "")) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30006);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30006_MSG);
+                return map;
+            }
             Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
+            if (createId == null || Objects.equals(createId, "")) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30005);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30005_MSG);
+                return map;
+            }
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
+            if (state == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30005);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30005_MSG);
+                return map;
+            }
+            if (state == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30011);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30011_MSG);
+                return map;
+            }
             Optional.ofNullable(state).ifPresent(insertCircle::setState);
+            if (type == null) {
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30012);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30012_MSG);
+                return map;
+            }
             Optional.ofNullable(type).ifPresent(insertCircle::setType);
+            if (details==null||Objects.equals(details,"")){
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30010);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30010_MSG);
+                return map;
+            }
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
+            if (headImgUrl==null||Objects.equals(headImgUrl,"")){
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30013);
+                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30013_MSG);
+                return map;
+            }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHead_img_url);
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
@@ -110,6 +145,41 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 resultMap.put(Constants.STATE, Constants.ERROR);
                 return resultMap;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put(Constants.STATE, Constants.ERROR_500);
+            return resultMap;
+        }
+    }
+
+    @Override
+    public Map<String, Object> setTop(Integer circle_id) {
+        Map<String, Object> resultMap = new HashMap<>();
+        try {
+            Optional.ofNullable(circle_id).orElse(-1);
+            Integer result = circleMapper.setTop(circle_id);
+            if (result > 0) {
+                resultMap.put(Constants.STATE, Constants.SUCCESS);
+            } else {
+                resultMap.put(Constants.STATE, Constants.PARAM_MISS);
+            }
+            return resultMap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put(Constants.STATE, Constants.ERROR_500);
+            return resultMap;
+        }
+    }
+
+    @Override
+    public Map<String, Object> top(Integer max) {
+        Map<String, Object> resultMap = new HashMap<>();
+        try {
+            Optional.ofNullable(max).orElse(3);
+            List<Circle> topList = circleMapper.top(max);
+            resultMap.put(Constants.STATE, Constants.SUCCESS);
+            resultMap.put(PgConstants.PG_RESULT, topList);
+            return resultMap;
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put(Constants.STATE, Constants.ERROR_500);

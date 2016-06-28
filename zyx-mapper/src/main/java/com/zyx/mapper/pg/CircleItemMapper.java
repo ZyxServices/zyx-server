@@ -2,7 +2,10 @@ package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author XiaoWei
@@ -12,4 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("circleItemMapper")
 public interface CircleItemMapper extends BaseMapper<CircleItem> {
+    List<CircleItem> circleItemList(@Param("max") Integer max);
 }

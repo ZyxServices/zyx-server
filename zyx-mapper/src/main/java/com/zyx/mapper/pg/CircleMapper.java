@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XiaoWei on 2016/6/13.
@@ -14,6 +15,7 @@ import java.util.List;
 public interface CircleMapper extends BaseMapper<Circle> {
     /**
      * 圈子列表
+     *
      * @param max 指定最大条数为多少
      * @return
      */
@@ -46,5 +48,21 @@ public interface CircleMapper extends BaseMapper<Circle> {
      * @return
      */
     int deleteCircle(@Param("circle_id") Integer circle_id);
+
+    /**
+     * 圈子
+     *
+     * @param circle_id
+     * @return
+     */
+    int setTop(@Param("circle_id") Integer circle_id);
+
+    /**
+     * 圈子查询执行数据
+     *
+     * @param max
+     * @return
+     */
+    List<Circle> top(@Param("max") Integer max);
 
 }

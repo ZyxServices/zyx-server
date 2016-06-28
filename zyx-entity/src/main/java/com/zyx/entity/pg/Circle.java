@@ -37,6 +37,12 @@ public class Circle extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String head_img_url;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer top;//1位置顶，其他都为不置顶
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer hot;//热度
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -96,5 +102,13 @@ public class Circle extends BaseEntity {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getTop() {
+        return top;
+    }
+
+    public void setTop(Integer top) {
+        this.top = top;
     }
 }
