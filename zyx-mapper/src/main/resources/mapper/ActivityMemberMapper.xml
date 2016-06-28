@@ -37,7 +37,6 @@
             and activity_id = #{activityId}
         </if>
         ORDER BY create_time desc
-
     </select>
 
     <update id="updateMemberByExamine" parameterType="java.lang.Integer">

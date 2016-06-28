@@ -47,4 +47,6 @@ public interface ActivityConstants {
     int AUTH_ERROR_10009 = 10009;
     //取消对应报名失败
     int AUTH_ERROR_10010 = 10010;
+    //首推失败（取消首推失败）
+    int AUTH_ERROR_10011 = 10011;
 }

@@ -2,6 +2,7 @@ package com.zyx.rpc.activity;
 
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 
 import java.util.Map;
 

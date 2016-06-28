@@ -2,8 +2,10 @@ package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.entity.activity.parm.QueryActivityParm;
+import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,13 @@ public class ActivityFacadeImpl implements ActivityFacade {
                                               Long endTime, Long lastTime, Integer maxPeople, Integer visible,
                                               String phone, Double price, Integer type, String address, Integer examine,
                                               String memberTemplate) {
-        return activityService.insterActivity(createId, title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate);
+        try {
+            return activityService.insterActivity(createId, title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return ActivityUtils.Error500();
+        }
     }
 
     @Override
@@ -41,11 +49,9 @@ public class ActivityFacadeImpl implements ActivityFacade {
         try {
             return activityService.queryActivity(parm);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            return ActivityUtils.Error500();
         }
     }
 
@@ -54,11 +60,9 @@ public class ActivityFacadeImpl implements ActivityFacade {
         try {
             return activityService.queryActivityMember(id);
         } catch (Exception e) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+            e.printStackTrace();
             logger.error(e);
-            return map;
+            return ActivityUtils.Error500();
         }
     }
 
@@ -68,11 +72,8 @@ public class ActivityFacadeImpl implements ActivityFacade {
             return activityService.queryActivityHistory(history);
         } catch (Exception e) {
             e.printStackTrace();
-            Map<String, Object> map = new HashMap<String, Object>();
             logger.error(e);
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            return ActivityUtils.Error500();
         }
     }
 }

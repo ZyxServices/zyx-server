@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.entity.activity.parm.AddTopicParm;
 import com.zyx.entity.activity.parm.QueryTopicParm;
 import com.zyx.rpc.activity.ActivityTopicFacade;
+import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityTopicService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +29,16 @@ public class ActivityTopicFacadeImpl implements ActivityTopicFacade {
     @Autowired
     private ActivityTopicService activityTopicService;
 
-    private static Logger loggers = Logger.getLogger(ActivityTopicFacadeImpl.class);
+    private static Logger logger = Logger.getLogger(ActivityTopicFacadeImpl.class);
 
     @Override
     public Map<String, Object> addActivityTopic(AddTopicParm addTopicParm) {
         try {
             return activityTopicService.addActivityTopic(addTopicParm);
         } catch (Exception e) {
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 
@@ -48,11 +47,9 @@ public class ActivityTopicFacadeImpl implements ActivityTopicFacade {
         try {
             return activityTopicService.dynamicQuery(topicParm);
         } catch (Exception e) {
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 }

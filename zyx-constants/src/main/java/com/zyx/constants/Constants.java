@@ -96,6 +96,11 @@ public interface Constants {
      */
     int REQUEST_UNAUTHORIZED = 401;
 
+    /**
+     * TOKEN失效
+     */
+    int TOKEN_FAILURE = 800;
+
     //文件类型 900+
 
     /**

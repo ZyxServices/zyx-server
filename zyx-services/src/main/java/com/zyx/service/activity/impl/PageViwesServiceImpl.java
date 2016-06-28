@@ -31,29 +31,29 @@ public class PageViwesServiceImpl implements PageViwesService {
     private static String REDIS_PAGE_VIEWS = "pageViews";
 
     @Resource
-    protected RedisTemplate<String, String> jedisTemplate;
+    protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Resource
     private PageViewsMapper pageViewsMapper;
 
     @Override
     public void pageViwes(Integer types, Integer typeId) {
-        String sValue = jedisTemplate.opsForValue().get(REDIS_PAGE_VIEWS + types);
+        String sValue = stringRedisTemplate.opsForValue().get(REDIS_PAGE_VIEWS + types);
         String newValue;
         if (sValue == null) {
             newValue = typeId + "_" + types;
-            jedisTemplate.opsForValue().set(REDIS_PAGE_VIEWS + types, newValue);
+            stringRedisTemplate.opsForValue().set(REDIS_PAGE_VIEWS + types, newValue);
         } else if (!sValue.contains(typeId + "_" + types)) {
             newValue = sValue + "," + typeId + "_" + types;
-            jedisTemplate.opsForValue().set(REDIS_PAGE_VIEWS + types, newValue);
+            stringRedisTemplate.opsForValue().set(REDIS_PAGE_VIEWS + types, newValue);
         }
 
-        String sidValue = jedisTemplate.opsForValue().get(typeId + "_" + types);
+        String sidValue = stringRedisTemplate.opsForValue().get(typeId + "_" + types);
         if (sidValue != null && !sidValue.equals("")) {
             int newSidValue = Integer.parseInt(sidValue) + 1;
-            jedisTemplate.opsForValue().set(typeId + "_" + types, newSidValue + "");
+            stringRedisTemplate.opsForValue().set(typeId + "_" + types, newSidValue + "");
         } else {
-            jedisTemplate.opsForValue().set(typeId + "_" + types, "1");
+            stringRedisTemplate.opsForValue().set(typeId + "_" + types, "1");
         }
     }
 
@@ -67,12 +67,12 @@ public class PageViwesServiceImpl implements PageViwesService {
 
             PageViews views = pageViewsMapper.queryPageView(pageViews);
 
-            String sidValue = jedisTemplate.opsForValue().get(typeId + "_" + types);
+            String sidValue = stringRedisTemplate.opsForValue().get(typeId + "_" + types);
 
             if (views != null) {
                 views.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + (sidValue == null ? 0 : Integer.valueOf(sidValue)));
                 map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(ActivityConstants.AUTH_SUCCESS, views);
+                map.put(Constants.SUCCESS_MSG, views);
                 return map;
             }else{
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
@@ -95,7 +95,7 @@ public class PageViwesServiceImpl implements PageViwesService {
 
         PageViews views = pageViewsMapper.queryPageView(pageViews);
 
-        String sidValue = jedisTemplate.opsForValue().get(typeId + "_" + types);
+        String sidValue = stringRedisTemplate.opsForValue().get(typeId + "_" + types);
 
         if(views != null){
             views.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + (sidValue == null ? 0 : Integer.valueOf(sidValue)));

@@ -44,7 +44,7 @@
         </if>
         <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
             and create_time &gt;= #{startTime}
-            and end_time &lt;=  #{endTime}
+            and end_time &lt;= #{endTime}
         </if>
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
@@ -53,11 +53,11 @@
     </select>
 
     <select id="queryActivityMember" parameterType="java.lang.Integer" resultMap="member_template">
-        select * from activity where id = #{id}
+        select * from activity where id = #{id} ORDER BY create_time desc
     </select>
 
     <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="activity">
-        select * from activity where id = #{id}
+        select * from activity where id = #{id} ORDER BY create_time desc
     </select>
 
     <select id="queryActivityHistory" parameterType="com.zyx.entity.activity.parm.QueryHistoryParm"
@@ -67,6 +67,19 @@
         <if test="pageNumber != null and pageHis != null">
             limit #{pageNumber}, #{pageHis}
         </if>
+    </select>
+
+    <update id="updateDevaluation" parameterType="com.zyx.entity.activity.parm.UpdateDevaluationParm">
+        UPDATE activity SET devaluation = ${devaluation} where id = #{id}
+    </update>
+
+    <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="activity">
+        select * from activity where id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+         ORDER BY create_time desc
     </select>
 
 </mapper>

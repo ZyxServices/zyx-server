@@ -20,5 +20,5 @@
     <dubbo:service interface="com.zyx.rpc.activity.ActivityMemberFacade" ref="activityMemberFacade"/>
     <dubbo:service interface="com.zyx.rpc.activity.ActivityTopicFacade" ref="activityTopicFacade"/>
     <dubbo:service interface="com.zyx.rpc.activity.PageViwesFacade" ref="pageViwesFacade"/>
-
+    <dubbo:service interface="com.zyx.rpc.activity.ActivityDevaFacade" ref="activityDevaFacade"/>
 </beans>  

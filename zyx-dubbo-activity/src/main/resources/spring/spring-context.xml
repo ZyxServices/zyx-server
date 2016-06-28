@@ -20,19 +20,6 @@
 	<!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxIdle" value="${redis.maxIdle}"/>
-		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
-		<property name="testOnBorrow" value="${redis.testOnBorrow}"/>
-	</bean>
-
-	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		  p:hostName="${redis.host}" p:port="${redis.port}" p:poolConfig-ref="poolConfig"/>
-
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory"/>
-	</bean>
-
 	<import resource="classpath:applicationContext.xml" />
 	<import resource="classpath:spring/dubbo-provider.xml" />
 	

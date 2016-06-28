@@ -5,6 +5,7 @@ import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.service.BaseServiceImpl;
@@ -59,6 +60,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setType(type);
             activity.setAddress(address == null ? "" : address);
             activity.setExamine(examine == null ? 0 : examine);
+            activity.setDevaluation(0);
             if (activity.getExamine() == 1) {
                 if (!memberTemplate.equals("")) {
                     activity.setMemberTemplate(memberTemplate);

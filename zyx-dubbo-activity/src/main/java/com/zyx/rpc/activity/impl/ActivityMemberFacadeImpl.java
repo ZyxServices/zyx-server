@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.rpc.activity.ActivityMemberFacade;
 import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
+import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityMemberService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -26,18 +27,16 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     @Resource
     private ActivityMemberService activityMemberService;
 
-    private static Logger loggers = Logger.getLogger(ActivityMemberFacadeImpl.class);
+    private static Logger logger = Logger.getLogger(ActivityMemberFacadeImpl.class);
 
     @Override
     public Map<String, Object> addActivityMember(MemberInfoParm addMemberInfoParm) {
         try {
             return activityMemberService.addActivityMember(addMemberInfoParm);
         } catch (Exception e) {
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 
@@ -46,11 +45,9 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
         try{
             return activityMemberService.delActivityMember(memberInfoParm);
         }catch (Exception e){
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 
@@ -59,11 +56,9 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
         try {
             return activityMemberService.queryActivityMemberInfo(queryMemberParm);
         } catch (Exception e) {
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 
@@ -72,11 +67,9 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
         try {
             return activityMemberService.updateMemberByExamine(id);
         } catch (Exception e) {
-            loggers.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.zyx.mapper.activity;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,12 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @return
      */
     List<Activity> queryActivityHistory(QueryHistoryParm history);
+
+    /**
+     * 查询首推活动
+     * @return
+     */
+    List<Activity> queryActivityDevaluation(List<Integer> longs);
 
 
 }

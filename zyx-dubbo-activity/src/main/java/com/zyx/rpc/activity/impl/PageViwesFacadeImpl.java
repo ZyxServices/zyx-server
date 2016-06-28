@@ -2,6 +2,7 @@ package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.rpc.activity.PageViwesFacade;
+import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.PageViwesService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,9 @@ public class PageViwesFacadeImpl implements PageViwesFacade {
         try {
             return pageViwesService.getPageViwes(types, typeId);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            return ActivityUtils.Error500();
         }
     }
 }
