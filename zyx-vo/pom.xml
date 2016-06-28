@@ -22,5 +22,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>tiyujia-parent</groupId>
+      <artifactId>zyx-common</artifactId>
+      <version>${zyx.common.version}</version>
+    </dependency>
   </dependencies>
 </project>
