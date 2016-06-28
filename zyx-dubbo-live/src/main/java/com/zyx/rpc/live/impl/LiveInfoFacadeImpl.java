@@ -57,14 +57,13 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
 	@Override
 	public List<LiveInfo> searchList(LiveSearchVo liveSearchVo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getLiveUrl(Long liveId) {
-		// TODO Auto-generated method stub
-		return "测试获取直播地址";
+		LiveInfo liveInfo = liveInfoService.selectByKey(liveId);
+		return 	 liveInfo==null ?null:liveInfo.getVedioUrl();
 	}
 
 }
