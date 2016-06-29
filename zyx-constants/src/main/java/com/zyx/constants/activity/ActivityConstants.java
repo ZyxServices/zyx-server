@@ -1,6 +1,8 @@
 package com.zyx.constants.activity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rainbow on 16-6-12.
@@ -20,6 +22,14 @@ public interface ActivityConstants {
     SimpleDateFormat SDF = new SimpleDateFormat(defaultDatePattern);
 
     String AUTH_SUCCESS = "result";
+
+    ArrayList<String> stringsDeva = new ArrayList(){{
+            add("activityDeva");
+            add("accountDeva");
+            add("liveDeva");
+            add("concerDeva");
+            add("cirle");
+        }};
 
     /*************************
      * 活动返回码

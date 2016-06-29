@@ -7,6 +7,7 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.DevaluationMapper;
 import com.zyx.service.activity.ActivityDevaluationService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +30,8 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     private DevaluationMapper devaluationMapper;
     @Resource
     private ActivityMapper activityMapper;
+    @Resource
+    private RedisTemplate<String, Map> redisTemplate;
 
 
     @Override
@@ -63,6 +66,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (insert > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "首推成功");
+                redisTemplate.delete(ActivityConstants.stringsDeva);
             } else {
                 map.put(Constants.STATE, Constants.ERROR);
                 map.put(Constants.ERROR_MSG, "首推失败");
@@ -78,16 +82,17 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     public Map<String, Object> delActivityDeva(Devaluation devaluation) {
         Map<String, Object> map = new HashMap<>();
 
-        if(devaluation.getDevaluationId() != null && devaluation.getTypes() != null){
+        if (devaluation.getDevaluationId() != null && devaluation.getTypes() != null) {
             int del = devaluationMapper.deleteDevaluation(devaluation);
-            if(del > 0){
+            if (del > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "取消首推成功");
-            }else{
+                redisTemplate.delete(ActivityConstants.stringsDeva);
+            } else {
                 map.put(Constants.STATE, Constants.ERROR);
                 map.put(Constants.ERROR_MSG, "取消首推失败");
             }
-        }else{
+        } else {
             map.put(Constants.STATE, Constants.PARAM_MISS);
             map.put(Constants.ERROR_MSG, "参数缺失");
         }
