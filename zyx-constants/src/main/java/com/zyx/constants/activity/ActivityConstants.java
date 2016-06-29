@@ -23,14 +23,6 @@ public interface ActivityConstants {
 
     String AUTH_SUCCESS = "result";
 
-    ArrayList<String> stringsDeva = new ArrayList(){{
-            add("activityDeva");
-            add("accountDeva");
-            add("liveDeva");
-            add("concerDeva");
-            add("cirle");
-        }};
-
     /*************************
      * 活动返回码
      ****************************************/

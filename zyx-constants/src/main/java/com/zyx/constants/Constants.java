@@ -59,6 +59,37 @@ public interface Constants {
      * 成功消息 标志
      */
     String SUCCESS_MSG = "successmsg";
+
+    /**
+     * 成功返回data
+     */
+    String SUCCESS_DATA = "data";
+
+    /**
+     * 活动首推
+     */
+    String ACTIVITY_DEVA = "activityDeva";
+
+    /**
+     * 用户首推
+     */
+    String ACCOUNT_DEVA = "accountDeva";
+
+    /**
+     * 视频首推
+     */
+    String LIVE_DEVA = "liveDeva";
+
+    /**
+     *
+     */
+    String CONCER_DEVA = "concerDeva";
+
+    /**
+     *
+     */
+    String CIRLE_DEVA = "cirle";
+
     ////////////// 系统标识符 结束//////////////////
 
     ////////////// 系统状态码 开始//////////////////

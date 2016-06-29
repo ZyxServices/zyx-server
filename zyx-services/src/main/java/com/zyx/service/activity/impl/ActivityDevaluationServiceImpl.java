@@ -31,7 +31,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     @Resource
     private ActivityMapper activityMapper;
     @Resource
-    private RedisTemplate<String, Map> redisTemplate;
+    private RedisTemplate<String, List<Activity>> redisTemplate;
 
 
     @Override
@@ -46,6 +46,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (activities.size() > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, activities);
+                redisTemplate.opsForValue().set("activityDeva", activities);
             } else {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
                 map.put(Constants.ERROR_MSG, "查无数据");
@@ -66,7 +67,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (insert > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "首推成功");
-                redisTemplate.delete(ActivityConstants.stringsDeva);
+                deleteDeavRedis(devaluation);
             } else {
                 map.put(Constants.STATE, Constants.ERROR);
                 map.put(Constants.ERROR_MSG, "首推失败");
@@ -87,7 +88,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (del > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, "取消首推成功");
-                redisTemplate.delete(ActivityConstants.stringsDeva);
+                deleteDeavRedis(devaluation);
             } else {
                 map.put(Constants.STATE, Constants.ERROR);
                 map.put(Constants.ERROR_MSG, "取消首推失败");
@@ -97,5 +98,26 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             map.put(Constants.ERROR_MSG, "参数缺失");
         }
         return map;
+    }
+
+
+    private void deleteDeavRedis(Devaluation devaluation){
+        switch (devaluation.getTypes()){
+            case 1:
+                redisTemplate.delete(Constants.ACTIVITY_DEVA);
+                break;
+            case 2:
+                redisTemplate.delete(Constants.LIVE_DEVA);
+                break;
+            case 3:
+                redisTemplate.delete(Constants.CIRLE_DEVA);
+                break;
+            case 4:
+                redisTemplate.delete(Constants.CONCER_DEVA);
+                break;
+            case 5:
+                redisTemplate.delete(Constants.ACCOUNT_DEVA);
+                break;
+        }
     }
 }
