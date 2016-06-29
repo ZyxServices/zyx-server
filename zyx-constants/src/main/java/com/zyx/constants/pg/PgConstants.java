@@ -1,12 +1,14 @@
 package com.zyx.constants.pg;
 
+import com.zyx.constants.Constants;
+
 /**
  * @author XiaoWei
  * @version V 1.0
  * @package com.zyx.constants.pg
  * Create by XiaoWei on 2016/6/17
  */
-public interface PgConstants {
+public interface PgConstants extends Constants{
     int PG_ERROR_CODE_35000= 35000;
     String PG_ERROR_CODE_35000_MSG = "操场后台错误";
 

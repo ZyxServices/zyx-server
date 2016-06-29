@@ -29,25 +29,25 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             CircleItem circleItem = new CircleItem();
             Optional.ofNullable(circle_id).ifPresent(circleItem::setCircle_id);
             if (circle_id == null) {
-                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30001);
+                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30001);
                 map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30001_MSG);
                 return map;
             }
             Optional.ofNullable(create_id).ifPresent(circleItem::setCreate_id);
             if (create_id == null) {
-                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30005);
+                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30005);
                 map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30005_MSG);
                 return map;
             }
             Optional.ofNullable(title).ifPresent(circleItem::setTitle);
             if (title == null) {
-                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30006);
+                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30006);
                 map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30006_MSG);
                 return map;
             }
             Optional.ofNullable(content).ifPresent(circleItem::setContent);
             if (content == null) {
-                map.put(Constants.ERROR_CODE, PgConstants.PG_ERROR_CODE_30007);
+                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30007);
                 map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30007_MSG);
                 return map;
             }
