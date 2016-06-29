@@ -141,6 +141,11 @@ public interface Constants {
      */
     int TOKEN_FAILURE = 800;
 
+    /**
+     * 无数据
+     */
+    int NO_DATA = 804;
+
     //文件类型 900+
 
     /**

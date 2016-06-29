@@ -62,7 +62,6 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
             map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
             return map;
         }
-        stringRedisTemplate.getConnectionFactory().getConnection().flushDb();
         // 登录成功返回
         String token = UUID.randomUUID().toString().replaceAll("-", "");
         stringRedisTemplate.opsForValue().set("tyj_token:" + token, phone);

@@ -163,6 +163,15 @@ public interface AccountConstants extends Constants {
     /**
      * ---------------------------常量---------------------------------------------
      */
+
+    // ----------------------首推开始----------------------
+    int USER_DEVA_MODEL = 5;
+
+    String TYJ_DEVA = "TYJ_DEVA";
+
+    String TYJ_USER_DEVA = "TYJ_USER_DEVA";
+    // ----------------------首推结束-----------------------
+
     String TIMESTAMP_LONG = "timestamp_long";
 
     String TIMESTAMP_STRING = "timestamp_string";

@@ -31,4 +31,6 @@
     <!-- 用户地址接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountAddressFacade" ref="accountAddressFacade"/>
 
+    <!-- 用户首推接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.UserDevaFacade" ref="userDevaFacade"/>
 </beans>

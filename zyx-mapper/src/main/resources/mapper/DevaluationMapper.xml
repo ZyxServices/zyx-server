@@ -19,4 +19,8 @@
         select devaluation_id from devaluation where types = #{types} ORDER BY create_time desc
     </select>
 
+    <select id="queryDevaluationByDevaId" resultMap="devaluation">
+        select * from devaluation where types = #{0} and devaluation_id = #{1} ORDER BY create_time desc
+    </select>
+
 </mapper>
