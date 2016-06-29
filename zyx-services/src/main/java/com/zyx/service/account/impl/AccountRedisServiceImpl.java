@@ -37,6 +37,10 @@ public class AccountRedisServiceImpl implements AccountRedisService {
     public AccountInfoVo get(String phone) {
         AccountInfoVo accountInfoVo = new AccountInfoVo();
         accountInfoVo.setPhone(phone);
-        return (AccountInfoVo) redisTemplate.opsForHash().get(accountInfoVo.getObjectKey(), accountInfoVo.getPhone());
+        Object o = redisTemplate.opsForHash().get(accountInfoVo.getObjectKey(), accountInfoVo.getPhone());
+        if (o == null) {
+            return null;
+        }
+        return (AccountInfoVo) o;
     }
 }

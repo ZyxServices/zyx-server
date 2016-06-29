@@ -25,6 +25,11 @@
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-api</artifactId>
       </dependency>
+      <dependency>
+          <groupId>tiyujia-parent</groupId>
+          <artifactId>zyx-constants</artifactId>
+          <version>${zyx.constants.version}</version>
+      </dependency>
   </dependencies>
     <build>
         <plugins>

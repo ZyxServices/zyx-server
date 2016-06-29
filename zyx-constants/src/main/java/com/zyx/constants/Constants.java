@@ -1,5 +1,10 @@
 package com.zyx.constants;
 
+import com.zyx.constants.account.AccountConstants;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by Rainbow on 16-6-12.
  *
@@ -46,6 +51,10 @@ public interface Constants {
      * 状态 标志
      */
     String STATE = "state";
+    /**
+     * 状态 标志
+     */
+    String DATA = "data";
     /**
      * 错误代码 标志
      */
@@ -174,4 +183,28 @@ public interface Constants {
     String MSG_REQUEST_UNAUTHORIZED = "unauthorized request";
 
     ////////////// 系统消息 结束//////////////////
+
+    /**
+     * 系统错误
+     */
+    Map<String, Object> MAP_500 = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.ERROR_500);
+        put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+    }};
+
+    /**
+     * 参数缺失
+     */
+    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.PARAM_MISS);
+        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
+    }};
+
+    /**
+     * TOKEN失效
+     */
+    Map<String, Object> MAP_TOKEN_FAILURE = new ConcurrentHashMap() {{
+        put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
+        put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
+    }};
 }

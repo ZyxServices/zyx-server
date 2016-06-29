@@ -1,9 +1,6 @@
 package com.zyx.rpc.account.impl;
 
 import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.json.JSONArray;
-import com.alibaba.dubbo.common.json.JSONObject;
-import com.alibaba.dubbo.common.json.ParseException;
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserMarkInfo;
@@ -11,6 +8,7 @@ import com.zyx.entity.account.param.UserMarkParam;
 import com.zyx.rpc.account.MarkFacade;
 import com.zyx.service.account.UserMarkService;
 import com.zyx.utils.DateUtils;
+import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.MarkInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -35,64 +33,49 @@ public class MarkFacadeImpl implements MarkFacade {
     private UserMarkService userMarkService;
 
     @Autowired
-    protected RedisTemplate<String, String> jedisTemplate;
+    protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        String phone = jedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
+        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
         if (phone == null) {// token失效
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
-            return map;
+            return Constants.MAP_TOKEN_FAILURE;
         }
-        // 查询用户签到信息
-        MarkInfoVo markInfoVo = null;
         try {
-            markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
+            // 查询用户签到信息
+            MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
+            if (markInfoVo != null) {// 查询到进行更新
+                return modifyMarkInfo(userMarkParam, markInfoVo);
+            }
+            return insertMarkInfo(userMarkParam);
         } catch (Exception e) {
-            map = AccountConstants.MAP_500;
+            return Constants.MAP_500;
         }
-        if (markInfoVo != null) {// 查询到进行更新
-            modifyMarkInfo(map, userMarkParam, markInfoVo);
-        } else {
-            map = insertMarkInfo(map, userMarkParam);
-        }
-        return map;
     }
 
     @Override
     public Map<String, Object> querySign(UserMarkParam userMarkParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        String phone = jedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
+        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
         if (phone == null) {// token失效
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
-            return map;
+            return Constants.MAP_TOKEN_FAILURE;
         }
         // 查询用户签到信息
-        MarkInfoVo markInfoVo;
         try {
-            markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
+            MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(AccountConstants.MARK_INFO, markInfoVo);
-            } else {
-                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50202);
-                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50202_MSG);
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到信息查询成功", markInfoVo);
             }
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50202, AccountConstants.ACCOUNT_ERROR_CODE_50202_MSG);
         } catch (Exception e) {
-            map = AccountConstants.MAP_500;
+            return Constants.MAP_500;
         }
-        return map;
     }
 
-    private Map<String, Object> modifyMarkInfo(Map<String, Object> map, UserMarkParam userMarkParam, MarkInfoVo markInfoVo) {
+    private Map<String, Object> modifyMarkInfo(UserMarkParam userMarkParam, MarkInfoVo markInfoVo) {
         Timestamp lastModifyTimeStamp = new Timestamp(markInfoVo.getMarkTime());
         Timestamp todayStartTimeStamp = DateUtils.getTodayStartTimeStamp();
         if (lastModifyTimeStamp.after(todayStartTimeStamp)) {// 今天已经签过到了
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50201);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50201_MSG);
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50201, AccountConstants.ACCOUNT_ERROR_CODE_50201_MSG);
         } else {
             Long t = System.currentTimeMillis();
             final long missDays = DateUtils.getMissDay(t, markInfoVo.getMarkTime());
@@ -108,21 +91,18 @@ public class MarkFacadeImpl implements MarkFacade {
                 userMarkParam.setMarkHistory(getMarkHistory(markInfoVo.getMarkHistory(), t));
                 int result = userMarkService.updateMarkInfo(userMarkParam);
                 if (result >= 1) {
-                    map.put(Constants.STATE, Constants.SUCCESS);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到成功", null);
                 } else {
-                    map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50203);
-                    map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50203_MSG);
+                    return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50203, AccountConstants.ACCOUNT_ERROR_CODE_50203_MSG);
                 }
             } catch (Exception e) {
-                map = AccountConstants.MAP_500;
+                return Constants.MAP_500;
             }
 
         }
-
-        return map;
     }
 
-    private Map<String, Object> insertMarkInfo(Map<String, Object> map, UserMarkParam userMarkParam) {
+    private Map<String, Object> insertMarkInfo(UserMarkParam userMarkParam) {
         UserMarkInfo userMarkInfo = new UserMarkInfo();
         Long t = System.currentTimeMillis();
         userMarkInfo.setMarkTime(t);
@@ -134,15 +114,13 @@ public class MarkFacadeImpl implements MarkFacade {
             userMarkInfo.setMarkHistory(history);
             int result = userMarkService.save(userMarkInfo);
             if (result >= 1) {
-                map.put(Constants.STATE, Constants.SUCCESS);
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到成功", null);
             } else {
-                map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50200);
-                map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50200_MSG);
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50200, AccountConstants.ACCOUNT_ERROR_CODE_50200_MSG);
             }
         } catch (IOException e) {
-            map = AccountConstants.MAP_500;
+            return Constants.MAP_500;
         }
-        return map;
     }
 
     /**

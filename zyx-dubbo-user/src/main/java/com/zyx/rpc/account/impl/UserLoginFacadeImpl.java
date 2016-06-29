@@ -6,7 +6,6 @@ import com.zyx.rpc.account.UserLoginFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.AccountRedisService;
 import com.zyx.service.account.UserLoginService;
-import com.zyx.service.account.UserMarkService;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,9 +31,6 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
 
     @Autowired
     private AccountInfoService accountInfoService;
-
-    @Autowired
-    private UserMarkService userMarkService;
 
     @Autowired
     protected RedisTemplate<String, String> stringRedisTemplate;

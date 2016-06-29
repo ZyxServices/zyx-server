@@ -7,6 +7,7 @@ import com.zyx.entity.account.UserLoginParam;
 import com.zyx.rpc.account.RegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.AccountRedisService;
+import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,49 +31,40 @@ public class RegisterFacadeImpl implements RegisterFacade {
     private AccountInfoService accountInfoService;
 
     @Autowired
-    protected RedisTemplate<String, String> jedisTemplate;
+    protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Autowired
     private AccountRedisService accountRedisService;
 
     @Override
     public Map<String, Object> validatePhoneCode(UserLoginParam userLoginParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        // 判断手机号是否已经注册
-        int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
-        if (count != 0) {// 手机号码重复
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
-            return map;
+        // 判断缓存中手机号码和验证码是否对应
+        String redis_code = stringRedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
+
+        if (StringUtils.isEmpty(redis_code)) {
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
         }
 
-        // 判断缓存中手机号码和验证码是否对应
-        String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
         if (!userLoginParam.getCode().equals(redis_code)) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50006, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
         }
         // 验证成功
-        map.put(Constants.STATE, Constants.SUCCESS);
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("phone", userLoginParam.getPhone());
         map.put("code", userLoginParam.getCode());
-        return map;
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, "手机号和验证码匹配成功", map);
     }
 
     @Override
     public Map<String, Object> registerAccount(UserLoginParam userLoginParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
         // 判断手机号是否已经注册
         int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
         if (count != 0) {// 手机号码重复
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50005);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50005, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
         }
 
         // 判断缓存中手机号码和验证码是否对应
-        String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
+        String redis_code = stringRedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
 //        if (!userLoginParam.getCode().equals(redis_code)) {
 //            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
 //            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
@@ -80,9 +72,7 @@ public class RegisterFacadeImpl implements RegisterFacade {
 //        }
 
         if (StringUtils.isEmpty(redis_code)) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50011);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
         }
 
         AccountInfo accountInfo = new AccountInfo();
@@ -93,48 +83,36 @@ public class RegisterFacadeImpl implements RegisterFacade {
         accountInfo.setCreateTime(System.currentTimeMillis());
         int result = accountInfoService.save(accountInfo);
         if (result == 0) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50010);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50010_MSG);
-        } else {
-            map.put(Constants.STATE, Constants.SUCCESS);
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50010, AccountConstants.ACCOUNT_ERROR_CODE_50010_MSG);
         }
-        return map;
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, AccountConstants.ACCOUNT_SUCCESS_CODE_50013_MSG, accountInfo);
     }
 
     @Override
     public Map<String, Object> renewpwd(UserLoginParam userLoginParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        String phone = jedisTemplate.opsForValue().get("tyj_token:" + userLoginParam.getToken());
+        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + userLoginParam.getToken());
         if (phone == null) {// token失效
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
-            return map;
+            return Constants.MAP_TOKEN_FAILURE;
         }
         userLoginParam.setPhone(phone);
         userLoginParam.setPassword(userLoginParam.getPassword());
         List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
         if (list == null || list.size() == 0) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50001);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50001, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
         }
         userLoginParam.setPassword2(userLoginParam.getPassword2());
         int result = accountInfoService.renewpwd(userLoginParam);
         if (result == 0) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50002);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
-        } else {
-            map.put(Constants.STATE, Constants.SUCCESS);
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50002, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
         }
-        return map;
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户密码修改成功", null);
     }
 
     @Override
     public Map<String, Object> retrievepwd(UserLoginParam userLoginParam) {
-        Map<String, Object> map = new HashMap<String, Object>();
 
         // 判断缓存中手机号码和验证码是否对应
-        String redis_code = jedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
+        String redis_code = stringRedisTemplate.opsForValue().get("tyj_phone_code:" + userLoginParam.getPhone());
 //        if (!userLoginParam.getCode().equals(redis_code)) {
 //            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
 //            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
@@ -142,35 +120,29 @@ public class RegisterFacadeImpl implements RegisterFacade {
 //        }
 
         if (StringUtils.isEmpty(redis_code)) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50011);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
         }
 
         // 验证密码是否输入一致
         if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50012);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50012);
-            return map;
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50012, AccountConstants.ACCOUNT_ERROR_CODE_50012_MSG);
         }
 
         userLoginParam.setPassword2(userLoginParam.getPassword2());
         int result = accountInfoService.renewpwd(userLoginParam);
         if (result == 0) {
-            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50002);
-            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50002, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
         } else {
-            jedisTemplate.delete("tyj_phone_code:" + userLoginParam.getPhone());
-            String temp = jedisTemplate.opsForValue().get("tyj_phone:" + userLoginParam.getPhone());
+            stringRedisTemplate.delete("tyj_phone_code:" + userLoginParam.getPhone());
+            String temp = stringRedisTemplate.opsForValue().get("tyj_phone:" + userLoginParam.getPhone());
             if (temp != null) {
                 String token = temp.substring(temp.indexOf("【") + 1, temp.indexOf("】"));
-                jedisTemplate.delete("tyj_token:" + token);
-                jedisTemplate.delete("tyj_phone:" + userLoginParam.getPhone());
+                stringRedisTemplate.delete("tyj_token:" + token);
+                stringRedisTemplate.delete("tyj_phone:" + userLoginParam.getPhone());
                 accountRedisService.delete(userLoginParam.getPhone());
             }
-            map.put(Constants.STATE, Constants.SUCCESS);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户密码修改成功", null);
         }
-        return map;
     }
 
 }

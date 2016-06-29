@@ -94,6 +94,12 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50012_MSG = "两次输入的密码不正确！！！";
 
     /**
+     * 注册成功
+     */
+    int ACCOUNT_ERROR_CODE_50013 = 50013;
+    String ACCOUNT_SUCCESS_CODE_50013_MSG = "注册成功！！！";
+
+    /**
      * 发送验证码失败，手机号格式有误
      */
     int ACCOUNT_ERROR_CODE_50100 = 50100;
@@ -163,27 +169,4 @@ public interface AccountConstants extends Constants {
 
     String MARK_INFO = "mark_info";
 
-    /**
-     * 系统错误
-     */
-    Map<String, Object> MAP_500 = new ConcurrentHashMap() {{
-        put(Constants.STATE, Constants.ERROR_500);
-        put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-    }};
-
-    /**
-     * 参数缺失
-     */
-    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
-        put(Constants.STATE, Constants.PARAM_MISS);
-        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
-    }};
-
-    /**
-     * TOKEN失效
-     */
-    Map<String, Object> MAP_TOKEN_FAILURE = new ConcurrentHashMap() {{
-        put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
-        put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
-    }};
 }
