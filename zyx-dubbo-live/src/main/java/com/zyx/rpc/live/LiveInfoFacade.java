@@ -89,5 +89,17 @@ public interface LiveInfoFacade {
 	 */
 	public List<LiveInfo> getDevaLives();
 	
+	/**
+	 * 刷新首推
+	 * 
+	 * @description TODO
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月29日 下午2:52:40
+	 */
 	public void refreshDevaLives();
+	
+	public void addDevaLive(Integer lvieId);
+	
+	public int countDevaLive();
 }

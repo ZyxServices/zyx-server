@@ -41,7 +41,9 @@ public interface LiveConstants extends Constants{
 	
 	
 	int PAGE_LAB_PAGE_SIZE= 4;
+	
 	int MARK_LIVE_DEVA_MODEL= 2;
+	int MARK_LIVE_DEVA_COUNT= 4;
 	String MARK_LIVE_DEVA = "liveDeva";
 	String MARK_HASH_LIVE_DEVA = "hash_liveDeva";
 }

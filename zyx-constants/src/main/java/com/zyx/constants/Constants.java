@@ -58,7 +58,7 @@ public interface Constants {
     /**
      * 错误代码 标志
      */
-    String ERROR_CODE = "errcode";
+//    String ERROR_CODE = "errcode";
     /**
      * 错误消息 标志
      */

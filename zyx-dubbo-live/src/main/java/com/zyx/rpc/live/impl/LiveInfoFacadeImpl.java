@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zyx.constants.live.LiveConstants;
+import com.zyx.entity.Devaluation;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.rpc.live.LiveInfoFacade;
 import com.zyx.service.admin.DevaluationService;
@@ -21,7 +22,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	@Autowired
 	LiveInfoService liveInfoService;
 	@Autowired
-    private RedisTemplate<String,ArrayList<LiveInfo>> redisTemplate;
+	private RedisTemplate<String, ArrayList<LiveInfo>> redisTemplate;
 	@Autowired
 	DevaluationService devaluationService;
 
@@ -70,13 +71,15 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	@Override
 	public String getLiveUrl(Long liveId) {
 		LiveInfo liveInfo = liveInfoService.selectByKey(liveId);
-		return 	 liveInfo==null ?null:liveInfo.getVedioUrl();
+		return liveInfo == null ? null : liveInfo.getVedioUrl();
 	}
 
 	@Override
 	public List<LiveInfo> getDevaLives() {
-		List<LiveInfo> list =(List<LiveInfo>) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA);
-		if(list!=null){
+		@SuppressWarnings("unchecked")
+		List<LiveInfo> list = (List<LiveInfo>) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_DEVA,
+				LiveConstants.MARK_HASH_LIVE_DEVA);
+		if (list != null) {
 			return list;
 		}
 		List<Long> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
@@ -84,11 +87,28 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 		redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
 		return list;
 	}
+
 	@Override
 	public void refreshDevaLives() {
 		List<Long> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
 		List<LiveInfo> list = liveInfoService.selectLiveDevas(devaIds);
 		redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
+	}
+
+	@Override
+	public void addDevaLive(Integer lvieId) {
+		Devaluation entity = new Devaluation();
+		entity.setTypes(LiveConstants.MARK_LIVE_DEVA_MODEL);
+		entity.setDevaluationId(lvieId);
+		entity.setCreateTime(System.currentTimeMillis());
+		devaluationService.save(entity);
+	}
+
+	@Override
+	public int countDevaLive() {
+		Devaluation record =  new Devaluation();
+		record.setTypes(LiveConstants.MARK_LIVE_DEVA_MODEL);
+		return devaluationService.selectCount(record );
 	}
 
 }
