@@ -14,6 +14,7 @@ public class LiveInfoVo extends BaseVo {
 	private Integer auth;
 	private Integer type;
 	private Integer lab;
+	private List<Integer> ids;
 	public List<Integer> getUserIds() {
 		return userIds;
 	}
@@ -37,5 +38,11 @@ public class LiveInfoVo extends BaseVo {
 	}
 	public void setAuth(Integer auth) {
 		this.auth = auth;
+	}
+	public List<Integer> getIds() {
+		return ids;
+	}
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
 	}
 }

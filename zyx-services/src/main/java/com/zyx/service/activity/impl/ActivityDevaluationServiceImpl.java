@@ -50,7 +50,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
         List<Devaluation> devaluations = devaluationMapper.queryDevaluation(1);
         if (devaluations.size() > 0) {
             List<Integer> longs = new ArrayList<>();
-            devaluations.forEach(e -> longs.add(e.getDevaluationId()));
+            devaluations.forEach(e -> longs.add(e.getDevaluationId().intValue()));
             List<Activity> activities = activityMapper.queryActivityDevaluation(longs);
             if (activities.size() > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);

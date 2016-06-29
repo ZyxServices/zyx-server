@@ -38,5 +38,10 @@ public interface LiveConstants extends Constants{
 	String MSG_LIVE_BARRAGE_NULL_CONTENT = "直播弹幕无消息内容";
 	
 	
+	
+	
 	int PAGE_LAB_PAGE_SIZE= 4;
+	int MARK_LIVE_DEVA_MODEL= 2;
+	String MARK_LIVE_DEVA = "liveDeva";
+	String MARK_HASH_LIVE_DEVA = "hash_liveDeva";
 }

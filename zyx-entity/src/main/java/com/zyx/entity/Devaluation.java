@@ -20,7 +20,11 @@ import java.io.Serializable;
 @Table(name = "devaluation")
 public class Devaluation extends BaseEntity implements Serializable{
 
-    /**
+    
+	 /**serialVersionUID TODO*/ 
+	
+	private static final long serialVersionUID = 8846690488192906727L;
+	/**
      * 对面模块类型 1、活动
      */
     @Column

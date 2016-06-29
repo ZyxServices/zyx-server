@@ -11,11 +11,14 @@ import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.vo.live.LiveInfoVo;
 
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
+
 @Service("liveInfoService")
 public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements LiveInfoService {
 
 	@Autowired
-	LiveInfoMapper liveInfoMapper;
+	LiveInfoMapper liveInfoMapper ;
 	@Override
 	public int countLive(LiveInfoVo vo) {
 		return liveInfoMapper.countLives(vo);
@@ -24,6 +27,16 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 	public List<LiveInfo> selectLives(LiveInfoVo vo) {
 		return liveInfoMapper.selectLives(vo);
 	}
-
-	
+	@Override
+	public List<LiveInfo> selectLiveDevas(List<Long> ids) {
+		
+		if(ids==null||ids.isEmpty())
+			return null;
+		else{
+			Example example = new Example(LiveInfo.class);
+			Criteria criteria = example.createCriteria();
+			criteria.andIn("id", ids);
+			return liveInfoMapper.selectByExample(example);
+		}
+	}
 }

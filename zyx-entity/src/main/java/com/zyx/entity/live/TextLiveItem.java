@@ -19,18 +19,18 @@ public class TextLiveItem extends BaseEntity{
 	private static final long serialVersionUID = 5254933749194981402L;
 	
 	@Column
-	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private long liveId;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer liveId;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String content;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String imgUrl;
-	public long getLiveId() {
+	public Integer getLiveId() {
 		return liveId;
 	}
-	public void setLiveId(long liveId) {
+	public void setLiveId(Integer liveId) {
 		this.liveId = liveId;
 	}
 	public String getContent() {

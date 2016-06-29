@@ -26,8 +26,8 @@ public class Barrage extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	
 	@Column
-	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private Long liveId;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer liveId;
 	@Column
 	@ColumnType(jdbcType = JdbcType.INTEGER)
 	private Integer userId;
@@ -40,10 +40,10 @@ public class Barrage extends BaseEntity{
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String content;
-	public Long getLiveId() {
+	public Integer getLiveId() {
 		return liveId;
 	}
-	public void setLiveId(Long liveId) {
+	public void setLiveId(Integer liveId) {
 		this.liveId = liveId;
 	}
 	public Integer getUserId() {

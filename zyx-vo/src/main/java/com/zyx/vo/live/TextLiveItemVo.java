@@ -23,7 +23,7 @@ public class TextLiveItemVo extends BaseVo{
 	/**
 	 * 内容所属的直播ID
 	 */
-	private Long liveId;
+	private Integer liveId;
 	
 	/**
 	 * 查询时间范围 开始时间
@@ -32,11 +32,11 @@ public class TextLiveItemVo extends BaseVo{
 	private Long createTimeUpper;
 
 
-	public Long getLiveId() {
+	public Integer getLiveId() {
 		return liveId;
 	}
 
-	public void setLiveId(Long liveId) {
+	public void setLiveId(Integer liveId) {
 		this.liveId = liveId;
 	}
 

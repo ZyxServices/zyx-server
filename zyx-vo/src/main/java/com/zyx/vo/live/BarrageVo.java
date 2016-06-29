@@ -19,14 +19,14 @@ public class BarrageVo extends BaseVo{
 	
 	private static final long serialVersionUID = 1L;
 
-	private Long liveId;
+	private Integer liveId;
     private Long createTimeLower;
     private Long createTimeUpper;
-	public Long getLiveId() {
+	public Integer getLiveId() {
 		return liveId;
 	}
 
-	public void setLiveId(Long liveId) {
+	public void setLiveId(Integer liveId) {
 		this.liveId = liveId;
 	}
 

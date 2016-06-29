@@ -15,5 +15,8 @@
     <select id="queryDevaluation" parameterType="java.lang.Integer" resultMap="devaluation">
         select * from devaluation where types = #{types} ORDER BY create_time desc
     </select>
+    <select id="queryDevaIds" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select devaluation_id from devaluation where types = #{types} ORDER BY create_time desc
+    </select>
 
 </mapper>

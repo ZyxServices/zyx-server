@@ -77,4 +77,17 @@ public interface LiveInfoFacade {
 	 * @update 2016年6月27日 下午6:18:28
 	 */
 	public String getLiveUrl(Long liveId);
+	
+	/**
+	 * 获取首推
+	 * @param vo
+	 * @return
+	 * @description TODO
+	 * @version 1.0
+	 * @author MrDeng
+	 * @update 2016年6月29日 上午10:35:22
+	 */
+	public List<LiveInfo> getDevaLives();
+	
+	public void refreshDevaLives();
 }

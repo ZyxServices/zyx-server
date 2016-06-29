@@ -31,8 +31,8 @@ public class LiveInfo extends BaseEntity {
 	@ColumnType(jdbcType = JdbcType.BIGINT)
 	private Long end;
 	@Column
-	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private Long userId;
+	@ColumnType(jdbcType = JdbcType.INTEGER)
+	private Integer userId;
 	@Column
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	private String title;
@@ -80,11 +80,11 @@ public class LiveInfo extends BaseEntity {
 		this.end = end;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

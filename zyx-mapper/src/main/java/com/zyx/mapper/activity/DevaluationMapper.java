@@ -30,4 +30,6 @@ public interface DevaluationMapper extends BaseMapper<Devaluation> {
      * @return
      */
     List<Devaluation> queryDevaluation(Integer types);
+    
+    List<Long> queryDevaIds(Integer types);
 }
