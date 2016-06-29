@@ -1,7 +1,9 @@
 package com.zyx.rpc.activity;
 
 import com.zyx.entity.Devaluation;
+import com.zyx.entity.activity.Activity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,4 +38,11 @@ public interface ActivityDevaFacade {
      * @return
      */
     Map<String, Object> delActivityDeva(Devaluation devaluation);
+
+    /**
+     * 获取redis中到活动首推
+     *
+     * @return
+     */
+    List<Activity> getActivityDeva();
 }

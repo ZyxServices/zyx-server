@@ -1,14 +1,17 @@
 package com.zyx.rpc.activity.impl;
 
 import com.zyx.entity.Devaluation;
+import com.zyx.entity.activity.Activity;
 import com.zyx.rpc.activity.ActivityDevaFacade;
 import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityDevaluationService;
 import com.zyx.service.activity.ActivityService;
 import org.apache.log4j.Logger;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +29,8 @@ public class ActivityDevaFacadeImpl implements ActivityDevaFacade {
 
     @Resource
     private ActivityDevaluationService activityDevaluationService;
+    @Resource
+    private RedisTemplate<String, List<Activity>> redisTemplate;
 
     private static Logger logger = Logger.getLogger(ActivityFacadeImpl.class);
 
@@ -60,6 +65,11 @@ public class ActivityDevaFacadeImpl implements ActivityDevaFacade {
             logger.error(e);
             return ActivityUtils.Error500();
         }
+    }
+
+    @Override
+    public List<Activity> getActivityDeva() {
+        return (List<Activity>) redisTemplate.opsForHash().get("devaluation", "activityDeva");
     }
 
 

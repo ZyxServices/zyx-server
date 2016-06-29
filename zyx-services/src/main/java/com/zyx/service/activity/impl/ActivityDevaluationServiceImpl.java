@@ -46,7 +46,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (activities.size() > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
                 map.put(Constants.SUCCESS_MSG, activities);
-                redisTemplate.opsForValue().set("activityDeva", activities);
+                redisTemplate.opsForHash().put("devaluation", "activityDeva", activities);
             } else {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
                 map.put(Constants.ERROR_MSG, "查无数据");
@@ -101,8 +101,8 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     }
 
 
-    private void deleteDeavRedis(Devaluation devaluation){
-        switch (devaluation.getTypes()){
+    private void deleteDeavRedis(Devaluation devaluation) {
+        switch (devaluation.getTypes()) {
             case 1:
                 redisTemplate.delete(Constants.ACTIVITY_DEVA);
                 break;
