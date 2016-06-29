@@ -9,6 +9,7 @@ import com.zyx.mapper.activity.DevaluationMapper;
 import com.zyx.service.activity.ActivityDevaluationService;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -37,6 +38,14 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     @Override
     public Map<String, Object> queryActivityDeva() {
 
+        List<Activity> devaluations1 = (List<Activity>) redisTemplate.opsForHash().get("devaluation", "activityDeva");
+        if (devaluations1 != null && devaluations1.size() > 0) {
+            Map<String, Object> map = new HashMap<>();
+            map.put(Constants.STATE, Constants.SUCCESS);
+            map.put(Constants.SUCCESS_MSG, "数据获取成功");
+            map.put(Constants.SUCCESS_DATA, devaluations1);
+            return map;
+        }
         Map<String, Object> map = new HashMap<>();
         List<Devaluation> devaluations = devaluationMapper.queryDevaluation(1);
         if (devaluations.size() > 0) {
@@ -45,7 +54,8 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             List<Activity> activities = activityMapper.queryActivityDevaluation(longs);
             if (activities.size() > 0) {
                 map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(Constants.SUCCESS_MSG, activities);
+                map.put(Constants.SUCCESS_MSG, "数据获取成功");
+                map.put(Constants.SUCCESS_DATA, activities);
                 redisTemplate.opsForHash().put("devaluation", "activityDeva", activities);
             } else {
                 map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
@@ -99,7 +109,6 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
         }
         return map;
     }
-
 
     private void deleteDeavRedis(Devaluation devaluation) {
         switch (devaluation.getTypes()) {

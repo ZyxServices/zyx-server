@@ -66,11 +66,4 @@ public class ActivityDevaFacadeImpl implements ActivityDevaFacade {
             return ActivityUtils.Error500();
         }
     }
-
-    @Override
-    public List<Activity> getActivityDeva() {
-        return (List<Activity>) redisTemplate.opsForHash().get("devaluation", "activityDeva");
-    }
-
-
 }
