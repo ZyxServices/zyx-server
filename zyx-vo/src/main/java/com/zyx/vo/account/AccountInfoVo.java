@@ -30,6 +30,8 @@ public class AccountInfoVo extends BaseVo {
 
     private String avatar;
 
+    private String token;
+
     public Integer getId() {
         return id;
     }
@@ -78,15 +80,24 @@ public class AccountInfoVo extends BaseVo {
         this.avatar = avatar;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "AccountInfoVo{" +
-                "avatar='" + avatar + '\'' +
-                ", sex=" + sex +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
+                "id=" + id +
                 ", phone='" + phone + '\'' +
-                ", id=" + id +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex=" + sex +
+                ", avatar='" + avatar + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 

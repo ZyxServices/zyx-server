@@ -1,6 +1,6 @@
 package com.zyx.rpc.account.impl;
 
-import com.zyx.constants.Constants;
+import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.Devaluation;
 import com.zyx.rpc.account.UserDevaFacade;
 import com.zyx.service.account.UserDevaluationService;
@@ -27,7 +27,7 @@ public class UserDevaFacadeImpl implements UserDevaFacade {
         try {
             return userDevaluationService.queryUserDeva();
         } catch (Exception e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
     }
 
@@ -36,7 +36,7 @@ public class UserDevaFacadeImpl implements UserDevaFacade {
         try {
             return userDevaluationService.insertUserDeva(devaluation);
         } catch (Exception e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
     }
 

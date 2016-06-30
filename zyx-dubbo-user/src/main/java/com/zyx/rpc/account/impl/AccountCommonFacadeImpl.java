@@ -1,6 +1,5 @@
 package com.zyx.rpc.account.impl;
 
-import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.AccountCommonFacade;
 import com.zyx.service.account.AccountRedisService;
@@ -94,13 +93,14 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
             String substring = request.substring(beginPoint + 9, endPoint);
             if (substring.equals("Sucess")) {
-                stringRedisTemplate.opsForValue().set("tyj_phone_code:" + phone, random, 30 * 60, TimeUnit.SECONDS);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + phone, random, 30 * 60, TimeUnit.SECONDS);
                 stringRedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "验证码发送成功！！！", random);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "验证码发送成功！！！", random);
             } else {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50009, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
             }
         } catch (IOException e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
 
@@ -108,13 +108,13 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
     @Override
     public boolean validateToken(String token) {
-        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + token);
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
         return !StringUtils.isEmpty(phone);
     }
 
     @Override
     public AccountInfoVo getAccountVoByToken(String token) {
-        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + token);
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
         if (StringUtils.isEmpty(phone)) {
             return null;
         }

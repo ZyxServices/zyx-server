@@ -1,6 +1,5 @@
 package com.zyx.rpc.account.impl;
 
-import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.rpc.account.AccountInfoFacade;
@@ -10,6 +9,7 @@ import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -29,15 +29,14 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
     private AccountInfoService accountInfoService;
 
     @Autowired
-    protected RedisTemplate<String, String> jedisTemplate;
+    protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Override
     public Map<String, Object> queryAccountInfo(String token, int userId) {
-        String phone = jedisTemplate.opsForValue().get("tyj_token:" + token);
-        if (phone == null) {// token失效
-            return Constants.MAP_TOKEN_FAILURE;
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
         }
-
         UserLoginParam userLoginParam = new UserLoginParam();
         userLoginParam.setToken(token);
         userLoginParam.setId(userId);
@@ -47,13 +46,23 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
             } else {
                 AccountInfoVo accountInfo = list.get(0);
+                // 获取token相关的手机号码
+                String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
                 if (accountInfo.getPhone().equals(phone)) {
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户信息查询成功", accountInfo);
+                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", accountInfo);
                 }
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50301, AccountConstants.ACCOUNT_ERROR_CODE_50301_MSG);
             }
         } catch (Exception e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
+    }
+
+    private boolean isTokenFailure(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return true;
+        }
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+        return StringUtils.isEmpty(phone);
     }
 }

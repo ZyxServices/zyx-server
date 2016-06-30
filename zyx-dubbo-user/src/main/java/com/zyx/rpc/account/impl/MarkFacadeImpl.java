@@ -1,7 +1,6 @@
 package com.zyx.rpc.account.impl;
 
 import com.alibaba.dubbo.common.json.JSON;
-import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserMarkInfo;
 import com.zyx.entity.account.param.UserMarkParam;
@@ -13,10 +12,14 @@ import com.zyx.vo.account.MarkInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by WeiMinSheng on 2016/6/16.
@@ -37,9 +40,9 @@ public class MarkFacadeImpl implements MarkFacade {
 
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
-        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
-        if (phone == null) {// token失效
-            return Constants.MAP_TOKEN_FAILURE;
+        // 判断token是否失效
+        if (isTokenFailure(userMarkParam.getToken())) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
         }
         try {
             // 查询用户签到信息
@@ -49,25 +52,25 @@ public class MarkFacadeImpl implements MarkFacade {
             }
             return insertMarkInfo(userMarkParam);
         } catch (Exception e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
     }
 
     @Override
     public Map<String, Object> querySign(UserMarkParam userMarkParam) {
-        String phone = stringRedisTemplate.opsForValue().get("tyj_token:" + userMarkParam.getToken());
-        if (phone == null) {// token失效
-            return Constants.MAP_TOKEN_FAILURE;
+        // 判断token是否失效
+        if (isTokenFailure(userMarkParam.getToken())) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
         }
         // 查询用户签到信息
         try {
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到信息查询成功", markInfoVo);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户签到信息查询成功", markInfoVo);
             }
             return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50202, AccountConstants.ACCOUNT_ERROR_CODE_50202_MSG);
         } catch (Exception e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
     }
 
@@ -91,12 +94,12 @@ public class MarkFacadeImpl implements MarkFacade {
                 userMarkParam.setMarkHistory(getMarkHistory(markInfoVo.getMarkHistory(), t));
                 int result = userMarkService.updateMarkInfo(userMarkParam);
                 if (result >= 1) {
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到成功", null);
+                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户签到成功", null);
                 } else {
                     return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50203, AccountConstants.ACCOUNT_ERROR_CODE_50203_MSG);
                 }
             } catch (Exception e) {
-                return Constants.MAP_500;
+                return AccountConstants.MAP_500;
             }
 
         }
@@ -114,12 +117,12 @@ public class MarkFacadeImpl implements MarkFacade {
             userMarkInfo.setMarkHistory(history);
             int result = userMarkService.save(userMarkInfo);
             if (result >= 1) {
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "用户签到成功", null);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户签到成功", null);
             } else {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50200, AccountConstants.ACCOUNT_ERROR_CODE_50200_MSG);
             }
         } catch (IOException e) {
-            return Constants.MAP_500;
+            return AccountConstants.MAP_500;
         }
     }
 
@@ -164,4 +167,11 @@ public class MarkFacadeImpl implements MarkFacade {
         return JSON.json(map);
     }
 
+    private boolean isTokenFailure(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return true;
+        }
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+        return StringUtils.isEmpty(phone);
+    }
 }

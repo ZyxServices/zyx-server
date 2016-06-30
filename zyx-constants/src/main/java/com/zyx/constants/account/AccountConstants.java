@@ -172,6 +172,24 @@ public interface AccountConstants extends Constants {
     String TYJ_USER_DEVA = "TYJ_USER_DEVA";
     // ----------------------首推结束-----------------------
 
+    //----------------------REDIS参数开始-------------------
+    /**
+     * token键
+     */
+    String REDIS_KEY_TYJ_TOKEN = "TYJ_TOKEN:";
+
+    /**
+     * phone键
+     */
+    String REDIS_KEY_TYJ_PHONE = "TYJ_PHONE:";
+
+    /**
+     * 验证码键
+     */
+    String REDIS_KEY_TYJ_PHONE_CODE = "TYJ_PHONE_CODE:";
+
+    //----------------------REDIS参数结束-------------------
+
     String TIMESTAMP_LONG = "timestamp_long";
 
     String TIMESTAMP_STRING = "timestamp_string";
