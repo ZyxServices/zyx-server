@@ -1,7 +1,9 @@
 package com.zyx.rpc.account;
 
 import com.zyx.entity.Devaluation;
+import com.zyx.vo.account.AccountInfoVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +21,7 @@ public interface UserDevaFacade {
      *
      * @return
      */
-    Map<String, Object> queryUserDeva();
+	List<AccountInfoVo> queryUserDeva();
 
 
     /**

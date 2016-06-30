@@ -35,14 +35,9 @@ public class ActivityDevaFacadeImpl implements ActivityDevaFacade {
     private static Logger logger = Logger.getLogger(ActivityFacadeImpl.class);
 
     @Override
-    public Map<String, Object> queryActivityDeva() {
-        try {
+    public List<Activity>  queryActivityDeva() {
             return activityDevaluationService.queryActivityDeva();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e);
-            return ActivityUtils.Error500();
-        }
+      
     }
 
     @Override

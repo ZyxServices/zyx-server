@@ -4,9 +4,12 @@ import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.Devaluation;
 import com.zyx.rpc.account.UserDevaFacade;
 import com.zyx.service.account.UserDevaluationService;
+import com.zyx.vo.account.AccountInfoVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,12 +26,8 @@ public class UserDevaFacadeImpl implements UserDevaFacade {
     private UserDevaluationService userDevaluationService;
 
     @Override
-    public Map<String, Object> queryUserDeva() {
-        try {
+    public List<AccountInfoVo> queryUserDeva() {
             return userDevaluationService.queryUserDeva();
-        } catch (Exception e) {
-            return AccountConstants.MAP_500;
-        }
     }
 
     @Override

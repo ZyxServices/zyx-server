@@ -29,7 +29,6 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 	}
 	@Override
 	public List<LiveInfo> selectLiveDevas(List<Long> ids) {
-		
 		if(ids==null||ids.isEmpty())
 			return null;
 		else{

@@ -1,9 +1,10 @@
 package com.zyx.service.activity;
 
+import java.util.List;
+import java.util.Map;
+
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.activity.Activity;
-
-import java.util.Map;
 
 /**
  * Created by SubDong on 16-6-28.
@@ -21,7 +22,7 @@ public interface ActivityDevaluationService {
      * 活动首推
      * @return
      */
-    Map<String, Object> queryActivityDeva();
+	List<Activity> queryActivityDeva();
 
     /**
      * 活动首推

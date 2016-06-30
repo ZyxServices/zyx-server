@@ -1,7 +1,9 @@
 package com.zyx.service.account;
 
 import com.zyx.entity.Devaluation;
+import com.zyx.vo.account.AccountInfoVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +20,7 @@ public interface UserDevaluationService {
      *
      * @return
      */
-    Map<String, Object> queryUserDeva();
+	List<AccountInfoVo> queryUserDeva();
 
     /**
      * 用户首推
