@@ -8,7 +8,7 @@ import com.zyx.vo.account.AccountInfoVo;
 import java.util.List;
 
 /**
- * Created by WeiMinSheng on 2016/6/13.
+ * Created by WeiMS on 2016/6/13.
  *
  * @author WeiMinSheng
  * @version V1.0
@@ -22,5 +22,5 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
 
     int renewpwd(UserLoginParam userLoginParam);
 
-    List<AccountInfoVo> queryUserDevaluation(List<Integer> users);
+    List<AccountInfoVo> queryUserDevaluation(List<Long> users);
 }

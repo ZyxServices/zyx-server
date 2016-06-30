@@ -53,7 +53,7 @@
                  open="(" separator="," close=")">
             #{item}
         </foreach>
-        ORDER BY create_time desc
+        ORDER BY create_time desc limit 0,10
     </select>
 
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
