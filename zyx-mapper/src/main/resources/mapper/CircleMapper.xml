@@ -67,5 +67,12 @@
         SELECT * FROM circle where top=1 ORDER BY create_time DESC limit 0,#{max}
     </select>
 
+    <select id="queryCircleDeva" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 
 </mapper>

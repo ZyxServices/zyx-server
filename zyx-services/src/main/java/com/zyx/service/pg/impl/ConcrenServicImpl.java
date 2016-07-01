@@ -3,7 +3,9 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.mapper.activity.DevaluationMapper;
 import com.zyx.mapper.pg.ConcernMapper;
+import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.pg.Concern;
@@ -22,6 +24,9 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
     @Resource
     private ConcernMapper concernMapper;
 
+    @Resource
+    DevaluationMapper devaluationMapper;
+
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
         Map<String, Object> map = new HashMap<>();
@@ -36,28 +41,39 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideo_url);
             Optional.ofNullable(visible).ifPresent(insertCern::setTopic_visible);
             save(insertCern);
-            map.put(Constants.STATE, Constants.SUCCESS);
-            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+//            map.put(Constants.STATE, Constants.SUCCESS);
+//            return map;
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            return map;
+            return PgConstants.MAP_500;
+//            map.put(Constants.STATE, Constants.ERROR_500);
         }
     }
 
     @Override
-    public Map<String, Object> starRandom(Integer type,Integer n) {
+    public Map<String, Object> starRandom(Integer type, Integer n) {
         Map<String, Object> map = new HashMap<>();
         try {
             Optional.ofNullable(n).orElse(10);
             List<Concern> randomList = concernMapper.starRandom(type, n);
-            map.put(Constants.STATE, Constants.MSG_SUCCESS);
-            map.put(PgConstants.PG_RESULT, Optional.ofNullable(randomList).orElse(null));
-            return map;
+//            map.put(Constants.STATE, Constants.MSG_SUCCESS);
+//            map.put(PgConstants.PG_RESULT, Optional.ofNullable(randomList).orElse(null));
+//            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, Optional.ofNullable(randomList).orElse(null));
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            return map;
+            return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public List<Concern> queryConcernDeva() {
+        List<Long> ids = devaluationMapper.queryDevaIds(3);
+        if (ids != null && ids.size() > 0) {
+            List<Concern> list = concernMapper.queryConcernDeva(ids);
+            return list;
+        }
+        return null;
     }
 }

@@ -34,7 +34,7 @@ public class Concern extends BaseEntity {
     private String video_url;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer topic_visible;
+    private Integer topic_visible;//0所有可见，1好友可见
 
 
     public Integer getType() {

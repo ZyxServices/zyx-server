@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Reply extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer reply_type;//回复主体类型，0为圈子，1为帖子，2为活动，3为动态
+    private Integer reply_type;//回复主体类型，-1为回复id，0为圈子，1为帖子，2为活动，3为动态
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer reply_id;//id对应回复类型

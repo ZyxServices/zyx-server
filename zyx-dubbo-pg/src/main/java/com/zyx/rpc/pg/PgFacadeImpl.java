@@ -1,9 +1,12 @@
 package com.zyx.rpc.pg;
 
+import com.zyx.entity.pg.Circle;
+import com.zyx.entity.pg.Concern;
 import com.zyx.service.pg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -97,6 +100,16 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content) {
         return replyService.addReply(reply_type, reply_id, account_id, content);
+    }
+
+    @Override
+    public List<Circle> queryCircleDeva() {
+        return circleService.queryCircleDeva();
+    }
+
+    @Override
+    public List<Concern> queryConcernDeva() {
+        return concrenService.queryConcernDeva();
     }
 
 }

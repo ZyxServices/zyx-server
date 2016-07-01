@@ -4,6 +4,7 @@ import com.zyx.entity.pg.Circle;
 import com.zyx.service.BaseService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,6 +51,7 @@ public interface CircleService extends BaseService<Circle> {
 
     /**
      * 删除圈子
+     *
      * @param circle_id
      * @return
      */
@@ -57,17 +59,22 @@ public interface CircleService extends BaseService<Circle> {
 
     /**
      * 圈子
+     *
      * @param circle_id
      * @return
      */
-    Map<String,Object> setTop(Integer circle_id);
+    Map<String, Object> setTop(Integer circle_id);
 
     /**
      * 圈子置顶数据
+     *
      * @param max
      * @return
      */
-    Map<String,Object> top(Integer max);
+    Map<String, Object> top(Integer max);
+
+
+    List<Circle> queryCircleDeva();
 
 
 }

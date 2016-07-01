@@ -25,7 +25,7 @@ public class Devaluation extends BaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = 8846690488192906727L;
 	/**
-     * 对面模块类型 1、活动
+     * 对面模块类型 1、活动，3,圈子，4动态
      */
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)

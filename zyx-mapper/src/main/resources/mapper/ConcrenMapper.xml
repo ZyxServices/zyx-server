@@ -45,4 +45,11 @@
         </if>
     </select>
 
+    <select id="queryConcernDeva" resultMap="ConcernResultMap">
+        SELECT * FROM concern WHERE  id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

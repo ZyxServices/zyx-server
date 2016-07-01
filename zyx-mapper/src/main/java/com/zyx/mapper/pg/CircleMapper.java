@@ -65,4 +65,11 @@ public interface CircleMapper extends BaseMapper<Circle> {
      */
     List<Circle> top(@Param("max") Integer max);
 
+    /**
+     * 根据id列表查询圈子数据
+     * @param ids
+     * @return
+     */
+    List<Circle> queryCircleDeva(@Param("ids") List<Long> ids);
+
 }

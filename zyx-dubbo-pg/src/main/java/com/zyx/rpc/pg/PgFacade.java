@@ -1,5 +1,9 @@
 package com.zyx.rpc.pg;
 
+import com.zyx.entity.pg.Circle;
+import com.zyx.entity.pg.Concern;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,7 +130,7 @@ public interface PgFacade {
     Map<String, Object> setTop(Integer circle);
 
     /**
-     * 圈子置顶数据
+     * 获取圈子置顶数据
      *
      * @param max
      * @return
@@ -142,5 +146,18 @@ public interface PgFacade {
      * @return
      */
     Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content);
+
+
+    /**
+     * 获取圈子首推数据
+     * @return
+     */
+    List<Circle> queryCircleDeva();
+
+    /**
+     * 获取动态首推数据
+     * @return
+     */
+    List<Concern> queryConcernDeva();
 
 }

@@ -6,6 +6,7 @@ import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleItemService;
+import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,36 +30,39 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             CircleItem circleItem = new CircleItem();
             Optional.ofNullable(circle_id).ifPresent(circleItem::setCircle_id);
             if (circle_id == null) {
-                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30001);
-                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30001_MSG);
-                return map;
+//                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30001);
+//                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30001_MSG);
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
             }
             Optional.ofNullable(create_id).ifPresent(circleItem::setCreate_id);
             if (create_id == null) {
-                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30005);
-                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30005_MSG);
-                return map;
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
+//                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30005);
+//                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30005_MSG);
+////                Constants.MSG_PARAM_ERROR
+//                return map;
             }
             Optional.ofNullable(title).ifPresent(circleItem::setTitle);
             if (title == null) {
-                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30006);
-                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30006_MSG);
-                return map;
+//                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30006);
+//                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30006_MSG);
+//                return map;
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30006, PgConstants.PG_ERROR_CODE_30006_MSG);
             }
             Optional.ofNullable(content).ifPresent(circleItem::setContent);
             if (content == null) {
-                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30007);
-                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30007_MSG);
-                return map;
+//                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30007);
+//                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30007_MSG);
+//                return map;
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30007, PgConstants.PG_ERROR_CODE_30007_MSG);
+
             }
             circleItem.setCreateTime(new Date().getTime());
             save(circleItem);
-            map.put(Constants.STATE, Constants.SUCCESS);
-            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            return map;
+            return PgConstants.MAP_500;
         }
     }
 
@@ -68,13 +72,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         try {
             Optional.ofNullable(max).orElse(10);
             List<CircleItem> list = circleItemMapper.circleItemList(max);
-            map.put(Constants.STATE, Constants.SUCCESS);
-            map.put(PgConstants.PG_RESULT, list);
-            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_35000_MSG, list);
         } catch (Exception e) {
             e.printStackTrace();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            return map;
+            return PgConstants.MAP_500;
         }
     }
 }
