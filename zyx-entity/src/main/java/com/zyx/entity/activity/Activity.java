@@ -2,6 +2,7 @@ package com.zyx.entity.activity;
 
 import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.TypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
@@ -48,7 +49,7 @@ public class Activity extends BaseEntity {
      * 活动描述
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
     private String descContent;
 
     /**
@@ -143,13 +144,6 @@ public class Activity extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String memberTemplate;
-
-    /**
-     * 首推标注（0 不首推, 1 首推）
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private int devaluation;
 
     public Integer getUserId() {
         return userId;
@@ -287,14 +281,6 @@ public class Activity extends BaseEntity {
         this.memberTemplate = memberTemplate;
     }
 
-    public int getDevaluation() {
-        return devaluation;
-    }
-
-    public void setDevaluation(int devaluation) {
-        this.devaluation = devaluation;
-    }
-
     @Override
     public String toString() {
         return "Activity{" +
@@ -315,7 +301,6 @@ public class Activity extends BaseEntity {
                 ", activityType=" + activityType +
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
-                ", devaluation=" + devaluation +
                 '}';
     }
 }

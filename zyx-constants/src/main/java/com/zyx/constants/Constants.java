@@ -198,18 +198,18 @@ public interface Constants {
     }};
 
     /**
-     * 参数缺失
-     */
-    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
-        put(Constants.STATE, Constants.PARAM_MISS);
-        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
-    }};
-
-    /**
      * TOKEN失效
      */
     Map<String, Object> MAP_TOKEN_FAILURE = new ConcurrentHashMap() {{
         put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
         put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
+    }};
+
+    /**
+     * 参数缺失
+     */
+    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.PARAM_MISS);
+        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
     }};
 }

@@ -8,6 +8,7 @@ import com.zyx.entity.activity.parm.QueryTopicParm;
 import com.zyx.mapper.activity.ActivityTopicMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.ActivityTopicService;
+import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,9 +36,7 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
     public Map<String, Object> addActivityTopic(AddTopicParm parm) {
         Map<String, Object> map = new HashMap<>();
         if (parm == null) {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
 
         if (parm.getUserId() != null && parm.getActivityId() != null
@@ -53,18 +52,12 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
             topic.setCreateTime(System.currentTimeMillis());
             int insert = mapper.insert(topic);
             if (insert > 0) {
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(Constants.SUCCESS_MSG, "发布活动动态成功");
-                return map;
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布活动动态成功", null);
             } else {
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10008);
-                map.put(Constants.ERROR_MSG, "发布动态失败");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10008, "发布动态失败");
             }
         } else {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
     }
 
@@ -75,9 +68,7 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
 
         if (topicParm != null && topicParm.getActivityId() != null) {
             if (topicParm.getPageNumber() == 0) {
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10003);
-                map.put(Constants.ERROR_MSG, "分页参数无效");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
 
             Integer pageNumber = topicParm.getPageNumber();
@@ -104,19 +95,12 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
                     String[] strings = e.getImages().split(",");
                     objectMap.put("images", strings);
                 });
-
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(Constants.SUCCESS_MSG, objectMap);
-                return map;
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", objectMap);
             } else {
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
-                map.put(Constants.ERROR_MSG, "差无数据");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
             }
         } else {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
     }
 }

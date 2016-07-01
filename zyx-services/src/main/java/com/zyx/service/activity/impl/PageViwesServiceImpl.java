@@ -6,6 +6,7 @@ import com.zyx.entity.activity.PageViews;
 import com.zyx.mapper.activity.ActivityTopicMapper;
 import com.zyx.mapper.activity.PageViewsMapper;
 import com.zyx.service.activity.PageViwesService;
+import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -71,18 +72,12 @@ public class PageViwesServiceImpl implements PageViwesService {
 
             if (views != null) {
                 views.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + (sidValue == null ? 0 : Integer.valueOf(sidValue)));
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(Constants.SUCCESS_MSG, views);
-                return map;
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", views);
             }else{
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
-                map.put(ActivityConstants.AUTH_SUCCESS, "查无数据!");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
             }
         }else{
-            map.put(Constants.STATE,Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG,"参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
     }
 

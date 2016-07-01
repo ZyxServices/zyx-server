@@ -13,7 +13,7 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
-        <result column="desc_content" property="descContent" jdbcType="VARCHAR"/>
+        <result column="desc_content" property="descContent" jdbcType="LONGVARCHAR"/>
         <result column="start_time" property="startTime" jdbcType="BIGINT"/>
         <result column="end_time" property="endTime" jdbcType="BIGINT"/>
         <result column="last_time" property="lastTime" jdbcType="BIGINT"/>

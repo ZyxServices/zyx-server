@@ -11,6 +11,7 @@ import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.ActivityMemberMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.ActivityMemberService;
+import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,8 +39,6 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     @Override
     public Map<String, Object> addActivityMember(MemberInfoParm parm) {
 
-        Map<String, Object> map = new HashMap<>();
-
         if (parm.getActivityId() != null && parm.getUserId() != null
                 && parm.getMemberInfo() != null && parm.getUserNick() != null
                 && parm.getPhone() != null) {
@@ -50,9 +49,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(queryMemberParm);
             if (queryMemberVos.size() > 0) {
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10005);
-                map.put(Constants.ERROR_MSG, "此用户已报名过此活动");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10005, "此用户已报名过此活动");
             }
 
             ActivityMember activityMember = new ActivityMember();
@@ -74,18 +71,12 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             int insert = mapper.insert(activityMember);
             if (insert > 0) {
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(ActivityConstants.AUTH_SUCCESS, "报名成功");
-                return map;
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "报名成功", null);
             } else {
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10004);
-                map.put(Constants.ERROR_MSG, "报名失败");
-                return map;
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10004, "报名失败");
             }
         } else {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
     }
 
@@ -95,62 +86,42 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
         if (memberInfoParm != null && memberInfoParm.getActivityId() != null && memberInfoParm.getUserId() != null) {
             int member = activityMemberMapper.delActivityMember(memberInfoParm);
-            if(member > 0){
-                map.put(Constants.STATE, Constants.SUCCESS);
-                map.put(ActivityConstants.AUTH_SUCCESS, "取消对应报名成功");
-                return map;
-            }else{
-                map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10010);
-                map.put(Constants.ERROR_MSG, "取消对应报名失败");
-                return map;
+            if (member > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "取消对应报名成功", null);
+            } else {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10010, "取消对应报名失败");
             }
-        }else{
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+        } else {
+            return Constants.MAP_PARAM_MISS;
         }
     }
 
     @Override
     public Map<String, Object> queryActivityMemberInfo(QueryMemberParm parm) {
-        Map<String, Object> map = new HashMap<>();
         if (parm.getActivityId() == null && parm.getUserId() == null) {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
 
         List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
 
         if (queryMemberVos != null && queryMemberVos.size() > 0) {
-            map.put(Constants.STATE, Constants.SUCCESS);
-            map.put(ActivityConstants.AUTH_SUCCESS, queryMemberVos);
-            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", queryMemberVos);
         } else {
-            map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10002);
-            map.put(ActivityConstants.AUTH_SUCCESS, "查无数据!");
-            return map;
+            return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
         }
     }
 
     @Override
     public Map<String, Object> updateMemberByExamine(Integer id) {
 
-        Map<String, Object> map = new HashMap<>();
         if (id == null) {
-            map.put(Constants.STATE, Constants.PARAM_MISS);
-            map.put(Constants.ERROR_MSG, "参数缺失");
-            return map;
+            return Constants.MAP_PARAM_MISS;
         }
         int integer = activityMemberMapper.updateMemberByExamine(id);
         if (integer > 0) {
-            map.put(Constants.STATE, Constants.SUCCESS);
-            map.put(ActivityConstants.AUTH_SUCCESS, "审核成功");
-            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "审核成功", null);
         } else {
-            map.put(Constants.STATE, ActivityConstants.AUTH_ERROR_10006);
-            map.put(ActivityConstants.AUTH_SUCCESS, "审核失败");
-            return map;
+            return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10006, "审核失败");
         }
     }
 }
