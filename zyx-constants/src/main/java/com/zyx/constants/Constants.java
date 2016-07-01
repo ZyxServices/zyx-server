@@ -97,7 +97,7 @@ public interface Constants {
     /**
      *
      */
-    String CIRLE_DEVA = "cirle";
+    String CIRLE_DEVA = "cirleDeva";
 
     ////////////// 系统标识符 结束//////////////////
 
