@@ -69,7 +69,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
 
     @Override
     public List<Concern> queryConcernDeva() {
-        List<Long> ids = devaluationMapper.queryDevaIds(3);
+        List<Integer> ids = devaluationMapper.queryDevaIds(3);
         if (ids != null && ids.size() > 0) {
             List<Concern> list = concernMapper.queryConcernDeva(ids);
             return list;

@@ -70,6 +70,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
      * @param ids
      * @return
      */
-    List<Circle> queryCircleDeva(@Param("ids") List<Long> ids);
+    List<Circle> queryCircleDeva(@Param("ids") List<Integer> ids);
 
 }

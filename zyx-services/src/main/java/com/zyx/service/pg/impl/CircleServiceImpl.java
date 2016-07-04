@@ -191,7 +191,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
     @Override
     public List<Circle> queryCircleDeva() {
-        List<Long> devaLongs = devaluationService.queryDevaIds(3);
+        List<Integer> devaLongs = devaluationService.queryDevaIds(3);
         if (devaLongs != null && devaLongs.size() > 0) {
             List<Circle> returnList = circleMapper.queryCircleDeva(devaLongs);
             return returnList;

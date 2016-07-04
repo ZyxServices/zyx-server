@@ -14,5 +14,5 @@ import java.util.List;
 public interface ConcernMapper extends BaseMapper<Concern> {
     List<Concern> starRandom(@Param("type") Integer type, @Param("n") Integer n);
 
-    List<Concern> queryConcernDeva(@Param("ids") List<Long> ids);
+    List<Concern> queryConcernDeva(@Param("ids") List<Integer> ids);
 }
