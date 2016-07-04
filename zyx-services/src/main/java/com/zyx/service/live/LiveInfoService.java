@@ -20,5 +20,5 @@ public interface LiveInfoService extends BaseService<LiveInfo> {
 	 */
 	public List<LiveInfo> selectLives(LiveInfoVo vo);
 	
-	public List<LiveInfo> selectLiveDevas(List<Long> ids);
+	public List<LiveInfo> selectLiveDevas(List<Integer> ids);
 }

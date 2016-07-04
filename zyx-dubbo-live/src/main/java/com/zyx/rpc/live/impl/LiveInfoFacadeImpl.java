@@ -1,7 +1,10 @@
 package com.zyx.rpc.live.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -82,7 +85,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 		if (list != null) {
 			return list;
 		}
-		List<Long> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
+		List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
 		list = liveInfoService.selectLiveDevas(devaIds);
 		redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
 		return list;
@@ -90,7 +93,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
 	@Override
 	public void refreshDevaLives() {
-		List<Long> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
+		List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
 		List<LiveInfo> list = liveInfoService.selectLiveDevas(devaIds);
 		redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
 	}
@@ -111,4 +114,20 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 		return devaluationService.selectCount(record );
 	}
 
+	@Override
+	public Map<Integer, Integer> getLiveWatchNum(List<Integer> liveIds) {
+		Random rand =new Random(System.currentTimeMillis());
+		Map<Integer,Integer> numMap  =new HashMap<Integer, Integer>();
+		// TODO 获取到直播的当前观看人数
+		for(Integer liveId :liveIds){
+			numMap.put(liveId, rand.nextInt(1000));
+		}
+		return numMap;
+	}
+
+	@Override
+	public Map<Integer, Integer> getLiveDevaWatchNum() {
+		List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
+		return getLiveWatchNum(devaIds);
+	}
 }

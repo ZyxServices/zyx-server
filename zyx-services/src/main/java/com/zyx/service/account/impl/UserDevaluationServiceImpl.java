@@ -48,7 +48,7 @@ public class UserDevaluationServiceImpl implements UserDevaluationService {
             System.out.println("redis");
             return _vos;
         }
-        List<Long> userIds = devaluationMapper.queryDevaIds(AccountConstants.USER_DEVA_MODEL);
+        List<Integer> userIds = devaluationMapper.queryDevaIds(AccountConstants.USER_DEVA_MODEL);
         // if (devaluations == null || devaluations.size() == 0) {
         // return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
         // }

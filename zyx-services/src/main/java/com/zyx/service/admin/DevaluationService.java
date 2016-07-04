@@ -19,5 +19,5 @@ public interface DevaluationService extends BaseService<Devaluation>{
      */
     List<Devaluation> queryDevaluation(Integer types);
     
-    List<Long> queryDevaIds(Integer types);
+    List<Integer> queryDevaIds(Integer types);
 }

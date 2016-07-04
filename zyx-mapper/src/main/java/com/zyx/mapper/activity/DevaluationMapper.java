@@ -39,7 +39,7 @@ public interface DevaluationMapper extends BaseMapper<Devaluation> {
      * @param types
      * @return
      */
-    List<Long> queryDevaIds(Integer types);
+    List<Integer> queryDevaIds(Integer types);
 
     /**
      * 根据type和首推现id查询首推信息

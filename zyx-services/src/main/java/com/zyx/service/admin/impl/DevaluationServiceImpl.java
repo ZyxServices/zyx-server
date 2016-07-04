@@ -24,7 +24,7 @@ public class DevaluationServiceImpl extends BaseServiceImpl<Devaluation>implemen
 		return devaluationMapper.queryDevaluation(types);
 	}
 	@Override
-	public List<Long> queryDevaIds(Integer types) {
+	public List<Integer> queryDevaIds(Integer types) {
 		return devaluationMapper.queryDevaIds(types);
 	}
 

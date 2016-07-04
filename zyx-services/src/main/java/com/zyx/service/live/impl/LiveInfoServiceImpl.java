@@ -28,7 +28,7 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		return liveInfoMapper.selectLives(vo);
 	}
 	@Override
-	public List<LiveInfo> selectLiveDevas(List<Long> ids) {
+	public List<LiveInfo> selectLiveDevas(List<Integer> ids) {
 		if(ids==null||ids.isEmpty())
 			return null;
 		else{

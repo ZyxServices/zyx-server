@@ -22,5 +22,5 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
 
     int renewpwd(UserLoginParam userLoginParam);
 
-    List<AccountInfoVo> queryUserDevaluation(List<Long> users);
+    List<AccountInfoVo> queryUserDevaluation(List<Integer> users);
 }
