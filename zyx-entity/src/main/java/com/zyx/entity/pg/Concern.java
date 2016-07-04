@@ -16,26 +16,37 @@ public class Concern extends BaseEntity {
     private static final long serialVersionUID = 1L;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer user_id;
+    private Integer userId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;//动态类型1为个人动态，2为活动动态，3为明星动态，4为圈子动态
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String topic_title;
+    private String topicTitle;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String topic_content;
+    private String topicContent;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String img_url;
+    private String imgUrl;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String video_url;
+    private String videoUrl;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer topic_visible;//0所有可见，1好友可见
+    private Integer topicVisible;//0所有可见，1好友可见
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getType() {
         return type;
@@ -45,56 +56,43 @@ public class Concern extends BaseEntity {
         this.type = type;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getTopicTitle() {
+        return topicTitle;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public String getTopicContent() {
+        return topicContent;
     }
 
-    public String getTopic_title() {
-        return topic_title;
+    public void setTopicContent(String topicContent) {
+        this.topicContent = topicContent;
     }
 
-    public void setTopic_title(String topic_title) {
-        this.topic_title = topic_title;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public String getTopic_content() {
-        return topic_content;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public void setTopic_content(String topic_content) {
-        this.topic_content = topic_content;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-
-    public Integer getTopic_visible() {
-        return topic_visible;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    public void setTopic_visible(Integer topic_visible) {
-        this.topic_visible = topic_visible;
+    public Integer getTopicVisible() {
+        return topicVisible;
     }
 
-    public String getImg_url() {
-        return img_url;
-    }
-
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
-    }
-
-    public String getVideo_url() {
-        return video_url;
-    }
-
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
+    public void setTopicVisible(Integer topicVisible) {
+        this.topicVisible = topicVisible;
     }
 }

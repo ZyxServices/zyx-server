@@ -17,24 +17,24 @@ import javax.persistence.Table;
 public class Meet extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer circle_id;
+    private Integer circleId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer account_id;
+    private Integer accountId;
 
-    public Integer getCircle_id() {
-        return circle_id;
+    public Integer getCircleId() {
+        return circleId;
     }
 
-    public void setCircle_id(Integer circle_id) {
-        this.circle_id = circle_id;
+    public void setCircleId(Integer circleId) {
+        this.circleId = circleId;
     }
 
-    public Integer getAccount_id() {
-        return account_id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Integer account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }

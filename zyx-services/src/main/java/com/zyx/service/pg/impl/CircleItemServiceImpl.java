@@ -28,13 +28,13 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         Map<String, Object> map = new HashMap<>();
         try {
             CircleItem circleItem = new CircleItem();
-            Optional.ofNullable(circle_id).ifPresent(circleItem::setCircle_id);
+            Optional.ofNullable(circle_id).ifPresent(circleItem::setCircleId);
             if (circle_id == null) {
 //                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30001);
 //                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30001_MSG);
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
             }
-            Optional.ofNullable(create_id).ifPresent(circleItem::setCreate_id);
+            Optional.ofNullable(create_id).ifPresent(circleItem::setCreateId);
             if (create_id == null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
 //                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30005);

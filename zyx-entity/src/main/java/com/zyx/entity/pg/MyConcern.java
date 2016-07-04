@@ -18,35 +18,35 @@ import javax.persistence.Table;
 public class MyConcern  extends BaseEntity{
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer concern_id;
+    private Integer concernId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer concern_type;//关注类型，1为明星，2为个人，3为球队
+    private Integer concernType;//关注类型，1为明星，2为个人，3为球队
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer account_id;
+    private Integer accountId;
 
-    public Integer getConcern_id() {
-        return concern_id;
+    public Integer getConcernId() {
+        return concernId;
     }
 
-    public void setConcern_id(Integer concern_id) {
-        this.concern_id = concern_id;
+    public void setConcernId(Integer concernId) {
+        this.concernId = concernId;
     }
 
-    public Integer getConcern_type() {
-        return concern_type;
+    public Integer getConcernType() {
+        return concernType;
     }
 
-    public void setConcern_type(Integer concern_type) {
-        this.concern_type = concern_type;
+    public void setConcernType(Integer concernType) {
+        this.concernType = concernType;
     }
 
-    public Integer getAccount_id() {
-        return account_id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Integer account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }

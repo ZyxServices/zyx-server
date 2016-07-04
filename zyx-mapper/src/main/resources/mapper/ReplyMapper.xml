@@ -27,11 +27,11 @@
 <mapper namespace="com.zyx.mapper.pg.ReplyMapper">
     <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Reply">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="reply_type" property="reply_type" jdbcType="INTEGER"/>
-        <result column="reply_id" property="reply_id" jdbcType="INTEGER"/>
-        <result column="reply_account_id" property="reply_account_id" jdbcType="INTEGER"/>
+        <result column="reply_type" property="replyType" jdbcType="INTEGER"/>
+        <result column="reply_id" property="replyId" jdbcType="INTEGER"/>
+        <result column="reply_account_id" property="replyAccountId" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="reply_state" property="reply_state" jdbcType="INTEGER"/>
+        <result column="reply_state" property="replyState" jdbcType="INTEGER"/>
     </resultMap>
 
 </mapper>

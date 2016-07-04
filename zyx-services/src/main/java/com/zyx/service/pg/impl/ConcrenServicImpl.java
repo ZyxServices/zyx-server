@@ -33,13 +33,13 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
         try {
             Concern insertCern = new Concern();
             insertCern.setCreateTime(new Date().getTime());
-            Optional.ofNullable(userId).ifPresent(insertCern::setUser_id);
+            Optional.ofNullable(userId).ifPresent(insertCern::setUserId);
             Optional.ofNullable(type).ifPresent(insertCern::setType);
-            Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopic_title);
-            Optional.ofNullable(content).ifPresent(insertCern::setTopic_content);
-            Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImg_url);
-            Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideo_url);
-            Optional.ofNullable(visible).ifPresent(insertCern::setTopic_visible);
+            Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopicTitle);
+            Optional.ofNullable(content).ifPresent(insertCern::setTopicContent);
+            Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImgUrl);
+            Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideoUrl);
+            Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
             save(insertCern);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
 //            map.put(Constants.STATE, Constants.SUCCESS);

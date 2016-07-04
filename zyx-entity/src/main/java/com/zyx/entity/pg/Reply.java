@@ -17,43 +17,20 @@ import javax.persistence.Table;
 public class Reply extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer reply_type;//回复主体类型，-1为回复id，0为圈子，1为帖子，2为活动，3为动态
+    private Integer replyType;//回复主体类型，-1为回复id，0为圈子，1为帖子，2为活动，3为动态
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer reply_id;//id对应回复类型
+    private Integer replyId;//id对应回复类型
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer reply_account_id;//回复用户id
+    private Integer replyAccountId;//回复用户id
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String content;//回复内容
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer reply_state;//回复类型,0为公开回复，其他类型预留
+    private Integer replyState;//回复类型,0为公开回复，其他类型预留
 
-    public Integer getReply_type() {
-        return reply_type;
-    }
-
-    public void setReply_type(Integer reply_type) {
-        this.reply_type = reply_type;
-    }
-
-    public Integer getReply_id() {
-        return reply_id;
-    }
-
-    public void setReply_id(Integer reply_id) {
-        this.reply_id = reply_id;
-    }
-
-    public Integer getReply_account_id() {
-        return reply_account_id;
-    }
-
-    public void setReply_account_id(Integer reply_account_id) {
-        this.reply_account_id = reply_account_id;
-    }
 
     public String getContent() {
         return content;
@@ -63,11 +40,35 @@ public class Reply extends BaseEntity {
         this.content = content;
     }
 
-    public Integer getReply_state() {
-        return reply_state;
+    public Integer getReplyType() {
+        return replyType;
     }
 
-    public void setReply_state(Integer reply_state) {
-        this.reply_state = reply_state;
+    public void setReplyType(Integer replyType) {
+        this.replyType = replyType;
+    }
+
+    public Integer getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
+
+    public Integer getReplyAccountId() {
+        return replyAccountId;
+    }
+
+    public void setReplyAccountId(Integer replyAccountId) {
+        this.replyAccountId = replyAccountId;
+    }
+
+    public Integer getReplyState() {
+        return replyState;
+    }
+
+    public void setReplyState(Integer replyState) {
+        this.replyState = replyState;
     }
 }

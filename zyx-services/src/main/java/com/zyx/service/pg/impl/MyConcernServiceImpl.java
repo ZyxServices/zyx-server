@@ -35,7 +35,7 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30015 ,PgConstants.PG_ERROR_CODE_30015_MSG);
 
             }
-            Optional.ofNullable(concernId).ifPresent(myConcern::setConcern_id);
+            Optional.ofNullable(concernId).ifPresent(myConcern::setConcernId);
             if (concern_type == null) {
 //                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30016);
 //                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30016_MSG);
@@ -43,7 +43,7 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30016 ,PgConstants.PG_ERROR_CODE_30016_MSG);
 
             }
-            Optional.ofNullable(concern_type).ifPresent(myConcern::setConcern_type);
+            Optional.ofNullable(concern_type).ifPresent(myConcern::setConcernType);
             if (accountId == null) {
 //                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
 //                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
@@ -51,7 +51,7 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014 ,PgConstants.PG_ERROR_CODE_30014_MSG);
 
             }
-            Optional.ofNullable(accountId).ifPresent(myConcern::setAccount_id);
+            Optional.ofNullable(accountId).ifPresent(myConcern::setAccountId);
             myConcern.setCreateTime(new Date().getTime());
             save(myConcern);
 //            map.put(PgConstants.STATE, PgConstants.SUCCESS);

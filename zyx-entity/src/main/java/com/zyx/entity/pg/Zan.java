@@ -24,13 +24,13 @@ public class Zan   {
     private Long id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer body_id;//主题id,可以是圈子，帖子，动态，活动动态
+    private Integer bodyId;//主题id,可以是圈子，帖子，动态，活动动态
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer body_type;//定位点赞类型
+    private Integer bodyType;//定位点赞类型
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer account_id;//点赞的人
+    private Integer accountId;//点赞的人
 
     public Long getId() {
         return id;
@@ -40,27 +40,27 @@ public class Zan   {
         this.id = id;
     }
 
-    public Integer getBody_id() {
-        return body_id;
+    public Integer getBodyId() {
+        return bodyId;
     }
 
-    public void setBody_id(Integer body_id) {
-        this.body_id = body_id;
+    public void setBodyId(Integer bodyId) {
+        this.bodyId = bodyId;
     }
 
-    public Integer getBody_type() {
-        return body_type;
+    public Integer getBodyType() {
+        return bodyType;
     }
 
-    public void setBody_type(Integer body_type) {
-        this.body_type = body_type;
+    public void setBodyType(Integer bodyType) {
+        this.bodyType = bodyType;
     }
 
-    public Integer getAccount_id() {
-        return account_id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Integer account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }

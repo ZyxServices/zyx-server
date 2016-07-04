@@ -32,7 +32,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30009, PgConstants.PG_ERROR_CODE_30009_MSG);
 
             }
-            Optional.ofNullable(body_id).ifPresent(zan::setBody_id);
+            Optional.ofNullable(body_id).ifPresent(zan::setBodyId);
             if (body_type == null) {
 //                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30017);
 //                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30017_MSG);
@@ -40,7 +40,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30017, PgConstants.PG_ERROR_CODE_30017_MSG);
 
             }
-            Optional.ofNullable(body_type).ifPresent(zan::setBody_type);
+            Optional.ofNullable(body_type).ifPresent(zan::setBodyType);
             if (account_id == null) {
 //                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
 //                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
@@ -48,7 +48,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
 
             }
-            Optional.ofNullable(account_id).ifPresent(zan::setAccount_id);
+            Optional.ofNullable(account_id).ifPresent(zan::setAccountId);
             save(zan);
 //            map.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);

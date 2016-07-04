@@ -17,10 +17,10 @@ import javax.persistence.Table;
 public class CircleItem extends BaseEntity{
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer circle_id;
+    private Integer circleId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer create_id;
+    private Integer createId;
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String title;
@@ -34,20 +34,20 @@ public class CircleItem extends BaseEntity{
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer top;
 
-    public Integer getCreate_id() {
-        return create_id;
+    public Integer getCircleId() {
+        return circleId;
     }
 
-    public void setCreate_id(Integer create_id) {
-        this.create_id = create_id;
+    public void setCircleId(Integer circleId) {
+        this.circleId = circleId;
     }
 
-    public Integer getCircle_id() {
-        return circle_id;
+    public Integer getCreateId() {
+        return createId;
     }
 
-    public void setCircle_id(Integer circle_id) {
-        this.circle_id = circle_id;
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
     }
 
     public String getTitle() {

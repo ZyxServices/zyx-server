@@ -44,7 +44,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             if (createId == null || Objects.equals(createId, "")) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
             }
-            Optional.ofNullable(createId).ifPresent(insertCircle::setCreate_id);
+            Optional.ofNullable(createId).ifPresent(insertCircle::setCreateId);
             if (state == null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
             }
@@ -66,7 +66,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
             }
-            Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHead_img_url);
+            Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
             mapper.insert(insertCircle);

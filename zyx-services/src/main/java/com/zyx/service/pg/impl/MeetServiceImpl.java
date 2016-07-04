@@ -33,7 +33,7 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
 //                return map;
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30001,PG_ERROR_CODE_30001_MSG);
             }
-            Optional.ofNullable(circleId).ifPresent(meet::setCircle_id);
+            Optional.ofNullable(circleId).ifPresent(meet::setCircleId);
             if(accountId==null){
 //                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
 //                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
@@ -41,7 +41,7 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30014,PG_ERROR_CODE_30014_MSG);
 
             }
-            Optional.ofNullable(accountId).ifPresent(meet::setAccount_id);
+            Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
             meet.setCreateTime(new Date().getTime());
             save(meet);
 //            map.put(PgConstants.STATE, PgConstants.SUCCESS);

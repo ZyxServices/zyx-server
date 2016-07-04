@@ -53,12 +53,12 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010 ,PgConstants.PG_ERROR_CODE_30010_MSG);
 
             }
-            reply.setReply_type(reply_type);
-            reply.setReply_id(reply_id);
-            reply.setReply_account_id(account_id);
+            reply.setReplyType(reply_type);
+            reply.setReplyId(reply_id);
+            reply.setReplyAccountId(account_id);
             reply.setContent(content);
             reply.setCreateTime(new Date().getTime());
-            reply.setReply_state(0);
+            reply.setReplyState(0);
             save(reply);
 //            resultMap.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            resultMap.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);

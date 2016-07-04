@@ -27,8 +27,8 @@
 <mapper namespace="com.zyx.mapper.pg.CircleItemMapper">
     <resultMap id="ConcernResultMap" type="com.zyx.entity.pg.CircleItem">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="circle_id" property="circle_id" jdbcType="INTEGER"/>
-        <result column="create_id" property="create_id" jdbcType="INTEGER"/>
+        <result column="circle_id" property="circleId" jdbcType="INTEGER"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="hot" property="hot" jdbcType="VARCHAR"/>

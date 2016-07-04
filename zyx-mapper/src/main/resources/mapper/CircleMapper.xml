@@ -28,14 +28,14 @@
     <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="create_id" property="create_id" jdbcType="INTEGER"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
-        <result column="circle_master" property="circle_master" jdbcType="VARCHAR"/>
+        <result column="circle_master" property="circleMaster" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
-        <result column="circle_master_id" property="circle_master_id" jdbcType="INTEGER"/>
+        <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
         <result column="details" property="details" jdbcType="VARCHAR"/>
-        <result column="head_img_url" property="head_img_url" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="hot" property="hot" jdbcType="INTEGER"/>
     </resultMap>

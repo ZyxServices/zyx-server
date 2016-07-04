@@ -27,13 +27,13 @@
 <mapper namespace="com.zyx.mapper.pg.ConcernMapper">
     <resultMap id="ConcernResultMap" type="com.zyx.entity.pg.Concern">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="user_id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
-        <result column="topic_title" property="topic_title" jdbcType="VARCHAR"/>
-        <result column="topic_content" property="topic_content" jdbcType="VARCHAR"/>
-        <result column="img_url" property="img_url" jdbcType="INTEGER"/>
-        <result column="video_url" property="video_url" jdbcType="INTEGER"/>
-        <result column="topic_visible" property="video_url" jdbcType="INTEGER"/>
+        <result column="topic_title" property="topicTitle" jdbcType="VARCHAR"/>
+        <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="INTEGER"/>
+        <result column="video_url" property="videoUrl" jdbcType="INTEGER"/>
+        <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
         <result column="createTime" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
