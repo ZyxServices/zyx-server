@@ -44,10 +44,23 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         if (count == 0) {// 未注册
             return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50003, AccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
         }
-        // 判断是否已经登录
+        // 判断是否已经登录,已登录的情况下删除登录信息
         String phoneTime = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
         if (phoneTime != null) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50004, AccountConstants.ACCOUNT_ERROR_CODE_50004_MSG);
+            // 获取登陆TOKEN
+            String token = phoneTime.substring(phoneTime.indexOf("【") + 1, phoneTime.indexOf("】"));
+            stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+            stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
+            AccountInfoVo _accountInfo = accountRedisService.get(phone);
+            if (_accountInfo != null) {
+                String token_new = UUID.randomUUID().toString().replaceAll("-", "");
+                String _newTyjPhone = phoneTime.replaceAll(token, token_new);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token_new, phone);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, _newTyjPhone);
+                _accountInfo.setToken(token_new);
+                accountRedisService.put(_accountInfo);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "登录成功", _accountInfo);
+            }
         }
         try {
             AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);

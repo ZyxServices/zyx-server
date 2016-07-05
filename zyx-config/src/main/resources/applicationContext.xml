@@ -41,7 +41,7 @@
 
     <!-- 采用注释的方式配置bean -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.zyx.service"/>
+    <context:component-scan base-package="com.zyx.*"/>
 
     <context:property-placeholder location="classpath:config.properties,classpath:redis.properties"/>
 
@@ -49,9 +49,9 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性driverClassName、 url、user、password -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://120.25.195.67:3306/zyx?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
-        <property name="username" value="zhanghr"/>
-        <property name="password" value="zhanghr"/>
+        <property name="url" value="jdbc:mysql://114.112.98.72:3306/zyx?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
+        <property name="username" value="tiyujia"/>
+        <property name="password" value="tiyujia_2016"/>
         <!-- 配置初始化大小、最小、最大 -->
         <!-- 通常来说，只需要修改initialSize、minIdle、maxActive -->
         <property name="initialSize" value="2"/>
@@ -90,7 +90,7 @@
         </property>
     </bean>
 
-    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.zyx.mapper"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
         <property name="markerInterface" value="com.zyx.mapper.BaseMapper"/>
