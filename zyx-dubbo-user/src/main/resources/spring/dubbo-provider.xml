@@ -7,23 +7,23 @@
             http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="accountService"/>
+    <dubbo:application name="AccountService"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry protocol="zookeeper" address="114.112.98.72:2182"/>
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20885"/>
+    <dubbo:protocol name="dubbo" port="20885" threads="200"/>
 
     <!-- 短信发送接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountCommonFacade" ref="accountCommonFacade"/>
 
     <!-- 用户服务接口 -->
-    <dubbo:service interface="com.zyx.rpc.account.AccountInfoFacade" ref="accountInfoFacade"/>
+    <dubbo:service interface="com.zyx.rpc.account.AccountInfoFacade" ref="accountInfoFacade" timeout="10000"/>
 
-    <dubbo:service interface="com.zyx.rpc.account.RegisterFacade" ref="registerFacade"/>
+    <dubbo:service interface="com.zyx.rpc.account.RegisterFacade" ref="registerFacade" timeout="10000"/>
 
-    <dubbo:service interface="com.zyx.rpc.account.UserLoginFacade" ref="userLoginFacade"/>
+    <dubbo:service interface="com.zyx.rpc.account.UserLoginFacade" ref="userLoginFacade" executes="100" timeout="10000"/>
 
     <!-- 用户签到接口 -->
     <dubbo:service interface="com.zyx.rpc.account.MarkFacade" ref="markFacade"/>
