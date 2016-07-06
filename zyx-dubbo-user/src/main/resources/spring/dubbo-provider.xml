@@ -10,7 +10,7 @@
     <dubbo:application name="AccountService"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
-    <dubbo:registry protocol="zookeeper" address="114.112.98.72:2182"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.1.200:2181"/>
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20885" threads="200"/>
@@ -33,4 +33,6 @@
 
     <!-- 用户首推接口 -->
     <dubbo:service interface="com.zyx.rpc.account.UserDevaFacade" ref="userDevaFacade"/>
+
+    <dubbo:service interface="com.zyx.rpc.common.TokenFacade" ref="tokenFacade"/>
 </beans>

@@ -198,11 +198,11 @@ public interface Constants {
     }};
 
     /**
-     * TOKEN失效
+     * TOKEN失效，401无权限请求
      */
     Map<String, Object> MAP_TOKEN_FAILURE = new ConcurrentHashMap() {{
-        put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50000);
-        put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50000_MSG);
+        put(Constants.STATE, Constants.REQUEST_UNAUTHORIZED);
+        put(Constants.ERROR_MSG, Constants.MSG_REQUEST_UNAUTHORIZED);
     }};
 
     /**

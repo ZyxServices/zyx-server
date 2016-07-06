@@ -26,8 +26,6 @@
     </modules>
 
     <properties>
-
-
         <zyx.common.version>0.0.1-SNAPSHOT</zyx.common.version>
         <zyx.config.version>0.0.1-SNAPSHOT</zyx.config.version>
         <zyx.core.version>0.0.1-SNAPSHOT</zyx.core.version>
@@ -66,8 +64,6 @@
         <sms.password>1JKY7K</sms.password>
         <sms.sendType>1</sms.sendType>
         <sms.PostFixNumber></sms.PostFixNumber>
-
-
 
     </properties>
 
