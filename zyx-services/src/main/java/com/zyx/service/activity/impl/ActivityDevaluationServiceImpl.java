@@ -36,7 +36,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     @Override
     public List<Activity> queryActivityDeva() {
         @SuppressWarnings("unchecked")
-        List<Activity> devaluations1 = (List<Activity>) redisTemplate.opsForHash().get("devaluation", "activityDeva");
+        List<Activity> devaluations1 = redisTemplate.opsForList().leftPop(ActivityConstants.ACTIVITY_DEVA);
         if (devaluations1 != null && devaluations1.size() > 0) {
             return devaluations1;
         } else {
@@ -45,6 +45,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
                 List<Integer> longs = new ArrayList<>();
                 devaluations.forEach(e -> longs.add(e.getDevaluationId()));
                 List<Activity> activities = activityMapper.queryActivityDevaluation(longs);
+                redisTemplate.opsForList().leftPush(ActivityConstants.ACTIVITY_DEVA, activities);
                 return activities;
             } else {
                 return null;
@@ -61,10 +62,10 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
                 deleteDeavRedis(devaluation);
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "首推成功", null);
             } else {
-                return MapUtils.buildErrorMap(Constants.ERROR,"首推失败");
+                return MapUtils.buildErrorMap(Constants.ERROR, "首推失败");
             }
         } else {
-            return MapUtils.buildErrorMap(Constants.PARAM_MISS,"参数缺失");
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
         }
     }
 
@@ -76,10 +77,10 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
                 deleteDeavRedis(devaluation);
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "取消首推成功", null);
             } else {
-                return MapUtils.buildErrorMap(Constants.ERROR,"取消首推失败");
+                return MapUtils.buildErrorMap(Constants.ERROR, "取消首推失败");
             }
         } else {
-            return  MapUtils.buildErrorMap(Constants.PARAM_MISS,"参数缺失");
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
         }
     }
 

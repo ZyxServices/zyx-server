@@ -23,6 +23,8 @@ public interface ActivityConstants {
 
     String AUTH_SUCCESS = "result";
 
+    String ACTIVITY_DEVA = "activityDeva";
+
     /*************************
      * 活动返回码
      ****************************************/
