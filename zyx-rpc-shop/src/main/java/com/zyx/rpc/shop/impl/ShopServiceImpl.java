@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public Goods getGoodsbyKey(Long id) {
+	public Goods getGoodsbyKey(Integer id) {
 		return goodsService.selectByKey(id);
 	}
 

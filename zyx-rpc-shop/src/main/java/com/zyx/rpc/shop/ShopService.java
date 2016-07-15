@@ -6,6 +6,6 @@ public interface ShopService {
 	
 	public void addGoods(Goods goods);
 	
-	public Goods getGoodsbyKey(Long id);
+	public Goods getGoodsbyKey(Integer id);
 
 }

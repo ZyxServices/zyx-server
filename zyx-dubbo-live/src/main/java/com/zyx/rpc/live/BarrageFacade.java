@@ -24,7 +24,7 @@ public interface BarrageFacade {
 //	 * @author MrDeng
 //	 * @update 2016年6月22日 上午10:30:44
 //	 */
-//	public Barrage getById(Long id);
+//	public Barrage getById(Integer id);
 	/**
 	 * 
 	 * @param barrage
@@ -44,5 +44,5 @@ public interface BarrageFacade {
 //	 * @author MrDeng
 //	 * @update 2016年6月22日 上午10:30:06
 //	 */
-//	public void delete(String token,Long id);
+//	public void delete(String token,Integer id);
 }

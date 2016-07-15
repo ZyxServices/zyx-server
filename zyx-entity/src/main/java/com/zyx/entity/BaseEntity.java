@@ -29,7 +29,7 @@ public class BaseEntity implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Long id;
+	private Integer id;
 
 	/** 创建时间 **/
 	@Column
@@ -37,12 +37,12 @@ public class BaseEntity implements Serializable {
 	private Long createTime;
 
 	/** 主键ID **/
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/** 主键ID **/
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -28,7 +28,7 @@ public interface TextLiveItemFacade {
 	 * @param id
 	 * @return
 	 */
-	public TextLiveItem getById(Long id);
+	public TextLiveItem getById(Integer id);
 	/**
 	 * 获取直播内容列表
 	 * @param liveInfoVo
@@ -43,5 +43,5 @@ public interface TextLiveItemFacade {
 	 * @author MrDeng
 	 * @update 2016年6月15日 下午2:07:23
 	 */
-	public void deleteById(Long id);
+	public void deleteById(Integer id);
 }

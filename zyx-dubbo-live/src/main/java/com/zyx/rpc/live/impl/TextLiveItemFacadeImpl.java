@@ -33,7 +33,7 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 	}
 
 	@Override
-	public TextLiveItem getById(Long id) {
+	public TextLiveItem getById(Integer id) {
 		return textLiveItemService.selectByKey(id);
 	}
 
@@ -55,7 +55,7 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Integer id) {
 		textLiveItemService.delete(id);
 		
 	}

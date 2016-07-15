@@ -43,7 +43,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	}
 
 	@Override
-	public LiveInfo getById(Long id) {
+	public LiveInfo getById(Integer id) {
 		return liveInfoService.selectByKey(id);
 	}
 
@@ -62,7 +62,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		liveInfoService.delete(id);
 	}
 
@@ -72,7 +72,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 	}
 
 	@Override
-	public String getLiveUrl(Long liveId) {
+	public String getLiveUrl(Integer liveId) {
 		LiveInfo liveInfo = liveInfoService.selectByKey(liveId);
 		return liveInfo == null ? null : liveInfo.getVedioUrl();
 	}
