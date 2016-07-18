@@ -44,6 +44,10 @@ public interface LiveConstants extends Constants{
 	
 	int MARK_LIVE_DEVA_MODEL= 2;
 	int MARK_LIVE_DEVA_COUNT= 4;
+
+	///////////////////////REDIS KEYS////////////////////////////
 	String MARK_LIVE_DEVA = "liveDeva";
 	String MARK_HASH_LIVE_DEVA = "hash_liveDeva";
+	String MARK_REDIS_LIVE_TYPE_LIST = "lt_list";
+	String MARK_HASH_REDIS_LIVE_TYPE_LIST = "hash_lt_list";
 }

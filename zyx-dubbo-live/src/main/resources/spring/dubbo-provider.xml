@@ -19,5 +19,5 @@
 	<dubbo:service interface="com.zyx.rpc.live.LiveInfoFacade" ref="liveInfoFacade" />
 	<dubbo:service interface="com.zyx.rpc.live.TextLiveItemFacade" ref="textLiveItemFacade" />
 	<dubbo:service interface="com.zyx.rpc.live.BarrageFacade" ref="barrageFacade" />
-	
+	<dubbo:service interface="com.zyx.rpc.live.LiveLabFacade" ref="liveLabFacade" />
 </beans>  
