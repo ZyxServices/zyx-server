@@ -18,15 +18,13 @@ public class LiveLabFacadeImpl implements LiveLabFacade {
     LiveLabService liveTypeService;
     @Autowired
     private RedisTemplate<String, ArrayList<LiveLab>> redisTemplate;
-
-
     @Override
     public List<String> getAllLabs() {
-        List<String> list = (List<String>) redisTemplate.opsForHash().get(LiveConstants.MARK_REDIS_LIVE_TYPE_LIST, LiveConstants.MARK_HASH_REDIS_LIVE_TYPE_LIST);
+        List<String> list = (List<String>) redisTemplate.opsForHash().get(LiveConstants.MARK_REDIS_LIVE_LAB_LIST, LiveConstants.MARK_REDIS_LIVE_LAB_LIST);
         if (null==list||list.isEmpty()){
             list = liveTypeService.getAllTypes();
             if(null!=list&&!list.isEmpty())
-                redisTemplate.opsForHash().put(LiveConstants.MARK_REDIS_LIVE_TYPE_LIST, LiveConstants.MARK_HASH_REDIS_LIVE_TYPE_LIST,list);
+                redisTemplate.opsForHash().put(LiveConstants.MARK_REDIS_LIVE_LAB_LIST, LiveConstants.MARK_HASH_REDIS_LAB_TYPE_LIST,list);
         }
         return list;
     }
