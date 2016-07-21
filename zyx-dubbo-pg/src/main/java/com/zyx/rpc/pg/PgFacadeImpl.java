@@ -3,6 +3,7 @@ package com.zyx.rpc.pg;
 import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.Concern;
 import com.zyx.entity.pg.Zan;
+import com.zyx.entity.pg.dto.ZanCountDto;
 import com.zyx.service.pg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,8 +108,6 @@ public class PgFacadeImpl implements PgFacade {
     public List<Circle> queryCircleDeva() {
 
 
-
-
         return circleService.queryCircleDeva();
     }
 
@@ -118,19 +117,13 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public List<Integer> countZanByBodyId(Integer type, List<Integer> bodyIds) {
-        return zanService.countZanByBodyId(type,bodyIds);
+    public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
+        return zanService.countZanByBodyId(type, bodyIds);
     }
 
     @Override
-    public Integer countZanByBodyId(Integer type, Integer bodyId) {
-        if(type!=null&&bodyId!=null){
-            Zan record = new Zan();
-            record.setBodyId(bodyId);
-            record.setBodyType(type);
-            return zanService.selectCount(record);
-        }
-       return 0;
+    public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
+        return zanService.countZanByBodyId(type, bodyId);
     }
 
 }

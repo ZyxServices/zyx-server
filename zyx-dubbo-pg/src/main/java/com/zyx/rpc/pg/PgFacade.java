@@ -3,6 +3,7 @@ package com.zyx.rpc.pg;
 import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.Concern;
 import com.zyx.entity.pg.Zan;
+import com.zyx.entity.pg.dto.ZanCountDto;
 
 import java.util.List;
 import java.util.Map;
@@ -169,7 +170,7 @@ public interface PgFacade {
      * @param bodyIds
      * @return
      */
-    List<Integer> countZanByBodyId(Integer type,List<Integer> bodyIds);
+    List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds);
 
     /**
      * 重载
@@ -177,5 +178,5 @@ public interface PgFacade {
      * @param bodyId
      * @return
      */
-    Integer countZanByBodyId(Integer type,Integer bodyId);
+    ZanCountDto countZanByBodyId(Integer type,Integer bodyId);
 }

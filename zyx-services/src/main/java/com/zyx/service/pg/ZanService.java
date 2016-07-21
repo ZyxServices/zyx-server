@@ -1,6 +1,7 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Zan;
+import com.zyx.entity.pg.dto.ZanCountDto;
 import com.zyx.service.BaseService;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface ZanService extends BaseService<Zan> {
      * @param bodyIds
      * @return
      */
-    List<Integer> countZanByBodyId(Integer type, List<Integer> bodyIds);
+    List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds);
 
     /**
      * 重载
@@ -30,5 +31,5 @@ public interface ZanService extends BaseService<Zan> {
      * @param bodyId
      * @return
      */
-    Integer countZanByBodyId(Integer type,Integer bodyId);
+    ZanCountDto countZanByBodyId(Integer type,Integer bodyId);
 }

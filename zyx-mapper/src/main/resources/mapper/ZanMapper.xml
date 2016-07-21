@@ -32,8 +32,8 @@
     <result column="account_id" property="accountId" jdbcType="INTEGER" />
   </resultMap>
 
-  <select id="countZanByBodyId" parameterType="com.zyx.vo.pg.ZanVo" resultType="java.lang.Integer">
-    SELECT COUNT(body_id)
+  <select id="countZanByBodyId" parameterType="com.zyx.vo.pg.ZanVo" resultType="com.zyx.entity.pg.dto.ZanCountDto">
+    SELECT body_type as bodyType,body_id AS bodyId,COUNT(body_id) AS zanCount
     FROM zan
     WHERE
     1=1
