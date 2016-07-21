@@ -2,6 +2,7 @@ package com.zyx.rpc.pg;
 
 import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.Concern;
+import com.zyx.entity.pg.Zan;
 
 import java.util.List;
 import java.util.Map;
@@ -160,4 +161,21 @@ public interface PgFacade {
      */
     List<Concern> queryConcernDeva();
 
+
+    /**
+     * 通过BodyId 查询多个点赞数量
+     * MrDeng
+     * @param type
+     * @param bodyIds
+     * @return
+     */
+    List<Integer> countZanByBodyId(Integer type,List<Integer> bodyIds);
+
+    /**
+     * 重载
+     * @param type
+     * @param bodyId
+     * @return
+     */
+    Integer countZanByBodyId(Integer type,Integer bodyId);
 }

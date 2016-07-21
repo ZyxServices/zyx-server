@@ -297,7 +297,11 @@
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
-		<!-- dubbo 需要的jar end -->
+	   <dependency>
+		   <groupId>com.alibaba</groupId>
+		   <artifactId>fastjson</artifactId>
+	   </dependency>
+	   <!-- dubbo 需要的jar end -->
 
 	</dependencies>
     <build>

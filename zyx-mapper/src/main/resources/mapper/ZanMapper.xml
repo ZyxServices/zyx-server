@@ -32,4 +32,23 @@
     <result column="account_id" property="accountId" jdbcType="INTEGER" />
   </resultMap>
 
+  <select id="countZanByBodyId" parameterType="com.zyx.vo.pg.ZanVo" resultType="java.lang.Integer">
+    SELECT COUNT(body_id)
+    FROM zan
+    WHERE
+    1=1
+    <if test="type!=null ">
+      AND
+      body_type=#{type}
+    </if>
+    <if test="bodyIds!=null">
+      AND
+      body_id in
+      <foreach collection="bodyIds" index="index" item="tag" open="("
+               separator="," close=")">
+        #{tag}
+      </foreach>
+    </if>
+    GROUP BY body_id
+  </select>
 </mapper>
