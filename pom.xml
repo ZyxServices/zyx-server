@@ -23,6 +23,7 @@
         <module>zyx-dubbo-live</module>
         <module>zyx-constants</module>
         <module>zyx-vo</module>
+        <module>zyx-dubbo-system</module>
     </modules>
 
     <properties>

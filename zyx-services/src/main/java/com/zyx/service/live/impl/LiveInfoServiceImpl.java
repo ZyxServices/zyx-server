@@ -38,4 +38,12 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 			return liveInfoMapper.selectByExample(example);
 		}
 	}
+
+	@Override
+	public void logicDelete(Integer id) {
+		LiveInfo liveInfo = new LiveInfo();
+		liveInfo.setId(id);
+		liveInfo.setDel(-1);
+		updateNotNull(liveInfo);
+	}
 }

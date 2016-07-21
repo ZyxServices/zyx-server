@@ -38,6 +38,10 @@
 				#{tag}
 			</foreach>
 		</if>
+		<if test="del != null">
+			and
+			del = #{del}
+		</if>
 		order by
 		create_time
 		DESC
@@ -60,6 +64,10 @@
 				separator="," close=")">
 				#{tag}
 			</foreach>
+		</if>
+		<if test="del != null">
+			and
+			del = #{del}
 		</if>
 		order by
 		create_time

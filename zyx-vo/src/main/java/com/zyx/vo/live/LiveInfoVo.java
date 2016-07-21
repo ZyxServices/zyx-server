@@ -18,6 +18,8 @@ public class LiveInfoVo extends BaseVo {
 	public List<Integer> getUserIds() {
 		return userIds;
 	}
+
+	public Integer del = 0;
 	public void setUserIds(List<Integer> userIds) {
 		this.userIds = userIds;
 	}
@@ -44,5 +46,13 @@ public class LiveInfoVo extends BaseVo {
 	}
 	public void setIds(List<Integer> ids) {
 		this.ids = ids;
+	}
+
+	public Integer getDel() {
+		return del;
+	}
+
+	public void setDel(Integer del) {
+		this.del = del;
 	}
 }
