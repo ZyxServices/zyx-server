@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.zyx.entity.live.LiveInfo;
+import com.zyx.entity.live.dto.LiveInfoDto;
 import com.zyx.vo.live.LiveInfoVo;
 import com.zyx.vo.live.LiveSearchVo;
 
@@ -45,7 +46,7 @@ public interface LiveInfoFacade {
 	 * @author MrDeng
 	 * @update 2016年6月22日 上午10:30:21
 	 */
-	public List<LiveInfo> getList( LiveInfoVo liveInfoVo);
+	public List<LiveInfoDto> getList(LiveInfoVo liveInfoVo);
 	
 	/**
 	 * 
@@ -59,7 +60,6 @@ public interface LiveInfoFacade {
 	public List<LiveInfo> searchList( LiveSearchVo liveSearchVo);
 	/**
 	 * 
-	 * @param token
 	 * @param id
 	 * @description 删除直播 需要Token验证
 	 * @version 1.0
@@ -81,7 +81,6 @@ public interface LiveInfoFacade {
 	
 	/**
 	 * 获取首推
-	 * @param vo
 	 * @return
 	 * @description TODO
 	 * @version 1.0

@@ -1,57 +1,34 @@
-package com.zyx.entity.live;
-
-import javax.persistence.Column;
-import javax.persistence.Table;
+package com.zyx.entity.live.dto;
 
 import org.apache.ibatis.type.JdbcType;
-
-import com.zyx.entity.BaseEntity;
-
 import tk.mybatis.mapper.annotation.ColumnType;
 
-@Table(name = "t_live")
-public class LiveInfo extends BaseEntity {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    /**
-     *
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
+import javax.persistence.Column;
+import java.io.Serializable;
+
+/**
+ * Created by MrDeng on 2016/7/21.
+ */
+public class LiveInfoDto implements Serializable{
+    private Integer id;
     private Integer auth;
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long start;
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long end;
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer userId;
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String title;
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer lab;
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String bgmUrl;
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String vedioUrl;
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer state;
 
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer del;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public Integer getAuth() {
         return auth;
@@ -129,15 +106,7 @@ public class LiveInfo extends BaseEntity {
         return state;
     }
 
-    public void setState(Integer status) {
-        this.state= state;
-    }
-
-    public Integer getDel() {
-        return del;
-    }
-
-    public void setDel(Integer del) {
-        this.del = del;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }
