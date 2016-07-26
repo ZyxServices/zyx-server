@@ -2,6 +2,7 @@ package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
+import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
@@ -40,7 +41,9 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public int updateAccountInfo(UserLoginParam userLoginParam) {
-        return 0;
+    public int updateAccountByParam(AccountInfoParam param) {
+        AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
+        return accountInfoMapper.updateAccountByParam(param);
     }
+
 }

@@ -60,4 +60,27 @@
         update user set password = #{password2} where phone = #{phone}
     </update>
 
+    <update id="updateAccountByParam" parameterType="com.zyx.entity.account.param.AccountInfoParam">
+        update user set id = #{id}
+        <if test="avatar != null and avatar != ''">
+            , avatar = #{avatar}
+        </if>
+        <if test="nickname != null and nickname != ''">
+            , nickname = #{nickname}
+        </if>
+        <if test="sex != null and sex != ''">
+            , sex = #{sex}
+        </if>
+        <if test="birthday != null and birthday != ''">
+            , birthday = #{birthday}
+        </if>
+        <if test="address != null and address != ''">
+            , address = #{address}
+        </if>
+        <if test="signature != null and signature != ''">
+            , signature = #{signature}
+        </if>
+        where id = #{id}
+    </update>
+
 </mapper>

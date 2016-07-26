@@ -2,6 +2,7 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserLoginParam;
+import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.rpc.account.AccountInfoFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
@@ -52,6 +53,26 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
                     return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", accountInfo);
                 }
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50301, AccountConstants.ACCOUNT_ERROR_CODE_50301_MSG);
+            }
+        } catch (Exception e) {
+            return AccountConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> editAccountInfo(String token, int userId, AccountInfoParam param) {
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
+        }
+        param.setId(userId);
+        param.setToken(token);
+        try {
+            int result = accountInfoService.updateAccountByParam(param);
+            if (result >= 1) {
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息修改成功", null);
+            } else {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50002, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
             }
         } catch (Exception e) {
             return AccountConstants.MAP_500;
