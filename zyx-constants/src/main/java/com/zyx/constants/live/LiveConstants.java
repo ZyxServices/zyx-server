@@ -51,4 +51,13 @@ public interface LiveConstants extends Constants{
 
 	String MARK_REDIS_LIVE_LAB_LIST = "lab_list";
 	String MARK_HASH_REDIS_LAB_TYPE_LIST = "hash_lab_list";
+
+	String MARK_REDIS_BARRAGE_QUEUE = "barrage";
+	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage";
+	/**
+	 * 弹幕默认缓存数量
+	 */
+	long DEFAULT_BARRAGE_QUEUE_SIZE = 20;
+
+	String MARK_REDIS_BARRAGE_SIZE = "b_size";
 }

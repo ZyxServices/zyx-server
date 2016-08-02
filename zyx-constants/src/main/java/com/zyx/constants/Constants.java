@@ -212,4 +212,13 @@ public interface Constants {
         put(Constants.STATE, Constants.PARAM_MISS);
         put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
     }};
+
+
+
+    /////////////////静态标识符///////////////////
+
+    /**
+     * 线程队列标识符
+     */
+    String REDIS_THREADH_QUEUE = "tq";
 }

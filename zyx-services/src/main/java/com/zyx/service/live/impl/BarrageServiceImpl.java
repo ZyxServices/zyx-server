@@ -17,6 +17,9 @@ public class BarrageServiceImpl extends BaseServiceImpl<Barrage> implements Barr
 	BarrageMapper barrageMapper;
 
 	@Override
+	public void addBarrage(Barrage barrage) {
+	}
+	@Override
 	public List<Barrage> getTop(BarrageVo vo) {
 		return barrageMapper.selectTop(vo);
 	}

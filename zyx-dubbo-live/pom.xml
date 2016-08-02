@@ -21,8 +21,6 @@
 			<artifactId>zyx-config</artifactId>
 			<version>${zyx.config.version}</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>tiyujia-parent</groupId>
 			<artifactId>zyx-core</artifactId>
@@ -292,6 +290,11 @@
 		<dependency>
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- dubbo 需要的jar end -->
