@@ -1,6 +1,6 @@
-package com.zyx.core.thread;
+package com.zyx.task.thread;
 
-import com.zyx.core.thread.Workor;
+import com.zyx.core.workors.Workor;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

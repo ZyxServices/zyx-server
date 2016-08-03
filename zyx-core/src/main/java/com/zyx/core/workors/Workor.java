@@ -1,7 +1,6 @@
-package com.zyx.core.thread;
+package com.zyx.core.workors;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Created by MrDeng on 2016/7/26.

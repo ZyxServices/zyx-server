@@ -59,11 +59,6 @@ public class AppTest extends TestCase {
 			vo.setPageSize(3);
 			System.out.println(JSON.toJSONString(vo));
 			System.out.println("获取记录范围"+vo.getStart()+"   "+vo.getEnd());
-			List<LiveInfo> list = liveInfoService.selectLives(vo);
-			System.out.println("记录条数："+(list==null?0:list.size()));
-			for(LiveInfo info:list){
-				System.out.println(JSON.toJSONString(info));
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

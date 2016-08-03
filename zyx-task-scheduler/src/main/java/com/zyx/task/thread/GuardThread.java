@@ -1,7 +1,8 @@
-package com.zyx.core.thread;
+package com.zyx.task.thread;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.zyx.core.workors.Workor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -17,35 +18,22 @@ public class GuardThread {
     RedisTemplate<String, Workor> redisTemplate;
     @Autowired
     GlobalTreadPool globalThreadPool;
-    public GuardThread() {
-    }
-
     @PostConstruct
     public void start() {
-//        System.out.println("****************启动守护进程***************");
+        logger.info("****************启动守护进程***************");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 int sleepTime = 500;
-//                System.out.println("****************运行守护进程***************");
+                logger.info("****************运行守护进程***************");
                 while (true) {
                     try {
                         Workor workor = redisTemplate.opsForList().rightPop("tq");
-//                        System.out.println("***************守护进程 扫描中 任务：***************" + workor);
-                        if (workor != null) {
-//                            System.out.println("***************Do workor 立即再次扫描**************" + workor.getThreadName());
+                        logger.info("***************守护进程 扫描中 任务：***************" + workor);
+                        if (workor != null && globalThreadPool != null) {
                             globalThreadPool.submitWorkor(workor);
                             sleepTime = 0;
                         } else {
-//                            System.out.println("***************No workor 修改守护扫描时间间隔为1s**************");
-                            //测试
-//                            Random r = new Random(System.currentTimeMillis());
-//                            int n = r.nextInt() % 5 + 1;
-//                            for (int i = 0; i < n; i++) {
-//                                BatchSaveBarrageWorkor tw = new BatchSaveBarrageWorkor();
-//                                tw.setThreadName("test:" + r.nextInt());
-//                                redisTemplate.opsForList().leftPush(Constants.REDIS_THREADH_QUEUE, tw);
-//                            }
                             sleepTime = 500;
                         }
                         if (sleepTime > 0)

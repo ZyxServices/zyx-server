@@ -1,10 +1,4 @@
-package com.zyx.core;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+package com.zyx.task;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
@@ -12,18 +6,22 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ConfigUtils;
 import com.alibaba.dubbo.container.Container;
-import com.zyx.core.thread.GuardThread;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Hello world!
  */
-public class CoreMain {
+public class TaskMain {
     public static final String CONTAINER_KEY = "dubbo.container";
 
     public static final String SHUTDOWN_HOOK_KEY = "dubbo.shutdown.hook";
 
-    private static final Logger logger = LoggerFactory.getLogger(CoreMain.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaskMain.class);
 
     private static final ExtensionLoader<Container> loader = ExtensionLoader.getExtensionLoader(Container.class);
 
@@ -52,9 +50,9 @@ public class CoreMain {
                             } catch (Throwable t) {
                                 logger.error(t.getMessage(), t);
                             }
-                            synchronized (CoreMain.class) {
+                            synchronized (TaskMain.class) {
                                 running = false;
-                                CoreMain.class.notify();
+                                TaskMain.class.notify();
                             }
                         }
                     }
@@ -72,10 +70,10 @@ public class CoreMain {
             logger.error(e.getMessage(), e);
             System.exit(1);
         }
-        synchronized (CoreMain.class) {
+        synchronized (TaskMain.class) {
             while (running) {
                 try {
-                    CoreMain.class.wait();
+                    TaskMain.class.wait();
                 } catch (Throwable e) {
                 }
             }

@@ -1,11 +1,8 @@
-package com.zyx.core.thread;
+package com.zyx.core.workors;
 
-import com.alibaba.fastjson.JSON;
-import com.zyx.constants.Constants;
 import com.zyx.core.exception.RedisNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 
 /**
  * Created by MrDeng on 2016/8/2.
