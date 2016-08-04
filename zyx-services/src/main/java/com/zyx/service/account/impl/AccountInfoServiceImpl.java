@@ -50,4 +50,9 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
         return accountInfoMapper.updateAccountByParam(param);
     }
 
+    @Override
+    public List<AccountInfo> selectBaseInfo(List<Integer> ids) {
+        return selectByIds(ids,"id","createTime","phone","nickname","sex","avatar");
+    }
+
 }

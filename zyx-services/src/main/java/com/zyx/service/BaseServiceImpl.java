@@ -27,7 +27,6 @@ package com.zyx.service;
 import java.util.List;
 
 import com.zyx.entity.BaseEntity;
-import com.zyx.entity.deva.dto.DevaDto;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -67,9 +66,26 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public List<T> selectByIds(Object key, String... properties) {
+        Example example = new Example(propertyClazz);
+        Example.Criteria criteria = example.createCriteria();
+        example.selectProperties(properties);
+        criteria.equals(key);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
     public List<T> selectByIds(List<Integer> keys) {
-        Example example = null;
-        example = new Example(propertyClazz);
+        Example example = new Example(propertyClazz);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", keys);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectByIds(List<Integer> keys, String... properties) {
+        Example example = new Example(propertyClazz);
+        example.selectProperties(properties);
         Example.Criteria criteria = example.createCriteria();
         criteria.andIn("id", keys);
         return mapper.selectByExample(example);

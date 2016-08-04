@@ -1,6 +1,5 @@
 package com.zyx.rpc.system;
 
-import com.zyx.entity.deva.dto.DevaDto;
 
 import java.util.List;
 
@@ -15,6 +14,4 @@ public interface DevaFacade {
      */
     public List getDevaByModel(Integer model);
     public List getAllDeva();
-//    public void refreshDevaByModel(Integer model);
-//    public void refreshAllDeva();
 }

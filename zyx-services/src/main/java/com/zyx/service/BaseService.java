@@ -41,7 +41,27 @@ public interface BaseService<T> {
      */
     T selectByKey(Object key);
 
+    /**
+     *  id查询 可设置查询字段
+     * @param keys
+     * @param properties
+     * @return
+     */
+    List<T> selectByIds(Object keys,String... properties);
+    /**
+     *  id查询
+     * @param keys
+     * @return
+     */
     List<T> selectByIds(List<Integer> keys);
+
+    /**
+     * ids查询 可设置查询字段
+     * @param keys
+     * @param properties
+     * @return
+     */
+    List<T> selectByIds(List<Integer> keys,String... properties);
 
     /**
      * 插入单个实体

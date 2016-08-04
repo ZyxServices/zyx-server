@@ -84,27 +84,27 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         return liveInfo == null ? null : liveInfo.getVedioUrl();
     }
 
-    @Override
-    public List<LiveInfo> getDevaLives() {
-        @SuppressWarnings("unchecked")
-        List<LiveInfo> list = (List<LiveInfo>) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_DEVA,
-                LiveConstants.MARK_HASH_LIVE_DEVA);
-        if (list != null && !list.isEmpty()) {
-            return list;
-        }
-        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
-        list = liveInfoService.selectLiveDevas(devaIds);
-        redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
-        return list;
-    }
+//    @Override
+//    public List<LiveInfo> getDevaLives() {
+//        @SuppressWarnings("unchecked")
+//        List<LiveInfo> list = (List<LiveInfo>) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_DEVA,
+//                LiveConstants.MARK_HASH_LIVE_DEVA);
+//        if (list != null && !list.isEmpty()) {
+//            return list;
+//        }
+//        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
+//        list = liveInfoService.selectLiveDevas(devaIds);
+//        redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
+//        return list;
+//    }
 
-    @Override
-    public void refreshDevaLives() {
-        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
-        List<LiveInfo> list = liveInfoService.selectLiveDevas(devaIds);
-        if (list != null && !list.isEmpty())
-            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
-    }
+//    @Override
+////    public void refreshDevaLives() {
+////        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
+////        List<LiveInfo> list = liveInfoService.selectLiveDevas(devaIds);
+////        if (list != null && !list.isEmpty())
+////            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
+////    }
 
     @Override
     public void addDevaLive(Integer lvieId) {

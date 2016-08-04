@@ -87,7 +87,7 @@ public interface LiveInfoFacade {
 	 * @author MrDeng
 	 * @update 2016年6月29日 上午10:35:22
 	 */
-	public List<LiveInfo> getDevaLives();
+//	public List<LiveInfo> getDevaLives();
 	
 	/**
 	 * 刷新首推
@@ -97,7 +97,7 @@ public interface LiveInfoFacade {
 	 * @author MrDeng
 	 * @update 2016年6月29日 下午2:52:40
 	 */
-	public void refreshDevaLives();
+//	public void refreshDevaLives();
 	
 	/**
 	 * 添加首推

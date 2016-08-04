@@ -49,4 +49,11 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      * @return
      */
     int updateAccountByParam(AccountInfoParam param);
+
+    /**
+     * 查询多个用户信息的基础信息
+     * @param ids
+     * @return
+     */
+    List<AccountInfo> selectBaseInfo(List<Integer> ids);
 }

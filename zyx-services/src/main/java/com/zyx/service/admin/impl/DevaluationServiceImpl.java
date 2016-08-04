@@ -2,7 +2,6 @@ package com.zyx.service.admin.impl;
 
 import java.util.List;
 
-import com.zyx.entity.deva.dto.DevaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class DevaluationServiceImpl extends BaseServiceImpl<Devaluation> impleme
     }
 
     @Override
-    public List<DevaDto> queryDevaByModel(Integer model) {
+    public List queryDevaByModel(Integer model) {
         if (model == null || model < 1 || model > 5)
             return null;
         else {
