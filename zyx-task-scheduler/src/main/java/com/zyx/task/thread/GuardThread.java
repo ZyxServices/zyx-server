@@ -20,16 +20,16 @@ public class GuardThread {
     GlobalTreadPool globalThreadPool;
     @PostConstruct
     public void start() {
-        logger.info("****************启动守护进程***************");
+//        logger.info("****************启动守护进程***************");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 int sleepTime = 500;
-                logger.info("****************运行守护进程***************");
+//                logger.info("****************运行守护进程***************");
                 while (true) {
                     try {
                         Workor workor = redisTemplate.opsForList().rightPop("tq");
-                        logger.info("***************守护进程 扫描中 任务：***************" + workor);
+//                        logger.info("***************守护进程 扫描中 任务：***************" + workor);
                         if (workor != null && globalThreadPool != null) {
                             globalThreadPool.submitWorkor(workor);
                             sleepTime = 0;
