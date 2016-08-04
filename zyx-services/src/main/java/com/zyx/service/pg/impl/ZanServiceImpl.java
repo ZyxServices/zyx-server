@@ -27,6 +27,11 @@ import com.zyx.service.pg.ZanService;
 public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
     @Autowired
     ZanMapper zanMapper;
+
+    public ZanServiceImpl() {
+        super(Zan.class);
+    }
+
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         Map<String, Object> map = new HashMap<>();

@@ -9,4 +9,7 @@ import com.zyx.service.shop.GoodsService;
 @Service("goodsService")
 public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsService {
 
+    public GoodsServiceImpl() {
+        super(Goods.class);
+    }
 }

@@ -1,6 +1,7 @@
 package com.zyx.rpc.live.impl;
 
 import com.zyx.constants.live.LiveConstants;
+import com.zyx.core.exception.RedisNullException;
 import com.zyx.core.workors.BatchSaveBarrageWorkor;
 import com.zyx.core.workors.Workor;
 import com.zyx.core.workors.WorkorHelper;
@@ -36,20 +37,24 @@ public class BarrageFacadeImpl implements BarrageFacade {
     @Override
     public synchronized void add(Barrage barrage) {
         Long size = barrageRedis.opsForList().size(LiveConstants.MARK_REDIS_BARRAGE_QUEUE);
-        if (size >= LiveConstants.DEFAULT_BARRAGE_QUEUE_SIZE) {
+        if (size >= LiveConstants.REDIS_MAX_BARRAGE_QUEUE_SIZE) {
             barrageRedis.opsForList().rightPop(LiveConstants.MARK_REDIS_BARRAGE_QUEUE);
         }
+        barrageRedis.opsForList().leftPush(LiveConstants.MARK_REDIS_BARRAGE_QUEUE,barrage);
         /**
          * 缓存+线程池处理
          */
         cacheBarrage.add(barrage);
-        if (cacheBarrage.size() > 5) {
+        if (cacheBarrage.size() > LiveConstants.CACHE_BATACH_SAVE_PROFIXE) {
             BatchSaveBarrageWorkor workor = new BatchSaveBarrageWorkor();
             workor.setCacheBarrage(cacheBarrage);
-            redisTemplate.opsForList().leftPush("tq", workor);
-            cacheBarrage.clear();
+            try {
+                workorHelper.submitWorkor( workor);
+                cacheBarrage.clear();
+            } catch (RedisNullException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     @Override

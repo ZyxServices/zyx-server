@@ -23,6 +23,10 @@ import com.zyx.service.pg.MyConcernService;
 @Service
 public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements MyConcernService {
 
+    public MyConcernServiceImpl() {
+        super(MyConcern.class);
+    }
+
     @Override
     public Map<String, Object> addMyConcern(Integer concernId, Integer concern_type, Integer accountId) {
         Map<String, Object> map = new HashMap<>();

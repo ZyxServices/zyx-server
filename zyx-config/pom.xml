@@ -8,15 +8,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>zyx-config</artifactId>
-
     <dependencies>
-        <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-mapper</artifactId>
-            <version>${zyx.mapper.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -30,23 +23,19 @@
             <artifactId>mybatis-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${pagehelper.version}</version>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>${mapper.version}</version>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
             <version>1.9.2</version>
@@ -55,7 +44,7 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.2</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

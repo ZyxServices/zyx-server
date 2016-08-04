@@ -55,9 +55,14 @@ public interface LiveConstants extends Constants{
 	String MARK_REDIS_BARRAGE_QUEUE = "barrage";
 	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage";
 	/**
-	 * 弹幕默认缓存数量
+	 * 弹幕默认最大缓存数量
 	 */
-	long DEFAULT_BARRAGE_QUEUE_SIZE = 20;
+	long REDIS_MAX_BARRAGE_QUEUE_SIZE = 10000;
 
+	/**
+	 * 批量存储弹幕 条数阈值  测试实则为5
+	 */
+	// TODO: 2016/8/3 正式时修改该数值
+	long CACHE_BATACH_SAVE_PROFIXE = 5;
 	String MARK_REDIS_BARRAGE_SIZE = "b_size";
 }

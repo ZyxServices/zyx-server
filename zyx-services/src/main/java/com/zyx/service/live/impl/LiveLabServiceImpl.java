@@ -15,6 +15,10 @@ public class LiveLabServiceImpl extends BaseServiceImpl<LiveLab> implements Live
 	@Autowired
 	LiveLabMapper liveLabMapper ;
 
+	public LiveLabServiceImpl() {
+		super(LiveLab.class);
+	}
+
 	@Override
 	public List<String> getAllTypes() {
 		return liveLabMapper.getAllLabs();

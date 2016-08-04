@@ -17,19 +17,8 @@ public class WorkorHelper {
         if(redisTemplate==null||redisTemplate.opsForList()==null){
             throw  new RedisNullException("redis cache queue connect failure");
         }else{
-//            redisTemplate.setValueSerializer(new JacksonJsonRedisSerializer<Workor>(Workor.class));
-//            redisTemplate.afterPropertiesSet();
             redisTemplate.opsForList().leftPush("tq", workor);
         }
     }
 
-//    public Workor cosumerWorkor( ) throws RedisNullException {
-//        if(redisTemplate==null||redisTemplate.opsForList()==null){
-//            throw  new RedisNullException("redis cache queue connect failure");
-//        }else{
-////            redisTemplate.setValueSerializer(new JacksonJsonRedisSerializer<Workor>(Workor.class));
-////            redisTemplate.afterPropertiesSet();
-//            return  redisTemplate.opsForList().rightPop("tq");
-//        }
-//    }
 }

@@ -27,6 +27,11 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
     @Resource
     DevaluationMapper devaluationMapper;
 
+    public ConcrenServicImpl() {
+        super(Concern.class);
+    }
+
+
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
         Map<String, Object> map = new HashMap<>();

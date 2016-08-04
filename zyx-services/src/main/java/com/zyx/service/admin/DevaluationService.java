@@ -3,6 +3,7 @@ package com.zyx.service.admin;
 import java.util.List;
 
 import com.zyx.entity.Devaluation;
+import com.zyx.entity.deva.dto.DevaDto;
 import com.zyx.service.BaseService;
 
 public interface DevaluationService extends BaseService<Devaluation>{
@@ -20,4 +21,6 @@ public interface DevaluationService extends BaseService<Devaluation>{
     List<Devaluation> queryDevaluation(Integer types);
     
     List<Integer> queryDevaIds(Integer types);
+
+    List<DevaDto> queryDevaByModel(Integer model);
 }

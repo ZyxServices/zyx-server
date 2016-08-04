@@ -2,8 +2,8 @@ package com.zyx.core.workors;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.fastjson.JSON;
 import com.zyx.entity.live.Barrage;
+import com.zyx.service.live.BarrageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -18,10 +18,12 @@ public class BatchSaveBarrageWorkor extends Workor{
     @Autowired
     private RedisTemplate<String, Barrage> redisTemplate;
     ArrayList<Barrage> cacheBarrage;
+
+    @Autowired
+    BarrageService barrageService;
     @Override
     public void work() {
         logger.info("批处理弹幕存储…………START");
-        System.out.println(JSON.toJSONString(cacheBarrage));
         logger.info("批处理弹幕存储…………END");
     }
 

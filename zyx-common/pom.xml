@@ -9,34 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>zyx-common</artifactId>
-
-
     <dependencies>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>${mapper.version}</version>
-        </dependency>
-        <!--Mybatis-->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${mybatis.spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

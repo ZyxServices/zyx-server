@@ -1,11 +1,14 @@
 package com.zyx.core.workors;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by MrDeng on 2016/7/26.
  */
 public abstract  class Workor implements Runnable,Serializable {
+    private static final long serialVersionUID = -5832717692258803068L;
     /**
      * 线程ID
      */
@@ -18,6 +21,8 @@ public abstract  class Workor implements Runnable,Serializable {
      * 线程组名称
      */
     private String groupName;
+
+    private Map<String,Object> params;
     @Override
     public void run() {
         work();
@@ -46,5 +51,15 @@ public abstract  class Workor implements Runnable,Serializable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        if(params==null)
+            params=new HashMap<>();
+        this.params = params;
     }
 }

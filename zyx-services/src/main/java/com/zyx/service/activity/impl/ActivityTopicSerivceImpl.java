@@ -32,6 +32,11 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
     @Resource
     private ActivityTopicMapper activityTopicMapper;
 
+    public ActivityTopicSerivceImpl() {
+        super(ActivityTopic.class);
+    }
+
+
     @Override
     public Map<String, Object> addActivityTopic(AddTopicParm parm) {
         Map<String, Object> map = new HashMap<>();

@@ -20,6 +20,10 @@ import org.springframework.stereotype.Service;
 @Service("userLoginService")
 public class UserLoginServiceImpl extends BaseServiceImpl<UserLoginInfo> implements UserLoginService {
 
+    public UserLoginServiceImpl() {
+        super(UserLoginInfo.class);
+    }
+
     @Override
     public AccountInfoVo loginByPhoneAndPassword(String phone, String password) {
         UserLoginParam userLoginParam = new UserLoginParam();

@@ -31,6 +31,10 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     @Resource
     DevaluationService devaluationService;
 
+    public CircleServiceImpl() {
+        super(Circle.class);
+    }
+
 
     @Override
     public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {

@@ -34,20 +34,68 @@ import java.util.List;
 @Service
 public interface BaseService<T> {
 
+    /**
+     * 通过主键查询
+     * @param key
+     * @return
+     */
     T selectByKey(Object key);
 
+    List<T> selectByIds(List<Integer> keys);
+
+    /**
+     * 插入单个实体
+     * @param entity
+     * @return
+     */
     int save(T entity);
 
+    /**
+     * 批量插入实体
+     * @param entities
+     * @return
+     */
+    int batchSave(List<T> entities);
+
+    /**
+     * 通过主键删除
+     * @param key
+     * @return
+     */
     int delete(Object key);
 
+    /**
+     * 更新实体
+     * @param entity
+     * @return
+     */
     int updateAll(T entity);
 
+    /**
+     * 更新实体非空字段
+     * 主键ID作为查询条件
+     * @param entity
+     * @return
+     */
     int updateNotNull(T entity);
 
+    /**
+     * 组合条件查询
+     * @param example
+     * @return
+     */
     List<T> selectByExample(Object example);
 
+    /**
+     * 实体查询
+     * @param record
+     * @return
+     */
     List<T> select(T record);
-    
+
+    /**
+     * 实体条数查询
+     */
     int selectCount(T record);
     //TODO 其他...
 }

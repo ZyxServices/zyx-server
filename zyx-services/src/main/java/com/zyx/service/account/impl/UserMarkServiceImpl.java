@@ -21,6 +21,10 @@ import java.util.Map;
 @Service("userMarkService")
 public class UserMarkServiceImpl extends BaseServiceImpl<UserMarkInfo> implements UserMarkService {
 
+    public UserMarkServiceImpl() {
+        super(UserMarkInfo.class);
+    }
+
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
 

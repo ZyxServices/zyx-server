@@ -2,6 +2,7 @@ package com.zyx.service.live.impl;
 
 import java.util.List;
 
+import com.zyx.entity.deva.dto.DevaDto;
 import com.zyx.entity.live.dto.LiveInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 
 	@Autowired
 	LiveInfoMapper liveInfoMapper ;
+
+	public LiveInfoServiceImpl() {
+		super(LiveInfo.class);
+	}
+
 	@Override
 	public int countLive(LiveInfoVo vo) {
 		return liveInfoMapper.countLives(vo);
@@ -33,7 +39,8 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		if(ids==null||ids.isEmpty())
 			return null;
 		else{
-			Example example = new Example(LiveInfo.class);
+			Example example = new Example(DevaDto.class);
+			example.selectProperties("id","");
 			Criteria criteria = example.createCriteria();
 			criteria.andIn("id", ids);
 			return liveInfoMapper.selectByExample(example);

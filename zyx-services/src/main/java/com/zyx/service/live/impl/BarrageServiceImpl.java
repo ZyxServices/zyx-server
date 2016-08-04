@@ -16,6 +16,10 @@ public class BarrageServiceImpl extends BaseServiceImpl<Barrage> implements Barr
 	@Autowired
 	BarrageMapper barrageMapper;
 
+	public BarrageServiceImpl() {
+		super(Barrage.class);
+	}
+
 	@Override
 	public void addBarrage(Barrage barrage) {
 	}

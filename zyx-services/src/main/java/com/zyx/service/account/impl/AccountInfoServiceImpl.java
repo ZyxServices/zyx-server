@@ -22,6 +22,10 @@ import java.util.List;
 @Service("accountInfoService")
 public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> implements AccountInfoService {
 
+    public AccountInfoServiceImpl() {
+        super(AccountInfo.class);
+    }
+
     @Override
     public int selectAccountByPhone(String phone) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;

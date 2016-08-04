@@ -35,6 +35,10 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     @Resource
     private ActivityMemberMapper activityMemberMapper;
 
+    public ActivityMemberServiceImpl() {
+        super(ActivityMember.class);
+    }
+
 
     @Override
     public Map<String, Object> addActivityMember(MemberInfoParm parm) {
