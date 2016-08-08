@@ -41,7 +41,7 @@ public class PgFacadeImpl implements PgFacade {
 
     @Override
     public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
-        return circleService.insertCircle(title, createId, state, type, details, headImgUrl);
+        return circleService.insertCircle(title, createId, state, details, headImgUrl);
     }
 
     @Override
@@ -124,6 +124,11 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
         return zanService.countZanByBodyId(type, bodyId);
+    }
+
+    @Override
+    public Map<String, Object> findCircle(Integer circleId, Integer accountId) {
+        return circleService.getOne(circleId, accountId);
     }
 
 }

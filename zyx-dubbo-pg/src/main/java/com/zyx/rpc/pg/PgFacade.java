@@ -141,10 +141,11 @@ public interface PgFacade {
 
     /**
      * 添加回复
+     *
      * @param reply_type 回复主体类型
-     * @param reply_id 回复主体id
+     * @param reply_id   回复主体id
      * @param account_id 回复人
-     * @param content 回复内容
+     * @param content    回复内容
      * @return
      */
     Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content);
@@ -152,12 +153,14 @@ public interface PgFacade {
 
     /**
      * 获取圈子首推数据
+     *
      * @return
      */
     List<Circle> queryCircleDeva();
 
     /**
      * 获取动态首推数据
+     *
      * @return
      */
     List<Concern> queryConcernDeva();
@@ -166,6 +169,7 @@ public interface PgFacade {
     /**
      * 通过BodyId 查询多个点赞数量
      * MrDeng
+     *
      * @param type
      * @param bodyIds
      * @return
@@ -174,9 +178,19 @@ public interface PgFacade {
 
     /**
      * 重载
+     *
      * @param type
      * @param bodyId
      * @return
      */
-    ZanCountDto countZanByBodyId(Integer type,Integer bodyId);
+    ZanCountDto countZanByBodyId(Integer type, Integer bodyId);
+
+    /**
+     * 根据圈子id和用户id获取圈子相关数据
+     * @param circleId
+     * @param accountId
+     * @return 关注数，帖子数，是否关注等数据
+     */
+    Map<String, Object> findCircle(Integer circleId, Integer accountId);
+
 }

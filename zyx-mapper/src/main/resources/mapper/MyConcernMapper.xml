@@ -24,11 +24,18 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.pg.MyConcernMapper" >
-  <resultMap id="CircleResultMap" type="com.zyx.entity.pg.MyConcern" >
-    <id column="Id" property="id" jdbcType="INTEGER" />
-    <result column="concern_id" property="concernId" jdbcType="INTEGER" />
-    <result column="concern_type" property="concernType" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.zyx.mapper.pg.MyConcernMapper">
+    <resultMap id="MyConcernResultMap" type="com.zyx.entity.pg.MyConcern">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="concern_id" property="concernId" jdbcType="INTEGER"/>
+        <result column="concern_type" property="concernType" jdbcType="INTEGER"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*) as concernCounts FROM myconcern WHERE concern_id=#{concernId} AND concern_type=#{concernType}
+    </select>
 
+    <select id="existConcern" resultMap="MyConcernResultMap">
+        SELECT * FROM myconcern WHERE account_id=#{accountId} AND concern_id=#{concernId} AND concern_type=#{concernType}
+    </select>
 </mapper>

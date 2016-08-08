@@ -18,10 +18,10 @@ import javax.persistence.Table;
 public class MyConcern  extends BaseEntity{
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer concernId;
+    private Integer concernId;//关注类型id
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer concernType;//关注类型，1为明星，2为个人，3为球队
+    private Integer concernType;//关注类型，0为动态，1为明星，2为个人，3为球队,4为圈子，5为活动，6位直播
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer accountId;

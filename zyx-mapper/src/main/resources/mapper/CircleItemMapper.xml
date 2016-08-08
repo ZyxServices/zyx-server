@@ -36,11 +36,15 @@
     </resultMap>
 
     <select id="circleItemList" resultMap="ConcernResultMap">
-        SELECT * FROM circleItem
+        SELECT * FROM circle_item
         GROUP BY create_time
         <if test="#{max} !=null">
             limit 0, #{max}
         </if>
+    </select>
+
+    <select id="getCircleItemCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*) as circleItemCount FROM circle_item WHERE circle_id=#{circleId}
     </select>
 
 </mapper>

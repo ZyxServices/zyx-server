@@ -13,8 +13,8 @@ import javax.persistence.Table;
  * @package com.zyx.entity.pg
  * Create by XiaoWei on 2016/6/21
  */
-@Table(name = "circleItem")
-public class CircleItem extends BaseEntity{
+@Table(name = "circle_item")
+public class CircleItem extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer circleId;

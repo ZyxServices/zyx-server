@@ -6,7 +6,10 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.pg.Meet;
+import com.zyx.entity.pg.MyConcern;
+import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.mapper.pg.CircleMapper;
+import com.zyx.mapper.pg.MyConcernMapper;
 import com.zyx.service.admin.DevaluationService;
 import com.zyx.service.pg.MeetService;
 import com.zyx.utils.MapUtils;
@@ -27,6 +30,11 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     private MeetService meetService;
     @Resource
     CircleMapper circleMapper;
+    @Resource
+    MyConcernMapper myConcernMapper;
+
+    @Resource
+    CircleItemMapper circleItemMapper;
 
     @Resource
     DevaluationService devaluationService;
@@ -37,7 +45,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, String details, String headImgUrl) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
@@ -57,11 +65,11 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 return map;
             }*/
             Optional.ofNullable(state).ifPresent(insertCircle::setState);
-            if (type == null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30012, PgConstants.PG_ERROR_CODE_30012_MSG);
-
-            }
-            Optional.ofNullable(type).ifPresent(insertCircle::setType);
+//            if (type == null) {
+//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30012, PgConstants.PG_ERROR_CODE_30012_MSG);
+//
+//            }
+//            Optional.ofNullable(type).ifPresent(insertCircle::setType);
             if (details == null || Objects.equals(details, "")) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
             }
@@ -70,6 +78,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
             }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
+            insertCircle.setType(0);
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
             mapper.insert(insertCircle);
@@ -200,5 +209,28 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             return returnList;
         }
         return null;
+    }
+
+    @Override
+    public Map<String, Object> getOne(Integer circleId, Integer accountId) {
+        if (circleId == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
+        }
+        if (accountId == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
+        }
+        Map<String, Object> resultMap = new HashMap<>();
+        Boolean isConcern = false;
+        Integer concernCount = myConcernMapper.getCounts(4, circleId);
+        Integer circleItemCount = circleItemMapper.getCircleItemCounts(circleId);
+        MyConcern myConcern = myConcernMapper.existConcern(accountId, circleId, 4);
+        if (myConcern != null) {
+            isConcern = true;
+        }
+        resultMap.put("concernCount", concernCount);
+        resultMap.put("circleItemCount", circleItemCount);
+        resultMap.put("isConcern", isConcern);
+
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
     }
 }

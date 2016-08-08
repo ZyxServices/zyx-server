@@ -16,4 +16,7 @@ import java.util.List;
 @Repository("circleItemMapper")
 public interface CircleItemMapper extends BaseMapper<CircleItem> {
     List<CircleItem> circleItemList(@Param("max") Integer max);
+
+    int getCircleItemCounts(@Param(value = "circleId") Integer circleId);
+
 }
