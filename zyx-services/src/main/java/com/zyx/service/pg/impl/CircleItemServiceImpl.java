@@ -57,6 +57,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30007, PgConstants.PG_ERROR_CODE_30007_MSG);
 
             }
+            circleItem.setState(0);
             circleItem.setCreateTime(new Date().getTime());
             save(circleItem);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);

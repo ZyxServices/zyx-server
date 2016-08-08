@@ -33,6 +33,9 @@ public class CircleItem extends BaseEntity{
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer top;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer state;//帖子状态,0为正常可以访问，-1为删除，如有业务需求，可以再加入
 
     public Integer getCircleId() {
         return circleId;
@@ -80,5 +83,13 @@ public class CircleItem extends BaseEntity{
 
     public void setTop(Integer top) {
         this.top = top;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

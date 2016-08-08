@@ -30,25 +30,20 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
         Map<String, Object> map = new HashMap<>();
-        try {
-            Concern insertCern = new Concern();
-            insertCern.setCreateTime(new Date().getTime());
-            Optional.ofNullable(userId).ifPresent(insertCern::setUserId);
-            Optional.ofNullable(type).ifPresent(insertCern::setType);
-            Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopicTitle);
-            Optional.ofNullable(content).ifPresent(insertCern::setTopicContent);
-            Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImgUrl);
-            Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideoUrl);
-            Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
-            save(insertCern);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+        Concern insertCern = new Concern();
+        insertCern.setCreateTime(new Date().getTime());
+        Optional.ofNullable(userId).ifPresent(insertCern::setUserId);
+        Optional.ofNullable(type).ifPresent(insertCern::setType);
+        Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopicTitle);
+        Optional.ofNullable(content).ifPresent(insertCern::setTopicContent);
+        Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImgUrl);
+        Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideoUrl);
+        Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
+        insertCern.setState(0);
+        save(insertCern);
+//        return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
 //            map.put(Constants.STATE, Constants.SUCCESS);
-//            return map;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return PgConstants.MAP_500;
-//            map.put(Constants.STATE, Constants.ERROR_500);
-        }
+            return map;
     }
 
     @Override

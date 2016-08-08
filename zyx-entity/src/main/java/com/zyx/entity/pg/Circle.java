@@ -23,8 +23,10 @@ public class Circle extends BaseEntity {
     private Integer createId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除
-    //    private String circleMaster;
+    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除,-2为屏蔽
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String adminIds;//管理员ids
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;//圈子类型,0未普通圈子，1位明星圈子
@@ -43,6 +45,9 @@ public class Circle extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer hot;//热度
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer tag;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -118,5 +123,21 @@ public class Circle extends BaseEntity {
 
     public void setHot(Integer hot) {
         this.hot = hot;
+    }
+
+    public String getAdminIds() {
+        return adminIds;
+    }
+
+    public void setAdminIds(String adminIds) {
+        this.adminIds = adminIds;
+    }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
     }
 }

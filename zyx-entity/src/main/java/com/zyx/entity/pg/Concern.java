@@ -35,6 +35,9 @@ public class Concern extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer topicVisible;//0所有可见，1好友可见
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer state;//动态状态，-2未屏蔽，-1为删除
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -94,5 +97,13 @@ public class Concern extends BaseEntity {
 
     public void setTopicVisible(Integer topicVisible) {
         this.topicVisible = topicVisible;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

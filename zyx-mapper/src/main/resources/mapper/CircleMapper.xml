@@ -31,13 +31,14 @@
         <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
-        <result column="circle_master" property="circleMaster" jdbcType="VARCHAR"/>
+        <result column="admin_ids" property="adminIds" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
         <result column="details" property="details" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <result column="tag" property="tag" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="circleList" resultMap="CircleResultMap">

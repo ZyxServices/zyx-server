@@ -24,7 +24,7 @@ public class Zan   {
     private Long id;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer bodyId;//主题id,可以是圈子，帖子，动态，活动动态
+    private Integer bodyId;//主题id,可以是圈子，动态，活动,直播
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer bodyType;//定位点赞类型
