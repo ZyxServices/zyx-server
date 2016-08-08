@@ -2,6 +2,7 @@ package com.zyx.mapper.account;
 
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
+import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.AccountInfoVo;
 
@@ -23,4 +24,6 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
     int renewpwd(UserLoginParam userLoginParam);
 
     List<AccountInfoVo> queryUserDevaluation(List<Integer> users);
+
+    int updateAccountByParam(AccountInfoParam param);
 }

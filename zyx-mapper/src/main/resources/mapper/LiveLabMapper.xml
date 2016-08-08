@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.live.LiveLabMapper">
+
+	<!-- 用户信息表 -->
+	<!-- <sql id="liveInfo"> t_live </sql> -->
+
+	<resultMap id="LiveLab" type="com.zyx.entity.live.LiveLab">
+		<id column="id" property="id" />
+		<id column="creat_time" property="createTime" />
+		<id column="type" property="type" />
+		<id column="desc" property="desc" />
+	</resultMap>
+
+	<select id="getAllLabs" resultType="java.lang.String">
+		SELECT type
+		FROM t_live_lab
+	</select>
+</mapper>

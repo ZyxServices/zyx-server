@@ -46,24 +46,25 @@ public class AppTest extends TestCase {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 					"classpath:spring/spring-context.xml");
 			LiveInfoServiceImpl liveInfoService = context.getBean("liveInfoService", LiveInfoServiceImpl.class);
-			LiveInfoVo vo = new LiveInfoVo();
-			vo.setLab(1);
-			List<Integer> userIds= new ArrayList<Integer>();
-			userIds.add(1);
-			vo.setUserIds(userIds);
-			
-			int count = liveInfoService.countLive(vo);
-			System.out.println(JSON.toJSONString("count "+count));
-			vo.setCount(count);
-			vo.setPageNo(2);
-			vo.setPageSize(3);
-			System.out.println(JSON.toJSONString(vo));
-			System.out.println("获取记录范围"+vo.getStart()+"   "+vo.getEnd());
-			List<LiveInfo> list = liveInfoService.selectLives(vo);
-			System.out.println("记录条数："+(list==null?0:list.size()));
-			for(LiveInfo info:list){
-				System.out.println(JSON.toJSONString(info));
-			}
+			List<Integer> list =  new ArrayList<>();
+			list.add(323);
+			list.add(324);
+			list.add(325);
+			List<LiveInfo> lives = liveInfoService.selectByIds(list);
+			System.out.println(JSON.toJSONString(lives));
+//			LiveInfoVo vo = new LiveInfoVo();
+//			vo.setLab(1);
+//			List<Integer> userIds= new ArrayList<Integer>();
+//			userIds.add(1);
+//			vo.setUserIds(userIds);
+//
+//			int count = liveInfoService.countLive(vo);
+//			System.out.println(JSON.toJSONString("count "+count));
+//			vo.setCount(count);
+//			vo.setPageNo(2);
+//			vo.setPageSize(3);
+//			System.out.println(JSON.toJSONString(vo));
+//			System.out.println("获取记录范围"+vo.getStart()+"   "+vo.getEnd());
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

@@ -11,121 +11,133 @@ import tk.mybatis.mapper.annotation.ColumnType;
 
 @Table(name = "t_live")
 public class LiveInfo extends BaseEntity {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	@Column
-	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Integer auth;
-	@Column
-	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Integer type;
-	@Column
-	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private Long start;
-	@Column
-	@ColumnType(jdbcType = JdbcType.BIGINT)
-	private Long end;
-	@Column
-	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Integer userId;
-	@Column
-	@ColumnType(jdbcType = JdbcType.VARCHAR)
-	private String title;
-	@Column
-	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Integer lab;
-	@Column
-	@ColumnType(jdbcType = JdbcType.VARCHAR)
-	private String bgmUrl;
-	@Column
-	@ColumnType(jdbcType = JdbcType.VARCHAR)
-	private String vedioUrl;
-	@Column
-	@ColumnType(jdbcType = JdbcType.INTEGER)
-	private Integer status =0;
-	public Integer getAuth() {
-		return auth;
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer auth;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer type;
+    @Column
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long start;
+    @Column
+    @ColumnType(jdbcType = JdbcType.BIGINT)
+    private Long end;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer userId;
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String title;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer lab;
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String bgmUrl;
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String vedioUrl;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer state;
 
-	public void setAuth(Integer auth) {
-		this.auth = auth;
-	}
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer del;
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getAuth() {
+        return auth;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setAuth(Integer auth) {
+        this.auth = auth;
+    }
 
-	public Long getStart() {
-		return start;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public void setStart(Long start) {
-		this.start = start;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-	public Long getEnd() {
-		return end;
-	}
+    public Long getStart() {
+        return start;
+    }
 
-	public void setEnd(Long end) {
-		this.end = end;
-	}
+    public void setStart(Long start) {
+        this.start = start;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Long getEnd() {
+        return end;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setEnd(Long end) {
+        this.end = end;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public Integer getLab() {
-		return lab;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setLab(Integer lab) {
-		this.lab = lab;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getBgmUrl() {
-		return bgmUrl;
-	}
+    public Integer getLab() {
+        return lab;
+    }
 
-	public void setBgmUrl(String bgmUrl) {
-		this.bgmUrl = bgmUrl;
-	}
+    public void setLab(Integer lab) {
+        this.lab = lab;
+    }
 
-	public String getVedioUrl() {
-		return vedioUrl;
-	}
+    public String getBgmUrl() {
+        return bgmUrl;
+    }
 
-	public void setVedioUrl(String vedioUrl) {
-		this.vedioUrl = vedioUrl;
-	}
+    public void setBgmUrl(String bgmUrl) {
+        this.bgmUrl = bgmUrl;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public String getVedioUrl() {
+        return vedioUrl;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setVedioUrl(String vedioUrl) {
+        this.vedioUrl = vedioUrl;
+    }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer status) {
+        this.state= state;
+    }
+
+    public Integer getDel() {
+        return del;
+    }
+
+    public void setDel(Integer del) {
+        this.del = del;
+    }
 }

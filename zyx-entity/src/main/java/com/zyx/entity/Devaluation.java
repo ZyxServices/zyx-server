@@ -38,6 +38,10 @@ public class Devaluation extends BaseEntity implements Serializable{
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer devaluationId;
 
+    @Column(name = "image")
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String image;
+
     public Integer getTypes() {
         return types;
     }
@@ -54,11 +58,20 @@ public class Devaluation extends BaseEntity implements Serializable{
         this.devaluationId = devaluationId;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Devaluation{" +
                 "types=" + types +
                 ", devaluationId=" + devaluationId +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

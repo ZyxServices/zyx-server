@@ -66,4 +66,6 @@ public interface ActivityService extends BaseService<Activity> {
      * @return
      */
     Map<String, Object> queryActivityHistory(QueryHistoryParm history);
+
+//    List queryActivityByIds();
 }

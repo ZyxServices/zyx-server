@@ -1,10 +1,15 @@
 package com.zyx.service.pg.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.zyx.entity.pg.dto.ZanCountDto;
+import com.zyx.mapper.pg.ZanMapper;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.pg.ZanVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyx.constants.pg.PgConstants;
@@ -20,6 +25,13 @@ import com.zyx.service.pg.ZanService;
  */
 @Service
 public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
+    @Autowired
+    ZanMapper zanMapper;
+
+    public ZanServiceImpl() {
+        super(Zan.class);
+    }
+
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         Map<String, Object> map = new HashMap<>();
@@ -59,5 +71,25 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
+        ZanVo vo = new ZanVo();
+        vo.setType(type);
+        vo.setBodyIds(bodyIds);
+        return zanMapper.countZanByBodyId(vo);
+    }
+
+    @Override
+    public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
+        Zan record = new Zan();
+        record.setBodyType(type);
+        record.setBodyId(bodyId);
+        ZanCountDto dto = new ZanCountDto();
+        dto.setBodyId(bodyId);
+        dto.setBodyType(type);
+        dto.setZanCount( selectCount(record));
+        return dto;
     }
 }

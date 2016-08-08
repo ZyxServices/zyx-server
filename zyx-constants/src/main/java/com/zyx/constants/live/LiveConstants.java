@@ -44,6 +44,25 @@ public interface LiveConstants extends Constants{
 	
 	int MARK_LIVE_DEVA_MODEL= 2;
 	int MARK_LIVE_DEVA_COUNT= 4;
+
+	///////////////////////REDIS KEYS////////////////////////////
 	String MARK_LIVE_DEVA = "liveDeva";
 	String MARK_HASH_LIVE_DEVA = "hash_liveDeva";
+
+	String MARK_REDIS_LIVE_LAB_LIST = "lab_list";
+	String MARK_HASH_REDIS_LAB_TYPE_LIST = "hash_lab_list";
+
+	String MARK_REDIS_BARRAGE_QUEUE = "barrage";
+	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage";
+	/**
+	 * 弹幕默认最大缓存数量
+	 */
+	long REDIS_MAX_BARRAGE_QUEUE_SIZE = 10000;
+
+	/**
+	 * 批量存储弹幕 条数阈值  测试实则为5
+	 */
+	// TODO: 2016/8/3 正式时修改该数值
+	long CACHE_BATACH_SAVE_PROFIXE = 5;
+	String MARK_REDIS_BARRAGE_SIZE = "b_size";
 }

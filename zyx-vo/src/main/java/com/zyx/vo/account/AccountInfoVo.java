@@ -30,6 +30,10 @@ public class AccountInfoVo extends BaseVo {
 
     private String avatar;
 
+    private Integer del;
+
+    private Integer mask;
+
     private String token;
 
     public Integer getId() {
@@ -80,6 +84,22 @@ public class AccountInfoVo extends BaseVo {
         this.avatar = avatar;
     }
 
+    public Integer getDel() {
+        return del;
+    }
+
+    public void setDel(Integer del) {
+        this.del = del;
+    }
+
+    public Integer getMask() {
+        return mask;
+    }
+
+    public void setMask(Integer mask) {
+        this.mask = mask;
+    }
+
     public String getToken() {
         return token;
     }
@@ -97,6 +117,8 @@ public class AccountInfoVo extends BaseVo {
                 ", nickname='" + nickname + '\'' +
                 ", sex=" + sex +
                 ", avatar='" + avatar + '\'' +
+                ", del=" + del +
+                ", mask=" + mask +
                 ", token='" + token + '\'' +
                 '}';
     }

@@ -22,6 +22,10 @@ import static com.zyx.constants.pg.PgConstants.*;
  */
 @Service
 public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetService {
+    public MeetServiceImpl() {
+        super(Meet.class);
+    }
+
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
         Meet meet = new Meet();

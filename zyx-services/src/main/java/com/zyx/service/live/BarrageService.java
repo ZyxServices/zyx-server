@@ -8,5 +8,6 @@ import com.zyx.vo.live.BarrageVo;
 
 public interface BarrageService extends BaseService<Barrage> {
 
+	public void addBarrage(Barrage barrage);
 	public List<Barrage> getTop(BarrageVo vo);
 }

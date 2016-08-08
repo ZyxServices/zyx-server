@@ -20,6 +20,10 @@ import com.zyx.service.pg.ReplyService;
  */
 @Service
 public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplyService {
+    public ReplyServiceImpl() {
+        super(Reply.class);
+    }
+
     @Override
     public Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content) {
         Map<String, Object> resultMap = new HashMap<>();

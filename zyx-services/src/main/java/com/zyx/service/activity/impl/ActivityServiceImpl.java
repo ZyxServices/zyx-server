@@ -33,6 +33,10 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     @Resource
     private ActivityMapper activityMapper;
 
+    public ActivityServiceImpl() {
+        super(Activity.class);
+    }
+
 
     @Override
     public Map<String, Object> insterActivity(Integer createId, String title, String desc, String image, Long startTime,

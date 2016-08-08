@@ -2,6 +2,8 @@ package com.zyx.rpc.pg;
 
 import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.Concern;
+import com.zyx.entity.pg.Zan;
+import com.zyx.entity.pg.dto.ZanCountDto;
 import com.zyx.service.pg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,14 +108,22 @@ public class PgFacadeImpl implements PgFacade {
     public List<Circle> queryCircleDeva() {
 
 
-
-
         return circleService.queryCircleDeva();
     }
 
     @Override
     public List<Concern> queryConcernDeva() {
         return concrenService.queryConcernDeva();
+    }
+
+    @Override
+    public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
+        return zanService.countZanByBodyId(type, bodyIds);
+    }
+
+    @Override
+    public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
+        return zanService.countZanByBodyId(type, bodyId);
     }
 
 }

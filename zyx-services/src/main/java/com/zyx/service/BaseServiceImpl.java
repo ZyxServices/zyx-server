@@ -26,26 +26,35 @@ package com.zyx.service;
 
 import java.util.List;
 
+import com.zyx.entity.BaseEntity;
+import com.zyx.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zyx.service.BaseService;
 
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 
 /**
- * 
+ * @author ZhangHuaRong
+ * @version V1.0
+ *          Copyright (c)2012 chantsoft-版权所有
  * @title BaseService.java
  * @package com.zyx.mapper.service.impl
  * @description TODO
- * @author ZhangHuaRong   
  * @update 2016年5月26日 下午3:02:33
- * @version V1.0  
- * Copyright (c)2012 chantsoft-版权所有
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
+    protected Class<?> propertyClazz;
+
+    public BaseServiceImpl(Class<?> propertyClazz) {
+        this.propertyClazz = propertyClazz;
+    }
+
+    ;
     @Autowired
-    protected Mapper<T> mapper;
+    protected BaseMapper<T> mapper;
 
     public Mapper<T> getMapper() {
         return mapper;
@@ -56,9 +65,43 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return mapper.selectByPrimaryKey(key);
     }
 
+    @Override
+    public List<T> selectByIds(Object key, String... properties) {
+        Example example = new Example(propertyClazz);
+        Example.Criteria criteria = example.createCriteria();
+        example.selectProperties(properties);
+        criteria.equals(key);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectByIds(List<Integer> keys) {
+        Example example = new Example(propertyClazz);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", keys);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectByIds(List<Integer> keys, String... properties) {
+        Example example = new Example(propertyClazz);
+        example.selectProperties(properties);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", keys);
+        return mapper.selectByExample(example);
+    }
+
     public int save(T entity) {
-//    	mapper.
+
         return mapper.insert(entity);
+    }
+
+    @Override
+    public int batchSave(List<T> entities) {
+        if (entities == null)
+            return 0;
+        mapper.insertList(entities);
+        return entities.size();
     }
 
     public int delete(Object key) {
@@ -77,17 +120,15 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return mapper.selectByExample(example);
     }
 
-	@Override
-	public List<T> select(T record) {
-		return mapper.select(record);
-	}
+    @Override
+    public List<T> select(T record) {
+        return mapper.select(record);
+    }
 
-	@Override
-	public int selectCount(T record) {
-		return mapper.selectCount(record);
-	}
-	
+    @Override
+    public int selectCount(T record) {
+        return mapper.selectCount(record);
+    }
+
     //TODO 其他...
-    
-    
 }

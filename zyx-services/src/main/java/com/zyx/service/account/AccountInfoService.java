@@ -2,6 +2,7 @@ package com.zyx.service.account;
 
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.account.UserLoginParam;
+import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.account.AccountInfoVo;
 
@@ -41,12 +42,18 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      */
     int renewpwd(UserLoginParam userLoginParam);
 
-
     /**
-     * 修改信息
+     * 修改用户信息
      *
-     * @param userLoginParam
+     * @param param
      * @return
      */
-    int updateAccountInfo(UserLoginParam userLoginParam);
+    int updateAccountByParam(AccountInfoParam param);
+
+    /**
+     * 查询多个用户信息的基础信息
+     * @param ids
+     * @return
+     */
+    List<AccountInfo> selectBaseInfo(List<Integer> ids);
 }

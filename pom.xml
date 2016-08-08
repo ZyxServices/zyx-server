@@ -23,6 +23,8 @@
         <module>zyx-dubbo-live</module>
         <module>zyx-constants</module>
         <module>zyx-vo</module>
+        <module>zyx-dubbo-system</module>
+        <module>zyx-task-scheduler</module>
     </modules>
 
     <properties>
@@ -121,12 +123,12 @@
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-core-asl</artifactId>
-                <version>1.9.13</version>
+                <version>1.9.2</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-mapper-asl</artifactId>
-                <version>1.9.13</version>
+                <version>1.9.2</version>
             </dependency>
             <dependency>
                 <groupId>ognl</groupId>

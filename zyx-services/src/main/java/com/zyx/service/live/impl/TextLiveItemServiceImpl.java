@@ -8,4 +8,8 @@ import com.zyx.service.live.TextLiveItemService;
 
 @Service("textLiveItemService")
 public class TextLiveItemServiceImpl extends BaseServiceImpl<TextLiveItem> implements TextLiveItemService {
+
+    public TextLiveItemServiceImpl() {
+        super(TextLiveItem.class);
+    }
 }

@@ -23,6 +23,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     @Resource
     private CircleItemMapper circleItemMapper;
 
+    public CircleItemServiceImpl() {
+        super(CircleItem.class);
+    }
+
     @Override
     public Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content) {
         Map<String, Object> map = new HashMap<>();

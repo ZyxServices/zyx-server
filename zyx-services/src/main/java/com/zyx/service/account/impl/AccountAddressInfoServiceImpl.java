@@ -25,6 +25,10 @@ public class AccountAddressInfoServiceImpl extends BaseServiceImpl<UserAddressIn
     @Autowired
     private UserAddressMapper userAddressMapper;
 
+    public AccountAddressInfoServiceImpl() {
+        super(UserAddressInfo.class);
+    }
+
     @Override
     public int insertAccountAddressInfo(UserAddressParam param) {
         UserAddressInfo userAddressInfo = new UserAddressInfo();
