@@ -46,9 +46,9 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
         Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
         insertCern.setState(0);
         save(insertCern);
-//        return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
-//            map.put(Constants.STATE, Constants.SUCCESS);
-            return map;
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+//        map.put(Constants.STATE, Constants.SUCCESS);
+//        return map;
     }
 
     @Override
