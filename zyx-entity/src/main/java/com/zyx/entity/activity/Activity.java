@@ -145,6 +145,11 @@ public class Activity extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String memberTemplate;
 
+    /**
+     * 当前活动报名人数
+     */
+    private int memberCount;
+
     public Integer getUserId() {
         return userId;
     }
@@ -281,6 +286,14 @@ public class Activity extends BaseEntity {
         this.memberTemplate = memberTemplate;
     }
 
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
+    }
+
     @Override
     public String toString() {
         return "Activity{" +
@@ -301,6 +314,7 @@ public class Activity extends BaseEntity {
                 ", activityType=" + activityType +
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
+                ", memberCount=" + memberCount +
                 '}';
     }
 }

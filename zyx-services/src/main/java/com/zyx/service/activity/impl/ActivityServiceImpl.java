@@ -90,7 +90,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     @Override
     public Map<String, Object> queryActivity(QueryActivityParm parm) {
 
-        Map<String, Object> map = new HashMap<>();
         if (parm != null && parm.getPageNumber() != null && parm.getPage() != null) {
             if (parm.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
@@ -111,7 +110,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             }
 
             List<Activity> activities = activityMapper.queryActivity(parm);
-
             if (activities.size() > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
             } else {
