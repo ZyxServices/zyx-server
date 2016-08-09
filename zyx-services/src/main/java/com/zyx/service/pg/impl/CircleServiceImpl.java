@@ -45,7 +45,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
@@ -56,15 +56,15 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
             }
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreateId);
-            if (state == null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
+            if (circleType == null) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30025, PgConstants.PG_ERROR_CODE_30025_MSG);
             }
+            Optional.ofNullable(circleType).ifPresent(insertCircle::setCircleType);
            /* if (state == null) {
                 map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30011);
                 map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30011_MSG);
                 return map;
             }*/
-            Optional.ofNullable(state).ifPresent(insertCircle::setState);
 //            if (type == null) {
 //                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30012, PgConstants.PG_ERROR_CODE_30012_MSG);
 //
@@ -186,20 +186,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         }
     }
 
-    @Override
-    public Map<String, Object> top(Integer max) {
-        try {
-            Optional.ofNullable(max).orElse(3);
-            List<Circle> topList = circleMapper.top(max);
-//            resultMap.put(PgConstants.STATE, PgConstants.SUCCESS);
-//            resultMap.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
-//            resultMap.put(PgConstants.DATA, topList);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, topList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return PgConstants.MAP_500;
-        }
-    }
 
     @Override
     public List<Circle> queryCircleDeva() {

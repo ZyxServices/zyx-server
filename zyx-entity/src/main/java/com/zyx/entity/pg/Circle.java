@@ -48,6 +48,9 @@ public class Circle extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer tag;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer circleType;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -139,5 +142,13 @@ public class Circle extends BaseEntity {
 
     public void setTag(Integer tag) {
         this.tag = tag;
+    }
+
+    public Integer getCircleType() {
+        return circleType;
+    }
+
+    public void setCircleType(Integer circleType) {
+        this.circleType = circleType;
     }
 }

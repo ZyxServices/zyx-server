@@ -64,9 +64,6 @@
         UPDATE circle SET top=1 where id=#{circle_id}
     </update>
 
-    <select id="top" resultMap="CircleResultMap">
-        SELECT * FROM circle where top=1 ORDER BY create_time DESC limit 0,#{max}
-    </select>
 
     <select id="queryCircleDeva" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE id IN

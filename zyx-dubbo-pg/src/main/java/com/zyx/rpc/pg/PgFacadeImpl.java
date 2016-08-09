@@ -40,8 +40,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
-        return circleService.insertCircle(title, createId, state, details, headImgUrl);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, Integer type, String details, String headImgUrl) {
+        return circleService.insertCircle(title, createId, circleType, details, headImgUrl);
     }
 
     @Override
@@ -85,8 +85,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer max) {
-        return circleItemService.circleItemList(max);
+    public Map<String, Object> circleItemList(Integer max, Integer circleId) {
+        return circleItemService.circleItemList(max, circleId);
     }
 
     @Override
@@ -95,8 +95,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> top(Integer max) {
-        return circleService.top(max);
+    public Map<String, Object> top(Integer max, Integer circleId) {
+        return circleItemService.topList(circleId, max);
     }
 
     @Override

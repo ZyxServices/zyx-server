@@ -25,7 +25,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zyx.mapper.pg.CircleItemMapper">
-    <resultMap id="ConcernResultMap" type="com.zyx.entity.pg.CircleItem">
+    <resultMap id="CircleItemResultMap" type="com.zyx.entity.pg.CircleItem">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="circle_id" property="circleId" jdbcType="INTEGER"/>
         <result column="create_id" property="createId" jdbcType="INTEGER"/>
@@ -33,14 +33,40 @@
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="hot" property="hot" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="CircleItemCustomMap" type="com.zyx.entity.pg.dto.CircleItemDto" extends="CircleItemResultMap">
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
+        <result column="meetCount" property="meetCount" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="circleItemList" resultMap="ConcernResultMap">
-        SELECT * FROM circle_item
-        GROUP BY create_time
-        <if test="#{max} !=null">
-            limit 0, #{max}
-        </if>
+    <select id="circleItemList" resultMap="CircleItemCustomMap" >
+    SELECT
+    circle_item.id,
+    circle_item.circle_id,
+    circle_item.create_id,
+    circle_item.title,
+    circle_item.content,
+    circle_item.hot,
+    circle_item.create_time,
+    circle_item.top,
+    circle_item.state,
+    `user`.nickname,
+    `user`.avatar,
+    (SELECT count(*) from meet where circle_id=circle_item.circle_id) as meetCount,
+    (SELECT count(*) from zan where body_type=5 AND body_id=circle_item.circle_id) as zanCount
+    FROM
+    circle_item
+    INNER JOIN `user` ON circle_item.create_id = `user`.id
+    WHERE circle_item.circle_id=#{circleId}
+    ORDER BY circle_item.create_time
+    limit 0,#{max}
+    </select>
+
+    <select id="topList" resultMap="CircleItemResultMap">
+        SELECT * FROM circle_item where circle_id=#{circleId} ORDER BY top DESC limit 0,#{max}
     </select>
 
     <select id="getCircleItemCounts" resultType="java.lang.Integer">

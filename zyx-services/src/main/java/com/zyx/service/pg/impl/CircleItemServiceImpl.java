@@ -29,7 +29,6 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
 
     @Override
     public Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content) {
-        Map<String, Object> map = new HashMap<>();
         try {
             CircleItem circleItem = new CircleItem();
             Optional.ofNullable(circle_id).ifPresent(circleItem::setCircleId);
@@ -72,15 +71,23 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer max) {
-        Map<String, Object> map = new HashMap<>();
+    public Map<String, Object> circleItemList(Integer max,Integer circleId) {
         try {
             Optional.ofNullable(max).orElse(10);
-            List<CircleItem> list = circleItemMapper.circleItemList(max);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_35000_MSG, list);
+            List<CircleItem> list = circleItemMapper.circleItemList(max,circleId);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, list);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> topList(Integer circleId, Integer max) {
+        Optional.ofNullable(max).orElse(3);
+        if (circleId == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
+        }
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleItemMapper.topList(circleId, max));
     }
 }

@@ -32,7 +32,7 @@ public interface PgFacade {
      * @param details    内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, Integer type, String details, String headImgUrl);
 
 
     /**
@@ -121,7 +121,7 @@ public interface PgFacade {
      * @param max
      * @return
      */
-    Map<String, Object> circleItemList(Integer max);
+    Map<String, Object> circleItemList(Integer max,Integer circleId);
 
     /**
      * 设置置顶圈子
@@ -137,7 +137,7 @@ public interface PgFacade {
      * @param max
      * @return
      */
-    Map<String, Object> top(Integer max);
+    Map<String, Object> top(Integer max,Integer circleId);
 
     /**
      * 添加回复

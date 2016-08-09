@@ -18,7 +18,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param details    内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer state, String details, String headImgUrl);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl);
 
     /**
      * 圈子签到
@@ -65,13 +65,6 @@ public interface CircleService extends BaseService<Circle> {
      */
     Map<String, Object> setTop(Integer circle_id);
 
-    /**
-     * 圈子置顶数据
-     *
-     * @param max
-     * @return
-     */
-    Map<String, Object> top(Integer max);
 
 
     List<Circle> queryCircleDeva();

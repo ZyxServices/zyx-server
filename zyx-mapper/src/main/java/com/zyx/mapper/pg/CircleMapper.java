@@ -57,13 +57,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
      */
     int setTop(@Param("circle_id") Integer circle_id);
 
-    /**
-     * 圈子查询执行数据
-     *
-     * @param max
-     * @return
-     */
-    List<Circle> top(@Param("max") Integer max);
 
     /**
      * 根据id列表查询圈子数据
