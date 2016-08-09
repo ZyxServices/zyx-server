@@ -39,6 +39,10 @@
         ORDER BY create_time desc
     </select>
 
+    <select id="memberCount" parameterType="int" resultType="int">
+        select COUNT(*) from activity_member where activity_id = #{id}
+    </select>
+
     <update id="updateMemberByExamine" parameterType="java.lang.Integer">
         UPDATE activity_member SET examine_type = true where id = #{id}
     </update>

@@ -30,8 +30,31 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
+    <resultMap id="queryActivity" type="com.zyx.entity.activity.Activity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
+        <result column="desc_content" property="descContent" jdbcType="LONGVARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="BIGINT"/>
+        <result column="end_time" property="endTime" jdbcType="BIGINT"/>
+        <result column="last_time" property="lastTime" jdbcType="BIGINT"/>
+        <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
+        <result column="visible" property="visible" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
+        <result column="examine" property="examine" jdbcType="INTEGER"/>
+        <result column="member_template" property="memberTemplate" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association column="id" property="memberCount" javaType="int" select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
+    </resultMap>
+
     <select id="queryActivity" parameterType="com.zyx.entity.activity.parm.QueryActivityParm"
-            resultMap="activity">
+            resultMap="queryActivity">
         select * from activity where 1=1
         <if test="id != null">
             AND id = #{id}
@@ -56,12 +79,12 @@
         select * from activity where id = #{id} ORDER BY create_time desc
     </select>
 
-    <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="activity">
+    <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="queryActivity">
         select * from activity where id = #{id} ORDER BY create_time desc
     </select>
 
     <select id="queryActivityHistory" parameterType="com.zyx.entity.activity.parm.QueryHistoryParm"
-            resultMap="activity">
+            resultMap="queryActivity">
         select * from activity where 1=1
         ORDER BY create_time desc
         <if test="pageNumber != null and pageHis != null">
@@ -73,7 +96,7 @@
         UPDATE activity SET devaluation = ${devaluation} where id = #{id}
     </update>
 
-    <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="activity">
+    <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="queryActivity">
         select * from activity where id IN
         <foreach item="item" index="index" collection="list"
                  open="(" separator="," close=")">
