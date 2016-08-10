@@ -4,6 +4,7 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
 import com.zyx.entity.activity.parm.UpdateDevaluationParm;
+import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @param parm
      * @return
      */
-    List<Activity> queryActivity(QueryActivityParm parm);
+    List<ActivityVo> queryActivity(QueryActivityParm parm);
 
     /**
      * 查询活动发起者自定义报名模板
@@ -40,13 +41,13 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @param history
      * @return
      */
-    List<Activity> queryActivityHistory(QueryHistoryParm history);
+    List<ActivityVo> queryActivityHistory(QueryHistoryParm history);
 
     /**
      * 查询首推活动
      * @return
      */
-    List<Activity> queryActivityDevaluation(List<Integer> longs);
+    List<ActivityVo> queryActivityDevaluation(List<Integer> longs);
 
 
 }

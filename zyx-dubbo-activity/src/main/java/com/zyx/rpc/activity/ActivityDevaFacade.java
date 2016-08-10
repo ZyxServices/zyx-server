@@ -2,6 +2,7 @@ package com.zyx.rpc.activity;
 
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.vo.ActivityVo;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public interface ActivityDevaFacade {
      *
      * @return
      */
-	List<Activity>  queryActivityDeva();
+	List<ActivityVo>  queryActivityDeva();
 
     /**
      * 活动首推

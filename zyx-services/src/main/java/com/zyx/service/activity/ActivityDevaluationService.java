@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.vo.ActivityVo;
 
 /**
  * Created by SubDong on 16-6-28.
@@ -22,7 +23,7 @@ public interface ActivityDevaluationService {
      * 活动首推
      * @return
      */
-	List<Activity> queryActivityDeva();
+	List<ActivityVo> queryActivityDeva();
 
     /**
      * 活动首推

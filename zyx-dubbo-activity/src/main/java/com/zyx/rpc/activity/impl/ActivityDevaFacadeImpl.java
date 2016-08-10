@@ -3,6 +3,7 @@ package com.zyx.rpc.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.rpc.activity.ActivityDevaFacade;
 import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityDevaluationService;
@@ -36,7 +37,7 @@ public class ActivityDevaFacadeImpl implements ActivityDevaFacade {
     private static Logger logger = Logger.getLogger(ActivityFacadeImpl.class);
 
     @Override
-    public List<Activity> queryActivityDeva() {
+    public List<ActivityVo> queryActivityDeva() {
         return activityDevaluationService.queryActivityDeva();
     }
 

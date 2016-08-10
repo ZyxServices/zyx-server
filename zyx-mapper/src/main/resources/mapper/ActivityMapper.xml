@@ -30,7 +30,7 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
-    <resultMap id="queryActivity" type="com.zyx.entity.activity.Activity">
+    <resultMap id="queryActivity" type="com.zyx.entity.activity.vo.ActivityVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
