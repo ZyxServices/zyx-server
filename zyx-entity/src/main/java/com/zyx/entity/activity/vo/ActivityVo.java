@@ -1,149 +1,138 @@
-package com.zyx.entity.activity;
+package com.zyx.entity.activity.vo;
 
 import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.TypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * Created by Rainbow on 16-6-12.
- * <p>
- * 活动
+ * Created by SubDong on 16-8-10.
  *
  * @author SubDong
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title com.zyx.entity.activity
+ * @title ActivityVo
+ * @package com.zyx.entity.activity.vo
+ * @update 16-8-10 上午11:30
  */
-@Table(name = "activity")
-public class Activity extends BaseEntity {
-
+public class ActivityVo implements Serializable {
+    /**
+     * 主键ID
+     **/
+    private Integer id;
+    /**
+     * 创建时间
+     **/
+    private Long createTime;
     /**
      * 创建者(用户ID)
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer userId;
 
     /**
      * 活动标题
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String title;
 
     /**
      * 活动图片
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String imgUrls;
 
     /**
      * 活动描述
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
     private String descContent;
 
     /**
      * 活动开始时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long startTime;
 
     /**
      * 活动结束时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long endTime;
 
     /**
      * 报名截至时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long lastTime;
 
     /**
      * 活动人数上限
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer maxPeople;
 
     /**
      * 活动可见范围 0 所有可见, 1 朋友可见
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer visible;
 
     /**
      * 咨询电话
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String phone;
 
     /**
      * 活动价格
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.DECIMAL)
     private double price;
 
     /**
      * 活动分类
      * 0 线上活动, 1  线下活动
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;
 
     /**
      * 线上活动跳转地址
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String targetUrl;
 
     /**
      * 活动地址
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String address;
 
     /**
      * 活动启用状态 (0 不起用，1 启用)
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer activityType;
 
     /**
      * 活动是否需要审核（活动发起者审核）
      * 0 不许要审核 , 1 需要审核
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer examine;
 
     /**
      * 报名活动模板
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String memberTemplate;
+
+    /**
+     * 当前活动报名人数
+     */
+    private int memberCount;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -281,10 +270,20 @@ public class Activity extends BaseEntity {
         this.memberTemplate = memberTemplate;
     }
 
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
+    }
+
     @Override
     public String toString() {
-        return "Activity{" +
-                "userId=" + userId +
+        return "ActivityVo{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", imgUrls='" + imgUrls + '\'' +
                 ", descContent='" + descContent + '\'' +
@@ -301,6 +300,7 @@ public class Activity extends BaseEntity {
                 ", activityType=" + activityType +
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
+                ", memberCount=" + memberCount +
                 '}';
     }
 }

@@ -6,6 +6,7 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
 import com.zyx.entity.activity.parm.UpdateDevaluationParm;
+import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.service.BaseServiceImpl;
@@ -109,7 +110,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 parm.setPage((pageNumber * page) - 1);
             }
 
-            List<Activity> activities = activityMapper.queryActivity(parm);
+            List<ActivityVo> activities = activityMapper.queryActivity(parm);
             if (activities.size() > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
             } else {
@@ -156,9 +157,9 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 history.setPageHis((pageNumber * page) - 1);
             }
 
-            List<Activity> activityHistory = activityMapper.queryActivityHistory(history);
+            List<ActivityVo> activityHistory = activityMapper.queryActivityHistory(history);
 
-            List<Activity> activities = activityHistory
+            List<ActivityVo> activities = activityHistory
                     .stream()
                     .filter(e -> e != null && (e.getEndTime() - e.getStartTime()) <= 0)
                     .collect(Collectors.toList());

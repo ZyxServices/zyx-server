@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.Devaluation;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.DevaluationMapper;
 import com.zyx.service.activity.ActivityDevaluationService;
@@ -31,12 +32,14 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     @Resource
     private ActivityMapper activityMapper;
     @Resource
-    private RedisTemplate<String, List<Activity>> redisTemplate;
+    private RedisTemplate<String, List<Activity>> redisTemplateActivity;
+    @Resource
+    private RedisTemplate<String, List<ActivityVo>> redisTemplate;
 
     @Override
-    public List<Activity> queryActivityDeva() {
+    public List<ActivityVo> queryActivityDeva() {
         @SuppressWarnings("unchecked")
-        List<Activity> devaluations1 = redisTemplate.opsForList().leftPop(ActivityConstants.ACTIVITY_DEVA);
+        List<ActivityVo> devaluations1 = redisTemplate.opsForList().leftPop(ActivityConstants.ACTIVITY_DEVA);
         if (devaluations1 != null && devaluations1.size() > 0) {
             return devaluations1;
         } else {
@@ -44,7 +47,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
             if (devaluations.size() > 0) {
                 List<Integer> longs = new ArrayList<>();
                 devaluations.forEach(e -> longs.add(e.getDevaluationId()));
-                List<Activity> activities = activityMapper.queryActivityDevaluation(longs);
+                List<ActivityVo> activities = activityMapper.queryActivityDevaluation(longs);
                 redisTemplate.opsForList().leftPush(ActivityConstants.ACTIVITY_DEVA, activities);
                 return activities;
             } else {
