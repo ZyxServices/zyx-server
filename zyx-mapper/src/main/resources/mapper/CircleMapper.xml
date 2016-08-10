@@ -72,5 +72,9 @@
         </foreach>
     </select>
 
+    <select id="findById" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE id=#{id} AND state!=-1
+    </select>
+
 
 </mapper>

@@ -61,6 +61,10 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
             }
             Optional.ofNullable(accountId).ifPresent(myConcern::setAccountId);
             myConcern.setCreateTime(new Date().getTime());
+            MyConcern myConcernFind=myConcernMapper.existConcern(accountId, concernId, concern_type);
+            if(myConcernFind!=null){
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PgConstants.PG_ERROR_CODE_30028_MSG);
+            }
             save(myConcern);
 //            map.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
