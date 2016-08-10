@@ -193,4 +193,12 @@ public interface PgFacade {
      */
     Map<String, Object> findCircle(Integer circleId, Integer accountId);
 
+    /**
+     * 根据关注类型跟对应id查询关注列表
+     * @param concernId
+     * @param concernType
+     * @return
+     */
+    Map<String,Object> findMyConcernParams(Integer concernId,Integer concernType);
+
 }

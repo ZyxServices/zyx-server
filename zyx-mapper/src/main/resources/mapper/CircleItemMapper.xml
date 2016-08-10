@@ -66,7 +66,7 @@
     </select>
 
     <select id="topList" resultMap="CircleItemResultMap">
-        SELECT * FROM circle_item where circle_id=#{circleId} ORDER BY top DESC limit 0,#{max}
+        SELECT * FROM circle_item where circle_id=#{circleId} AND top=1  top DESC create_time limit 0,#{max}
     </select>
 
     <select id="getCircleItemCounts" resultType="java.lang.Integer">

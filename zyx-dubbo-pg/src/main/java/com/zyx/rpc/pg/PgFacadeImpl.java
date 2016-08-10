@@ -131,4 +131,9 @@ public class PgFacadeImpl implements PgFacade {
         return circleService.getOne(circleId, accountId);
     }
 
+    @Override
+    public Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType) {
+        return myConcernService.findByParams(concernId, concernType);
+    }
+
 }
