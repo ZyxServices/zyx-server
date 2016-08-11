@@ -29,7 +29,13 @@
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="concern_id" property="concernId" jdbcType="INTEGER"/>
         <result column="concern_type" property="concernType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="MyConcernDtoResultMap" type="com.zyx.entity.pg.dto.MyConcernDto" extends="MyConcernResultMap">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getCounts" resultType="java.lang.Integer">
         SELECT COUNT(*) as concernCounts FROM myconcern WHERE concern_id=#{concernId} AND concern_type=#{concernType}
@@ -37,5 +43,21 @@
 
     <select id="existConcern" resultMap="MyConcernResultMap">
         SELECT * FROM myconcern WHERE account_id=#{accountId} AND concern_id=#{concernId} AND concern_type=#{concernType}
+    </select>
+
+    <select id="findByParams" resultMap="MyConcernDtoResultMap">
+    SELECT
+    myconcern.id,
+    myconcern.concern_id,
+    myconcern.concern_type,
+    myconcern.account_id,
+    myconcern.create_time,
+    `user`.`name` AS user_name,
+    `user`.nickname,
+    `user`.id as user_id
+    FROM
+    myconcern
+    INNER JOIN `user` ON myconcern.account_id = `user`.id
+    WHERE concern_id=#{concernId} and concern_type=#{concernType}
     </select>
 </mapper>

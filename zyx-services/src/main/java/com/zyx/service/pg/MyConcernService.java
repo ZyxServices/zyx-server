@@ -12,5 +12,7 @@ import java.util.Map;
  * Create by XiaoWei on 2016/6/20
  */
 public interface MyConcernService extends BaseService<MyConcern> {
-    Map<String,Object> addMyConcern(Integer concernId,Integer concern_type,Integer accountId);
+    Map<String, Object> addMyConcern(Integer concernId, Integer concern_type, Integer accountId);
+
+    Map<String, Object> findByParams(Integer concernId, Integer concernType);
 }

@@ -216,7 +216,9 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         resultMap.put("concernCount", concernCount);
         resultMap.put("circleItemCount", circleItemCount);
         resultMap.put("isConcern", isConcern);
+        resultMap.put("circle", circleMapper.findById(circleId));
 
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
     }
+
 }
