@@ -22,7 +22,7 @@ public class AccountInfoVo extends BaseVo {
 
     private String phone;
 
-    private String password;
+//    private String password;
 
     private String nickname;
 
@@ -35,6 +35,10 @@ public class AccountInfoVo extends BaseVo {
     private Integer mask;
 
     private String token;
+
+    private String signature;
+
+    private String address;
 
     public Integer getId() {
         return id;
@@ -52,13 +56,13 @@ public class AccountInfoVo extends BaseVo {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getNickname() {
         return nickname;
@@ -108,18 +112,35 @@ public class AccountInfoVo extends BaseVo {
         this.token = token;
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "AccountInfoVo{" +
                 "id=" + id +
                 ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", sex=" + sex +
                 ", avatar='" + avatar + '\'' +
                 ", del=" + del +
                 ", mask=" + mask +
                 ", token='" + token + '\'' +
+                ", signature='" + signature + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 
