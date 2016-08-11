@@ -6,6 +6,7 @@ import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Column;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by SubDong on 16-8-10.
@@ -117,6 +118,16 @@ public class ActivityVo implements Serializable {
      * 当前活动报名人数
      */
     private int memberCount;
+
+    /**
+     * 编辑所用纯文本
+     */
+    private String editDesc;
+
+    /**
+     * 编辑所用图片url
+     */
+    private List<String> editDescImgUrl;
 
     public Integer getId() {
         return id;
@@ -278,6 +289,22 @@ public class ActivityVo implements Serializable {
         this.memberCount = memberCount;
     }
 
+    public String getEditDesc() {
+        return editDesc;
+    }
+
+    public void setEditDesc(String editDesc) {
+        this.editDesc = editDesc;
+    }
+
+    public List<String> getEditDescImgUrl() {
+        return editDescImgUrl;
+    }
+
+    public void setEditDescImgUrl(List<String> editDescImgUrl) {
+        this.editDescImgUrl = editDescImgUrl;
+    }
+
     @Override
     public String toString() {
         return "ActivityVo{" +
@@ -301,6 +328,8 @@ public class ActivityVo implements Serializable {
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
                 ", memberCount=" + memberCount +
+                ", editDesc='" + editDesc + '\'' +
+                ", editDescImgUrl='" + editDescImgUrl + '\'' +
                 '}';
     }
 }

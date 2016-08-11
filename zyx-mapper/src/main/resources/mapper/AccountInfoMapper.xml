@@ -68,7 +68,7 @@
         <if test="nickname != null and nickname != ''">
             , nickname = #{nickname}
         </if>
-        <if test="sex != null and sex != ''">
+        <if test="sex != null">
             , sex = #{sex}
         </if>
         <if test="birthday != null and birthday != ''">

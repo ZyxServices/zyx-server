@@ -15,6 +15,7 @@ import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,6 +113,27 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
             List<ActivityVo> activities = activityMapper.queryActivity(parm);
             if (activities.size() > 0) {
+                if (parm.getEditState() != 0) {
+                    activities.stream().filter(e -> e.getDescContent() != null && !e.getDescContent().equals("")).forEach(s -> {
+                        String[] strings = s.getDescContent().split("<img");
+                        List<String> editImage = new ArrayList<>();
+                        String editText = "";
+                        for (String string : strings) {
+                            if (string.contains("src=")) {
+                                 editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
+                            } else {
+                                if (editText.equals(string)) {
+                                    editText = string;
+                                } else {
+                                    editText += string;
+                                }
+
+                            }
+                        }
+                        s.setEditDescImgUrl(editImage);
+                        s.setEditDesc(editText);
+                    });
+                }
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
             } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
