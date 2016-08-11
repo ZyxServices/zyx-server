@@ -17,4 +17,6 @@ public interface CircleItemService extends BaseService<CircleItem> {
     Map<String,Object> circleItemList(Integer max,Integer circleId);
 
     Map<String,Object> topList(Integer circleId,Integer max);
+
+    Map<String,Object> deleteCircleItemByParams(Integer createThisId,Integer circleItemId);
 }

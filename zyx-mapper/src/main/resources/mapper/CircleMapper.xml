@@ -76,5 +76,17 @@
         SELECT * FROM circle WHERE id=#{id} AND state!=-1
     </select>
 
+    <update id="closeMaster">
+        UPDATE circle SET circle_master_id=null WHERE id=#{circleId} AND create_id=#{oldMasterId}
+    </update>
+
+    <update id="updateHeadImg">
+         UPDATE circle SET head_img_url=#{headImgUrl} WHERE id=#{circleId}
+    </update>
+
+    <update id="setAdminIds">
+        UPDATE circle SET admin_ids=#{adminIds} WHERE id=#{circleId}
+    </update>
+
 
 </mapper>

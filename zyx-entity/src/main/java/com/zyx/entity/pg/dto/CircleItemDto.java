@@ -13,6 +13,7 @@ public class CircleItemDto extends CircleItem {
     private String avatar;
     private Integer zanCount;
     private Integer meetCount;
+    private String circleTitle;
 
     public Integer getZanCount() {
         return zanCount;
@@ -44,5 +45,13 @@ public class CircleItemDto extends CircleItem {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getCircleTitle() {
+        return circleTitle;
+    }
+
+    public void setCircleTitle(String circleTitle) {
+        this.circleTitle = circleTitle;
     }
 }

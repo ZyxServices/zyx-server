@@ -35,7 +35,7 @@ public class CircleItem extends BaseEntity {
     private Integer top;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer state;//帖子状态,0为正常可以访问，-1为删除，如有业务需求，可以再加入
+    private Integer state;//帖子状态,0为正常可以访问，-1为删除，-2为屏蔽如有业务需求，可以再加入
 
     public Integer getCircleId() {
         return circleId;

@@ -40,8 +40,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, Integer type, String details, String headImgUrl) {
-        return circleService.insertCircle(title, createId, circleType, details, headImgUrl);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag) {
+        return circleService.insertCircle(title, createId, circleType, details, headImgUrl, tag);
     }
 
     @Override
@@ -134,6 +134,26 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType) {
         return myConcernService.findByParams(concernId, concernType);
+    }
+
+    @Override
+    public Map<String, Object> deleteCircleItem(Integer createThisId, Integer circleItemId) {
+        return circleItemService.deleteCircleItemByParams(createThisId, circleItemId);
+    }
+
+    @Override
+    public Map<String, Object> closeMaster(Integer circleId, Integer accountId) {
+        return circleService.closeMaster(circleId, accountId);
+    }
+
+    @Override
+    public Map<String, Object> updateCircleImg(String imgUrl, Integer circleId) {
+        return circleService.updateHeadImg(imgUrl, circleId);
+    }
+
+    @Override
+    public Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId) {
+        return circleService.setAdmins(createId, adminIds, circleId);
     }
 
 }

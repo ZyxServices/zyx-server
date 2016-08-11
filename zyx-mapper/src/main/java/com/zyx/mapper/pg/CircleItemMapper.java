@@ -21,4 +21,8 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     List<CircleItem> topList(@Param("circleId") Integer circleId, @Param("max") Integer max);
 
+    CircleItem findById(@Param("circleItemId") Integer circleItemId);
+
+    Integer delByThisUser(@Param("createThisId") Integer createThisId, @Param("circleItemId") Integer circleItemId);
+
 }

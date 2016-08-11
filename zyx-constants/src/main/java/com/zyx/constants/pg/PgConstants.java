@@ -95,7 +95,6 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30020 = 30020;
     String PG_ERROR_CODE_30020_MSG = "状态不能为空";
 
-
     int PG_ERROR_CODE_30021 = 30021;
     String PG_ERROR_CODE_30021_MSG = "动态id不能为空";
 
@@ -119,6 +118,12 @@ public interface PgConstants extends Constants{
 
     int PG_ERROR_CODE_30028 = 30028;
     String PG_ERROR_CODE_30028_MSG = "数据已存在";
+
+    int PG_ERROR_CODE_30029 = 30029;
+    String PG_ERROR_CODE_30029_MSG = "该用户没有权限";
+
+    int PG_ERROR_CODE_30031 = 30031;
+    String PG_ERROR_CODE_30031_MSG = "数据不存在";
 
     String PG_RESULT = "result";
 }

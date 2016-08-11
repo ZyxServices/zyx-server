@@ -68,9 +68,18 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     /**
      * 单条
+     *
      * @param id
      * @return
      */
     Circle findById(@Param("id") Integer id);
+
+
+    Integer closeMaster(@Param("circleId") Integer circleId, @Param("oldMasterId") Integer oldMasterId);
+
+    Integer updateHeadImg(@Param("headImgUrl") String headImgUrl, @Param("circleId") Integer circleId);
+
+    Integer setAdminIds(@Param("adminIds") String adminIds, @Param("circleId") Integer circleId);
+
 
 }
