@@ -1,9 +1,9 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Circle;
+import com.zyx.entity.pg.dto.CircleListDto;
 import com.zyx.service.BaseService;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,5 +76,19 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
 
+    /**
+     * 我创建的圈子列表
+     *
+     * @param createId 创建者id
+     * @return
+     */
+    List<CircleListDto> myCreateList(Integer createId);
 
+    /**
+     * 我关注的圈子列表
+     *
+     * @param accountId 用户id
+     * @return
+     */
+    List<CircleListDto> myConcernList(Integer accountId);
 }

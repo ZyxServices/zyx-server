@@ -4,9 +4,8 @@ import java.util.*;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
-import com.zyx.entity.Devaluation;
-import com.zyx.entity.pg.Meet;
 import com.zyx.entity.pg.MyConcern;
+import com.zyx.entity.pg.dto.CircleListDto;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.mapper.pg.CircleMapper;
 import com.zyx.mapper.pg.MyConcernMapper;
@@ -286,6 +285,24 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             e.printStackTrace();
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
         }
+    }
+
+    @Override
+    public List<CircleListDto> myCreateList(Integer createId) {
+        if (createId == null) {
+            return null;
+        }
+
+        return circleMapper.myCreateList(createId);
+    }
+
+    @Override
+    public List<CircleListDto> myConcernList(Integer accountId) {
+        if (accountId == null) {
+            return null;
+        }
+
+        return circleMapper.myConcernList(accountId);
     }
 
 }
