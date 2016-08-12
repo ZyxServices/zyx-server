@@ -60,4 +60,5 @@
     INNER JOIN `user` ON myconcern.account_id = `user`.id
     WHERE concern_id=#{concernId} and concern_type=#{concernType}
     </select>
+
 </mapper>

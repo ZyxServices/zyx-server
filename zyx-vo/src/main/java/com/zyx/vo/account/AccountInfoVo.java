@@ -36,6 +36,8 @@ public class AccountInfoVo extends BaseVo {
 
     private String token;
 
+    private long birthday;
+
     private String signature;
 
     private String address;
@@ -112,6 +114,14 @@ public class AccountInfoVo extends BaseVo {
         this.token = token;
     }
 
+    public long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
+    }
+
     public String getSignature() {
         return signature;
     }
@@ -127,7 +137,7 @@ public class AccountInfoVo extends BaseVo {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    
     @Override
     public String toString() {
         return "AccountInfoVo{" +
@@ -139,6 +149,7 @@ public class AccountInfoVo extends BaseVo {
                 ", del=" + del +
                 ", mask=" + mask +
                 ", token='" + token + '\'' +
+                ", birthday=" + birthday +
                 ", signature='" + signature + '\'' +
                 ", address='" + address + '\'' +
                 '}';
