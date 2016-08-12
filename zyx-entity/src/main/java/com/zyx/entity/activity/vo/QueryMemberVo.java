@@ -14,13 +14,13 @@ import java.io.Serializable;
  * @package com.zyx.entity.activity.parm
  * @update 16-6-14 下午5:01
  */
-public class QueryMemberVo implements Serializable{
+public class QueryMemberVo implements Serializable {
 
     private Integer id;
     /**
      * 活动ID
      */
-    private Activity activity;
+    private ActivityVo activity;
 
     /**
      * 用户ID
@@ -61,11 +61,11 @@ public class QueryMemberVo implements Serializable{
         this.id = id;
     }
 
-    public Activity getActivity() {
+    public ActivityVo getActivity() {
         return activity;
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(ActivityVo activity) {
         this.activity = activity;
     }
 
