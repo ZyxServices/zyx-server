@@ -221,7 +221,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         resultMap.put("isConcern", isConcern);
         resultMap.put("circle", circleMapper.findById(circleId));
 
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
     }
 
     @Override
@@ -232,7 +232,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 if (Objects.equals(circleFind.getCreateId(), accountId)) {
                     Integer result = circleMapper.closeMaster(circleId, accountId);
                     if (result > 0) {
-                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+                        return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
                     } else {
                         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
                     }
@@ -254,7 +254,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Integer result = circleMapper.updateHeadImg(headImgUrl, circleId);
             if (result > 0) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+                return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
             } else {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
             }
@@ -272,7 +272,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 if (Objects.equals(circleFind.getCreateId(), createId)) {
                     Integer result = circleMapper.setAdminIds(adminIds, circleId);
                     if (result > 0) {
-                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+                        return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
                     }
                 } else {
                     return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);

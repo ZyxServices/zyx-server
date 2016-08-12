@@ -128,7 +128,6 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30032 = 30032;
     String PG_ERROR_CODE_30032_MSG = "置顶排序不能为空";
 
-
     int PG_ERROR_CODE_30033= 30033;
     String PG_ERROR_CODE_30033_MSG = "帖子id不能为空";
 
