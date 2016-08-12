@@ -81,5 +81,13 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     Integer setAdminIds(@Param("adminIds") String adminIds, @Param("circleId") Integer circleId);
 
+    /**
+     * 级联删除帖子
+     * 圈子id，
+     * @param circleId
+     * @return
+     */
+    Integer deleteByCircleId(@Param("circleId") Integer circleId);
+
 
 }

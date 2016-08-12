@@ -125,5 +125,12 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30031 = 30031;
     String PG_ERROR_CODE_30031_MSG = "数据不存在";
 
+    int PG_ERROR_CODE_30032 = 30032;
+    String PG_ERROR_CODE_30032_MSG = "置顶排序不能为空";
+
+
+    int PG_ERROR_CODE_30033= 30033;
+    String PG_ERROR_CODE_30033_MSG = "帖子id不能为空";
+
     String PG_RESULT = "result";
 }

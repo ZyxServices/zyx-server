@@ -176,7 +176,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
     @Override
     public Map<String, Object> setTop(Integer circle_id) {
-        Map<String, Object> resultMap = new HashMap<>();
         try {
             Optional.ofNullable(circle_id).orElse(-1);
             Integer result = circleMapper.setTop(circle_id);

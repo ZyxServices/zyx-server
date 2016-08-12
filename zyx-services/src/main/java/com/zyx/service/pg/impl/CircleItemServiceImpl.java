@@ -63,7 +63,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             circleItem.setState(0);
             circleItem.setCreateTime(new Date().getTime());
             save(circleItem);
-            return MapUtils.buildSuccessMap( PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
@@ -81,6 +81,22 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> setTop(Integer topSize, Integer circleItemId) {
+        if (topSize == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30032, PgConstants.PG_ERROR_CODE_30032_MSG);
+        }
+        if (circleItemId == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30033, PgConstants.PG_ERROR_CODE_30033_MSG);
+        }
+        Integer result = circleItemMapper.setTop(topSize, circleItemId);
+        if (result > 0) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG);
+
     }
 
     @Override

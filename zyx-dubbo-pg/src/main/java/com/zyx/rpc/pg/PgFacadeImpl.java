@@ -90,8 +90,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> setTop(Integer circle) {
-        return circleService.setTop(circle);
+    public Map<String, Object> setTop(Integer tooSize,Integer circleItemId) {
+        return circleItemService.setTop(tooSize, circleItemId);
     }
 
     @Override

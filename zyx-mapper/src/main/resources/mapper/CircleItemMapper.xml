@@ -77,8 +77,12 @@
         limit 0,#{max}
     </select>
 
+    <update id="setTop">
+        UPDATE circle_item SET top=#{top} WHERE id=#{circleItemId}
+    </update>
+
     <select id="topList" resultMap="CircleItemResultMap">
-        SELECT * FROM circle_item where circle_id=#{circleId} AND top=1 ORDER BY  create_time DESC limit 0,#{max}
+        SELECT * FROM circle_item where circle_id=#{circleId} AND top!='null' ORDER BY create_time DESC,top DESC limit 0,#{max}
     </select>
 
     <select id="getCircleItemCounts" resultType="java.lang.Integer">
