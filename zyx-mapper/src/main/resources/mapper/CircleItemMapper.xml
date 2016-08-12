@@ -40,29 +40,41 @@
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
         <result column="meetCount" property="meetCount" jdbcType="INTEGER"/>
+        <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+
     </resultMap>
 
-    <select id="circleItemList" resultMap="CircleItemCustomMap" >
-    SELECT
-    circle_item.id,
-    circle_item.circle_id,
-    circle_item.create_id,
-    circle_item.title,
-    circle_item.content,
-    circle_item.hot,
-    circle_item.create_time,
-    circle_item.top,
-    circle_item.state,
-    `user`.nickname,
-    `user`.avatar,
-    (SELECT count(*) from meet where circle_id=circle_item.circle_id) as meetCount,
-    (SELECT count(*) from zan where body_type=5 AND body_id=circle_item.circle_id) as zanCount
-    FROM
-    circle_item
-    INNER JOIN `user` ON circle_item.create_id = `user`.id
-    WHERE circle_item.circle_id=#{circleId}
-    ORDER BY circle_item.create_time
-    limit 0,#{max}
+    <select id="circleItemList" resultMap="CircleItemCustomMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        (SELECT count(*) from meet where circle_id=circle_item.circle_id) as meetCount,
+        (SELECT count(*) from zan where body_type=5 AND body_id=circle_item.circle_id) as zanCount,
+        circle.title AS circleTitle
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        WHERE
+        <if test="circleId!=null">
+            circle_item.circle_id=#{circleId}
+            AND circle_item.state!=-1
+        </if>
+        <if test="circleId==null">
+            circle_item.state!=-1
+        </if>
+
+        ORDER BY circle_item.create_time
+        limit 0,#{max}
     </select>
 
     <select id="topList" resultMap="CircleItemResultMap">
@@ -72,5 +84,13 @@
     <select id="getCircleItemCounts" resultType="java.lang.Integer">
         SELECT COUNT(*) as circleItemCount FROM circle_item WHERE circle_id=#{circleId}
     </select>
+
+    <select id="findById" resultMap="CircleItemResultMap">
+        SELECT * FROM circle_item WHERE  id=#{circleItemId}
+    </select>
+
+    <update id="delByThisUser">
+        UPDATE circle_item SET state=-1 WHERE create_id=#{createThisId} AND id=#{circleItemId}
+    </update>
 
 </mapper>

@@ -18,7 +18,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param details    内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag);
 
     /**
      * 圈子签到
@@ -69,6 +69,12 @@ public interface CircleService extends BaseService<Circle> {
     List<Circle> queryCircleDeva();
 
     Map<String, Object> getOne(Integer circleId, Integer accountId);
+
+    Map<String, Object> closeMaster(Integer circleId, Integer accountId);
+
+    Map<String, Object> updateHeadImg(String headImgUrl, Integer circleId);
+
+    Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
 
 
 }

@@ -19,6 +19,7 @@ public class QueryActivityParm implements Serializable{
     private Long endTime;
     private Integer pageNumber;
     private Integer page;
+    private int editState;
 
     public Integer getCreateId() {
         return createId;
@@ -74,5 +75,13 @@ public class QueryActivityParm implements Serializable{
 
     public void setEndTime(Long endTime) {
         this.endTime = endTime;
+    }
+
+    public int getEditState() {
+        return editState;
+    }
+
+    public void setEditState(int editState) {
+        this.editState = editState;
     }
 }

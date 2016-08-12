@@ -63,7 +63,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             circleItem.setState(0);
             circleItem.setCreateTime(new Date().getTime());
             save(circleItem);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap( PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
@@ -71,11 +71,12 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer max,Integer circleId) {
+    public Map<String, Object> circleItemList(Integer max, Integer circleId) {
         try {
             Optional.ofNullable(max).orElse(10);
-            List<CircleItem> list = circleItemMapper.circleItemList(max,circleId);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, list);
+
+            List<CircleItem> list = circleItemMapper.circleItemList(max, circleId);
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, list);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
@@ -89,5 +90,29 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
         }
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleItemMapper.topList(circleId, max));
+    }
+
+    @Override
+    public Map<String, Object> deleteCircleItemByParams(Integer createThisId, Integer circleItemId) {
+        try {
+            CircleItem circleItemFind = circleItemMapper.findById(circleItemId);
+            if (circleItemFind != null) {
+                if (circleItemFind.getCreateId() == createThisId) {
+                    Integer result = circleItemMapper.delByThisUser(createThisId, circleItemId);
+                    if (result > 0) {
+                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG);
+                    }
+                } else {
+                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                }
+            } else {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+
     }
 }

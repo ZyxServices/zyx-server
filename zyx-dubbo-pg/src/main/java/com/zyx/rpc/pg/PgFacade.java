@@ -31,8 +31,9 @@ public interface PgFacade {
      * @param createId   圈子创建者id
      * @param details    内容
      * @param headImgUrl 圈子头像url
+     * @param tag 圈子标签
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, Integer type, String details, String headImgUrl);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType,  String details, String headImgUrl,Integer tag);
 
 
     /**
@@ -121,7 +122,7 @@ public interface PgFacade {
      * @param max
      * @return
      */
-    Map<String, Object> circleItemList(Integer max,Integer circleId);
+    Map<String, Object> circleItemList(Integer max, Integer circleId);
 
     /**
      * 设置置顶圈子
@@ -137,7 +138,7 @@ public interface PgFacade {
      * @param max
      * @return
      */
-    Map<String, Object> top(Integer max,Integer circleId);
+    Map<String, Object> top(Integer max, Integer circleId);
 
     /**
      * 添加回复
@@ -187,6 +188,7 @@ public interface PgFacade {
 
     /**
      * 根据圈子id和用户id获取圈子相关数据
+     *
      * @param circleId
      * @param accountId
      * @return 关注数，帖子数，是否关注等数据
@@ -195,10 +197,43 @@ public interface PgFacade {
 
     /**
      * 根据关注类型跟对应id查询关注列表
+     *
      * @param concernId
      * @param concernType
      * @return
      */
-    Map<String,Object> findMyConcernParams(Integer concernId,Integer concernType);
+    Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType);
 
+    /**
+     * 根据用户id删除帖子
+     * @param createThisId
+     * @param circleItemId
+     * @return
+     */
+    Map<String, Object> deleteCircleItem(Integer createThisId, Integer circleItemId);
+
+    /**
+     * 取消圈主
+     * @param circleId
+     * @param accountId
+     * @return
+     */
+    Map<String,Object> closeMaster(Integer circleId,Integer accountId);
+
+    /**
+     * 修改圈子图片
+     * @param imgUrl
+     * @param circleId
+     * @return
+     */
+    Map<String,Object> updateCircleImg(String imgUrl,Integer circleId);
+
+    /**
+     * 设置管理员
+     * @param createId
+     * @param adminIds
+     * @param circleId
+     * @return
+     */
+    Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
 }

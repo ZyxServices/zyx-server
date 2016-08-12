@@ -45,7 +45,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
@@ -74,13 +74,18 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
             }
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
-            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
-            }
+//            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
+//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+//            }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
+            if (tag == null) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30027, PgConstants.PG_ERROR_CODE_30027_MSG);
+            }
+            Optional.ofNullable(tag).ifPresent(insertCircle::setTag);
             insertCircle.setType(0);
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
+
             mapper.insert(insertCircle);
 //            map.put(Constants.STATE, PgConstants.SUCCESS);
 //            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
@@ -219,6 +224,69 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         resultMap.put("circle", circleMapper.findById(circleId));
 
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
+    }
+
+    @Override
+    public Map<String, Object> closeMaster(Integer circleId, Integer accountId) {
+        try {
+            Circle circleFind = circleMapper.findById(circleId);
+            if (circleFind != null) {
+                if (Objects.equals(circleFind.getCreateId(), accountId)) {
+                    Integer result = circleMapper.closeMaster(circleId, accountId);
+                    if (result > 0) {
+                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+                    } else {
+                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+                    }
+                } else {
+                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                }
+            } else {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+        }
+
+    }
+
+    @Override
+    public Map<String, Object> updateHeadImg(String headImgUrl, Integer circleId) {
+        try {
+            Integer result = circleMapper.updateHeadImg(headImgUrl, circleId);
+            if (result > 0) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+            } else {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+        }
+    }
+
+    @Override
+    public Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId) {
+        try {
+            Circle circleFind = circleMapper.findById(circleId);
+            if (circleFind != null) {
+                if (Objects.equals(circleFind.getCreateId(), createId)) {
+                    Integer result = circleMapper.setAdminIds(adminIds, circleId);
+                    if (result > 0) {
+                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG);
+                    }
+                } else {
+                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                }
+            } else {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+        }
     }
 
 }
