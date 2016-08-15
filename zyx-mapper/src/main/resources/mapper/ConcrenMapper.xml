@@ -44,4 +44,20 @@
             limit 0, #{n}
         </if>
     </select>
+
+    <select id="queryConcernDeva" resultMap="ConcernResultMap">
+        SELECT * FROM concern WHERE  id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="myListCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM concern WHERE user_id = #{accountId}
+    </select>
+
+    <select id="myList" parameterType="int" resultMap="ConcernResultMap">
+        SELECT * FROM concern WHERE user_id = #{accountId}
+    </select>
+
 </mapper>

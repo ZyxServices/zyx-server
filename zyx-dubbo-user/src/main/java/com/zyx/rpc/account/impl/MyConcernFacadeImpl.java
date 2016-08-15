@@ -1,0 +1,55 @@
+package com.zyx.rpc.account.impl;
+
+import com.zyx.constants.Constants;
+import com.zyx.constants.account.AccountConstants;
+import com.zyx.entity.pg.Concern;
+import com.zyx.rpc.account.MyConcernFacade;
+import com.zyx.service.pg.ConcrenService;
+import com.zyx.utils.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by wms on 2016/8/12.
+ *
+ * @author WeiMinSheng
+ * @version V1.0
+ *          Copyright (c)2016 tyj-版权所有
+ * @title MyConcernFacadeImpl.java
+ */
+@Service("myConcernFacade")
+public class MyConcernFacadeImpl implements MyConcernFacade {
+
+    @Autowired
+    private ConcrenService concrenService;
+
+    @Autowired
+    protected RedisTemplate<String, String> stringRedisTemplate;
+
+    @Override
+    public Map<String, Object> myList(String token, Integer accountId) {
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
+        }
+        try {
+            List<Concern> _list = concrenService.queryMyConcernList(accountId);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, _list);
+        } catch (Exception e) {
+            return Constants.MAP_500;
+        }
+    }
+
+    private boolean isTokenFailure(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return true;
+        }
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+        return StringUtils.isEmpty(phone);
+    }
+}

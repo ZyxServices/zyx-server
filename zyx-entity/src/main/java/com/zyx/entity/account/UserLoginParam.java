@@ -3,7 +3,7 @@ package com.zyx.entity.account;
 import java.io.Serializable;
 
 /**
- * Created by WeiMinSheng on 2016/6/13.
+ * Created by wms on 2016/6/13.
  *
  * @author WeiMinSheng
  * @version V1.0

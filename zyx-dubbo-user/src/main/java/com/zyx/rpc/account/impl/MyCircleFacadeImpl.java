@@ -1,12 +1,15 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.pg.dto.CircleListDto;
 import com.zyx.rpc.account.MyCircleFacade;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +30,15 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     @Autowired
     private CircleService circleService;
 
+    @Autowired
+    protected RedisTemplate<String, String> stringRedisTemplate;
+
     @Override
-    public Map<String, Object> myCircleList(Integer accountId) {
+    public Map<String, Object> myCircleList(String token, Integer accountId) {
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
+        }
         List<CircleListDto> _list_create = new ArrayList<CircleListDto>();
         try {
             _list_create = circleService.myCreateList(accountId);
@@ -48,9 +58,12 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     }
 
     @Override
-    public Map<String, Object> myCreateList(Integer createId) {
+    public Map<String, Object> myCreateList(String token, Integer createId) {
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
+        }
         try {
-
             List<CircleListDto> _list = circleService.myCreateList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
 
@@ -60,14 +73,25 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     }
 
     @Override
-    public Map<String, Object> myConcernList(Integer createId) {
+    public Map<String, Object> myConcernList(String token, Integer createId) {
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return AccountConstants.MAP_TOKEN_FAILURE;
+        }
         try {
-
             List<CircleListDto> _list = circleService.myConcernList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
 
         } catch (Exception e) {
             return Constants.MAP_500;
         }
+    }
+
+    private boolean isTokenFailure(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return true;
+        }
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+        return StringUtils.isEmpty(phone);
     }
 }

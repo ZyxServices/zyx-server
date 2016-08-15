@@ -7,6 +7,7 @@ import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.QueryUserInfoVo;
 import org.springframework.stereotype.Repository;
+import com.zyx.vo.account.MyCenterInfoVo;
 
 import java.util.List;
 
@@ -30,8 +31,11 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
 
     /**
      * 通过ID查询用户简单信息
+     *
      * @param id
      * @return
      */
     QueryUserInfoVo selectAccountById(Integer id);
+
+    MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam);
 }

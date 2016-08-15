@@ -41,6 +41,14 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
         <result column="offcial" property="offcial" jdbcType="INTEGER"/>
     </resultMap>
+    
+    <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <!--<association property="gz" column="id" select="selectCircleItemCount"></association>-->
+        <!--<association property="fs" column="id" select="selectCircleItemCount"></association>-->
+        <association property="dt" column="id" select="selectDTCount"></association>
+        <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
+    </resultMap>
 
     <select id="selectAccountByPhone" parameterType="String" resultType="int">
         select count("id") from user where phone = #{phone}
@@ -100,5 +108,21 @@
         </if>
         where id = #{id}
     </update>
+
+    <select id="queryMyCenterInfo" parameterType="com.zyx.entity.account.UserLoginParam"
+            resultMap="MyCenterInfoVoResultMap">
+        select * from user where 1 = 1
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
+    </select>
+
+    <select id="selectAuthByUserId" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
+    <select id="selectDTCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM concern WHERE user_id = #{user_id}
+    </select>
 
 </mapper>

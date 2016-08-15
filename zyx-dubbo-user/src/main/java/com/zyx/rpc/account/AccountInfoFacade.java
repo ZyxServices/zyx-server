@@ -16,4 +16,13 @@ public interface AccountInfoFacade {
     Map<String, Object> queryAccountInfo(String token, int userId);
 
     Map<String, Object> editAccountInfo(String token, int userId, AccountInfoParam param);
+
+    /**
+     * 个人中心用户信息接口
+     *
+     * @param token
+     * @param userId
+     * @return
+     */
+    Map<String, Object> queryMyCenterInfo(String token, int userId);
 }

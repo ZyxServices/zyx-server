@@ -62,4 +62,13 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             return PgConstants.MAP_500;
         }
     }
+
+    @Override
+    public List<Concern> queryMyConcernList(Integer accountId) {
+        if (accountId == null) {
+            return null;
+        }
+
+        return concernMapper.myList(accountId);
+    }
 }

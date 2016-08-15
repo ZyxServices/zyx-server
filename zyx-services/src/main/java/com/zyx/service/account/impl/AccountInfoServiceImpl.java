@@ -7,6 +7,7 @@ import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.vo.account.AccountInfoVo;
+import com.zyx.vo.account.MyCenterInfoVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,7 +53,15 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
 
     @Override
     public List<AccountInfo> selectBaseInfo(List<Integer> ids) {
-        return selectByIds(ids,"id","createTime","phone","nickname","sex","avatar");
+        return selectByIds(ids, "id", "createTime", "phone", "nickname", "sex", "avatar");
+    }
+
+    @Override
+    public MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam) {
+        AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
+        MyCenterInfoVo _info = accountInfoMapper.queryMyCenterInfo(userLoginParam);
+
+        return _info;
     }
 
 }
