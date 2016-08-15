@@ -5,7 +5,6 @@ import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;

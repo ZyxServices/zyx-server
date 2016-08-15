@@ -2,7 +2,6 @@ package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.rpc.activity.utils.ActivityUtils;

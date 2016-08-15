@@ -66,8 +66,6 @@ public interface CircleService extends BaseService<Circle> {
     Map<String, Object> setTop(Integer circle_id);
 
 
-    List<Circle> queryCircleDeva();
-
     Map<String, Object> getOne(Integer circleId, Integer accountId);
 
     Map<String, Object> closeMaster(Integer circleId, Integer accountId);

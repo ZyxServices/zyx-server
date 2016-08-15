@@ -105,18 +105,6 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public List<Circle> queryCircleDeva() {
-
-
-        return circleService.queryCircleDeva();
-    }
-
-    @Override
-    public List<Concern> queryConcernDeva() {
-        return concrenService.queryConcernDeva();
-    }
-
-    @Override
     public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
         return zanService.countZanByBodyId(type, bodyIds);
     }

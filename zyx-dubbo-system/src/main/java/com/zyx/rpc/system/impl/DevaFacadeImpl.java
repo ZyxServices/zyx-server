@@ -2,8 +2,8 @@ package com.zyx.rpc.system.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.system.SystemConstants;
-import com.zyx.entity.Devaluation;
 import com.zyx.entity.account.AccountInfo;
+import com.zyx.entity.system.Devaluation;
 import com.zyx.rpc.system.DevaFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.activity.ActivityService;

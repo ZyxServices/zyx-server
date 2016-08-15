@@ -3,11 +3,9 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
-import com.zyx.mapper.activity.DevaluationMapper;
 import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
-
 import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcrenService;
@@ -24,8 +22,6 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
     @Resource
     private ConcernMapper concernMapper;
 
-    @Resource
-    DevaluationMapper devaluationMapper;
 
     public ConcrenServicImpl() {
         super(Concern.class);
@@ -65,15 +61,5 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
-    }
-
-    @Override
-    public List<Concern> queryConcernDeva() {
-        List<Integer> ids = devaluationMapper.queryDevaIds(3);
-        if (ids != null && ids.size() > 0) {
-            List<Concern> list = concernMapper.queryConcernDeva(ids);
-            return list;
-        }
-        return null;
     }
 }

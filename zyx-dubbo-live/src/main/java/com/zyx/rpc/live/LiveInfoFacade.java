@@ -80,55 +80,6 @@ public interface LiveInfoFacade {
 	public String getLiveUrl(Integer liveId);
 	
 	/**
-	 * 获取首推
-	 * @return
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年6月29日 上午10:35:22
-	 */
-//	public List<LiveInfo> getDevaLives();
-	
-	/**
-	 * 刷新首推
-	 * 
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年6月29日 下午2:52:40
-	 */
-//	public void refreshDevaLives();
-	
-	/**
-	 * 添加首推
-	 * @param lvieId
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年7月4日 下午2:19:34
-	 */
-	public void addDevaLive(Integer lvieId);
-	
-	/**
-	 * 首推个数
-	 * @return
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年7月4日 下午2:19:46
-	 */
-	public int countDevaLive();
-	
-	/**
-	 * 首推 直播观看人数
-	 * @return
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年7月4日 下午2:39:12
-	 */
-	public Map<Integer,Integer>getLiveDevaWatchNum();
-	/**
 	 * 获取直播的观看人数
 	 * @param liveIds
 	 * @return

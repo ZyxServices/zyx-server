@@ -91,18 +91,4 @@
             limit #{pageNumber}, #{pageHis}
         </if>
     </select>
-
-    <update id="updateDevaluation" parameterType="com.zyx.entity.activity.parm.UpdateDevaluationParm">
-        UPDATE activity SET devaluation = ${devaluation} where id = #{id}
-    </update>
-
-    <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="queryActivity">
-        select * from activity where id IN
-        <foreach item="item" index="index" collection="list"
-                 open="(" separator="," close=")">
-            #{item}
-        </foreach>
-         ORDER BY create_time desc
-    </select>
-
 </mapper>

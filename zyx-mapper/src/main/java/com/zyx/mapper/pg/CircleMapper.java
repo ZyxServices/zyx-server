@@ -61,14 +61,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
 
     /**
-     * 根据id列表查询圈子数据
-     *
-     * @param ids
-     * @return
-     */
-    List<Circle> queryCircleDeva(@Param("ids") List<Integer> ids);
-
-    /**
      * 单条
      *
      * @param id

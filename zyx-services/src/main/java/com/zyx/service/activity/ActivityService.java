@@ -3,7 +3,6 @@ package com.zyx.service.activity;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.parm.UpdateDevaluationParm;
 import com.zyx.service.BaseService;
 
 import java.util.List;
