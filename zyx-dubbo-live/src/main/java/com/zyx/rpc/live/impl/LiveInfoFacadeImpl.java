@@ -30,7 +30,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         // 修正开始时间
         long now = System.currentTimeMillis();
         liveInfo.setStart(liveInfo.getStart() == null || liveInfo.getStart() < now ? now : liveInfo.getStart());
-        liveInfo.setState(liveInfo.getStart() == null  ? 0 : liveInfo.getState());
+        liveInfo.setState(0);
         liveInfo.setDel(0);
         liveInfoService.save(liveInfo);
     }
