@@ -5,6 +5,8 @@ import com.zyx.entity.account.UserLoginParam;
 import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.AccountInfoVo;
+import com.zyx.vo.account.QueryUserInfoVo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
  *          Copyright (c)2016 tyj-版权所有
  * @title AccountInfoMapper.java
  */
+@Repository("accountInfoMapper")
 public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
     int selectAccountByPhone(String phone);
 
@@ -26,4 +29,11 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
     List<AccountInfoVo> queryUserDevaluation(List<Integer> users);
 
     int updateAccountByParam(AccountInfoParam param);
+
+    /**
+     * 通过ID查询用户简单信息
+     * @param id
+     * @return
+     */
+    QueryUserInfoVo selectAccountById(Integer id);
 }

@@ -59,7 +59,7 @@ public class ActivityDevaluationServiceImpl implements ActivityDevaluationServic
     @Override
     public Map<String, Object> insterActivityDeva(Devaluation devaluation) {
         if (devaluation.getTypes() != null && devaluation.getDevaluationId() != null) {
-            devaluation.setCreateTime(new Date().getTime());
+            devaluation.setCreateTime(System.currentTimeMillis());
             int insert = devaluationMapper.insert(devaluation);
             if (insert > 0) {
                 deleteDeavRedis(devaluation);

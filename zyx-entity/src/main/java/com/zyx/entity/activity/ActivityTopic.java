@@ -69,6 +69,12 @@ public class ActivityTopic extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String images;
 
+    /**
+     * 是否屏蔽
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private String mask;
 
     public Integer getUserId() {
         return userId;
@@ -126,6 +132,14 @@ public class ActivityTopic extends BaseEntity {
         this.images = images;
     }
 
+    public String getMask() {
+        return mask;
+    }
+
+    public void setMask(String mask) {
+        this.mask = mask;
+    }
+
     @Override
     public String toString() {
         return "ActivityTopic{" +
@@ -136,6 +150,7 @@ public class ActivityTopic extends BaseEntity {
                 ", topicContent='" + topicContent + '\'' +
                 ", topicDate=" + topicDate +
                 ", images='" + images + '\'' +
+                ", mask='" + mask + '\'' +
                 '}';
     }
 }

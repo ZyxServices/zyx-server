@@ -7,14 +7,19 @@ import com.zyx.entity.activity.ActivityMember;
 import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
 import com.zyx.entity.activity.vo.QueryMemberVo;
+import com.zyx.mapper.account.AccountInfoMapper;
+import com.zyx.mapper.account.UserAddressMapper;
+import com.zyx.mapper.account.UserMarkMapper;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.ActivityMemberMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.ActivityMemberService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.account.QueryUserInfoVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +39,8 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     private ActivityMapper activityMapper;
     @Resource
     private ActivityMemberMapper activityMemberMapper;
+    @Resource
+    private AccountInfoMapper accountInfoMapper;
 
     public ActivityMemberServiceImpl() {
         super(ActivityMember.class);
@@ -51,7 +58,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
             queryMemberParm.setActivityId(parm.getActivityId());
             queryMemberParm.setUserId(parm.getUserId());
 
-            List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(queryMemberParm);
+            List<ActivityMember> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(queryMemberParm);
             if (queryMemberVos.size() > 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10005, "此用户已报名过此活动");
             }
@@ -106,10 +113,27 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
             return Constants.MAP_PARAM_MISS;
         }
 
-        List<QueryMemberVo> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
+        List<ActivityMember> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
+        List<QueryMemberVo> memberVos = new ArrayList<>();
+        queryMemberVos.forEach(e ->{
+            QueryUserInfoVo queryUserInfoVo = accountInfoMapper.selectAccountById(e.getUserId());
+            QueryMemberVo queryMemberVo = new QueryMemberVo();
+            queryMemberVo.setId(e.getId());
+            queryMemberVo.setActivityId(e.getActivityId());
+            queryMemberVo.setJoinTime(e.getJoinTime());
+            queryMemberVo.setExamineType(e.isExamineType());
+            queryMemberVo.setMemberInfo(e.getMemberInfo());
+            queryMemberVo.setPhone(e.getPhone());
+            queryMemberVo.setUserId(e.getUserId());
+            queryMemberVo.setSex(queryUserInfoVo.getSex());
+            queryMemberVo.setUserNick(queryUserInfoVo.getNickname());
+            queryMemberVo.setBirthday(((System.currentTimeMillis() - queryUserInfoVo.getBirthday()) / (365 * 24 * 60 * 60 * 1000l)));
+            queryMemberVo.setMask(e.getMask());
+            memberVos.add(queryMemberVo);
+        });
 
-        if (queryMemberVos != null && queryMemberVos.size() > 0) {
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", queryMemberVos);
+        if (memberVos.size() > 0) {
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", memberVos);
         } else {
             return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
         }

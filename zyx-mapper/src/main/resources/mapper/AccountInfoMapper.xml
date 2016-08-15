@@ -30,6 +30,18 @@
         <result column="phone" property="phone" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="BIGINT"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <result column="offcial" property="offcial" jdbcType="INTEGER"/>
+    </resultMap>
+
     <select id="selectAccountByPhone" parameterType="String" resultType="int">
         select count("id") from user where phone = #{phone}
     </select>
@@ -45,15 +57,21 @@
         <if test="id != null and id != ''">
             and id = #{id}
         </if>
+        AND del != 1
     </select>
 
     <select id="queryUserDevaluation" parameterType="java.util.List" resultMap="AccountInfoMap">
-        select * from user where id IN
+        select * from user where del != 1 AND id IN
         <foreach item="item" index="index" collection="list"
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+
         ORDER BY create_time desc limit 0,10
+    </select>
+
+    <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1
     </select>
 
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
