@@ -1,9 +1,9 @@
 package com.zyx.service.admin;
 
-import java.util.List;
-
-import com.zyx.entity.Devaluation;
+import com.zyx.entity.system.Devaluation;
 import com.zyx.service.BaseService;
+
+import java.util.List;
 
 public interface DevaluationService extends BaseService<Devaluation>{
 	/**

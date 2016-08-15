@@ -47,15 +47,6 @@
         </if>
     </select>
 
-    <select id="queryUserDevaluation" parameterType="java.util.List" resultMap="AccountInfoMap">
-        select * from user where id IN
-        <foreach item="item" index="index" collection="list"
-                 open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        ORDER BY create_time desc limit 0,10
-    </select>
-
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
         update user set password = #{password2} where phone = #{phone}
     </update>

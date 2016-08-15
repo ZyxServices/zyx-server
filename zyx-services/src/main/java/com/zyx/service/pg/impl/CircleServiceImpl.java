@@ -9,7 +9,6 @@ import com.zyx.entity.pg.dto.CircleListDto;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.mapper.pg.CircleMapper;
 import com.zyx.mapper.pg.MyConcernMapper;
-import com.zyx.service.admin.DevaluationService;
 import com.zyx.service.pg.MeetService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
@@ -34,9 +33,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
     @Resource
     CircleItemMapper circleItemMapper;
-
-    @Resource
-    DevaluationService devaluationService;
 
     public CircleServiceImpl() {
         super(Circle.class);
@@ -189,16 +185,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         }
     }
 
-
-    @Override
-    public List<Circle> queryCircleDeva() {
-        List<Integer> devaLongs = devaluationService.queryDevaIds(3);
-        if (devaLongs != null && devaLongs.size() > 0) {
-            List<Circle> returnList = circleMapper.queryCircleDeva(devaLongs);
-            return returnList;
-        }
-        return null;
-    }
 
     @Override
     public Map<String, Object> getOne(Integer circleId, Integer accountId) {
