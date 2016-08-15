@@ -12,11 +12,12 @@
         <result column="topic_date" property="topicDate" jdbcType="TIMESTAMP"/>
         <result column="images" property="images" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
     </resultMap>
 
 
     <select id="dynamicQuery" parameterType="com.zyx.entity.activity.parm.QueryTopicParm" resultMap="activityTopic">
-        SELECT * FROM activity_topic WHERE activity_id = #{activityId} ORDER BY create_time desc
+        SELECT * FROM activity_topic WHERE activity_id = #{activityId} AND del != 1 ORDER BY create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pageNumber}, #{pages}
         </if>

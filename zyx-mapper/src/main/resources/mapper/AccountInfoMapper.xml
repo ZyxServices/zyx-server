@@ -30,6 +30,26 @@
         <result column="phone" property="phone" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="BIGINT"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <result column="offcial" property="offcial" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <!--<association property="gz" column="id" select="selectCircleItemCount"></association>-->
+        <!--<association property="fs" column="id" select="selectCircleItemCount"></association>-->
+        <association property="dt" column="id" select="selectDTCount"></association>
+        <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
+    </resultMap>
+
     <select id="selectAccountByPhone" parameterType="String" resultType="int">
         select count("id") from user where phone = #{phone}
     </select>
@@ -45,6 +65,21 @@
         <if test="id != null and id != ''">
             and id = #{id}
         </if>
+        AND del != 1
+    </select>
+
+    <select id="queryUserDevaluation" parameterType="java.util.List" resultMap="AccountInfoMap">
+        select * from user where del != 1 AND id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+        ORDER BY create_time desc limit 0,10
+    </select>
+
+    <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1
     </select>
 
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
@@ -73,5 +108,21 @@
         </if>
         where id = #{id}
     </update>
+
+    <select id="queryMyCenterInfo" parameterType="com.zyx.entity.account.UserLoginParam"
+            resultMap="MyCenterInfoVoResultMap">
+        select * from user where 1 = 1
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
+    </select>
+
+    <select id="selectAuthByUserId" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
+    <select id="selectDTCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM concern WHERE user_id = #{user_id}
+    </select>
 
 </mapper>

@@ -37,4 +37,7 @@
     <!-- 我的圈子接口 -->
     <dubbo:service interface="com.zyx.rpc.account.MyCircleFacade" ref="myCircleFacade"/>
 
+    <!-- 我的动态接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.MyConcernFacade" ref="myConcernFacade"/>
+
 </beans>

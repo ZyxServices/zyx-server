@@ -20,7 +20,7 @@ public class QueryMemberVo implements Serializable {
     /**
      * 活动ID
      */
-    private ActivityVo activity;
+    private Integer activityId;
 
     /**
      * 用户ID
@@ -53,6 +53,21 @@ public class QueryMemberVo implements Serializable {
      */
     private String memberInfo;
 
+    /**
+     * 性别
+     */
+    private Integer sex;
+
+    /**
+     * 出生日期
+     */
+    private Long birthday;
+
+    /**
+     * 是否屏蔽 （0正常 1屏蔽）
+     */
+    private Integer mask;
+
     public Integer getId() {
         return id;
     }
@@ -61,12 +76,12 @@ public class QueryMemberVo implements Serializable {
         this.id = id;
     }
 
-    public ActivityVo getActivity() {
-        return activity;
+    public Integer getActivityId() {
+        return activityId;
     }
 
-    public void setActivity(ActivityVo activity) {
-        this.activity = activity;
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
     }
 
     public Integer getUserId() {
@@ -115,5 +130,46 @@ public class QueryMemberVo implements Serializable {
 
     public void setMemberInfo(String memberInfo) {
         this.memberInfo = memberInfo;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Long birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getMask() {
+        return mask;
+    }
+
+    public void setMask(Integer mask) {
+        this.mask = mask;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryMemberVo{" +
+                "id=" + id +
+                ", activityId=" + activityId +
+                ", userId=" + userId +
+                ", userNick='" + userNick + '\'' +
+                ", joinTime=" + joinTime +
+                ", examineType=" + examineType +
+                ", phone='" + phone + '\'' +
+                ", memberInfo='" + memberInfo + '\'' +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
+                ", mask=" + mask +
+                '}';
     }
 }

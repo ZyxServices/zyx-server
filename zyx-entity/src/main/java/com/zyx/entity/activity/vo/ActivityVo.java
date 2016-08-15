@@ -129,6 +129,11 @@ public class ActivityVo implements Serializable {
      */
     private List<String> editDescImgUrl;
 
+    /**
+     * 是否屏蔽(0正常 1屏蔽)
+     */
+    private Integer mask;
+
     public Integer getId() {
         return id;
     }
@@ -305,6 +310,14 @@ public class ActivityVo implements Serializable {
         this.editDescImgUrl = editDescImgUrl;
     }
 
+    public Integer getMask() {
+        return mask;
+    }
+
+    public void setMask(Integer mask) {
+        this.mask = mask;
+    }
+
     @Override
     public String toString() {
         return "ActivityVo{" +
@@ -329,7 +342,8 @@ public class ActivityVo implements Serializable {
                 ", memberTemplate='" + memberTemplate + '\'' +
                 ", memberCount=" + memberCount +
                 ", editDesc='" + editDesc + '\'' +
-                ", editDescImgUrl='" + editDescImgUrl + '\'' +
+                ", editDescImgUrl=" + editDescImgUrl +
+                ", mask=" + mask +
                 '}';
     }
 }

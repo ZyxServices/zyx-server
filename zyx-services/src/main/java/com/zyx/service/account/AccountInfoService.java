@@ -5,11 +5,12 @@ import com.zyx.entity.account.UserLoginParam;
 import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.account.AccountInfoVo;
+import com.zyx.vo.account.MyCenterInfoVo;
 
 import java.util.List;
 
 /**
- * Created by WeiMinSheng on 2016/6/13.
+ * Created by wms on 2016/6/13.
  *
  * @author WeiMinSheng
  * @version V1.0
@@ -52,8 +53,17 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
 
     /**
      * 查询多个用户信息的基础信息
+     *
      * @param ids
      * @return
      */
     List<AccountInfo> selectBaseInfo(List<Integer> ids);
+
+    /**
+     * 个人中心用户信息查询接口
+     *
+     * @param userLoginParam
+     * @return
+     */
+    MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam);
 }

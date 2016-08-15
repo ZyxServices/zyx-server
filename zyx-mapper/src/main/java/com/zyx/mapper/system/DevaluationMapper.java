@@ -28,25 +28,25 @@ public interface DevaluationMapper extends BaseMapper<Devaluation> {
     /**
      * 查询首推项
      *
-     * @param types
+     * @param model
      * @return
      */
-    List<Devaluation> queryDevaluation(Integer types);
+    List<Devaluation> queryDevaluation(Integer model);
 
     /**
      * 查询相关类型的所有首推ids
      *
-     * @param types
+     * @param model
      * @return
      */
-    List<Integer> queryDevaIds(Integer types);
+    List<Integer> queryDevaIds(Integer model);
 
     /**
      * 根据type和首推现id查询首推信息
      *
-     * @param types
-     * @param devaluationId
+     * @param model
+     * @param modelId
      * @return
      */
-    Devaluation queryDevaluationByDevaId(Integer types, Integer devaluationId);
+    Devaluation queryDevaluationByDevaId(Integer model, Integer modelId);
 }

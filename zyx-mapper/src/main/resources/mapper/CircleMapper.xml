@@ -102,8 +102,9 @@
     </select>
 
     <select id="myConcernList" parameterType="int" resultMap="CircleListDtoResultMap">
-        SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id}) AND state!=-1
+    SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id} and concern_type = 4) AND state!=-1
     </select>
+
 
     <select id="jxCircle" resultMap="CircleJxDtoResultMap">
     SELECT

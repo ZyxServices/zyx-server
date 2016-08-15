@@ -4,23 +4,23 @@
 
     <resultMap id="devaluation" type="com.zyx.entity.system.Devaluation">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="types" property="types" jdbcType="INTEGER"/>
-        <result column="devaluation_id" property="devaluationId" jdbcType="INTEGER"/>
+        <result column="model" property="model" jdbcType="INTEGER"/>
+        <result column="model_id" property="modelId" jdbcType="INTEGER"/>
     </resultMap>
 
     <delete id="deleteDevaluation" parameterType="com.zyx.entity.system.Devaluation">
-        DELETE FROM devaluation WHERE types = ${types} AND devaluationId = ${devaluationId}
+        DELETE FROM devaluation WHERE model = ${model} AND model_id = ${modelId}
     </delete>
 
     <select id="queryDevaluation" parameterType="java.lang.Integer" resultMap="devaluation">
-        select * from devaluation where types = #{types} ORDER BY create_time desc
+        select * from devaluation where model = #{model} ORDER BY create_time desc
     </select>
     <select id="queryDevaIds" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select devaluation_id from devaluation where types = #{types} ORDER BY create_time desc
+        select model_id from devaluation where model = #{model} ORDER BY create_time desc
     </select>
 
     <select id="queryDevaluationByDevaId" resultMap="devaluation">
-        select * from devaluation where types = #{0} and devaluation_id = #{1} ORDER BY create_time desc
+        select * from devaluation where model = #{0} and model_id = #{1} ORDER BY create_time desc
     </select>
 
 </mapper>

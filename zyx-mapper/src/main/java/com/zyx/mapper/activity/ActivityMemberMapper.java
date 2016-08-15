@@ -36,7 +36,7 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
      * @param parm
      * @return
      */
-    List<QueryMemberVo> queryActivityMemberInfo(QueryMemberParm parm);
+    List<ActivityMember> queryActivityMemberInfo(QueryMemberParm parm);
 
     /**
      * 发起这审核报名
