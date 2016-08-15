@@ -95,9 +95,9 @@
         </if>
     </select>
 
-    <update id="updateDevaluation" parameterType="com.zyx.entity.activity.parm.UpdateDevaluationParm">
-        UPDATE activity SET devaluation = ${devaluation} where id = #{id}
-    </update>
+    <!--<update id="updateDevaluation" parameterType="com.zyx.entity.activity.parm.UpdateDevaluationParm">-->
+        <!--UPDATE activity SET devaluation = ${devaluation} where id = #{id}-->
+    <!--</update>-->
 
     <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="queryActivity">
         select * from activity where  del != 1 AND id IN
