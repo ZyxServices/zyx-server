@@ -23,56 +23,56 @@ public class Devaluation extends BaseEntity implements Serializable{
 
     
 	 /**serialVersionUID TODO*/ 
-	
 	private static final long serialVersionUID = 8846690488192906727L;
 	/**
      * 对面模块类型 1、活动，2,直播，3,圈子，4动态，5用户
      */
-    @Column
+    @Column(name = "model")
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer types;
-
+    private Integer model;
     /**
      * 对应模块首推数据ID
      */
-    @Column(name = "devaluation_id")
+    @Column(name = "model_id")
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer devaluationId;
+    private Integer modelId;
 
-    @Column(name = "image")
+    @Column(name = "image_url")
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String image;
+    private String imageUrl;
+    @Column(name = "area")
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private Integer area;
 
-    public Integer getTypes() {
-        return types;
+    public void setModel(Integer model) {
+        this.model = model;
     }
 
-    public void setTypes(Integer types) {
-        this.types = types;
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
     }
 
-    public Integer getDevaluationId() {
-        return devaluationId;
+    public Integer getModel() {
+        return model;
     }
 
-    public void setDevaluationId(Integer devaluationId) {
-        this.devaluationId = devaluationId;
+    public Integer getModelId() {
+        return modelId;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    @Override
-    public String toString() {
-        return "Devaluation{" +
-                "types=" + types +
-                ", devaluationId=" + devaluationId +
-                ", image='" + image + '\'' +
-                '}';
+    public void setArea(Integer area) {
+        this.area = area;
+    }
+
+    public Integer getArea() {
+        return area;
     }
 }

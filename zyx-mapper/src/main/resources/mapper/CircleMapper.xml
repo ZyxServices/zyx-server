@@ -105,30 +105,4 @@
         SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id} and concern_type = 4) AND state!=-1
     </select>
 
-    <select id="jxCircle" resultMap="CircleJxDtoResultMap">
-    SELECT
-        circle.title,
-        circle.id,
-        circle.head_img_url,
-        devaluation.sequence,
-        devaluation.area,
-        devaluation.types,
-        (
-            SELECT
-                COUNT('id')
-            FROM
-                circle_item
-            WHERE
-                circle.id = circle_item.circle_id
-        ) AS circleItemCount
-    FROM
-        circle
-    INNER JOIN devaluation ON circle.id = devaluation.devaluation_id
-    WHERE
-        devaluation.types = #{devTypes}
-    ORDER BY
-        sequence DESC
-    LIMIT 0,#{max}
-    </select>
-
 </mapper>

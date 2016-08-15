@@ -29,23 +29,12 @@ public class DevaluationServiceImpl extends BaseServiceImpl<Devaluation> impleme
     }
 
     @Override
-    public List<Devaluation> queryDevaluation(Integer types) {
-        return devaluationMapper.queryDevaluation(types);
+    public List<Devaluation> queryDevaluation(Integer model) {
+        return devaluationMapper.queryDevaluation(model);
     }
 
     @Override
-    public List<Integer> queryDevaIds(Integer types) {
-        return devaluationMapper.queryDevaIds(types);
+    public List<Integer> queryDevaIds(Integer model) {
+        return devaluationMapper.queryDevaIds(model);
     }
-
-    @Override
-    public List queryDevaByModel(Integer model) {
-        if (model == null || model < 1 || model > 5)
-            return null;
-        else {
-
-        }
-        return null;
-    }
-
 }
