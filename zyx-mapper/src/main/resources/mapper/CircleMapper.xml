@@ -72,13 +72,6 @@
         UPDATE circle SET top=1 where id=#{circle_id}
     </update>
 
-    <select id="queryCircleDeva" resultMap="CircleResultMap">
-        SELECT * FROM circle WHERE id IN
-        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
-
     <select id="findById" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE id=#{id} AND state!=-1
     </select>
