@@ -48,6 +48,11 @@
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <association property="circleItemCount" column="id" select="selectCircleItemCount"></association>
     </resultMap>
+    <resultMap id="CircleJxDtoResultMap" type="com.zyx.entity.pg.dto.JxCircleDto" extends="CircleResultMap">
+        <result column="sequence" property="sequence" jdbcType="INTEGER"></result>
+        <result column="area" property="area" jdbcType="INTEGER"></result>
+        <result column="types" property="types" jdbcType="INTEGER"></result>
+    </resultMap>
 
     <select id="circleList" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE state!=-1 ORDER BY create_time DESC
@@ -105,6 +110,32 @@
 
     <select id="myConcernList" parameterType="int" resultMap="CircleListDtoResultMap">
         SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id}) AND state!=-1
+    </select>
+
+    <select id="jxCircle" resultMap="CircleJxDtoResultMap">
+    SELECT
+        circle.title,
+        circle.id,
+        circle.head_img_url,
+        devaluation.sequence,
+        devaluation.area,
+        devaluation.types,
+        (
+            SELECT
+                COUNT('id')
+            FROM
+                circle_item
+            WHERE
+                circle.id = circle_item.circle_id
+        ) AS circleItemCount
+    FROM
+        circle
+    INNER JOIN devaluation ON circle.id = devaluation.devaluation_id
+    WHERE
+        devaluation.types = #{devTypes}
+    ORDER BY
+        sequence DESC
+    LIMIT 0,#{max}
     </select>
 
 </mapper>

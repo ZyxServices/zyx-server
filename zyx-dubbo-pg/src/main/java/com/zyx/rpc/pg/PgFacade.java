@@ -240,4 +240,11 @@ public interface PgFacade {
      * @return
      */
     Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId);
+
+    /**
+     *  获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     * @param max
+     * @return
+     */
+    Map<String, Object> jxCircle(Integer max);
 }

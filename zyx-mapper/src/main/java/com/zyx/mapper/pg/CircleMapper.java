@@ -2,6 +2,7 @@ package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.dto.CircleListDto;
+import com.zyx.entity.pg.dto.JxCircleDto;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -82,9 +83,9 @@ public interface CircleMapper extends BaseMapper<Circle> {
     Integer setAdminIds(@Param("adminIds") String adminIds, @Param("circleId") Integer circleId);
 
     /**
-<<<<<<< HEAD
      * 级联删除帖子
      * 圈子id，
+     *
      * @param circleId
      * @return
      */
@@ -105,4 +106,7 @@ public interface CircleMapper extends BaseMapper<Circle> {
      * @return
      */
     List<CircleListDto> myConcernList(@Param("account_id") Integer accountId);
+
+
+    List<JxCircleDto> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
 }

@@ -74,7 +74,7 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> updateHeadImg(String headImgUrl, Integer circleId);
 
-    Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
+    Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId);
 
     /**
      * 我创建的圈子列表
@@ -91,4 +91,11 @@ public interface CircleService extends BaseService<Circle> {
      * @return
      */
     List<CircleListDto> myConcernList(Integer accountId);
+
+    /**
+     *  获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     * @param max
+     * @return
+     */
+    Map<String, Object> jxCircle(Integer max);
 }
