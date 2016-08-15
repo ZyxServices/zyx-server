@@ -112,7 +112,7 @@
         circle.head_img_url,
         devaluation.sequence,
         devaluation.area,
-        devaluation.types,
+        devaluation.model as types,
         (
             SELECT
                 COUNT('id')
@@ -123,7 +123,7 @@
         ) AS circleItemCount
     FROM
         circle
-    INNER JOIN devaluation ON circle.id = devaluation.devaluation_id
+    INNER JOIN devaluation ON circle.id = devaluation.model_id
     WHERE
         devaluation.types = #{devTypes}
     ORDER BY

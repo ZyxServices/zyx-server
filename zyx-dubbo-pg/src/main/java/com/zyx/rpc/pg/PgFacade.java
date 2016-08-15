@@ -233,4 +233,18 @@ public interface PgFacade {
      * @return
      */
     Map<String, Object> jxCircle(Integer max);
+
+    /**
+     * 精选圈子模块帖子轮播图
+     * @param max
+     * @return
+     */
+    Map<String,Object> lbCircleItem(Integer max);
+
+    /**
+     * 根据登录用户获取该用户关注动态列表
+     * @param loginUserId
+     * @return
+     */
+    Map<String, Object> getMyFollowList(Integer loginUserId);
 }

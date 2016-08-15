@@ -3,6 +3,7 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.entity.pg.dto.MyFollow;
 import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,20 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> getMyFollowList(Integer loginUserId) {
+        try {
+            if (Objects.equals(loginUserId, null)) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30000, PgConstants.PG_ERROR_CODE_30000_MSG);
+            }
+            List<MyFollow> myFollows = concernMapper.myFollowList(loginUserId);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollows);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
+
     }
 }

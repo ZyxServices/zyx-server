@@ -41,7 +41,11 @@
         <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
         <result column="meetCount" property="meetCount" jdbcType="INTEGER"/>
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+    </resultMap>
 
+    <resultMap id="CircleItemLunBoMap" type="com.zyx.entity.pg.dto.CircleItemLunBo" extends="CircleItemResultMap">
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="circleItemList" resultMap="CircleItemCustomMap">
@@ -96,5 +100,18 @@
     <update id="delByThisUser">
         UPDATE circle_item SET state=-1 WHERE create_id=#{createThisId} AND id=#{circleItemId}
     </update>
+
+    <select id="getLunBo" resultMap="CircleItemLunBoMap">
+          SELECT
+            circle_item.id,
+            devaluation.image_url
+        FROM
+            devaluation
+        INNER JOIN circle_item ON circle_item.id = devaluation.model_id
+        WHERE devaluation.model=6 AND devaluation.area=2
+        ORDER BY
+            devaluation.sequence DESC
+        LIMIT 0,#{max}
+    </select>
 
 </mapper>

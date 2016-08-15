@@ -149,4 +149,14 @@ public class PgFacadeImpl implements PgFacade {
         return circleService.jxCircle(max);
     }
 
+    @Override
+    public Map<String, Object> lbCircleItem(Integer max) {
+        return circleItemService.lbCircleItem(max);
+    }
+
+    @Override
+    public Map<String, Object> getMyFollowList(Integer loginUserId) {
+        return concrenService.getMyFollowList(loginUserId);
+    }
+
 }

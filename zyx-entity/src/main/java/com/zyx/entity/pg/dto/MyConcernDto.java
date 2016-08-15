@@ -12,6 +12,7 @@ public class MyConcernDto extends MyConcern {
     private Integer userId;
     private String userName;
     private String nickName;
+    private String avatar;
 
     public Integer getUserId() {
         return userId;
@@ -35,5 +36,13 @@ public class MyConcernDto extends MyConcern {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

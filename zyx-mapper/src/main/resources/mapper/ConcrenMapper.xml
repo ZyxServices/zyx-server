@@ -34,7 +34,15 @@
         <result column="img_url" property="imgUrl" jdbcType="INTEGER"/>
         <result column="video_url" property="videoUrl" jdbcType="INTEGER"/>
         <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
-        <result column="createTime" property="createTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+    
+    <resultMap id="ConcernMyMap" type="com.zyx.entity.pg.dto.MyFollow" extends="ConcernResultMap">
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>
+        <result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="starRandom" resultMap="ConcernResultMap">
@@ -43,5 +51,24 @@
         <if test="n !=null">
             limit 0, #{n}
         </if>
+    </select>
+
+    <select id="myFollowList" resultMap="ConcernMyMap">
+        SELECT
+        concern.create_time,
+        concern.topic_content,
+        concern.img_url,
+        concern.video_url,
+        concern.topic_title,
+        `user`.nickname as nick_name,
+        `user`.avatar,
+        myconcern.account_id,
+        (SELECT COUNT(*) FROM zan WHERE zan.body_id=concern.id) AS zan_counts,
+        (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply_id=concern.id) AS comment_counts
+        FROM
+        concern
+        INNER JOIN myconcern ON myconcern.concern_id = concern.id
+        INNER JOIN `user` ON concern.user_id = `user`.id
+        WHERE myconcern.concern_type=0 AND myconcern.account_id=#{loginUserId}
     </select>
 </mapper>
