@@ -90,8 +90,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> setTop(Integer circle) {
-        return circleService.setTop(circle);
+    public Map<String, Object> setTop(Integer tooSize, Integer circleItemId) {
+        return circleItemService.setTop(tooSize, circleItemId);
     }
 
     @Override
@@ -102,18 +102,6 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content) {
         return replyService.addReply(reply_type, reply_id, account_id, content);
-    }
-
-    @Override
-    public List<Circle> queryCircleDeva() {
-
-
-        return circleService.queryCircleDeva();
-    }
-
-    @Override
-    public List<Concern> queryConcernDeva() {
-        return concrenService.queryConcernDeva();
     }
 
     @Override
@@ -154,6 +142,11 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId) {
         return circleService.setAdmins(createId, adminIds, circleId);
+    }
+
+    @Override
+    public Map<String, Object> jxCircle(Integer max) {
+        return circleService.jxCircle(max);
     }
 
 }

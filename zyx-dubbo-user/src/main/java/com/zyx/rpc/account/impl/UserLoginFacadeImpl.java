@@ -44,6 +44,11 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
         if (count == 0) {// 未注册
             return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50003, AccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
         }
+        // 判断用户名密码是否正确
+        AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);
+        if (accountInfo == null) {// 登陆失败
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50001, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
+        }
         // 判断是否已经登录,已登录的情况下删除登录信息
         String phoneTime = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
         if (phoneTime != null) {
@@ -63,10 +68,6 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
             }
         }
         try {
-            AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);
-            if (accountInfo == null) {// 登陆失败
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50001, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
-            }
             // 登录成功返回
             String token = UUID.randomUUID().toString().replaceAll("-", "");
             accountInfo.setToken(token);

@@ -46,7 +46,7 @@ public class LiveInfo extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String vedioUrl;
     @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
+    @ColumnType(jdbcType = JdbcType.INTEGER )
     private Integer state;
 
     @Column
@@ -129,7 +129,7 @@ public class LiveInfo extends BaseEntity {
         return state;
     }
 
-    public void setState(Integer status) {
+    public void setState(Integer state) {
         this.state= state;
     }
 

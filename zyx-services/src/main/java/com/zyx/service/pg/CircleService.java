@@ -1,9 +1,9 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Circle;
+import com.zyx.entity.pg.dto.CircleListDto;
 import com.zyx.service.BaseService;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,15 +66,34 @@ public interface CircleService extends BaseService<Circle> {
     Map<String, Object> setTop(Integer circle_id);
 
 
-    List<Circle> queryCircleDeva();
-
     Map<String, Object> getOne(Integer circleId, Integer accountId);
 
     Map<String, Object> closeMaster(Integer circleId, Integer accountId);
 
     Map<String, Object> updateHeadImg(String headImgUrl, Integer circleId);
 
-    Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
+    Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId);
 
+    /**
+     * 我创建的圈子列表
+     *
+     * @param createId 创建者id
+     * @return
+     */
+    List<CircleListDto> myCreateList(Integer createId);
 
+    /**
+     * 我关注的圈子列表
+     *
+     * @param accountId 用户id
+     * @return
+     */
+    List<CircleListDto> myConcernList(Integer accountId);
+
+    /**
+     *  获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     * @param max
+     * @return
+     */
+    Map<String, Object> jxCircle(Integer max);
 }

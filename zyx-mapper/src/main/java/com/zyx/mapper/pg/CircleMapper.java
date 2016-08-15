@@ -1,6 +1,8 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Circle;
+import com.zyx.entity.pg.dto.CircleListDto;
+import com.zyx.entity.pg.dto.JxCircleDto;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -59,14 +61,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
 
     /**
-     * 根据id列表查询圈子数据
-     *
-     * @param ids
-     * @return
-     */
-    List<Circle> queryCircleDeva(@Param("ids") List<Integer> ids);
-
-    /**
      * 单条
      *
      * @param id
@@ -74,12 +68,37 @@ public interface CircleMapper extends BaseMapper<Circle> {
      */
     Circle findById(@Param("id") Integer id);
 
-
     Integer closeMaster(@Param("circleId") Integer circleId, @Param("oldMasterId") Integer oldMasterId);
 
     Integer updateHeadImg(@Param("headImgUrl") String headImgUrl, @Param("circleId") Integer circleId);
 
     Integer setAdminIds(@Param("adminIds") String adminIds, @Param("circleId") Integer circleId);
 
+    /**
+     * 级联删除帖子
+     * 圈子id，
+     *
+     * @param circleId
+     * @return
+     */
+    Integer deleteByCircleId(@Param("circleId") Integer circleId);
 
+    /*
+     * 根据创建者ID查询圈子列表
+     *
+     * @param createId 创建者ID
+     * @return
+     */
+    List<CircleListDto> myCreateList(@Param("create_id") Integer createId);
+
+    /**
+     * 根据用户ID查询关注圈子列表
+     *
+     * @param accountId 用户ID
+     * @return
+     */
+    List<CircleListDto> myConcernList(@Param("account_id") Integer accountId);
+
+
+    List<JxCircleDto> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
 }

@@ -32,7 +32,9 @@
     <dubbo:service interface="com.zyx.rpc.account.AccountAddressFacade" ref="accountAddressFacade"/>
 
     <!-- 用户首推接口 -->
-    <dubbo:service interface="com.zyx.rpc.account.UserDevaFacade" ref="userDevaFacade"/>
-
     <dubbo:service interface="com.zyx.rpc.common.TokenFacade" ref="tokenFacade"/>
+
+    <!-- 我的圈子接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.MyCircleFacade" ref="myCircleFacade"/>
+
 </beans>

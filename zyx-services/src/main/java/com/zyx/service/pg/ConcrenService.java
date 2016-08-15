@@ -13,6 +13,4 @@ public interface ConcrenService extends BaseService<Concern> {
     Map<String,Object> addCern(Integer userId,Integer type,String cernTitle,String content,String  cernImgurl,String videoUrl,Integer visible);
 
     Map<String, Object> starRandom(Integer type,Integer n);
-
-    List<Concern> queryConcernDeva();
 }

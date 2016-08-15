@@ -12,10 +12,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zyx.constants.live.LiveConstants;
-import com.zyx.entity.Devaluation;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.rpc.live.LiveInfoFacade;
-import com.zyx.service.admin.DevaluationService;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.vo.live.LiveInfoVo;
 import com.zyx.vo.live.LiveSearchVo;
@@ -27,14 +25,12 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     LiveInfoService liveInfoService;
     @Autowired
     private RedisTemplate<String, ArrayList<LiveInfo>> redisTemplate;
-    @Autowired
-    DevaluationService devaluationService;
-
     @Override
     public void add(LiveInfo liveInfo) {
         // 修正开始时间
         long now = System.currentTimeMillis();
         liveInfo.setStart(liveInfo.getStart() == null || liveInfo.getStart() < now ? now : liveInfo.getStart());
+        liveInfo.setState(0);
         liveInfo.setDel(0);
         liveInfoService.save(liveInfo);
     }
@@ -83,45 +79,6 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         LiveInfo liveInfo = liveInfoService.selectByKey(liveId);
         return liveInfo == null ? null : liveInfo.getVedioUrl();
     }
-
-//    @Override
-//    public List<LiveInfo> getDevaLives() {
-//        @SuppressWarnings("unchecked")
-//        List<LiveInfo> list = (List<LiveInfo>) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_DEVA,
-//                LiveConstants.MARK_HASH_LIVE_DEVA);
-//        if (list != null && !list.isEmpty()) {
-//            return list;
-//        }
-//        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
-//        list = liveInfoService.selectLiveDevas(devaIds);
-//        redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
-//        return list;
-//    }
-
-//    @Override
-////    public void refreshDevaLives() {
-////        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
-////        List<LiveInfo> list = liveInfoService.selectLiveDevas(devaIds);
-////        if (list != null && !list.isEmpty())
-////            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_DEVA, LiveConstants.MARK_HASH_LIVE_DEVA, list);
-////    }
-
-    @Override
-    public void addDevaLive(Integer lvieId) {
-        Devaluation entity = new Devaluation();
-        entity.setTypes(LiveConstants.MARK_LIVE_DEVA_MODEL);
-        entity.setDevaluationId(lvieId);
-        entity.setCreateTime(System.currentTimeMillis());
-        devaluationService.save(entity);
-    }
-
-    @Override
-    public int countDevaLive() {
-        Devaluation record = new Devaluation();
-        record.setTypes(LiveConstants.MARK_LIVE_DEVA_MODEL);
-        return devaluationService.selectCount(record);
-    }
-
     @Override
     public Map<Integer, Integer> getLiveWatchNum(List<Integer> liveIds) {
         Random rand = new Random(System.currentTimeMillis());
@@ -131,11 +88,5 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
             numMap.put(liveId, rand.nextInt(1000));
         }
         return numMap;
-    }
-
-    @Override
-    public Map<Integer, Integer> getLiveDevaWatchNum() {
-        List<Integer> devaIds = devaluationService.queryDevaIds(LiveConstants.MARK_LIVE_DEVA_MODEL);
-        return getLiveWatchNum(devaIds);
     }
 }

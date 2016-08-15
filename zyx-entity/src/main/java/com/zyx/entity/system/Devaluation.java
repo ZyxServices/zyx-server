@@ -1,5 +1,6 @@
-package com.zyx.entity;
+package com.zyx.entity.system;
 
+import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 

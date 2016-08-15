@@ -31,9 +31,9 @@ public interface PgFacade {
      * @param createId   圈子创建者id
      * @param details    内容
      * @param headImgUrl 圈子头像url
-     * @param tag 圈子标签
+     * @param tag        圈子标签
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType,  String details, String headImgUrl,Integer tag);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag);
 
 
     /**
@@ -125,12 +125,12 @@ public interface PgFacade {
     Map<String, Object> circleItemList(Integer max, Integer circleId);
 
     /**
-     * 设置置顶圈子
+     * 设置置顶帖子
      *
-     * @param circle
+     * @param circleItemId
      * @return
      */
-    Map<String, Object> setTop(Integer circle);
+    Map<String, Object> setTop(Integer tooSize, Integer circleItemId);
 
     /**
      * 获取圈子置顶数据
@@ -151,20 +151,6 @@ public interface PgFacade {
      */
     Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content);
 
-
-    /**
-     * 获取圈子首推数据
-     *
-     * @return
-     */
-    List<Circle> queryCircleDeva();
-
-    /**
-     * 获取动态首推数据
-     *
-     * @return
-     */
-    List<Concern> queryConcernDeva();
 
 
     /**
@@ -206,6 +192,7 @@ public interface PgFacade {
 
     /**
      * 根据用户id删除帖子
+     *
      * @param createThisId
      * @param circleItemId
      * @return
@@ -214,26 +201,36 @@ public interface PgFacade {
 
     /**
      * 取消圈主
+     *
      * @param circleId
      * @param accountId
      * @return
      */
-    Map<String,Object> closeMaster(Integer circleId,Integer accountId);
+    Map<String, Object> closeMaster(Integer circleId, Integer accountId);
 
     /**
      * 修改圈子图片
+     *
      * @param imgUrl
      * @param circleId
      * @return
      */
-    Map<String,Object> updateCircleImg(String imgUrl,Integer circleId);
+    Map<String, Object> updateCircleImg(String imgUrl, Integer circleId);
 
     /**
      * 设置管理员
+     *
      * @param createId
      * @param adminIds
      * @param circleId
      * @return
      */
-    Map<String, Object> setAdmins(Integer createId,String adminIds, Integer circleId);
+    Map<String, Object> setAdmins(Integer createId, String adminIds, Integer circleId);
+
+    /**
+     *  获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     * @param max
+     * @return
+     */
+    Map<String, Object> jxCircle(Integer max);
 }

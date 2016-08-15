@@ -1,6 +1,6 @@
-package com.zyx.mapper.activity;
+package com.zyx.mapper.system;
 
-import com.zyx.entity.Devaluation;
+import com.zyx.entity.system.Devaluation;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

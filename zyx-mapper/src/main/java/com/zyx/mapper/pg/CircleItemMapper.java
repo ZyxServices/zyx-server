@@ -19,6 +19,8 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     int getCircleItemCounts(@Param(value = "circleId") Integer circleId);
 
+    Integer setTop(@Param("top") Integer topSize, @Param("circleItemId") Integer circleItemId);
+
     List<CircleItem> topList(@Param("circleId") Integer circleId, @Param("max") Integer max);
 
     CircleItem findById(@Param("circleItemId") Integer circleItemId);

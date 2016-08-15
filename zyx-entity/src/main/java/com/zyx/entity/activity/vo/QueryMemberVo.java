@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @package com.zyx.entity.activity.parm
  * @update 16-6-14 下午5:01
  */
-public class QueryMemberVo implements Serializable{
+public class QueryMemberVo implements Serializable {
 
     private Integer id;
     /**

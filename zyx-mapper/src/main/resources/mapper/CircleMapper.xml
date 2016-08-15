@@ -41,6 +41,19 @@
         <result column="tag" property="tag" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="CircleListDtoResultMap" type="com.zyx.entity.pg.dto.CircleListDto">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"></association>
+    </resultMap>
+    <resultMap id="CircleJxDtoResultMap" type="com.zyx.entity.pg.dto.JxCircleDto" extends="CircleResultMap">
+        <result column="sequence" property="sequence" jdbcType="INTEGER"></result>
+        <result column="area" property="area" jdbcType="INTEGER"></result>
+        <result column="types" property="types" jdbcType="INTEGER"></result>
+    </resultMap>
+
     <select id="circleList" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE state!=-1 ORDER BY create_time DESC
         <if test="#{max} !=null">
@@ -64,14 +77,6 @@
         UPDATE circle SET top=1 where id=#{circle_id}
     </update>
 
-
-    <select id="queryCircleDeva" resultMap="CircleResultMap">
-        SELECT * FROM circle WHERE id IN
-        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
-
     <select id="findById" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE id=#{id} AND state!=-1
     </select>
@@ -88,5 +93,42 @@
         UPDATE circle SET admin_ids=#{adminIds} WHERE id=#{circleId}
     </update>
 
+    <select id="myCreateList" parameterType="int" resultMap="CircleListDtoResultMap">
+        SELECT * FROM circle WHERE create_id=#{create_id} AND state!=-1
+    </select>
+
+    <select id="selectCircleItemCount" parameterType="int" resultType="int">
+        SELECT count(*) FROM circle_item WHERE circle_id=#{circle_id} AND state!=-1
+    </select>
+
+    <select id="myConcernList" parameterType="int" resultMap="CircleListDtoResultMap">
+        SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id}) AND state!=-1
+    </select>
+
+    <select id="jxCircle" resultMap="CircleJxDtoResultMap">
+    SELECT
+        circle.title,
+        circle.id,
+        circle.head_img_url,
+        devaluation.sequence,
+        devaluation.area,
+        devaluation.types,
+        (
+            SELECT
+                COUNT('id')
+            FROM
+                circle_item
+            WHERE
+                circle.id = circle_item.circle_id
+        ) AS circleItemCount
+    FROM
+        circle
+    INNER JOIN devaluation ON circle.id = devaluation.devaluation_id
+    WHERE
+        devaluation.types = #{devTypes}
+    ORDER BY
+        sequence DESC
+    LIMIT 0,#{max}
+    </select>
 
 </mapper>
