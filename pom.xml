@@ -27,6 +27,8 @@
         <module>zyx-task-scheduler</module>
         <module>zyx-dubbo-attention</module>
         <module>zyx-param</module>
+        <module>zyx-dubbo-collection</module>
+        <module>zyx-exception</module>
     </modules>
 
     <properties>

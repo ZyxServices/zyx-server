@@ -1,4 +1,4 @@
-package com.zyx.rpc.system.impl;
+package com.zyx.rpc.collection.impl;
 
 /**
  * Created by MrDeng on 2016/8/15.
