@@ -2,7 +2,7 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.entity.pg.dto.CircleListDto;
+import com.zyx.vo.pg.CircleListVo;
 import com.zyx.rpc.account.MyCircleFacade;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
@@ -39,13 +39,13 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
         if (isTokenFailure(token)) {
             return AccountConstants.MAP_TOKEN_FAILURE;
         }
-        List<CircleListDto> _list_create = new ArrayList<CircleListDto>();
+        List<CircleListVo> _list_create = new ArrayList<CircleListVo>();
         try {
             _list_create = circleService.myCreateList(accountId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<CircleListDto> _list_concern = new ArrayList<CircleListDto>();
+        List<CircleListVo> _list_concern = new ArrayList<CircleListVo>();
         try {
             _list_concern = circleService.myConcernList(accountId);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
             return AccountConstants.MAP_TOKEN_FAILURE;
         }
         try {
-            List<CircleListDto> _list = circleService.myCreateList(createId);
+            List<CircleListVo> _list = circleService.myCreateList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
 
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
             return AccountConstants.MAP_TOKEN_FAILURE;
         }
         try {
-            List<CircleListDto> _list = circleService.myConcernList(createId);
+            List<CircleListVo> _list = circleService.myConcernList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
 
         } catch (Exception e) {

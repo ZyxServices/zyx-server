@@ -1,14 +1,13 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Circle;
-import com.zyx.entity.pg.dto.CircleListDto;
-import com.zyx.entity.pg.dto.JxCircleDto;
+import com.zyx.vo.pg.CircleListVo;
+import com.zyx.vo.pg.JxCircleVo;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by XiaoWei on 2016/6/13.
@@ -89,7 +88,7 @@ public interface CircleMapper extends BaseMapper<Circle> {
      * @param createId 创建者ID
      * @return
      */
-    List<CircleListDto> myCreateList(@Param("create_id") Integer createId);
+    List<CircleListVo> myCreateList(@Param("create_id") Integer createId);
 
     /**
      * 根据用户ID查询关注圈子列表
@@ -97,8 +96,8 @@ public interface CircleMapper extends BaseMapper<Circle> {
      * @param accountId 用户ID
      * @return
      */
-    List<CircleListDto> myConcernList(@Param("account_id") Integer accountId);
+    List<CircleListVo> myConcernList(@Param("account_id") Integer accountId);
 
 
-    List<JxCircleDto> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
+    List<JxCircleVo> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
 }

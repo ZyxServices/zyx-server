@@ -1,4 +1,4 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import com.zyx.entity.pg.MyConcern;
 
@@ -8,7 +8,7 @@ import com.zyx.entity.pg.MyConcern;
  * @package com.zyx.entity.pg.dto
  * Create by XiaoWei on 2016/8/10
  */
-public class MyConcernDto extends MyConcern {
+public class MyConcernVo extends MyConcern {
     private Integer userId;
     private String userName;
     private String nickName;

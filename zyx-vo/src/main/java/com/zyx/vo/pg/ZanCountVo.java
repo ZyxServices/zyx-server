@@ -1,11 +1,11 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import java.io.Serializable;
 
 /**
  * Created by MrDeng on 2016/7/21.
  */
-public class ZanCountDto implements Serializable{
+public class ZanCountVo implements Serializable{
     private Integer bodyType;
     private Integer bodyId;
     private Integer zanCount;

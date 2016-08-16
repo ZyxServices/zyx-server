@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.zyx.entity.pg.dto.ZanCountDto;
+import com.zyx.vo.pg.ZanCountVo;
 import com.zyx.mapper.pg.ZanMapper;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.pg.ZanVo;
@@ -74,7 +74,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
     }
 
     @Override
-    public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
+    public List<ZanCountVo> countZanByBodyId(Integer type, List<Integer> bodyIds) {
         ZanVo vo = new ZanVo();
         vo.setType(type);
         vo.setBodyIds(bodyIds);
@@ -82,11 +82,11 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
     }
 
     @Override
-    public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
+    public ZanCountVo countZanByBodyId(Integer type, Integer bodyId) {
         Zan record = new Zan();
         record.setBodyType(type);
         record.setBodyId(bodyId);
-        ZanCountDto dto = new ZanCountDto();
+        ZanCountVo dto = new ZanCountVo();
         dto.setBodyId(bodyId);
         dto.setBodyType(type);
         dto.setZanCount( selectCount(record));

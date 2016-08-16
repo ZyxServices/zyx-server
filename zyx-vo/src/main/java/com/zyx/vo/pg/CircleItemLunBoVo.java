@@ -1,4 +1,4 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import com.zyx.entity.pg.CircleItem;
 
@@ -8,7 +8,7 @@ import com.zyx.entity.pg.CircleItem;
  * @package com.zyx.entity.pg.dto
  * Create by XiaoWei on 2016/8/15
  */
-public class CircleItemLunBo extends CircleItem {
+public class CircleItemLunBoVo extends CircleItem {
     private String image_url;
 
     public String getImage_url() {

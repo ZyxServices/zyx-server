@@ -1,4 +1,4 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import com.zyx.entity.pg.Circle;
 
@@ -8,7 +8,7 @@ import com.zyx.entity.pg.Circle;
  * @package com.zyx.entity.pg.dto
  * Create by XiaoWei on 2016/8/15
  */
-public class JxCircleDto extends Circle {
+public class JxCircleVo extends Circle {
     private Integer sequence;
     private Integer area;
     private Integer types;

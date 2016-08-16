@@ -3,13 +3,13 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
-import com.zyx.entity.pg.dto.MyFollow;
+import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.ConcrenService;
+import com.zyx.service.pg.ConcernService;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -18,7 +18,7 @@ import java.util.*;
  * Created by XiaoWei on 2016/6/7.
  */
 @Service
-public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcrenService {
+public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcernService {
 
     @Resource
     private ConcernMapper concernMapper;
@@ -70,12 +70,33 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
             if (Objects.equals(loginUserId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30000, PgConstants.PG_ERROR_CODE_30000_MSG);
             }
-            List<MyFollow> myFollows = concernMapper.myFollowList(loginUserId);
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollows);
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(loginUserId);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
 
+    }
+
+    @Override
+    public List<Concern> queryMyConcernList(Integer accountId) {
+        if (accountId == null) {
+            return null;
+        }
+        return concernMapper.myConcernList(accountId);
+
+    }
+
+    @Override
+    public Map<String, Object> starConcern(Integer max) {
+        try {
+            Optional.ofNullable(max).orElse(5);
+            List<MyFollowVo> myFollowVos = concernMapper.starConcern(max);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
     }
 }

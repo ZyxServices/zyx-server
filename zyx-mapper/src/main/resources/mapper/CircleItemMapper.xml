@@ -35,7 +35,7 @@
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
-    <resultMap id="CircleItemCustomMap" type="com.zyx.entity.pg.dto.CircleItemDto" extends="CircleItemResultMap">
+    <resultMap id="CircleItemCustomMap" type="com.zyx.vo.pg.CircleItemVo" extends="CircleItemResultMap">
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
@@ -43,7 +43,7 @@
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="CircleItemLunBoMap" type="com.zyx.entity.pg.dto.CircleItemLunBo" extends="CircleItemResultMap">
+    <resultMap id="CircleItemLunBoMap" type="com.zyx.vo.pg.CircleItemLunBoVo" extends="CircleItemResultMap">
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
     </resultMap>

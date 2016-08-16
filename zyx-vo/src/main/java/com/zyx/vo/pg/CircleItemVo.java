@@ -1,4 +1,4 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import com.zyx.entity.pg.CircleItem;
 
@@ -8,7 +8,7 @@ import com.zyx.entity.pg.CircleItem;
  * @package com.zyx.entity.pg.dto
  * Create by XiaoWei on 2016/8/9
  */
-public class CircleItemDto extends CircleItem {
+public class CircleItemVo extends CircleItem {
     private String nickname;
     private String avatar;
     private Integer zanCount;

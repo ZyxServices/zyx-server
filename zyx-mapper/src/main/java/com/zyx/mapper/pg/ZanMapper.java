@@ -1,7 +1,7 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Zan;
-import com.zyx.entity.pg.dto.ZanCountDto;
+import com.zyx.vo.pg.ZanCountVo;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.pg.ZanVo;
 import org.springframework.stereotype.Repository;
@@ -16,5 +16,5 @@ import java.util.List;
  */
 @Repository("zanMapper")
 public interface ZanMapper extends BaseMapper<Zan> {
-    List<ZanCountDto> countZanByBodyId(ZanVo vo);
+    List<ZanCountVo> countZanByBodyId(ZanVo vo);
 }

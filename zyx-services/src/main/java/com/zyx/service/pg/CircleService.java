@@ -1,7 +1,7 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Circle;
-import com.zyx.entity.pg.dto.CircleListDto;
+import com.zyx.vo.pg.CircleListVo;
 import com.zyx.service.BaseService;
 
 import java.util.List;
@@ -80,7 +80,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param createId 创建者id
      * @return
      */
-    List<CircleListDto> myCreateList(Integer createId);
+    List<CircleListVo> myCreateList(Integer createId);
 
     /**
      * 我关注的圈子列表
@@ -88,7 +88,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param accountId 用户id
      * @return
      */
-    List<CircleListDto> myConcernList(Integer accountId);
+    List<CircleListVo> myConcernList(Integer accountId);
 
     /**
      *  获取精选圈子数据，max为指定最多条数，按jx圈子排序

@@ -32,7 +32,7 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="account_id" property="accountId" jdbcType="INTEGER"/>
     </resultMap>
-    <resultMap id="MyConcernDtoResultMap" type="com.zyx.entity.pg.dto.MyConcernDto" extends="MyConcernResultMap">
+    <resultMap id="MyConcernDtoResultMap" type="com.zyx.vo.pg.MyConcernVo" extends="MyConcernResultMap">
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="nickname" property="nickName" jdbcType="VARCHAR"/>

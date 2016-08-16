@@ -1,9 +1,6 @@
 package com.zyx.rpc.pg;
 
-import com.zyx.entity.pg.Circle;
-import com.zyx.entity.pg.Concern;
-import com.zyx.entity.pg.Zan;
-import com.zyx.entity.pg.dto.ZanCountDto;
+import com.zyx.vo.pg.ZanCountVo;
 import com.zyx.service.pg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +19,7 @@ public class PgFacadeImpl implements PgFacade {
     @Autowired
     private CircleService circleService;
     @Autowired
-    private ConcrenService concrenService;
+    private ConcernService concrenService;
     @Autowired
     private MeetService meetService;
     @Autowired
@@ -105,12 +102,12 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds) {
+    public List<ZanCountVo> countZanByBodyId(Integer type, List<Integer> bodyIds) {
         return zanService.countZanByBodyId(type, bodyIds);
     }
 
     @Override
-    public ZanCountDto countZanByBodyId(Integer type, Integer bodyId) {
+    public ZanCountVo countZanByBodyId(Integer type, Integer bodyId) {
         return zanService.countZanByBodyId(type, bodyId);
     }
 
@@ -157,6 +154,11 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> getMyFollowList(Integer loginUserId) {
         return concrenService.getMyFollowList(loginUserId);
+    }
+
+    @Override
+    public Map<String, Object> starConcern(Integer max) {
+        return concrenService.starConcern(max);
     }
 
 }

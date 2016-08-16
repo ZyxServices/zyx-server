@@ -36,14 +36,32 @@
         <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
-    
-    <resultMap id="ConcernMyMap" type="com.zyx.entity.pg.dto.MyFollow" extends="ConcernResultMap">
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+
+    <resultMap id="ConcernMyMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernResultMap">
         <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
-        <result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>
-        <result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>
+        <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
+        <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="userVo" column="user_id" select="userSelect"/>
+        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
     </resultMap>
+
+    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
+        SELECT nickname,avatar,id FROM `user` WHERE id=#{user_id}
+    </select>
+
+    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.pg.UserAuthVo">
+        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    </select>
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_id=#{concernId}
+    </select>
+
+    <select id="commentSelect" parameterType="int" resultType="int">
+     SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply_id=#{concernId}
+    </select>
 
     <select id="starRandom" resultMap="ConcernResultMap">
         SELECT * FROM concern where type=#{type}
@@ -54,7 +72,7 @@
     </select>
 
     <select id="queryConcernDeva" resultMap="ConcernResultMap">
-        SELECT * FROM concern WHERE  id IN
+        SELECT * FROM concern WHERE id IN
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -64,27 +82,45 @@
         SELECT count(id) FROM concern WHERE user_id = #{accountId}
     </select>
 
-    <select id="myList" parameterType="int" resultMap="ConcernResultMap">
+    <select id="myConcernList" parameterType="int" resultMap="ConcernResultMap">
         SELECT * FROM concern WHERE user_id = #{accountId}
     </select>
 
     <select id="myFollowList" resultMap="ConcernMyMap">
         SELECT
         concern.create_time,
+        concern.id,
+        concern.user_id,
         concern.topic_content,
         concern.img_url,
         concern.video_url,
         concern.topic_title,
-        `user`.nickname as nick_name,
-        `user`.avatar,
-        myconcern.account_id,
-        (SELECT COUNT(*) FROM zan WHERE zan.body_id=concern.id) AS zan_counts,
-        (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply_id=concern.id) AS comment_counts
+        myconcern.account_id
         FROM
         concern
         INNER JOIN myconcern ON myconcern.concern_id = concern.id
-        INNER JOIN `user` ON concern.user_id = `user`.id
         WHERE myconcern.concern_type=0 AND myconcern.account_id=#{loginUserId}
+        ORDER BY
+        concern.create_time DESC
     </select>
+
+    <select id="starConcern" resultMap="ConcernMyMap">
+    SELECT
+    concern.create_time,
+    concern.id,
+    concern.user_id,
+    concern.topic_content,
+    concern.img_url,
+    concern.video_url,
+    concern.topic_title
+    FROM
+    concern
+    WHERE concern.type=3
+    ORDER BY
+    concern.create_time DESC
+    LIMIT 0,#{max}
+
+    </select>
+
 
 </mapper>

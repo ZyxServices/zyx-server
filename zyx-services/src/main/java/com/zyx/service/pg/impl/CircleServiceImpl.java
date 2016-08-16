@@ -5,10 +5,8 @@ import java.util.*;
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.MyConcern;
-import com.zyx.entity.pg.dto.CircleItemDto;
-import com.zyx.entity.pg.dto.CircleItemLunBo;
-import com.zyx.entity.pg.dto.CircleListDto;
-import com.zyx.entity.pg.dto.JxCircleDto;
+import com.zyx.vo.pg.CircleListVo;
+import com.zyx.vo.pg.JxCircleVo;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.mapper.pg.CircleMapper;
 import com.zyx.mapper.pg.MyConcernMapper;
@@ -277,7 +275,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     }
 
     @Override
-    public List<CircleListDto> myCreateList(Integer createId) {
+    public List<CircleListVo> myCreateList(Integer createId) {
         if (createId == null) {
             return null;
         }
@@ -286,7 +284,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     }
 
     @Override
-    public List<CircleListDto> myConcernList(Integer accountId) {
+    public List<CircleListVo> myConcernList(Integer accountId) {
         if (accountId == null) {
             return null;
         }
@@ -298,8 +296,8 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     public Map<String, Object> jxCircle(Integer max) {
         try {
             Optional.ofNullable(max).orElse(3);
-            List<JxCircleDto> jxCircleDtos = circleMapper.jxCircle(3, max);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, jxCircleDtos);
+            List<JxCircleVo> jxCircleVos = circleMapper.jxCircle(3, max);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, jxCircleVos);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;

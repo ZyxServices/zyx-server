@@ -1,9 +1,6 @@
 package com.zyx.rpc.pg;
 
-import com.zyx.entity.pg.Circle;
-import com.zyx.entity.pg.Concern;
-import com.zyx.entity.pg.Zan;
-import com.zyx.entity.pg.dto.ZanCountDto;
+import com.zyx.vo.pg.ZanCountVo;
 
 import java.util.List;
 import java.util.Map;
@@ -161,7 +158,7 @@ public interface PgFacade {
      * @param bodyIds
      * @return
      */
-    List<ZanCountDto> countZanByBodyId(Integer type, List<Integer> bodyIds);
+    List<ZanCountVo> countZanByBodyId(Integer type, List<Integer> bodyIds);
 
     /**
      * 重载
@@ -170,7 +167,7 @@ public interface PgFacade {
      * @param bodyId
      * @return
      */
-    ZanCountDto countZanByBodyId(Integer type, Integer bodyId);
+    ZanCountVo countZanByBodyId(Integer type, Integer bodyId);
 
     /**
      * 根据圈子id和用户id获取圈子相关数据
@@ -247,4 +244,11 @@ public interface PgFacade {
      * @return
      */
     Map<String, Object> getMyFollowList(Integer loginUserId);
+
+    /**
+     *大咖动态
+     * @param max
+     * @return
+     */
+    Map<String, Object> starConcern(Integer max);
 }

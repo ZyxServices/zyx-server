@@ -1,7 +1,7 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.CircleItem;
-import com.zyx.entity.pg.dto.CircleItemLunBo;
+import com.zyx.vo.pg.CircleItemLunBoVo;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -28,6 +28,6 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     Integer delByThisUser(@Param("createThisId") Integer createThisId, @Param("circleItemId") Integer circleItemId);
 
-    List<CircleItemLunBo> getLunBo(@Param("max") Integer max);
+    List<CircleItemLunBoVo> getLunBo(@Param("max") Integer max);
 
 }

@@ -4,7 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.pg.Concern;
 import com.zyx.rpc.account.MyConcernFacade;
-import com.zyx.service.pg.ConcrenService;
+import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class MyConcernFacadeImpl implements MyConcernFacade {
 
     @Autowired
-    private ConcrenService concrenService;
+    private ConcernService concrenService;
 
     @Autowired
     protected RedisTemplate<String, String> stringRedisTemplate;

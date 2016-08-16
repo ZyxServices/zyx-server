@@ -1,9 +1,8 @@
 package com.zyx.service.pg.impl;
 
-import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.CircleItem;
-import com.zyx.entity.pg.dto.CircleItemLunBo;
+import com.zyx.vo.pg.CircleItemLunBoVo;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleItemService;
@@ -138,7 +137,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         {
             try {
                 Optional.ofNullable(max).orElse(5);
-                List<CircleItemLunBo> lunBos = circleItemMapper.getLunBo(max);
+                List<CircleItemLunBoVo> lunBos = circleItemMapper.getLunBo(max);
                 return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, lunBos);
             } catch (Exception e) {
                 e.printStackTrace();

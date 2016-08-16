@@ -27,5 +27,10 @@
       <artifactId>zyx-common</artifactId>
       <version>${zyx.common.version}</version>
     </dependency>
+    <dependency>
+      <groupId>tiyujia-parent</groupId>
+      <artifactId>zyx-entity</artifactId>
+      <version>${zyx.entity.version}</version>
+    </dependency>
   </dependencies>
 </project>

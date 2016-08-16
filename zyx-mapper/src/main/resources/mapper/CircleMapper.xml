@@ -41,14 +41,14 @@
         <result column="tag" property="tag" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="CircleListDtoResultMap" type="com.zyx.entity.pg.dto.CircleListDto">
+    <resultMap id="CircleListDtoResultMap" type="com.zyx.vo.pg.CircleListVo">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="details" property="details" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <association property="circleItemCount" column="id" select="selectCircleItemCount"></association>
     </resultMap>
-    <resultMap id="CircleJxDtoResultMap" type="com.zyx.entity.pg.dto.JxCircleDto" extends="CircleResultMap">
+    <resultMap id="CircleJxDtoResultMap" type="com.zyx.vo.pg.JxCircleVo" extends="CircleResultMap">
         <result column="sequence" property="sequence" jdbcType="INTEGER"></result>
         <result column="area" property="area" jdbcType="INTEGER"></result>
         <result column="types" property="types" jdbcType="INTEGER"></result>
@@ -126,7 +126,7 @@
         circle
     INNER JOIN devaluation ON circle.id = devaluation.model_id
     WHERE
-        devaluation.types = #{devTypes}
+        devaluation.model = #{devTypes}
     ORDER BY
         sequence DESC
     LIMIT 0,#{max}

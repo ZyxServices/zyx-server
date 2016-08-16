@@ -1,4 +1,4 @@
-package com.zyx.entity.pg.dto;
+package com.zyx.vo.pg;
 
 import java.io.Serializable;
 
@@ -8,9 +8,9 @@ import java.io.Serializable;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title CircleListDto.java
+ * @title CircleListVo.java
  */
-public class CircleListDto implements Serializable {
+public class CircleListVo implements Serializable {
     private static final long serialVersionUID = 6886892223576540427L;
     private Integer id;
     private String title;

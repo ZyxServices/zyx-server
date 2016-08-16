@@ -9,10 +9,14 @@ import java.util.Map;
 /**
  * Created by XiaoWei on 2016/6/7.
  */
-public interface ConcrenService extends BaseService<Concern> {
+public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible);
 
     Map<String, Object> starRandom(Integer type, Integer n);
 
     Map<String, Object> getMyFollowList(Integer loginUserId);
+
+    List<Concern> queryMyConcernList(Integer accountId);
+
+    Map<String, Object> starConcern(Integer max);
 }

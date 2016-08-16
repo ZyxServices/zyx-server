@@ -1,7 +1,7 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.MyConcern;
-import com.zyx.entity.pg.dto.MyConcernDto;
+import com.zyx.vo.pg.MyConcernVo;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -20,5 +20,5 @@ public interface MyConcernMapper extends BaseMapper<MyConcern> {
 
     MyConcern existConcern(@Param(value = "accountId") Integer accountId, @Param(value = "concernId") Integer concernId, @Param(value = "concernType") Integer concernType);
 
-    List<MyConcernDto> findByParams(@Param("concernId") Integer concernId, @Param("concernType") Integer concernType);
+    List<MyConcernVo> findByParams(@Param("concernId") Integer concernId, @Param("concernType") Integer concernType);
 }

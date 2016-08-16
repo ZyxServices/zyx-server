@@ -1,13 +1,12 @@
 package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Concern;
-import com.zyx.entity.pg.dto.MyFollow;
+import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xw on 16-6-12.
@@ -16,6 +15,15 @@ import java.util.Map;
 public interface ConcernMapper extends BaseMapper<Concern> {
     List<Concern> starRandom(@Param("type") Integer type, @Param("n") Integer n);
 
-    List<MyFollow> myFollowList(@Param("loginUserId") Integer loginUserId);
-    List<Concern> myList(@Param("accountId") Integer accountId);
+    List<MyFollowVo> myFollowList(@Param("loginUserId") Integer loginUserId);
+
+    /* 我的动态列表
+     *
+     * @param accountId
+     * @return
+     */
+    List<Concern> myConcernList(@Param("accountId") Integer accountId);
+
+    List<MyFollowVo> starConcern(@Param("max") Integer max);
+
 }
