@@ -17,7 +17,8 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     List<MyFollowVo> myFollowList(@Param("loginUserId") Integer loginUserId);
 
-    /* 我的动态列表
+    /**
+     * 我的动态列表
      *
      * @param accountId
      * @return

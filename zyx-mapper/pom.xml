@@ -180,6 +180,11 @@
 			<artifactId>mapper</artifactId>
 			<version>${mapper.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>tiyujia-parent</groupId>
+			<artifactId>zyx-param</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

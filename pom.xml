@@ -25,6 +25,10 @@
         <module>zyx-vo</module>
         <module>zyx-dubbo-system</module>
         <module>zyx-task-scheduler</module>
+        <module>zyx-dubbo-attention</module>
+        <module>zyx-param</module>
+        <module>zyx-dubbo-collection</module>
+        <module>zyx-exception</module>
     </modules>
 
     <properties>
@@ -41,6 +45,7 @@
         <zyx.constants.version>0.0.1-SNAPSHOT</zyx.constants.version>
         <zyx.utils.version>0.0.1-SNAPSHOT</zyx.utils.version>
         <zyx.vo.version>0.0.1-SNAPSHOT</zyx.vo.version>
+        <zyx.param.version>0.0.1-SNAPSHOT</zyx.param.version>
         <!-- facade projects -->
         <!-- 移动端接口 -->
         <mobileservice.version>0.0.1-SNAPSHOT</mobileservice.version>

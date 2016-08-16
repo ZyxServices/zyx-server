@@ -4,12 +4,12 @@ package com.zyx.service.pg.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.vo.pg.MyFollowVo;
-import com.zyx.mapper.pg.ConcernMapper;
-import com.zyx.utils.MapUtils;
-import org.springframework.stereotype.Service;
 import com.zyx.entity.pg.Concern;
+import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcernService;
+import com.zyx.utils.MapUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -99,4 +99,5 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
             return PgConstants.MAP_500;
         }
     }
+
 }
