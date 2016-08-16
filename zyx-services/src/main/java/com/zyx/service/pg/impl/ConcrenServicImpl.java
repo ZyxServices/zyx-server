@@ -3,13 +3,13 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.entity.pg.Concern;
 import com.zyx.entity.pg.dto.MyFollow;
 import com.zyx.mapper.pg.ConcernMapper;
-import com.zyx.utils.MapUtils;
-import org.springframework.stereotype.Service;
-import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcrenService;
+import com.zyx.utils.MapUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -78,4 +78,15 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Concr
         }
 
     }
+
+
+    @Override
+    public List<Concern> queryMyConcernList(Integer accountId) {
+        if (accountId == null) {
+            return null;
+        }
+
+        return concernMapper.myConcernList(accountId);
+    }
+
 }

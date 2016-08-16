@@ -15,4 +15,6 @@ public interface ConcrenService extends BaseService<Concern> {
     Map<String, Object> starRandom(Integer type, Integer n);
 
     Map<String, Object> getMyFollowList(Integer loginUserId);
+
+    List<Concern> queryMyConcernList(Integer accountId);
 }

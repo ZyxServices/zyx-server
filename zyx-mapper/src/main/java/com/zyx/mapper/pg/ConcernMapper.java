@@ -17,5 +17,12 @@ public interface ConcernMapper extends BaseMapper<Concern> {
     List<Concern> starRandom(@Param("type") Integer type, @Param("n") Integer n);
 
     List<MyFollow> myFollowList(@Param("loginUserId") Integer loginUserId);
-    List<Concern> myList(@Param("accountId") Integer accountId);
+
+    /**
+     * 我的动态列表
+     *
+     * @param accountId
+     * @return
+     */
+    List<Concern> myConcernList(@Param("accountId") Integer accountId);
 }
