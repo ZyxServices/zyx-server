@@ -3,11 +3,18 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.Combination;
+import com.zyx.entity.activity.CombinedData;
 import com.zyx.entity.activity.parm.QueryActivityParm;
+import com.zyx.entity.activity.parm.QueryCombiationParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
 import com.zyx.entity.activity.vo.ActivityVo;
+import com.zyx.entity.activity.vo.CombinedDataListVo;
+import com.zyx.entity.activity.vo.CombinedDataVo;
 import com.zyx.entity.activity.vo.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
+import com.zyx.mapper.activity.CombinationDataMapper;
+import com.zyx.mapper.activity.CombinationMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
@@ -33,6 +40,10 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
     @Resource
     private ActivityMapper activityMapper;
+    @Resource
+    private CombinationMapper combinationMapper;
+    @Resource
+    private CombinationDataMapper combinationDataMapper;
 
     public ActivityServiceImpl() {
         super(Activity.class);
@@ -45,7 +56,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                                               String phone, Double price, Integer type, String address, Integer examine,
                                               String memberTemplate) {
         Activity activity = new Activity();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
         if (createId != null && title != null && desc != null && image != null && startTime != null
                 && endTime != null && lastTime != null && maxPeople != null
@@ -119,7 +130,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                         String editText = "";
                         for (String string : strings) {
                             if (string.contains("src=")) {
-                                 editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
+                                editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
                             } else {
                                 if (editText.equals(string)) {
                                     editText = string;
@@ -151,6 +162,40 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             MemberTemplate template = activityMapper.queryActivityMember(id);
             if (template != null) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", template);
+            } else {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
+            }
+        } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryActivityGroupName(String name) {
+
+        if (name != null && !name.equals("")) {
+            QueryCombiationParm combiationParm = new QueryCombiationParm();
+            combiationParm.setName(name);
+            Combination combination = combinationMapper.queryCombiation(combiationParm);
+            if (combination != null) {
+                CombinedData combinedData = new CombinedData();
+                combinedData.setCombinedId(combination.getId());
+                List<CombinedDataVo> combinedDatas = combinationDataMapper.queryCombiationData(combinedData);
+
+                CombinedDataListVo combinedDataListVo = new CombinedDataListVo();
+                combinedDataListVo.setCombinedId(combination.getId());
+                combinedDataListVo.setName(combination.getName());
+                combinedDataListVo.setImage(combination.getImage());
+                combinedDataListVo.setMask(combination.getMask());
+
+                if(combinedDatas.size() > 0){
+                    combinedDatas.stream().filter(e -> e != null).forEach(s -> {
+                            combinedDataListVo.getActivityVos().add(s.getActivityVo());
+                    });
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", combinedDataListVo);
+                }else{
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", combinedDataListVo);
+                }
             } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
             }
