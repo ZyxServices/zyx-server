@@ -66,6 +66,17 @@ public class ActivityFacadeImpl implements ActivityFacade {
     }
 
     @Override
+    public Map<String, Object> queryActivityGroupName(String name) {
+        try {
+            return activityService.queryActivityGroupName(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e);
+            return ActivityUtils.Error500();
+        }
+    }
+
+    @Override
     public Map<String, Object> queryActivityHistory(QueryHistoryParm history) {
         try {
             return activityService.queryActivityHistory(history);

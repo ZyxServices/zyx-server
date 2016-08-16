@@ -58,6 +58,14 @@ public interface ActivityService extends BaseService<Activity> {
     Map<String, Object> queryActivityMember(Integer id);
 
     /**
+     * 组合名称查询
+     *
+     * @param name
+     * @return
+     */
+    Map<String, Object> queryActivityGroupName(String name);
+
+    /**
      * 1  查询历史活动
      * 2  时间范围查询活动
      *

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.activity.CombinationDataMapper">
+
+    <resultMap id="combinationData" type="com.zyx.entity.activity.CombinedData">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="combinedId" property="name" jdbcType="VARCHAR"/>
+        <result column="dataId" property="image" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="INTEGER"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="combinationDataVo" type="com.zyx.entity.activity.vo.CombinedDataVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="combinedId" property="combinedId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="INTEGER"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <association column="dataId" property="activityVo" javaType="ActivityVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"/>
+    </resultMap>
+
+    <select id="queryCombiationData" parameterType="com.zyx.entity.activity.CombinedData" resultMap="combinationDataVo">
+        select * from combined_data where 1 = 1
+        <if test="combinedId != null">
+            and combinedId = #{combinedId}
+        </if>
+        <if test="dataId != null">
+            and dataId = #{dataId}
+        </if>
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        AND del != 1
+        ORDER BY create_time desc
+    </select>
+
+</mapper>
