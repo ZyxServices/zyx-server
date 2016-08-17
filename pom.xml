@@ -24,7 +24,7 @@
         <module>zyx-constants</module>
         <module>zyx-vo</module>
         <module>zyx-dubbo-system</module>
-        <module>zyx-task-scheduler</module>
+        <module>zyx-dubbo-task-scheduler</module>
         <module>zyx-dubbo-attention</module>
         <module>zyx-param</module>
         <module>zyx-dubbo-collection</module>

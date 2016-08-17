@@ -3,6 +3,7 @@ package com.zyx.service.live.impl;
 import java.util.List;
 
 import com.zyx.entity.live.dto.LiveInfoDto;
+import com.zyx.param.live.LiveInfoParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +21,16 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 
 	@Autowired
 	LiveInfoMapper liveInfoMapper ;
-
 	public LiveInfoServiceImpl() {
 		super(LiveInfo.class);
 	}
-
 	@Override
-	public int countLive(LiveInfoVo vo) {
-		return liveInfoMapper.countLives(vo);
+	public int countLive(LiveInfoParam param) {
+		return liveInfoMapper.countLives(param);
 	}
 	@Override
-	public List<LiveInfoDto> selectLives(LiveInfoVo vo) {
-		return liveInfoMapper.selectLives(vo);
+	public List<LiveInfoVo> selectLives(LiveInfoParam param) {
+		return liveInfoMapper.selectLives(param);
 	}
 	@Override
 	public void logicDelete(Integer id) {

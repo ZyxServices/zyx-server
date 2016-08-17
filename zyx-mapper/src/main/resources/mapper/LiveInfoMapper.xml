@@ -5,7 +5,7 @@
 	<!-- 用户信息表 -->
 	<!-- <sql id="liveInfo"> t_live </sql> -->
 
-	<resultMap id="LiveInfoDto" type="com.zyx.entity.live.dto.LiveInfoDto">
+	<resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
 		<id column="id" property="id" />
 		<id column="creat_time" property="createTime" />
 		<id column="auth" property="auth" />
@@ -18,9 +18,10 @@
 		<id column="bgm_url" property="bgmUrl" />
 		<id column="vedio_url" property="vedioUrl" />
 		<id column="state" property="state" />
+		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
 	</resultMap>
 
-	<select id="countLives" parameterType="com.zyx.vo.live.LiveInfoVo"
+	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
 		resultType="int">
 		select count(*)
 		from t_live
@@ -30,26 +31,11 @@
 			and
 			lab = #{lab}
 		</if>
-		<if test="userIds!=null">
-			and
-			user_id in
-			<foreach collection="userIds" index="index" item="tag" open="("
-				separator="," close=")">
-				#{tag}
-			</foreach>
-		</if>
-		<if test="del != null">
-			and
-			del = #{del}
-		</if>
-		order by
-		create_time
-		DESC
 	</select>
 
-	<select id="selectLives" parameterType="com.zyx.vo.live.LiveInfoVo"
-		resultMap="LiveInfoDto">
-		select *
+	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"
+		resultMap="LiveInfoVo">
+		select id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
 		from t_live
 		where
 		1=1
@@ -57,24 +43,31 @@
 			and
 			lab = #{lab}
 		</if>
-		<if test="userIds!=null">
+		<!--<if test="userIds!=null">
 			and
 			user_id in
 			<foreach collection="userIds" index="index" item="tag" open="("
 				separator="," close=")">
 				#{tag}
 			</foreach>
-		</if>
-		<if test="del != null">
-			and
-			del = #{del}
-		</if>
-		order by
+		</if>-->
+		<!--<if test="del != null">-->
+			<!--and-->
+			<!--del = #{del}-->
+		<!--</if>-->
+		<!--order by
 		create_time
 		DESC
 		<if test="start!=null and end !=null">
 			limit
 			#{start},#{end}
-		</if>
+		</if>-->
+	</select>
+
+	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+		SELECT id,nickname,avatar
+		FROM user
+		WHERE
+		id = #{id}
 	</select>
 </mapper>
