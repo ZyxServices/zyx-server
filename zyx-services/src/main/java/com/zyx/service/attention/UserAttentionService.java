@@ -1,7 +1,11 @@
 package com.zyx.service.attention;
 
 import com.zyx.entity.attention.UserAttention;
+import com.zyx.param.attention.AttentionParam;
 import com.zyx.service.BaseService;
+import com.zyx.vo.attention.AttentionVo;
+
+import java.util.List;
 
 /**
  * Created by wms on 2016/8/16.
@@ -14,4 +18,7 @@ import com.zyx.service.BaseService;
 
 public interface UserAttentionService extends BaseService<UserAttention> {
 
+    List<AttentionVo> myFSList(AttentionParam attentionParam);
+
+    List<AttentionVo> myGZList(AttentionParam attentionParam);
 }

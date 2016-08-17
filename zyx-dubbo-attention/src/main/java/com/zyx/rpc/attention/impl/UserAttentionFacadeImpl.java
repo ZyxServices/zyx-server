@@ -7,11 +7,13 @@ import com.zyx.param.attention.AttentionParam;
 import com.zyx.rpc.attention.UserAttentionFacade;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.attention.AttentionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,6 +52,47 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
             return UserAttentionConstants.MAP_500;
         }
     }
+
+    @Override
+    public Map<String, Object> myFSList(AttentionParam attentionParam) {
+        String token = attentionParam.getToken();
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return UserAttentionConstants.MAP_TOKEN_FAILURE;
+        }
+
+        try {
+            List<AttentionVo> _list = userAttentionService.myFSList(attentionParam);
+            if (_list == null) {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
+            } else {
+                return MapUtils.buildSuccessMap(_list);
+            }
+        } catch (Exception e) {
+            return UserAttentionConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> myGZList(AttentionParam attentionParam) {
+        String token = attentionParam.getToken();
+        // 判断token是否失效
+        if (isTokenFailure(token)) {
+            return UserAttentionConstants.MAP_TOKEN_FAILURE;
+        }
+
+        try {
+            List<AttentionVo> _list = userAttentionService.myGZList(attentionParam);
+            if (_list == null) {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
+            } else {
+                return MapUtils.buildSuccessMap(_list);
+            }
+        } catch (Exception e) {
+            return UserAttentionConstants.MAP_500;
+        }
+    }
+
 
     private UserAttention buildUserAttention(AttentionParam param) {
         UserAttention _temp = new UserAttention();

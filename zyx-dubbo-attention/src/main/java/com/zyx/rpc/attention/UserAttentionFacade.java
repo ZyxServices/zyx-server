@@ -16,4 +16,8 @@ public interface UserAttentionFacade {
 
     Map<String, Object> attentionFromAToB(AttentionParam attentionParam);
 
+    Map<String, Object> myFSList(AttentionParam attentionParam);
+
+    Map<String, Object> myGZList(AttentionParam attentionParam);
+
 }

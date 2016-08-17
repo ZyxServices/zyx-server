@@ -14,6 +14,10 @@ import java.util.Map;
  * @title MapUtils
  */
 public final class MapUtils {
+    public static Map<String, Object> buildSuccessMap(Object data) {
+        return buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, data);
+    }
+
     public static Map<String, Object> buildSuccessMap(int state, String msg, Object data) {
         Map<String, Object> map = new HashMap<>();
         map.put(Constants.STATE, state);

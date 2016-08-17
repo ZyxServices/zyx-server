@@ -25,6 +25,23 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zyx.mapper.attention.UserAttentionMapper">
+    <resultMap id="MyCenterGZVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="to_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+    </resultMap>
 
+    <resultMap id="MyCenterFSVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="from_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+    </resultMap>
 
+    <select id="myGZList" parameterType="int" resultMap="MyCenterGZVoResultMap">
+        SELECT * FROM USER_ATTENTION where from_user_id = #{fromId}
+    </select>
+
+    <select id="myFSList" parameterType="int" resultMap="MyCenterFSVoResultMap">
+        SELECT * FROM USER_ATTENTION where to_user_id = #{toId}
+    </select>
 </mapper>

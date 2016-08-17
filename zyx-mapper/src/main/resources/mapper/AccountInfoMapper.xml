@@ -41,11 +41,17 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
         <result column="offcial" property="offcial" jdbcType="INTEGER"/>
     </resultMap>
-    
+
+    <resultMap id="QueryAccountAttentionVo" type="com.zyx.vo.account.AccountAttentionVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <!--<association property="gz" column="id" select="selectCircleItemCount"></association>-->
-        <!--<association property="fs" column="id" select="selectCircleItemCount"></association>-->
+        <association property="gz" column="id" select="selectGZCount"></association>
+        <association property="fs" column="id" select="selectFSCount"></association>
         <association property="dt" column="id" select="selectDTCount"></association>
         <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
     </resultMap>
@@ -62,7 +68,7 @@
         <if test="password != null and password != ''">
             and password = #{password}
         </if>
-        <if test="id != null and id != ''">
+        <if test="id != null">
             and id = #{id}
         </if>
         AND del != 1
@@ -79,6 +85,10 @@
     </select>
 
     <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1
+    </select>
+
+    <select id="selectAttentionAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
         SELECT * FROM user WHERE id = #{id} AND del != 1
     </select>
 
@@ -112,13 +122,21 @@
     <select id="queryMyCenterInfo" parameterType="com.zyx.entity.account.UserLoginParam"
             resultMap="MyCenterInfoVoResultMap">
         select * from user where 1 = 1
-        <if test="id != null and id != ''">
+        <if test="id != null">
             and id = #{id}
         </if>
     </select>
 
     <select id="selectAuthByUserId" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
         SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
+    <select id="selectGZCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM USER_ATTENTION WHERE from_user_id = #{user_id} and rel_type = 1
+    </select>
+
+    <select id="selectFSCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM USER_ATTENTION WHERE to_user_id = #{user_id} and rel_type = 1
     </select>
 
     <select id="selectDTCount" parameterType="int" resultType="int">
