@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.zyx.entity.live.dto.LiveInfoDto;
+import com.zyx.param.live.LiveInfoParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -51,17 +52,8 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     }
 
     @Override
-    public List<LiveInfoDto> getList(LiveInfoVo liveInfoVo) {
-        if (liveInfoVo.getPageNo() != null && (liveInfoVo.getPageSize() == null || liveInfoVo.getPageSize() < 1)) {
-            liveInfoVo.setPageSize(6);
-        }
-        int count = liveInfoService.countLive(liveInfoVo);
-        if (count == 0)
-            return null;
-        else {
-            liveInfoVo.setCount(count);
-            return liveInfoService.selectLives(liveInfoVo);
-        }
+    public List<LiveInfoVo> getList(LiveInfoParam liveInfoParam) {
+        return liveInfoService.selectLives(liveInfoParam);
     }
 
     @Override

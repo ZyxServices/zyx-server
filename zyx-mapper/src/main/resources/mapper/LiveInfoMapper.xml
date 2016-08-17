@@ -12,7 +12,6 @@
 		<id column="type" property="type" />
 		<id column="start" property="start" />
 		<id column="end" property="end" />
-		<id column="user_id" property="userId" />
 		<id column="title" property="title" />
 		<id column="lab" property="lab" />
 		<id column="bgm_url" property="bgmUrl" />

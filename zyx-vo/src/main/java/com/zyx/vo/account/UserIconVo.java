@@ -1,9 +1,11 @@
 package com.zyx.vo.account;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/8/17.
  */
-public class UserIconVo {
+public class UserIconVo implements Serializable{
     private Integer id;
     private String nickname;
     private String avatar;

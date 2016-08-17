@@ -14,7 +14,7 @@ public class LiveInfoVo implements Serializable {
 	private Integer id;
 	private Integer auth;
 	private Integer type;
-	private Integer start;
+	private Long start;
 	private Long end;
 	private UserIconVo userIconVo;
 	private String title;
@@ -35,7 +35,7 @@ public class LiveInfoVo implements Serializable {
 		this.type = type;
 	}
 
-	public void setStart(Integer start) {
+	public void setStart(Long start) {
 		this.start = start;
 	}
 
@@ -79,7 +79,7 @@ public class LiveInfoVo implements Serializable {
 		return type;
 	}
 
-	public Integer getStart() {
+	public Long getStart() {
 		return start;
 	}
 
