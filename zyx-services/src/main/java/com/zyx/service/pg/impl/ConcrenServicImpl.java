@@ -80,7 +80,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
     }
 
     @Override
-    public List<Concern> queryMyConcernList(Integer accountId) {
+    public List<MyFollowVo> queryMyConcernList(Integer accountId) {
         if (accountId == null) {
             return null;
         }

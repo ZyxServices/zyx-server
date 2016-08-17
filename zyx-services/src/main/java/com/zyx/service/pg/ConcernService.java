@@ -2,6 +2,7 @@ package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Concern;
 import com.zyx.service.BaseService;
+import com.zyx.vo.pg.MyFollowVo;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> getMyFollowList(Integer loginUserId);
 
-    List<Concern> queryMyConcernList(Integer accountId);
+    List<MyFollowVo> queryMyConcernList(Integer accountId);
 
     Map<String, Object> starConcern(Integer max);
 }

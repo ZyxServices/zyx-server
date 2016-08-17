@@ -7,12 +7,14 @@ import com.zyx.param.attention.AttentionParam;
 import com.zyx.rpc.attention.UserAttentionFacade;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.attention.AttentionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,11 +65,7 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
 
         try {
             List<AttentionVo> _list = userAttentionService.myFSList(attentionParam);
-            if (_list == null) {
-                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
-            } else {
-                return MapUtils.buildSuccessMap(_list);
-            }
+            return getStringObjectMap(_list);
         } catch (Exception e) {
             return UserAttentionConstants.MAP_500;
         }
@@ -83,16 +81,23 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
 
         try {
             List<AttentionVo> _list = userAttentionService.myGZList(attentionParam);
-            if (_list == null) {
-                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
-            } else {
-                return MapUtils.buildSuccessMap(_list);
-            }
+            return getStringObjectMap(_list);
         } catch (Exception e) {
             return UserAttentionConstants.MAP_500;
         }
     }
 
+    private Map<String, Object> getStringObjectMap(List<AttentionVo> _list) {
+        if (_list == null) {
+            return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
+        } else {
+            List<AccountAttentionVo> _temp = new ArrayList<>();
+            for (AttentionVo vo : _list) {
+                _temp.addAll(vo.getAttentions());
+            }
+            return MapUtils.buildSuccessMap(_temp);
+        }
+    }
 
     private UserAttention buildUserAttention(AttentionParam param) {
         UserAttention _temp = new UserAttention();

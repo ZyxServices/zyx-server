@@ -35,38 +35,43 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
 
     @Override
     public Map<String, Object> myCircleList(String token, Integer accountId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
-        List<CircleListVo> _list_create = new ArrayList<CircleListVo>();
         try {
-            _list_create = circleService.myCreateList(accountId);
+
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            List<CircleListVo> _list_create = new ArrayList<CircleListVo>();
+            try {
+                _list_create = circleService.myCreateList(accountId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            List<CircleListVo> _list_concern = new ArrayList<CircleListVo>();
+            try {
+                _list_concern = circleService.myConcernList(accountId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Map<String, Object> _temp = new HashMap<String, Object>();
+            _temp.put("myCreateCircle", _list_create);
+            _temp.put("myConcernCircle", _list_concern);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _temp);
         } catch (Exception e) {
             e.printStackTrace();
+            return Constants.MAP_500;
         }
-        List<CircleListVo> _list_concern = new ArrayList<CircleListVo>();
-        try {
-            _list_concern = circleService.myConcernList(accountId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Map<String, Object> _temp = new HashMap<String, Object>();
-        _temp.put("myCreateCircle", _list_create);
-        _temp.put("myConcernCircle", _list_concern);
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _temp);
     }
 
     @Override
     public Map<String, Object> myCreateList(String token, Integer createId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             List<CircleListVo> _list = circleService.myCreateList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
-
         } catch (Exception e) {
             return Constants.MAP_500;
         }
@@ -74,14 +79,13 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
 
     @Override
     public Map<String, Object> myConcernList(String token, Integer createId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             List<CircleListVo> _list = circleService.myConcernList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
-
         } catch (Exception e) {
             return Constants.MAP_500;
         }

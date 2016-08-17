@@ -23,7 +23,7 @@ public interface ConcernMapper extends BaseMapper<Concern> {
      * @param accountId
      * @return
      */
-    List<Concern> myConcernList(@Param("accountId") Integer accountId);
+    List<MyFollowVo> myConcernList(@Param("accountId") Integer accountId);
 
     List<MyFollowVo> starConcern(@Param("max") Integer max);
 

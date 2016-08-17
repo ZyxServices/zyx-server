@@ -35,14 +35,14 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
 
     @Override
     public Map<String, Object> queryAccountInfo(String token, int userId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
-        UserLoginParam userLoginParam = new UserLoginParam();
-        userLoginParam.setToken(token);
-        userLoginParam.setId(userId);
         try {
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            UserLoginParam userLoginParam = new UserLoginParam();
+            userLoginParam.setToken(token);
+            userLoginParam.setId(userId);
             List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
             if (list == null || list.size() == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
@@ -62,13 +62,13 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
 
     @Override
     public Map<String, Object> editAccountInfo(String token, int userId, AccountInfoParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
-        param.setId(userId);
-        param.setToken(token);
         try {
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            param.setId(userId);
+            param.setToken(token);
             int result = accountInfoService.updateAccountByParam(param);
             if (result >= 1) {
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息修改成功", null);
@@ -82,13 +82,13 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
 
     @Override
     public Map<String, Object> queryMyCenterInfo(String token, int userId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
-        UserLoginParam userLoginParam = new UserLoginParam();
-        userLoginParam.setId(userId);
         try {
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            UserLoginParam userLoginParam = new UserLoginParam();
+            userLoginParam.setId(userId);
             MyCenterInfoVo _info = accountInfoService.queryMyCenterInfo(userLoginParam);
             if (_info == null) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);

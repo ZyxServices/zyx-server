@@ -39,43 +39,49 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
     @Override
     public Map<String, Object> validatePhoneCode(UserLoginParam userLoginParam) {
-        // 判断缓存中手机号码和验证码是否对应
-        String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
+        try {
+            // 判断缓存中手机号码和验证码是否对应
+            String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
 
-        if (StringUtils.isEmpty(redis_code)) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
-        }
+            if (StringUtils.isEmpty(redis_code)) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
+            }
 
-        if (!userLoginParam.getCode().equals(redis_code)) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50006, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
+            if (!userLoginParam.getCode().equals(redis_code)) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50006, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
+            }
+            // 验证成功
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("phone", userLoginParam.getPhone());
+            map.put("code", userLoginParam.getCode());
+            return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "手机号和验证码匹配成功", map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AccountConstants.MAP_500;
         }
-        // 验证成功
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("phone", userLoginParam.getPhone());
-        map.put("code", userLoginParam.getCode());
-        return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "手机号和验证码匹配成功", map);
     }
 
     @Override
     public Map<String, Object> registerAccount(UserLoginParam userLoginParam) {
-        // 判断手机号是否已经注册
-        int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
-        if (count != 0) {// 手机号码重复
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50005, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
-        }
+        try {
+            // 判断手机号是否已经注册
+            int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
+            if (count != 0) {// 手机号码重复
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50005, AccountConstants.ACCOUNT_ERROR_CODE_50005_MSG);
+            }
 
-        // 判断缓存中手机号码和验证码是否对应
-        String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
+            // 判断缓存中手机号码和验证码是否对应
+            String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
 //        if (!userLoginParam.getCode().equals(redis_code)) {
 //            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
 //            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
 //            return map;
 //        }
-        // 判断缓存中手机号码是否存在验证码
-        if (StringUtils.isEmpty(redis_code)) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
-        }
-        try {
+            // 判断缓存中手机号码是否存在验证码
+            if (StringUtils.isEmpty(redis_code)) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
+            }
+
             AccountInfo accountInfo = new AccountInfo();
             accountInfo.setPhone(userLoginParam.getPhone());
             accountInfo.setPassword(userLoginParam.getPassword());
@@ -95,12 +101,12 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
     @Override
     public Map<String, Object> renewpwd(UserLoginParam userLoginParam) {
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + userLoginParam.getToken());
-        // 判断token是否失效
-        if (phone == null) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + userLoginParam.getToken());
+            // 判断token是否失效
+            if (phone == null) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             userLoginParam.setPhone(phone);
             userLoginParam.setPassword(userLoginParam.getPassword());
             List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
@@ -121,25 +127,24 @@ public class RegisterFacadeImpl implements RegisterFacade {
 
     @Override
     public Map<String, Object> retrievepwd(UserLoginParam userLoginParam) {
-
-        // 判断缓存中手机号码和验证码是否对应
-        String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
+        try {
+            // 判断缓存中手机号码和验证码是否对应
+            String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
 //        if (!userLoginParam.getCode().equals(redis_code)) {
 //            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
 //            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
 //            return map;
 //        }
 
-        if (StringUtils.isEmpty(redis_code)) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
-        }
+            if (StringUtils.isEmpty(redis_code)) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50011, AccountConstants.ACCOUNT_ERROR_CODE_50011_MSG);
+            }
 
-        // 验证密码是否输入一致
-        if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50012, AccountConstants.ACCOUNT_ERROR_CODE_50012_MSG);
-        }
+            // 验证密码是否输入一致
+            if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50012, AccountConstants.ACCOUNT_ERROR_CODE_50012_MSG);
+            }
 
-        try {
             userLoginParam.setPassword2(userLoginParam.getPassword2());
             int result = accountInfoService.renewpwd(userLoginParam);
             if (result == 0) {

@@ -39,35 +39,35 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
 
     @Override
     public Map<String, Object> loginByPhoneAndPassword(String phone, String password) {
-        // 判断手机号码是否注册
-        int count = accountInfoService.selectAccountByPhone(phone);
-        if (count == 0) {// 未注册
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50003, AccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
-        }
-        // 判断用户名密码是否正确
-        AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);
-        if (accountInfo == null) {// 登陆失败
-            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50001, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
-        }
-        // 判断是否已经登录,已登录的情况下删除登录信息
-        String phoneTime = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
-        if (phoneTime != null) {
-            // 获取登陆TOKEN
-            String token = phoneTime.substring(phoneTime.indexOf("【") + 1, phoneTime.indexOf("】"));
-            stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-            stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
-            AccountInfoVo _accountInfo = accountRedisService.get(phone);
-            if (_accountInfo != null) {
-                String token_new = UUID.randomUUID().toString().replaceAll("-", "");
-                String _newTyjPhone = phoneTime.replaceAll(token, token_new);
-                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token_new, phone);
-                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, _newTyjPhone);
-                _accountInfo.setToken(token_new);
-                accountRedisService.put(_accountInfo);
-                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "登录成功", _accountInfo);
-            }
-        }
         try {
+            // 判断手机号码是否注册
+            int count = accountInfoService.selectAccountByPhone(phone);
+            if (count == 0) {// 未注册
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50003, AccountConstants.ACCOUNT_ERROR_CODE_50003_MSG);
+            }
+            // 判断用户名密码是否正确
+            AccountInfoVo accountInfo = userLoginService.loginByPhoneAndPassword(phone, password);
+            if (accountInfo == null) {// 登陆失败
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50001, AccountConstants.ACCOUNT_ERROR_CODE_50001_MSG);
+            }
+            // 判断是否已经登录,已登录的情况下删除登录信息
+            String phoneTime = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
+            if (phoneTime != null) {
+                // 获取登陆TOKEN
+                String token = phoneTime.substring(phoneTime.indexOf("【") + 1, phoneTime.indexOf("】"));
+                stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+                stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
+                AccountInfoVo _accountInfo = accountRedisService.get(phone);
+                if (_accountInfo != null) {
+                    String token_new = UUID.randomUUID().toString().replaceAll("-", "");
+                    String _newTyjPhone = phoneTime.replaceAll(token, token_new);
+                    stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token_new, phone);
+                    stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, _newTyjPhone);
+                    _accountInfo.setToken(token_new);
+                    accountRedisService.put(_accountInfo);
+                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "登录成功", _accountInfo);
+                }
+            }
             // 登录成功返回
             String token = UUID.randomUUID().toString().replaceAll("-", "");
             accountInfo.setToken(token);
@@ -83,12 +83,12 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
 
     @Override
     public Map<String, Object> signout(String token) {
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        // 判断token是否失效
-        if (phone == null) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+            // 判断token是否失效
+            if (phone == null) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
             stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
             AccountInfoVo accountInfoVo = new AccountInfoVo();
@@ -103,12 +103,12 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
 
     @Override
     public Map<String, Object> refreshtoken(String token) {
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        // 判断token是否失效
-        if (phone == null) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+            // 判断token是否失效
+            if (phone == null) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             String token_new = UUID.randomUUID().toString().replaceAll("-", "");
             String _newTyjPhone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE + phone).replaceAll(token, token_new);
             stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);

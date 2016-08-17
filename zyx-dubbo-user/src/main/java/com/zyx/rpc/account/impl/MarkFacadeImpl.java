@@ -40,11 +40,11 @@ public class MarkFacadeImpl implements MarkFacade {
 
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
-        // 判断token是否失效
-        if (isTokenFailure(userMarkParam.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(userMarkParam.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {// 查询到进行更新
@@ -58,12 +58,12 @@ public class MarkFacadeImpl implements MarkFacade {
 
     @Override
     public Map<String, Object> querySign(UserMarkParam userMarkParam) {
-        // 判断token是否失效
-        if (isTokenFailure(userMarkParam.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
-        // 查询用户签到信息
         try {
+            // 判断token是否失效
+            if (isTokenFailure(userMarkParam.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户签到信息查询成功", markInfoVo);

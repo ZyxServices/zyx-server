@@ -33,11 +33,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> insertAccountAddressInfo(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             int result = accountAddressInfoService.insertAccountAddressInfo(param);
             if (result == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50400, AccountConstants.ACCOUNT_ERROR_CODE_50400_MSG);
@@ -51,11 +51,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> queryAccountAddressInfo(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             UserAddressVo userAddressVo = accountAddressInfoService.selectAddressByAddressId(param);
             if (userAddressVo == null) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
@@ -69,11 +69,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> queryAccountAddressList(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             List<UserAddressVo> result = accountAddressInfoService.selectAddressList(param);
             if (result == null || result.size() == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
@@ -87,11 +87,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> deleteAccountAddressInfo(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             int result = accountAddressInfoService.deleteByAddressId(param);
             if (result == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50401, AccountConstants.ACCOUNT_ERROR_CODE_50401_MSG);
@@ -105,11 +105,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> editReceiptAddress(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             int result = accountAddressInfoService.editReceiptAddress(param);
             if (result == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50402, AccountConstants.ACCOUNT_ERROR_CODE_50402_MSG);
@@ -123,11 +123,11 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
 
     @Override
     public Map<String, Object> setDefaultReceiptAddress(UserAddressParam param) {
-        // 判断token是否失效
-        if (isTokenFailure(param.getToken())) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
             int result = accountAddressInfoService.setDefaultReceiptAddress(param);
             if (result == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50402, AccountConstants.ACCOUNT_ERROR_CODE_50402_MSG);
