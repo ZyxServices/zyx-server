@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.activity.ActivityMemberMapper">
 
-    <resultMap id="queryMemberVo" type="com.zyx.entity.activity.vo.QueryMemberVo">
+    <resultMap id="queryMemberVo" type="com.zyx.vo.activity.QueryMemberVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>

@@ -8,10 +8,10 @@ import com.zyx.entity.activity.CombinedData;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryCombiationParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.vo.ActivityVo;
-import com.zyx.entity.activity.vo.CombinedDataListVo;
-import com.zyx.entity.activity.vo.CombinedDataVo;
-import com.zyx.entity.activity.vo.MemberTemplate;
+import com.zyx.vo.activity.ActivityVo;
+import com.zyx.vo.activity.CombinedDataListVo;
+import com.zyx.vo.activity.CombinedDataVo;
+import com.zyx.vo.activity.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.CombinationDataMapper;
 import com.zyx.mapper.activity.CombinationMapper;
@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Rainbow on 16-6-12.
@@ -144,7 +145,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                         s.setEditDesc(editText);
                     });
                 }
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
+                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
             } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
             }

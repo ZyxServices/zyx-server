@@ -1,4 +1,4 @@
-package com.zyx.entity.activity.vo;
+package com.zyx.vo.activity;
 
 import java.io.Serializable;
 
