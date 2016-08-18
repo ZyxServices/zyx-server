@@ -19,7 +19,7 @@ public class Concern extends BaseEntity {
     private Integer userId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer type;//动态类型1为个人动态，2为活动动态，3为明星动态，4为圈子动态
+    private Integer type;//动态类型1为个人动态，2为活动动态，3为明星动态，4为圈子动态，5直播动态，6帖子动态
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String topicTitle;
@@ -38,6 +38,12 @@ public class Concern extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer state;//动态状态，-2未屏蔽，-1为删除
+
+    @Column(name = "from_id")
+    private Integer fromId;//跟fromType对应
+
+    @Column(name = "from_type")
+    private Integer fromType;//1:直播，2活动，3帖子，该字段只用于我的关注模块中自动生成的动态查询
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -105,5 +111,21 @@ public class Concern extends BaseEntity {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(Integer fromId) {
+        this.fromId = fromId;
+    }
+
+    public Integer getFromType() {
+        return fromType;
+    }
+
+    public void setFromType(Integer fromType) {
+        this.fromType = fromType;
     }
 }
