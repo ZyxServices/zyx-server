@@ -31,6 +31,7 @@
         <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
         <result column="hot" property="hot" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
@@ -38,20 +39,33 @@
     <resultMap id="CircleItemCustomMap" type="com.zyx.vo.pg.CircleItemVo" extends="CircleItemResultMap">
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
-        <result column="meetCount" property="meetCount" jdbcType="INTEGER"/>
+        <!--<result column="zanCount" property="zanCount" jdbcType="INTEGER"/>-->
+        <!--<result column="meetCount" property="meetCount" jdbcType="INTEGER"/>-->
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+        <association property="zanCount" column="circle_id" select="zanSelect"/>
+        <association property="meetCount" column="circle_id" select="meetSelect"/>
     </resultMap>
 
     <resultMap id="CircleItemLunBoMap" type="com.zyx.vo.pg.CircleItemLunBoVo" extends="CircleItemResultMap">
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="zanCount" property="zanCount" jdbcType="INTEGER"/>
+        <association property="userVo" column="create_id" select="userVoSelect"/>
     </resultMap>
+
+    <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
+        SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
+    </select>
+    <select id="meetSelect" parameterType="int" resultType="int">
+        SELECT count(*) from meet where circle_id=#{circle_item_id}
+    </select>
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT count(id) from zan where body_type=5 AND body_id=#{circle_item_id}
+    </select>
 
     <select id="circleItemList" resultMap="CircleItemCustomMap">
         SELECT
         circle_item.id,
         circle_item.circle_id,
+        circle_item.img_url,
         circle_item.create_id,
         circle_item.title,
         circle_item.content,
@@ -61,8 +75,6 @@
         circle_item.state,
         `user`.nickname,
         `user`.avatar,
-        (SELECT count(*) from meet where circle_id=circle_item.circle_id) as meetCount,
-        (SELECT count(*) from zan where body_type=5 AND body_id=circle_item.circle_id) as zanCount,
         circle.title AS circleTitle
         FROM
         circle_item
@@ -104,7 +116,8 @@
     <select id="getLunBo" resultMap="CircleItemLunBoMap">
           SELECT
             circle_item.id,
-            devaluation.image_url
+            circle_item.create_id,
+            devaluation.image_url as tjImgae_url
         FROM
             devaluation
         INNER JOIN circle_item ON circle_item.id = devaluation.model_id
@@ -112,6 +125,10 @@
         ORDER BY
             devaluation.sequence DESC
         LIMIT 0,#{max}
+    </select>
+
+    <select id="getOneCircleItem" resultMap="CircleItemLunBoMap">
+        SELECT * FROM circle_item WHERE id=#{id}
     </select>
 
 </mapper>

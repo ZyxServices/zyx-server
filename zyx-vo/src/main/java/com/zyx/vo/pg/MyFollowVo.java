@@ -10,7 +10,6 @@ import com.zyx.entity.pg.Concern;
  * Create by XiaoWei on 2016/8/15
  */
 public class MyFollowVo extends Concern {
-    private Integer accountId;
     UserVo userVo;
     private Integer zanCounts;
     private Integer commentCounts;
@@ -49,13 +48,5 @@ public class MyFollowVo extends Concern {
 
     public void setUserAuthVo(UserAuthVo userAuthVo) {
         this.userAuthVo = userAuthVo;
-    }
-
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
     }
 }

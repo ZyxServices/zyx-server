@@ -30,4 +30,6 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     List<CircleItemLunBoVo> getLunBo(@Param("max") Integer max);
 
+    CircleItemLunBoVo getOneCircleItem(@Param("id") Integer id);
+
 }

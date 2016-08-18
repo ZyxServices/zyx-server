@@ -93,7 +93,7 @@ public interface PgFacade {
      * @param content
      * @return
      */
-    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content);
+    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content,String img_url);
 
     /**
      * 圈子设置圈主
@@ -251,4 +251,18 @@ public interface PgFacade {
      * @return
      */
     Map<String, Object> starConcern(Integer max);
+
+    /**
+     * 获取动态详情
+     * @param concernId
+     * @return
+     */
+    Map<String, Object> getOneConcern(Integer concernId);
+
+    /**
+     * 获取帖子详情
+     * @param circleItemId
+     * @return
+     */
+    Map<String,Object> getOneCircleItem(Integer circleItemId);
 }

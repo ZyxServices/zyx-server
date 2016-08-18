@@ -36,6 +36,9 @@ public class CircleItem extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer state;//帖子状态,0为正常可以访问，-1为删除，-2为屏蔽如有业务需求，可以再加入
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String imgUrl;
 
     public Integer getCircleId() {
         return circleId;
@@ -91,5 +94,13 @@ public class CircleItem extends BaseEntity {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

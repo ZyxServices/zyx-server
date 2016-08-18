@@ -12,7 +12,7 @@ import java.util.Map;
  * Create by XiaoWei on 2016/6/21
  */
 public interface CircleItemService extends BaseService<CircleItem> {
-    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content);
+    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content,String img_url);
 
     Map<String, Object> circleItemList(Integer max, Integer circleId);
 
@@ -23,4 +23,6 @@ public interface CircleItemService extends BaseService<CircleItem> {
     Map<String, Object> deleteCircleItemByParams(Integer createThisId, Integer circleItemId);
 
     Map<String, Object> lbCircleItem(Integer max);
+
+    Map<String,Object> getOneCircleItem(Integer circleItemId);
 }
