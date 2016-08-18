@@ -22,9 +22,9 @@ public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> starConcern(Integer max);
 
     /**
-     *
+     * 自动生成动态
      * @param fromId
-     * @param fromType 目前3个模块用到，1：直播，2活动，3帖子
+     * @param fromType 目前3个模块用到，1：直播，2活动，3帖子（调用Constants key）
      * @param formObj
      * @return
      */

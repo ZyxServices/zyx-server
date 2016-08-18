@@ -271,4 +271,22 @@ public interface Constants {
      * 存放Authorization的header字段
      */
     String AUTHORIZATION = "authorization";
+
+    //******************自动生成动态 start***********************
+    /**
+     * 直播
+     */
+    int DYNAMIC_LIVE = 1;
+
+    /**
+     * 活动
+     */
+    int DYNAMIC_ACTIVITY = 2;
+
+    /**
+     * 帖子
+     */
+    int DYNAMIC_CIRCLE = 3;
+
+    //******************自动生成动态 ebd*************************
 }

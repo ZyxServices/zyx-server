@@ -115,7 +115,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
             return 0;
         }
         switch (fromType) {
-            case 1:
+            case Constants.DYNAMIC_LIVE:
                 //直播
                 LiveInfo liveInfo = (LiveInfo) fromObj;
                 Concern concern = new Concern();
@@ -130,7 +130,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
                 concern.setTopicVisible(1);
                 concern.setUserId(liveInfo.getUserId());
                 return concernMapper.insert(concern);
-            case 2:
+            case Constants.DYNAMIC_ACTIVITY:
                 //活动
                 Activity activity = (Activity) fromObj;
                 Concern concernActivity = new Concern();
@@ -145,7 +145,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
                 concernActivity.setTopicVisible(1);
                 concernActivity.setUserId(activity.getUserId());
                 return concernMapper.insert(concernActivity);
-            case 3:
+            case Constants.DYNAMIC_CIRCLE:
                 //帖子
                 CircleItem circleItem = (CircleItem) fromObj;
                 Concern concernItem = new Concern();
