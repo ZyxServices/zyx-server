@@ -3,6 +3,9 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.entity.activity.Activity;
+import com.zyx.entity.live.LiveInfo;
+import com.zyx.entity.pg.CircleItem;
 import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.pg.ConcernMapper;
@@ -80,7 +83,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
     }
 
     @Override
-    public List<Concern> queryMyConcernList(Integer accountId) {
+    public List<MyFollowVo> queryMyConcernList(Integer accountId) {
         if (accountId == null) {
             return null;
         }
@@ -98,6 +101,64 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Integer fromConcern(Integer fromId, Integer fromType, Object fromObj) {
+        if (Objects.equals(fromId, null)) {
+            return 0;
+        }
+        if (Objects.equals(fromType, null)) {
+            return 0;
+        }
+        if (Objects.equals(fromObj, null)) {
+            return 0;
+        }
+        switch (fromType) {
+            case 1:
+                //直播
+                LiveInfo liveInfo = (LiveInfo) fromObj;
+                Concern concern = new Concern();
+                concern.setFromId(fromId);
+                concern.setFromType(1);
+                concern.setType(5);
+                concern.setCreateTime(new Date().getTime());
+                if (!Objects.equals(liveInfo.getBgmUrl(), null)) {
+                    concern.setImgUrl(liveInfo.getBgmUrl());//设置动态图片为直播的背景图片
+                }
+                concern.setTopicTitle(liveInfo.getTitle());
+                concern.setTopicVisible(1);
+                concern.setUserId(liveInfo.getUserId());
+                return concernMapper.insert(concern);
+            case 2:
+                //活动
+                Activity activity = (Activity) fromObj;
+                Concern concernActivity = new Concern();
+                concernActivity.setFromId(fromId);
+                concernActivity.setFromType(fromType);
+                concernActivity.setType(2);
+                concernActivity.setCreateTime(new Date().getTime());
+                if (!Objects.equals(activity.getImgUrls(), null)) {
+                    concernActivity.setImgUrl(activity.getImgUrls());
+                }
+                concernActivity.setTopicTitle(activity.getTitle());
+                concernActivity.setTopicVisible(1);
+                concernActivity.setUserId(activity.getUserId());
+                return concernMapper.insert(concernActivity);
+            case 3:
+                //帖子
+                CircleItem circleItem = (CircleItem) fromObj;
+                Concern concernItem = new Concern();
+                concernItem.setFromId(fromId);
+                concernItem.setFromType(fromType);
+                concernItem.setType(6);
+                concernItem.setCreateTime(new Date().getTime());
+                concernItem.setTopicTitle(circleItem.getTitle());
+                concernItem.setTopicVisible(1);
+                concernItem.setUserId(circleItem.getCreateId());
+                return concernMapper.insert(concernItem);
+        }
+        return 0;
     }
 
 }

@@ -2,10 +2,10 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.entity.pg.Concern;
 import com.zyx.rpc.account.MyConcernFacade;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.pg.MyFollowVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -33,12 +33,12 @@ public class MyConcernFacadeImpl implements MyConcernFacade {
 
     @Override
     public Map<String, Object> myList(String token, Integer accountId) {
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return AccountConstants.MAP_TOKEN_FAILURE;
-        }
         try {
-            List<Concern> _list = concrenService.queryMyConcernList(accountId);
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return AccountConstants.MAP_TOKEN_FAILURE;
+            }
+            List<MyFollowVo> _list = concrenService.queryMyConcernList(accountId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, _list);
         } catch (Exception e) {
             return Constants.MAP_500;
