@@ -1,13 +1,15 @@
-package com.zyx.entity.activity.vo;
-
-import com.zyx.entity.BaseEntity;
-import com.zyx.entity.activity.Activity;
+package com.zyx.vo.activity;
 
 /**
  * Created by Rainbow on 2016/8/16.
  */
-public class CombinedDataVo extends BaseEntity {
+public class CombinedDataVo {
 
+    /** 主键ID **/
+    private Integer id;
+
+    /** 创建时间 **/
+    private Long createTime;
     /**
      * 组合id
      */
@@ -44,10 +46,28 @@ public class CombinedDataVo extends BaseEntity {
         this.mask = mask;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "CombinedDataVo{" +
-                "combinedId=" + combinedId +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", combinedId=" + combinedId +
                 ", activityVo=" + activityVo +
                 ", mask=" + mask +
                 '}';

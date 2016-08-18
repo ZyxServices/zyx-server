@@ -3,13 +3,12 @@ package com.zyx.mapper.activity;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.vo.ActivityVo;
-import com.zyx.entity.activity.vo.MemberTemplate;
+import com.zyx.vo.activity.ActivityVo;
+import com.zyx.vo.activity.MemberTemplate;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Rainbow on 16-6-12.

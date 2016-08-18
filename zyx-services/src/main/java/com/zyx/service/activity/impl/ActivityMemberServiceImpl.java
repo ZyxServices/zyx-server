@@ -6,10 +6,8 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.ActivityMember;
 import com.zyx.entity.activity.parm.MemberInfoParm;
 import com.zyx.entity.activity.parm.QueryMemberParm;
-import com.zyx.entity.activity.vo.QueryMemberVo;
+import com.zyx.vo.activity.QueryMemberVo;
 import com.zyx.mapper.account.AccountInfoMapper;
-import com.zyx.mapper.account.UserAddressMapper;
-import com.zyx.mapper.account.UserMarkMapper;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.ActivityMemberMapper;
 import com.zyx.service.BaseServiceImpl;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +75,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             if (activity.getExamine() == 1) activityMember.setExamineType(false);
             else activityMember.setExamineType(true);
-
+            activity.setMask(0);
 
             int insert = mapper.insert(activityMember);
             if (insert > 0) {
@@ -93,7 +90,6 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
     @Override
     public Map<String, Object> delActivityMember(MemberInfoParm memberInfoParm) {
-        Map<String, Object> map = new HashMap<>();
 
         if (memberInfoParm != null && memberInfoParm.getActivityId() != null && memberInfoParm.getUserId() != null) {
             int member = activityMemberMapper.delActivityMember(memberInfoParm);
@@ -115,7 +111,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
         List<ActivityMember> queryMemberVos = activityMemberMapper.queryActivityMemberInfo(parm);
         List<QueryMemberVo> memberVos = new ArrayList<>();
-        queryMemberVos.forEach(e ->{
+        queryMemberVos.forEach(e -> {
             QueryUserInfoVo queryUserInfoVo = accountInfoMapper.selectAccountById(e.getUserId());
             QueryMemberVo queryMemberVo = new QueryMemberVo();
             queryMemberVo.setId(e.getId());
@@ -125,10 +121,10 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
             queryMemberVo.setMemberInfo(e.getMemberInfo());
             queryMemberVo.setPhone(e.getPhone());
             queryMemberVo.setUserId(e.getUserId());
-            queryMemberVo.setSex(queryUserInfoVo.getSex());
+            queryMemberVo.setSex(queryUserInfoVo.getSex() == null ? 1 : queryUserInfoVo.getSex());
             queryMemberVo.setUserNick(queryUserInfoVo.getNickname());
-            queryMemberVo.setBirthday(((System.currentTimeMillis() - queryUserInfoVo.getBirthday()) / (365 * 24 * 60 * 60 * 1000l)));
-            queryMemberVo.setMask(e.getMask());
+            queryMemberVo.setBirthday(queryUserInfoVo.getBirthday() == null ? 0 : ((System.currentTimeMillis() - queryUserInfoVo.getBirthday()) / (365 * 24 * 60 * 60 * 1000l)));
+            queryMemberVo.setMask(e.getMask() == null ? 0 : e.getMask());
             memberVos.add(queryMemberVo);
         });
 

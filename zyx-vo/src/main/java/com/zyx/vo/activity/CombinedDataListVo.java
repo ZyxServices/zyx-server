@@ -1,7 +1,4 @@
-package com.zyx.entity.activity.vo;
-
-import com.zyx.entity.BaseEntity;
-import com.zyx.entity.activity.Activity;
+package com.zyx.vo.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +6,9 @@ import java.util.List;
 /**
  * Created by Rainbow on 2016/8/16.
  */
-public class CombinedDataListVo extends BaseEntity {
+public class CombinedDataListVo {
 
+    private Integer id;
     /**
      * 组合id
      */
@@ -35,6 +33,9 @@ public class CombinedDataListVo extends BaseEntity {
      * 是否屏蔽 （0 正常 1 屏蔽）
      */
     private Integer mask;
+
+    /** 创建时间 **/
+    private Long createTime;
 
     public Integer getCombinedId() {
         return combinedId;
@@ -79,14 +80,32 @@ public class CombinedDataListVo extends BaseEntity {
         this.mask = mask;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "CombinedDataListVo{" +
-                "combinedId=" + combinedId +
+                "id=" + id +
+                ", combinedId=" + combinedId +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
                 ", activityVos=" + activityVos +
                 ", mask=" + mask +
+                ", createTime=" + createTime +
                 '}';
     }
 }

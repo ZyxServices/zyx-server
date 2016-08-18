@@ -8,10 +8,11 @@ import com.zyx.entity.activity.CombinedData;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryCombiationParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
-import com.zyx.entity.activity.vo.ActivityVo;
-import com.zyx.entity.activity.vo.CombinedDataListVo;
-import com.zyx.entity.activity.vo.CombinedDataVo;
-import com.zyx.entity.activity.vo.MemberTemplate;
+import com.zyx.service.pg.ConcernService;
+import com.zyx.vo.activity.ActivityVo;
+import com.zyx.vo.activity.CombinedDataListVo;
+import com.zyx.vo.activity.CombinedDataVo;
+import com.zyx.vo.activity.MemberTemplate;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.CombinationDataMapper;
 import com.zyx.mapper.activity.CombinationMapper;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Rainbow on 16-6-12.
@@ -44,6 +46,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     private CombinationMapper combinationMapper;
     @Resource
     private CombinationDataMapper combinationDataMapper;
+    @Resource
+    private ConcernService concernService;
 
     public ActivityServiceImpl() {
         super(Activity.class);
@@ -59,8 +63,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         Map<String, Object> map = new HashMap<>();
 
         if (createId != null && title != null && desc != null && image != null && startTime != null
-                && endTime != null && lastTime != null && maxPeople != null
-                && visible != null && phone != null && type != null) {
+                && endTime != null && lastTime != null && visible != null && type != null) {
             activity.setUserId(createId);
             activity.setTitle(title);
             activity.setDescContent(desc);
@@ -93,6 +96,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         }
         Integer integer = mapper.insert(activity);
         if (integer > 0) {
+            concernService.fromConcern(activity.getId(), Constants.DYNAMIC_ACTIVITY, activity);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
         } else {
             return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10000, "活动发布失败");
@@ -188,12 +192,12 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 combinedDataListVo.setImage(combination.getImage());
                 combinedDataListVo.setMask(combination.getMask());
 
-                if(combinedDatas.size() > 0){
+                if (combinedDatas.size() > 0) {
                     combinedDatas.stream().filter(e -> e != null).forEach(s -> {
-                            combinedDataListVo.getActivityVos().add(s.getActivityVo());
+                        combinedDataListVo.getActivityVos().add(s.getActivityVo());
                     });
                     return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", combinedDataListVo);
-                }else{
+                } else {
                     return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", combinedDataListVo);
                 }
             } else {

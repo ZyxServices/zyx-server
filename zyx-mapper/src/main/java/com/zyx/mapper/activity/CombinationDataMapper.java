@@ -1,9 +1,7 @@
 package com.zyx.mapper.activity;
 
-import com.zyx.entity.activity.Combination;
 import com.zyx.entity.activity.CombinedData;
-import com.zyx.entity.activity.parm.QueryCombiationParm;
-import com.zyx.entity.activity.vo.CombinedDataVo;
+import com.zyx.vo.activity.CombinedDataVo;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

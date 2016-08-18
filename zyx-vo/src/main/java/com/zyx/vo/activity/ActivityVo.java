@@ -1,10 +1,7 @@
-package com.zyx.entity.activity.vo;
+package com.zyx.vo.activity;
 
-import com.zyx.entity.BaseEntity;
-import org.apache.ibatis.type.JdbcType;
-import tk.mybatis.mapper.annotation.ColumnType;
+import com.zyx.vo.account.AccountAttentionVo;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,10 +24,15 @@ public class ActivityVo implements Serializable {
      * 创建时间
      **/
     private Long createTime;
+
     /**
      * 创建者(用户ID)
      */
-    private Integer userId;
+    private AccountAttentionVo user;
+    /**
+     * 收藏
+     */
+    private Integer collection;
 
     /**
      * 活动标题
@@ -150,12 +152,23 @@ public class ActivityVo implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public AccountAttentionVo getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(AccountAttentionVo user) {
+        this.user = user;
+    }
+
+    public Integer getCollection() {
+        if (collection == null) {
+            collection = 0;
+        }
+        return collection;
+    }
+
+    public void setCollection(Integer collection) {
+        this.collection = collection;
     }
 
     public String getTitle() {
@@ -318,32 +331,4 @@ public class ActivityVo implements Serializable {
         this.mask = mask;
     }
 
-    @Override
-    public String toString() {
-        return "ActivityVo{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", imgUrls='" + imgUrls + '\'' +
-                ", descContent='" + descContent + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", lastTime=" + lastTime +
-                ", maxPeople=" + maxPeople +
-                ", visible=" + visible +
-                ", phone='" + phone + '\'' +
-                ", price=" + price +
-                ", type=" + type +
-                ", targetUrl='" + targetUrl + '\'' +
-                ", address='" + address + '\'' +
-                ", activityType=" + activityType +
-                ", examine=" + examine +
-                ", memberTemplate='" + memberTemplate + '\'' +
-                ", memberCount=" + memberCount +
-                ", editDesc='" + editDesc + '\'' +
-                ", editDescImgUrl=" + editDescImgUrl +
-                ", mask=" + mask +
-                '}';
-    }
 }

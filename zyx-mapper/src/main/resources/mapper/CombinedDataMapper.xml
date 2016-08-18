@@ -10,12 +10,12 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="combinationDataVo" type="com.zyx.entity.activity.vo.CombinedDataVo">
+    <resultMap id="combinationDataVo" type="com.zyx.vo.activity.CombinedDataVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="combinedId" property="combinedId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="INTEGER"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
-        <association column="dataId" property="activityVo" javaType="ActivityVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"/>
+        <association column="dataId" property="activityVo" javaType="com.zyx.vo.activity.ActivityVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"/>
     </resultMap>
 
     <select id="queryCombiationData" parameterType="com.zyx.entity.activity.CombinedData" resultMap="combinationDataVo">

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.activity.ActivityMapper">
 
-    <resultMap id="member_template" type="com.zyx.entity.activity.vo.MemberTemplate">
+    <resultMap id="member_template" type="com.zyx.vo.activity.MemberTemplate">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="member_template" property="template" jdbcType="VARCHAR"/>
@@ -31,9 +31,8 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="queryActivity" type="com.zyx.entity.activity.vo.ActivityVo">
+    <resultMap id="queryActivity" type="com.zyx.vo.activity.ActivityVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="desc_content" property="descContent" jdbcType="LONGVARCHAR"/>
@@ -52,6 +51,7 @@
         <result column="member_template" property="memberTemplate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
         <association column="id" property="memberCount" javaType="int" select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
     </resultMap>
 
