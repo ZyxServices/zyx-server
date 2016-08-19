@@ -1,6 +1,5 @@
 package com.zyx.vo.collection;
 
-import com.zyx.entity.activity.vo.ActivityVo;
 import com.zyx.vo.live.LiveInfoVo;
 
 /**
@@ -11,12 +10,6 @@ public class CollectionVo {
     private Integer model;
     private Integer modelId;
     private LiveInfoVo liveInfoVo;
-    private ActivityVo activityVo;
-    TempVO temp;
-    class TempVO{
-        private Integer model;
-        private Integer modelId;
-    }
     public void setUsrId(Integer usrId) {
         this.usrId = usrId;
     }
