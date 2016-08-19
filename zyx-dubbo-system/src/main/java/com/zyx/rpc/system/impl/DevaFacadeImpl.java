@@ -2,12 +2,11 @@ package com.zyx.rpc.system.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.system.SystemConstants;
-import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.system.Devaluation;
 import com.zyx.rpc.system.DevaFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.activity.ActivityService;
-import com.zyx.service.admin.DevaluationService;
+import com.zyx.service.system.DevaService;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.pg.CircleItemService;
 import com.zyx.service.pg.CircleService;
@@ -32,7 +31,7 @@ public class DevaFacadeImpl implements DevaFacade {
     @Autowired
     RedisTemplate<String, List<Integer>> innerDevaIdTemplate;
     @Autowired
-    DevaluationService devaluationService;
+    DevaService devaService;
     @Autowired
     LiveInfoService liveInfoService;
     @Autowired
@@ -46,23 +45,23 @@ public class DevaFacadeImpl implements DevaFacade {
     @Autowired
     MyConcernService myConcernService;
     @Override
-    public List getDevaByModel(Integer model) {
+    public List getDevaByModel(Integer area,Integer model) {
         //// TODO: 2016/8/3 判定Model范围
         if (model == null) {
             return null;
         }
-        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA + model);
+        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
         if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
-            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA + model);
-            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + model);
+            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
+            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
             if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
-                return queryAndRefreshFromDB(model);//刷新流程
+                return queryAndRefreshFromDB(area,model);//刷新流程
             } else {
-                devas = queryModelDevas(model,innerDevaIds);
+                devas = queryModelDevas(area,model,innerDevaIds);
                 if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
-                    return queryAndRefreshFromDB(model);//刷新流程
+                    return queryAndRefreshFromDB(area,model);//刷新流程
                 }
-                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA + model, devas);
+                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
                 return devas;
             }
         }
@@ -75,20 +74,20 @@ public class DevaFacadeImpl implements DevaFacade {
      * @param model
      * @return
      */
-    private List queryAndRefreshFromDB(Integer model) {
-        List<Integer> innerDevaIds = devaluationService.queryDevaIds(model);
-        List<Devaluation> innerDevas = devaluationService.queryDevaluation(model);
+    private List queryAndRefreshFromDB(Integer area,Integer model) {
+        List<Integer> innerDevaIds = devaService.selectModelIds(area,model);
+        List<Devaluation> innerDevas = devaService.selectDevas(area,model);
         if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//DB 中间表无数据
             return null;
         }
-        List devas = queryModelDevas(model,innerDevaIds);//DB查询
+        List devas = queryModelDevas( area, model,innerDevaIds);//DB查询
         if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
             return null;
         }
         //刷新Redis
-        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA + model, innerDevas);
-        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + model, innerDevaIds);
-        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA + model, devas);
+        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
+        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
+        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
         return devas;
     }
 
@@ -99,7 +98,7 @@ public class DevaFacadeImpl implements DevaFacade {
      * @param ids
      * @return
      */
-    private List queryModelDevas(Integer model, List<Integer>  ids) {
+    private List queryModelDevas(Integer area,Integer model, List<Integer>  ids) {
         switch (model){
             case Constants.MODEL_ACTIVITY:
                 return activityService.selectByIds(ids);

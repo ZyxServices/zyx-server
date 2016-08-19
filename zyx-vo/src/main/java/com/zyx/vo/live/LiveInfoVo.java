@@ -23,6 +23,8 @@ public class LiveInfoVo implements Serializable {
 	private String vedioUrl;
 	private Integer state;
 
+	private Object infos;
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -109,5 +111,13 @@ public class LiveInfoVo implements Serializable {
 
 	public Integer getState() {
 		return state;
+	}
+
+	public void setInfos(Object infos) {
+		this.infos = infos;
+	}
+
+	public Object getInfos() {
+		return infos;
 	}
 }

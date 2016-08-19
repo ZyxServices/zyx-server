@@ -17,7 +17,7 @@
 		<id column="bgm_url" property="bgmUrl" />
 		<id column="vedio_url" property="vedioUrl" />
 		<id column="state" property="state" />
-		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
+		<!--<association property="userIconVo" column="user_id" select="selectUserIcon"></association>-->
 	</resultMap>
 
 	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
@@ -63,10 +63,16 @@
 		</if>-->
 	</select>
 
-	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+	<select id="selectLiveInfo" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">
+		SELECT *
+		FROM t_live
+		WHERE
+		id = #{id}
+	</select>
+	<!--<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user
 		WHERE
 		id = #{id}
-	</select>
+	</select>-->
 </mapper>

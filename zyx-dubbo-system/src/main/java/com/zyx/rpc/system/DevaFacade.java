@@ -9,9 +9,10 @@ import java.util.List;
 public interface DevaFacade {
     /**
      *
+     * @param area
      * @param model
      * @return
      */
-    public List getDevaByModel(Integer model);
+    public List getDevaByModel(Integer area,Integer model);
     public List getAllDeva();
 }
