@@ -28,7 +28,7 @@ public interface LiveInfoFacade {
 	 * @author MrDeng
 	 * @update 2016年6月22日 上午10:28:48
 	 */
-	public void add(LiveInfo liveInfo);
+	public Integer add(LiveInfo liveInfo);
 	/**
 	 *
 	 * @param liveInfo
