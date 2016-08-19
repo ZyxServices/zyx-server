@@ -90,6 +90,17 @@ public class FastDFSClient {
     public static String uploadFiles(byte[] tempFile, String fileName) {
         FileInputStream fis = null;
         try {
+            //TODO:修改
+            TrackerClient trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
+            TrackerServer trackerServer = trackerClient.getConnection();
+            if (trackerServer == null) {
+                logger.error("getConnection return null");
+            }
+            StorageServer storageServer = trackerClient.getStoreStorage(trackerServer);
+            if (storageServer == null) {
+                logger.error("getStoreStorage return null");
+            }
+            storageClient1 = new StorageClient1(trackerServer, storageServer);
             String fileid = storageClient1.upload_file1(tempFile, getFileExt(fileName), null);
             return fileid;
         } catch (Exception ex) {
