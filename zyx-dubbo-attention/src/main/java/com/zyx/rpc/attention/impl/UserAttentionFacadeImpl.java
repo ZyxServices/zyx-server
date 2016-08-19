@@ -44,6 +44,10 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
         }
         try {
             UserAttention _attention = buildUserAttention(attentionParam);
+            attentionParam.setType(1);// 关注、粉丝
+            if (userAttentionService.selectAttentionCount(attentionParam) > 0) {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70003, UserAttentionConstants.ATTENTION_70003_MSG);
+            }
             int result = userAttentionService.save(_attention);
             if (result == 1) {// 成功
                 return MapUtils.buildSuccessMap(UserAttentionConstants.SUCCESS, UserAttentionConstants.SUCCESS_MSG, result);

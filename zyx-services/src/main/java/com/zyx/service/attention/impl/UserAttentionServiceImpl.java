@@ -39,4 +39,9 @@ public class UserAttentionServiceImpl extends BaseServiceImpl<UserAttention> imp
     public List<AttentionVo> myGZList(AttentionParam attentionParam) {
         return userAttentionMapper.myGZList(attentionParam);
     }
+
+    @Override
+    public int selectAttentionCount(AttentionParam attentionParam) {
+        return userAttentionMapper.selectAttentionCount(attentionParam);
+    }
 }

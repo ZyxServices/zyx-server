@@ -41,16 +41,6 @@ public class FastDFSClient {
                 ClientGlobal.initDefault(CONF_FILENAME_DEFAULT);
             }
 
-            TrackerClient trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
-            TrackerServer trackerServer = trackerClient.getConnection();
-            if (trackerServer == null) {
-                logger.error("getConnection return null");
-            }
-            StorageServer storageServer = trackerClient.getStoreStorage(trackerServer);
-            if (storageServer == null) {
-                logger.error("getStoreStorage return null");
-            }
-            storageClient1 = new StorageClient1(trackerServer, storageServer);
         } catch (Exception e) {
             logger.error(e);
         }
@@ -72,7 +62,16 @@ public class FastDFSClient {
                 file_buff = new byte[len];
                 fis.read(file_buff);
             }
-
+            TrackerClient trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
+            TrackerServer trackerServer = trackerClient.getConnection();
+            if (trackerServer == null) {
+                logger.error("getConnection return null");
+            }
+            StorageServer storageServer = trackerClient.getStoreStorage(trackerServer);
+            if (storageServer == null) {
+                logger.error("getStoreStorage return null");
+            }
+            storageClient1 = new StorageClient1(trackerServer, storageServer);
             String fileid = storageClient1.upload_file1(file_buff, getFileExt(fileName), meta_list);
             return fileid;
         } catch (Exception exs) {

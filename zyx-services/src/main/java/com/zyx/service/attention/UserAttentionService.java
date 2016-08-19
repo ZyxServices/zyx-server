@@ -21,4 +21,6 @@ public interface UserAttentionService extends BaseService<UserAttention> {
     List<AttentionVo> myFSList(AttentionParam attentionParam);
 
     List<AttentionVo> myGZList(AttentionParam attentionParam);
+
+    int selectAttentionCount(AttentionParam attentionParam);
 }

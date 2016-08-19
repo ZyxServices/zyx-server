@@ -36,6 +36,19 @@
         <association property="attentions" column="from_user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
     </resultMap>
+    
+    <select id="selectAttentionCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM USER_ATTENTION where 1 = 1
+        <if test="fromId != null">
+            and from_user_id = #{fromId}
+        </if>
+        <if test="toId != null">
+            and to_user_id = #{toId}
+        </if>
+        <if test="type != null">
+            and rel_type = #{type}
+        </if>
+    </select>
 
     <select id="myGZList" parameterType="int" resultMap="MyCenterGZVoResultMap">
         SELECT * FROM USER_ATTENTION where from_user_id = #{fromId}
