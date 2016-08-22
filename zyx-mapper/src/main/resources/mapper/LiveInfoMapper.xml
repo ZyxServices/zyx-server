@@ -69,10 +69,10 @@
 		WHERE
 		id = #{id}
 	</select>
-	<!--<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user
 		WHERE
 		id = #{id}
-	</select>-->
+	</select>
 </mapper>
