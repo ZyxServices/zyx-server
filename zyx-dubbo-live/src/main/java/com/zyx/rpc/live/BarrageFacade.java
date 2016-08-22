@@ -27,7 +27,6 @@ public interface BarrageFacade {
 //	public Barrage getById(Integer id);
 	/**
 	 * 
-	 * @param barrage
 	 * @return
 	 * @description 获取直播列表
 	 * @version 1.0
