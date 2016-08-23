@@ -3,10 +3,13 @@
 <mapper namespace="com.zyx.mapper.collection.CollectionMapper">
 
     <resultMap id="getLiveInfo" type="com.zyx.vo.collection.CollLiveVo" extends="BaseCollection">
-        <collection property="liveInfoVo" select="com.zyx.mapper.collection.CollectionMapper.selectCollLiveInfo"
+    <collection property="liveInfoVo" select="com.zyx.mapper.collection.CollectionMapper.selectCollLiveInfo"
+                column="model_id"/>
+    </resultMap>
+    <resultMap id="getActivityInfo" type="com.zyx.vo.collection.CollActivityVo" extends="BaseCollection">
+        <collection property="activityInfoVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"
                     column="model_id"/>
     </resultMap>
-
     <resultMap id="BaseCollection" type="com.zyx.vo.collection.CollectionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
@@ -14,6 +17,7 @@
         <result column="model" property="model" jdbcType="VARCHAR"/>
         <result column="model_id" property="modelId" jdbcType="VARCHAR"/>
         <discriminator javaType="java.lang.Integer" column="model">
+            <case value="1" resultMap="getActivityInfo"/>
             <case value="2" resultMap="getLiveInfo"/>
         </discriminator>
     </resultMap>
