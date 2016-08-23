@@ -1,11 +1,12 @@
-package com.zyx.service.admin;
+package com.zyx.service.system;
 
 import com.zyx.entity.system.Devaluation;
+import com.zyx.param.system.DevaParam;
 import com.zyx.service.BaseService;
 
 import java.util.List;
 
-public interface DevaluationService extends BaseService<Devaluation>{
+public interface DevaService extends BaseService<Devaluation>{
 	/**
      * 删除首推项
      * @param devaluation
@@ -14,10 +15,8 @@ public interface DevaluationService extends BaseService<Devaluation>{
 
     /**
      * 查询首推项
-     * @param types
      * @return
      */
-    List<Devaluation> queryDevaluation(Integer types);
-    
-    List<Integer> queryDevaIds(Integer types);
+    List<Devaluation> selectDevas(Integer area,Integer model);
+    List<Integer> selectModelIds(Integer area,Integer model);
 }

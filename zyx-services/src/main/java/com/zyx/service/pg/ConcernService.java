@@ -28,5 +28,7 @@ public interface ConcernService extends BaseService<Concern> {
      * @param formObj
      * @return
      */
-    Integer fromConcern(Integer fromId, Integer fromType,Object formObj);
+    Integer fromConcern(Integer fromId, Integer fromType, Object formObj);
+
+    Map<String, Object> getOne(Integer concernId);
 }

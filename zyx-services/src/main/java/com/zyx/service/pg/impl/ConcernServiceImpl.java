@@ -4,8 +4,14 @@ package com.zyx.service.pg.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.pg.CircleItem;
+import com.zyx.mapper.attention.UserAttentionMapper;
+import com.zyx.param.attention.AttentionParam;
+import com.zyx.service.attention.UserAttentionService;
+import com.zyx.vo.account.AccountAttentionVo;
+import com.zyx.vo.attention.AttentionVo;
 import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.pg.ConcernMapper;
@@ -16,18 +22,19 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by XiaoWei on 2016/6/7.
  */
 @Service
-public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements ConcernService {
+public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements ConcernService {
 
     @Resource
     private ConcernMapper concernMapper;
 
 
-    public ConcrenServicImpl() {
+    public ConcernServiceImpl() {
         super(Concern.class);
     }
 
@@ -73,7 +80,14 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
             if (Objects.equals(loginUserId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30000, PgConstants.PG_ERROR_CODE_30000_MSG);
             }
-            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(loginUserId);
+            AttentionParam attentionParam = new AttentionParam();
+            attentionParam.setFromId(loginUserId);
+            List<UserAttention> attentionIds = concernMapper.getAttentionIds(loginUserId);
+            List<Integer> ids = new ArrayList<>();
+            if (attentionIds.size() > 0) {
+                ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
+            }
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,6 +143,7 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
                 concern.setTopicTitle(liveInfo.getTitle());
                 concern.setTopicVisible(1);
                 concern.setUserId(liveInfo.getUserId());
+                concern.setState(0);
                 return concernMapper.insert(concern);
             case Constants.DYNAMIC_ACTIVITY:
                 //活动
@@ -142,8 +157,10 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
                     concernActivity.setImgUrl(activity.getImgUrls());
                 }
                 concernActivity.setTopicTitle(activity.getTitle());
+                concernActivity.setTopicContent(activity.getDescContent());
                 concernActivity.setTopicVisible(1);
                 concernActivity.setUserId(activity.getUserId());
+                concernActivity.setState(0);
                 return concernMapper.insert(concernActivity);
             case Constants.DYNAMIC_CIRCLE:
                 //帖子
@@ -154,11 +171,27 @@ public class ConcrenServicImpl extends BaseServiceImpl<Concern> implements Conce
                 concernItem.setType(6);
                 concernItem.setCreateTime(new Date().getTime());
                 concernItem.setTopicTitle(circleItem.getTitle());
+                concernItem.setTopicContent(circleItem.getContent());
                 concernItem.setTopicVisible(1);
                 concernItem.setUserId(circleItem.getCreateId());
+                concernItem.setState(0);
                 return concernMapper.insert(concernItem);
         }
         return 0;
+    }
+
+    @Override
+    public Map<String, Object> getOne(Integer concernId) {
+        try {
+            if (Objects.equals(concernId, null)) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
+            }
+            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
     }
 
 }

@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.collection.CollectionMapper">
-	<resultMap id="BaseCollection" type="com.zyx.entity.collection.Collection">
-		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="create_time" property="createTime" jdbcType="BIGINT" />
-		<result column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="model" property="nickName" jdbcType="VARCHAR" />
-		<result column="model_id" property="content" jdbcType="VARCHAR" />
+
+	<resultMap id="getLiveInfo" type="com.zyx.entity.live.LiveInfo" extends="BaseCollection">
+		<collection property="infos" select="com.zyx.mapper.live.LiveInfoMapper.selectLiveInfo" column="model_id"/>
 	</resultMap>
-	<select id="selectModelIds" parameterType="com.zyx.param.collection.CollectionParam" resultType="java.lang.Integer">
+
+	<resultMap id="BaseCollection" type="com.zyx.entity.collection.Collection">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="model_id" property="modelId" jdbcType="VARCHAR"/>
+        <discriminator javaType="int" column="model">
+            <case value="2" resultType="com.zyx.entity.live.LiveInfo"/>
+        </discriminator>
+    </resultMap>
+
+    <select id="selectCollection" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+		SELECT *
+		FROM t_collection
+		WHERE
+		1=1
+		AND
+		user_id=#{userId}
+		AND
+		model=#{model}
+    </select>
+
+    <select id="selectModelIds" parameterType="com.zyx.param.collection.CollectionParam" resultType="java.lang.Integer">
 		SELECT model_id
 		FROM t_collection
 		WHERE
@@ -16,6 +36,18 @@
 		AND
 		user_id=#{userId}
 		AND
-		model=#{model_id}
+		model=#{model}
 	</select>
+
+    <delete id="deleteCollection" parameterType="com.zyx.param.collection.CollectionParam">
+		DELETE
+		FROM t_collection
+		WHERE
+		1=1
+		AND
+		user_id=#{userId}
+		AND
+		model=#{model}
+
+	</delete>
 </mapper>

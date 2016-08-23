@@ -63,6 +63,12 @@
 		</if>-->
 	</select>
 
+	<select id="selectLiveInfo" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">
+		SELECT *
+		FROM t_live
+		WHERE
+		id = #{id}
+	</select>
 	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user

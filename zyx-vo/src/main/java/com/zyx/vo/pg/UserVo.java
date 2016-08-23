@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class UserVo implements Serializable {
     private String nickName;
     private String avatar;
+    private Integer authenticate;
 
 
     public String getNickName() {
@@ -27,5 +28,13 @@ public class UserVo implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getAuthenticate() {
+        return authenticate;
+    }
+
+    public void setAuthenticate(Integer authenticate) {
+        this.authenticate = authenticate;
     }
 }

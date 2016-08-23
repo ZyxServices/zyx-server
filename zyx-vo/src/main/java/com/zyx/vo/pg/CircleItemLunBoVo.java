@@ -9,13 +9,22 @@ import com.zyx.entity.pg.CircleItem;
  * Create by XiaoWei on 2016/8/15
  */
 public class CircleItemLunBoVo extends CircleItem {
-    private String image_url;
+    private UserVo userVo;
+    private String tjImgae_url;
 
-    public String getImage_url() {
-        return image_url;
+    public String getTjImgae_url() {
+        return tjImgae_url;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setTjImgae_url(String tjImgae_url) {
+        this.tjImgae_url = tjImgae_url;
+    }
+
+    public UserVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
     }
 }

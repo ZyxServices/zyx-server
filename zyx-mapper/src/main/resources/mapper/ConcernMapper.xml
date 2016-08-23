@@ -35,10 +35,11 @@
         <result column="video_url" property="videoUrl" jdbcType="INTEGER"/>
         <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="from_id" property="fromId" jdbcType="INTEGER"/>
+        <result column="from_type" property="fromType" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="ConcernMyMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernResultMap">
-        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
         <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
         <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
         <association property="zanCounts" column="id" select="zanSelect"/>
@@ -46,9 +47,16 @@
         <association property="userVo" column="user_id" select="userSelect"/>
         <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
     </resultMap>
+    <resultMap id="userAttentionResultMap" type="com.zyx.entity.attention.UserAttention">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="from_user_id" property="fromUserId" jdbcType="INTEGER"/>
+        <result column="to_user_id" property="toUserId" jdbcType="INTEGER"/>
+        <result column="create_time" property="fromUserId" jdbcType="BIGINT"/>
+        <result column="rel_type" property="relType" jdbcType="INTEGER"/>
+    </resultMap>
 
     <select id="userSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
-        SELECT nickname,avatar,id FROM `user` WHERE id=#{user_id}
+        SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
     <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.pg.UserAuthVo">
@@ -61,6 +69,10 @@
 
     <select id="commentSelect" parameterType="int" resultType="int">
      SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply_id=#{concernId}
+    </select>
+
+    <select id="getAttentionIds" parameterType="int" resultMap="userAttentionResultMap">
+        SELECT to_user_id FROM USER_ATTENTION WHERE from_user_id=#{loginUserId}
     </select>
 
     <select id="starRandom" resultMap="ConcernResultMap">
@@ -83,56 +95,22 @@
     </select>
 
     <select id="myConcernList" parameterType="int" resultMap="ConcernMyMap">
-        SELECT
-        concern.create_time,
-        concern.id,
-        concern.user_id,
-        concern.topic_content,
-        concern.img_url,
-        concern.video_url,
-        concern.topic_title
-        FROM
-        concern
-        WHERE concern.user_id=#{accountId}
-        ORDER BY
-        concern.create_time DESC
+        SELECT * FROM concern WHERE concern.user_id=#{accountId} ORDER BY concern.create_time DESC
     </select>
 
-    <select id="myFollowList" resultMap="ConcernMyMap">
-        SELECT
-        concern.create_time,
-        concern.id,
-        concern.user_id,
-        concern.topic_content,
-        concern.img_url,
-        concern.video_url,
-        concern.topic_title,
-        myconcern.account_id
-        FROM
-        concern
-        INNER JOIN myconcern ON myconcern.concern_id = concern.id
-        WHERE myconcern.concern_type=0 AND myconcern.account_id=#{loginUserId}
-        ORDER BY
-        concern.create_time DESC
+    <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMap">
+        SELECT * FROM concern WHERE user_id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <select id="starConcern" resultMap="ConcernMyMap">
-    SELECT
-    concern.create_time,
-    concern.id,
-    concern.user_id,
-    concern.topic_content,
-    concern.img_url,
-    concern.video_url,
-    concern.topic_title
-    FROM
-    concern
-    WHERE concern.type=3
-    ORDER BY
-    concern.create_time DESC
-    LIMIT 0,#{max}
-
+        SELECT* FROM concern WHERE concern.type=3 ORDER BY concern.create_time DESC LIMIT 0,#{max}
     </select>
 
+    <select id="getOne" resultMap="ConcernMyMap">
+        SELECT * FROM concern WHERE id=#{id}
+    </select>
 
 </mapper>

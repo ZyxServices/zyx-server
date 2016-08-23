@@ -59,9 +59,9 @@ public class BarrageFacadeImpl implements BarrageFacade {
 
     @Override
     public List<Barrage> getLast(BarrageVo barrageVo) {
-        barrageVo.setStart(0);
-        barrageVo.setEnd(10);
-        return barrageService.getTop(barrageVo);
+        Long size = barrageRedis.opsForList().size(LiveConstants.MARK_REDIS_BARRAGE_QUEUE);
+        List<Barrage> barrages = barrageRedis.opsForList().range(LiveConstants.MARK_REDIS_BARRAGE_QUEUE, 0, 10 < size ? 10 : size);
+        return barrages;
     }
 
 }
