@@ -33,7 +33,7 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     CircleItemLunBoVo getOneCircleItem(@Param("id") Integer id);
 
-    List<CircleItemVo> getTjCircleItem(@Param("start") Integer start, @Param("pageSize") Integer pageSize);
+    List<CircleItemVo> getTjCircleItem(@Param("start") Integer start, @Param("end") Integer end);
 
 
 }

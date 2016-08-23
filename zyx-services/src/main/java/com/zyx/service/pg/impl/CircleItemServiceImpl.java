@@ -64,6 +64,17 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             circleItem.setState(0);
             circleItem.setImgUrl(img_url);
             circleItem.setCreateTime(new Date().getTime());
+            circleItem.setContent("<p>" + circleItem.getContent() + "</p>");
+            if (circleItem.getImgUrl() != null) {
+                if (circleItem.getImgUrl().contains(",")) {
+                    StringBuilder sb = new StringBuilder();
+                    String[] imgOne = circleItem.getImgUrl().split(",");
+                    for (int i = 0; i < imgOne.length; i++) {
+                        sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
+                    }
+                    circleItem.setContent(circleItem.getContent() + "</br>" + sb.toString());
+                }
+            }
             save(circleItem);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
@@ -155,19 +166,6 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30033_MSG);
             }
             CircleItemLunBoVo vo = circleItemMapper.getOneCircleItem(circleItemId);
-            if (!Objects.equals(vo, null)) {
-                vo.setContent("<p>" + vo.getContent() + "</p>");
-                if (vo.getImgUrl() != null) {
-                    if (vo.getImgUrl().contains(",")) {
-                        StringBuilder sb = new StringBuilder();
-                        String[] imgOne = vo.getImgUrl().split(",");
-                        for (int i = 0; i < imgOne.length; i++) {
-                            sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
-                        }
-                        vo.setContent(vo.getContent() + "</br>" + sb.toString());
-                    }
-                }
-            }
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, vo);
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,11 +174,11 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> getTjCircleItem(Integer start,Integer pageSize) {
+    public Map<String, Object> getTjCircleItem(Integer start, Integer pageSize) {
         try {
             Optional.ofNullable(start).orElse(0);
             Optional.ofNullable(pageSize).orElse(0);
-            List<CircleItemVo> circleItemVos = circleItemMapper.getTjCircleItem(start*pageSize,pageSize);
+            List<CircleItemVo> circleItemVos = circleItemMapper.getTjCircleItem(start * pageSize, pageSize);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItemVos);
         } catch (Exception e) {
             e.printStackTrace();

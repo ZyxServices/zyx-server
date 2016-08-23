@@ -132,7 +132,27 @@
     </select>
 
     <select id="getTjCircleItem" resultMap="CircleItemCustomMap">
-
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        circle.title as circleTitle,
+        circle_item.img_url
+        FROM
+        circle_item
+        INNER JOIN devaluation ON circle_item.id = devaluation.model_id
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        where model=6 and area=2
+        LIMIT #{start},#{end}
     </select>
 
 </mapper>
