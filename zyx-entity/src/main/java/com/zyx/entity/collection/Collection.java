@@ -17,7 +17,7 @@ public class Collection extends BaseEntity{
 
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer usrId;
+    private Integer userId;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer model;
@@ -25,8 +25,8 @@ public class Collection extends BaseEntity{
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer modelId;
 
-    public void setUsrId(Integer usrId) {
-        this.usrId = usrId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
     public void setModel(Integer model) {
         this.model = model;
@@ -36,8 +36,8 @@ public class Collection extends BaseEntity{
         this.modelId = modelId;
     }
 
-    public Integer getUsrId() {
-        return usrId;
+    public Integer getUserId() {
+        return userId;
     }
 
     public Integer getModel() {

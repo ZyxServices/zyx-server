@@ -20,6 +20,5 @@ public interface CollectionService extends BaseService<Collection> {
      */
     public List<Integer> selectModelIds(CollectionParam param);
 
-
     public void deleteCollection(CollectionParam param);
 }
