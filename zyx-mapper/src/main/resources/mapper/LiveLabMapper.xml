@@ -13,7 +13,7 @@
 	</resultMap>
 
 	<select id="getAllLabs" resultType="java.lang.String">
-		SELECT type
+		SELECT lab
 		FROM t_live_lab
 	</select>
 </mapper>

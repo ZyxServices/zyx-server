@@ -10,7 +10,7 @@ import com.zyx.vo.live.LiveInfoVo;
 
 public interface LiveInfoService extends BaseService<LiveInfo> {
 	
-	public int countLive(LiveInfoParam param);
+	public Long countLive(LiveInfoParam param);
 
 	public List<LiveInfoVo> selectLives(LiveInfoParam param);
 
