@@ -1,8 +1,10 @@
 package com.zyx.rpc.account.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.AccountCommonFacade;
 import com.zyx.service.account.AccountRedisService;
+import com.zyx.test.HttpSender;
 import com.zyx.utils.HttpClientUtils;
 import com.zyx.utils.MapUtils;
 import com.zyx.utils.RandomUtil;
@@ -56,50 +58,62 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50007, AccountConstants.ACCOUNT_ERROR_CODE_50007_MSG);
             }
 
-            String random = RandomUtil.generateNumString(4);//  验证码
+            String random = RandomUtil.generateNumString(6);//  验证码
 
             String content;
             if (message != null && !message.equals("")) {
-                content = java.net.URLEncoder.encode(message + "【体育家】", "UTF-8");
+//                content = java.net.URLEncoder.encode(message, "UTF-8");
+                content = message;
             } else {
-                content = java.net.URLEncoder.encode("验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！【体育家】", "UTF-8");
+//                content = java.net.URLEncoder.encode("验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！", "UTF-8");
+                content = "验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！";
             }
             Properties props = new Properties();
-            props.load(new InputStreamReader(RegisterFacadeImpl.class.getClassLoader().getResourceAsStream("SMS.properties"), CHARSET_UTF_8));
+//            props.load(new InputStreamReader(RegisterFacadeImpl.class.getClassLoader().getResourceAsStream("SMS.properties"), CHARSET_UTF_8));
+            props.load(new InputStreamReader(RegisterFacadeImpl.class.getClassLoader().getResourceAsStream("CLMSG.properties"), CHARSET_UTF_8));
 
-            Map<String, Object> props_map = new HashMap<String, Object>();
-            props_map.put("UserID", props.getProperty("sms.id"));
-            props_map.put("Account", props.getProperty("sms.account"));
-            props_map.put("Password", props.getProperty("sms.password"));
-            props_map.put("SendType", props.getProperty("sms.sendType"));
-            props_map.put("PostFixNumber", props.getProperty("sms.PostFixNumber"));
-            props_map.put("SendTime", "");
-            props_map.put("Phones", phone);
-            props_map.put("Content", content);
+//            Map<String, Object> props_map = new HashMap<String, Object>();
+//            props_map.put("UserID", props.getProperty("sms.id"));
+//            props_map.put("Account", props.getProperty("sms.account"));
+//            props_map.put("Password", props.getProperty("sms.password"));
+//            props_map.put("SendType", props.getProperty("sms.sendType"));
+//            props_map.put("PostFixNumber", props.getProperty("sms.PostFixNumber"));
+//            props_map.put("SendTime", "");
+//            props_map.put("Phones", phone);
+//            props_map.put("Content", content);
+//
+//            String request = null;
+//            for (int i = 0; i < 3; i++) {
+//                request = HttpClientUtils.postRequest(SEND_URL, props_map);
+//                if (request != null) {
+//                    break;
+//                }
+//            }
+//            if (request == null) {
+//                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50009, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
+//            }
 
-            String request = null;
-            for (int i = 0; i < 3; i++) {
-                request = HttpClientUtils.postRequest(SEND_URL, props_map);
-                if (request != null) {
-                    break;
-                }
-            }
-            if (request == null) {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50009, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
-            }
+//            int beginPoint = request.indexOf("<RetCode>");
+//            int endPoint = request.indexOf("</RetCode>");
+//
+//            String substring = request.substring(beginPoint + 9, endPoint);
+            String returnString = HttpSender.batchSend(props.getProperty("CLMSG.URL"), props.getProperty("CLMSG.ACCOUNT"), props.getProperty("CLMSG.PSWD"), phone, content, true, null);
 
-            int beginPoint = request.indexOf("<RetCode>");
-            int endPoint = request.indexOf("</RetCode>");
 
-            String substring = request.substring(beginPoint + 9, endPoint);
-            if (substring.equals("Sucess")) {
+            if (returnString.contains(",0")) {
                 stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + phone, random, 30 * 60, TimeUnit.SECONDS);
                 stringRedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "验证码发送成功！！！", random);
             } else {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50009, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
+                if (returnString.contains(",103")) {
+                    return MapUtils.buildErrorMap(Constants.SUBMIT_OFTEN, Constants.SUBMIT_OFTEN_MSG);
+                } else if (returnString.contains(",107")) {
+                    return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50014, AccountConstants.ACCOUNT_ERROR_CODE_50014_MSG);
+                } else {
+                    return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50009, AccountConstants.ACCOUNT_ERROR_CODE_50009_MSG);
+                }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return AccountConstants.MAP_500;
         }
