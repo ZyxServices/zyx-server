@@ -11,14 +11,7 @@ import java.util.List;
  * Created by MrDeng on 2016/8/16.
  */
 public interface CollectionService extends BaseService<Collection> {
-
-    public List<CollectionVo> selectCollection(CollectionParam param);
-    /**
-     * 按照用户Id查询收藏内容
-     * @param param
-     * @return
-     */
     public List<Integer> selectModelIds(CollectionParam param);
-
     public void deleteCollection(CollectionParam param);
+    public List<CollectionVo> selectCollections(CollectionParam param);
 }

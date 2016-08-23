@@ -25,11 +25,6 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
     CollectionMapper collectionMapper;
 
     @Override
-    public List<CollectionVo> selectCollection(CollectionParam param) {
-        return collectionMapper.selectCollection(param);
-    }
-
-    @Override
     public List<Integer> selectModelIds(CollectionParam param) {
 //        Example example;
 //        Example.
@@ -40,5 +35,10 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
     @Override
     public void deleteCollection(CollectionParam param) {
         collectionMapper.deleteCollection(param);
+    }
+
+    @Override
+    public List<CollectionVo> selectCollections(CollectionParam param) {
+        return collectionMapper.selectCollections(param);
     }
 }

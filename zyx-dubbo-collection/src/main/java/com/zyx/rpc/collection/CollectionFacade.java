@@ -2,6 +2,7 @@ package com.zyx.rpc.collection;
 
 import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
+import com.zyx.vo.collection.CollectionVo;
 
 import java.util.List;
 
@@ -30,6 +31,5 @@ public interface CollectionFacade {
     /**
      * 查询收藏
      */
-
-//    public List<Integer>
+    public List<CollectionVo> selectCollections(CollectionParam param);
 }
