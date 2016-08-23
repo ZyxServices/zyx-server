@@ -21,7 +21,7 @@
 	</resultMap>
 
 	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
-		resultType="int">
+		resultType="java.lang.Long">
 		select count(*)
 		from t_live
 		where
@@ -45,28 +45,9 @@
 
 		ORDER BY
 		create_time DESC
-		<!--<if test="pager!=null">
-
-		</if>-->
-		<!--<if test="userIds!=null">
-			and
-			user_id in
-			<foreach collection="userIds" index="index" item="tag" open="("
-				separator="," close=")">
-				#{tag}
-			</foreach>
-		</if>-->
-		<!--<if test="del != null">-->
-			<!--and-->
-			<!--del = #{del}-->
-		<!--</if>-->
-		<!--order by
-		create_time
-		DESC
-		<if test="start!=null and end !=null">
-			limit
-			#{start},#{end}
-		</if>-->
+		<if test="pager != null">
+			LIMIT #{pager.offset},#{pager.pageSize}
+		</if>
 	</select>
 
 	<select id="selectLiveInfo" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">

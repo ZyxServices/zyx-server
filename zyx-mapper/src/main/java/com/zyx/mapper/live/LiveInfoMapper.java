@@ -13,6 +13,6 @@ import com.zyx.vo.live.LiveInfoVo;
 @Repository("liveInfoMapper")
 public interface LiveInfoMapper extends BaseMapper<LiveInfo> {
 	public LiveInfo selectLiveInfo(Integer id);
-	public int countLives(LiveInfoParam param);
+	public Long countLives(LiveInfoParam param);
 	public List<LiveInfoVo> selectLives(LiveInfoParam param);
 }
