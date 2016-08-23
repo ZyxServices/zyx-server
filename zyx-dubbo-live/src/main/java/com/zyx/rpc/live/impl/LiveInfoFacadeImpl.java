@@ -27,13 +27,14 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     @Autowired
     private RedisTemplate<String, ArrayList<LiveInfo>> redisTemplate;
     @Override
-    public void add(LiveInfo liveInfo) {
+    public Integer add(LiveInfo liveInfo) {
         // 修正开始时间
         long now = System.currentTimeMillis();
         liveInfo.setStart(liveInfo.getStart() == null || liveInfo.getStart() < now ? now : liveInfo.getStart());
         liveInfo.setState(0);
         liveInfo.setDel(0);
         liveInfoService.save(liveInfo);
+        return liveInfo.getId();
     }
 
     @Override

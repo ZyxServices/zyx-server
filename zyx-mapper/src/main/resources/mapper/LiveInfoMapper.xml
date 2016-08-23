@@ -21,7 +21,7 @@
 	</resultMap>
 
 	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
-		resultType="int">
+		resultType="java.lang.Long">
 		select count(*)
 		from t_live
 		where
@@ -42,31 +42,24 @@
 			and
 			lab = #{lab}
 		</if>
-		<!--<if test="userIds!=null">
-			and
-			user_id in
-			<foreach collection="userIds" index="index" item="tag" open="("
-				separator="," close=")">
-				#{tag}
-			</foreach>
-		</if>-->
-		<!--<if test="del != null">-->
-			<!--and-->
-			<!--del = #{del}-->
-		<!--</if>-->
-		<!--order by
-		create_time
-		DESC
-		<if test="start!=null and end !=null">
-			limit
-			#{start},#{end}
-		</if>-->
+
+		ORDER BY
+		create_time DESC
+		<if test="pager != null">
+			LIMIT #{pager.offset},#{pager.pageSize}
+		</if>
 	</select>
 
+	<select id="selectLiveInfo" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">
+		SELECT *
+		FROM t_live
+		WHERE
+		id = #{id}
+	</select>
 	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user
 		WHERE
-		id = #{id}
+		id = #{user_id}
 	</select>
 </mapper>

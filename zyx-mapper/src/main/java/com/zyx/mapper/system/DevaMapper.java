@@ -2,6 +2,7 @@ package com.zyx.mapper.system;
 
 import com.zyx.entity.system.Devaluation;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.param.system.DevaParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,12 +13,12 @@ import java.util.List;
  * @author SubDong
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title DevaluationMapper
+ * @title DevaMapper
  * @package com.zyx.mapper.activity
  * @update 16-6-28 下午3:13
  */
-@Repository("devaluationMapper")
-public interface DevaluationMapper extends BaseMapper<Devaluation> {
+@Repository("devaMapper")
+public interface DevaMapper extends BaseMapper<Devaluation> {
     /**
      * 删除首推项
      *
@@ -27,26 +28,16 @@ public interface DevaluationMapper extends BaseMapper<Devaluation> {
 
     /**
      * 查询首推项
-     *
-     * @param model
+     * @param param
      * @return
      */
-    List<Devaluation> queryDevaluation(Integer model);
+    List<Devaluation> queryDevas(DevaParam param);
 
     /**
      * 查询相关类型的所有首推ids
-     *
-     * @param model
+     * @param param
      * @return
      */
-    List<Integer> queryDevaIds(Integer model);
+    List<Integer> queryModelIds(DevaParam param);
 
-    /**
-     * 根据type和首推现id查询首推信息
-     *
-     * @param model
-     * @param modelId
-     * @return
-     */
-    Devaluation queryDevaluationByDevaId(Integer model, Integer modelId);
 }

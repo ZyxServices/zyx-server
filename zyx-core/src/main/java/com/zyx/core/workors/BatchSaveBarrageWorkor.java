@@ -24,6 +24,8 @@ public class BatchSaveBarrageWorkor extends Workor{
     @Override
     public void work() {
         logger.info("批处理弹幕存储…………START");
+        barrageService.batchSave(cacheBarrage);
+        cacheBarrage.clear();
         logger.info("批处理弹幕存储…………END");
     }
 

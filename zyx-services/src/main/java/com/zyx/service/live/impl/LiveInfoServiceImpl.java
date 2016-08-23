@@ -25,11 +25,14 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		super(LiveInfo.class);
 	}
 	@Override
-	public int countLive(LiveInfoParam param) {
+	public Long countLive(LiveInfoParam param) {
 		return liveInfoMapper.countLives(param);
 	}
 	@Override
 	public List<LiveInfoVo> selectLives(LiveInfoParam param) {
+		if(param.getPager()!=null&&param.getPager().getPageSize()!=null&&param.getPager().getOffset()!=null){
+			param.getPager().setCount(liveInfoMapper.countLives(param));
+		}
 		return liveInfoMapper.selectLives(param);
 	}
 	@Override

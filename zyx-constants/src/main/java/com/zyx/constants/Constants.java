@@ -15,6 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public interface Constants {
 
+    String GET_LIVE_URL = "http://api.tiyujia.com/v1/live/get?id=";
+
     // String AUTH_STATE = "state";
     // String AUTH_SUCCESS = "result";
     // String AUTH_ERROR_CODE = "error_code";
@@ -289,4 +291,6 @@ public interface Constants {
     int DYNAMIC_CIRCLE = 3;
 
     //******************自动生成动态 ebd*************************
+
+
 }
