@@ -8,6 +8,8 @@ import com.zyx.entity.activity.CombinedData;
 import com.zyx.entity.activity.parm.QueryActivityParm;
 import com.zyx.entity.activity.parm.QueryCombiationParm;
 import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.entity.live.LiveInfo;
+import com.zyx.mapper.live.LiveInfoMapper;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.vo.activity.ActivityVo;
 import com.zyx.vo.activity.CombinedDataListVo;
@@ -48,6 +50,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     private CombinationDataMapper combinationDataMapper;
     @Resource
     private ConcernService concernService;
+    @Resource
+    LiveInfoMapper liveInfoMapper;
 
     public ActivityServiceImpl() {
         super(Activity.class);
@@ -62,8 +66,10 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         Activity activity = new Activity();
         Map<String, Object> map = new HashMap<>();
 
+
         if (createId != null && title != null && desc != null && image != null && startTime != null
-                && endTime != null && lastTime != null && visible != null && type != null) {
+                && endTime != null && type != null && price != null && address != null) {
+
             activity.setUserId(createId);
             activity.setTitle(title);
             activity.setDescContent(desc);
@@ -72,13 +78,30 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setStartTime(startTime);
             activity.setEndTime(endTime);
             activity.setLastTime(lastTime);
-
             activity.setMaxPeople(maxPeople);
             activity.setVisible(visible);
             activity.setPhone(phone);
-            activity.setPrice(price == null ? 0.0 : price);
+            activity.setPrice(price);
             activity.setType(type);
-            activity.setAddress(address == null ? "" : address);
+            activity.setAddress(address);
+            if (type == 0) {
+                //==== 生成图文直播  并获取ID  生成图文直播访问地址====
+                LiveInfo liveInfo = new LiveInfo();
+                liveInfo.setCreateTime(System.currentTimeMillis());
+                liveInfo.setAuth(1);
+                liveInfo.setType(1);
+                liveInfo.setStart(startTime);
+                liveInfo.setEnd(endTime);
+                liveInfo.setUserId(createId);
+                liveInfo.setTitle(title);
+                liveInfo.setLab(1);
+                liveInfo.setState(1);
+                liveInfo.setBgmUrl(image);
+                liveInfo.setDel(0);
+                liveInfoMapper.insert(liveInfo);
+                activity.setTargetUrl(Constants.GET_LIVE_URL + liveInfo.getId());
+                //===================================================
+            }
             activity.setExamine(examine == null ? 0 : examine);
             if (activity.getExamine() == 1) {
                 if (!memberTemplate.equals("")) {
