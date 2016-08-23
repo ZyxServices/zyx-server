@@ -103,10 +103,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 //===================================================
             }
             activity.setExamine(examine == null ? 0 : examine);
-            if (!memberTemplate.equals("")) {
+            if (memberTemplate != null && !memberTemplate.equals("")) {
                 activity.setMemberTemplate(memberTemplate);
-            } else {
-                return Constants.MAP_PARAM_MISS;
             }
             activity.setActivityType(1);
             activity.setCreateTime(System.currentTimeMillis());
