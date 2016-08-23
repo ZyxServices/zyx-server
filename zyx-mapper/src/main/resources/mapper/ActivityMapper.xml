@@ -74,7 +74,7 @@
         AND del != 1
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
-            limit #{pageNumber}, #{page}
+            limit #{page}, #{pageNumber}
         </if>
     </select>
 
@@ -91,7 +91,7 @@
         select * from activity where 1=1 AND del != 1
         ORDER BY create_time desc
         <if test="pageNumber != null and pageHis != null">
-            limit #{pageNumber}, #{pageHis}
+            limit #{pageHis}, #{pageNumber}
         </if>
     </select>
 
