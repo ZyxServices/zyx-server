@@ -25,4 +25,6 @@ public interface CircleItemService extends BaseService<CircleItem> {
     Map<String, Object> lbCircleItem(Integer max);
 
     Map<String,Object> getOneCircleItem(Integer circleItemId);
+
+    Map<String,Object> getTjCircleItem(Integer start,Integer pageSize);
 }

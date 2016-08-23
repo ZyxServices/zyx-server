@@ -42,7 +42,7 @@ public class Devaluation extends BaseEntity implements Serializable{
     private String imageUrl;
     @Column(name = "area")
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private Integer area;
+    private Integer area;//默认1,2为操场模块推荐
 
     public void setModel(Integer model) {
         this.model = model;

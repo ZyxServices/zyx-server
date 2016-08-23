@@ -187,6 +187,19 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
             }
             MyFollowVo myFollowVo = concernMapper.getOne(concernId);
+            if (!Objects.equals(myFollowVo, null)) {
+                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
+                if (myFollowVo.getImgUrl() != null) {
+                    if (myFollowVo.getImgUrl().contains(",")) {
+                        StringBuilder sb = new StringBuilder();
+                        String[] imgOne = myFollowVo.getImgUrl().split(",");
+                        for (int i = 0; i < imgOne.length; i++) {
+                            sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
+                        }
+                        myFollowVo.setTopicContent(myFollowVo.getTopicContent() + "</br>" + sb.toString());
+                    }
+                }
+            }
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVo);
         } catch (Exception e) {
             e.printStackTrace();

@@ -265,4 +265,11 @@ public interface PgFacade {
      * @return
      */
     Map<String,Object> getOneCircleItem(Integer circleItemId);
+    /**
+     * 获取推荐帖子数据
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    Map<String,Object> getTjCircleItem(Integer start,Integer pageSize);
 }

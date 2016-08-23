@@ -12,6 +12,7 @@ public class JxCircleVo extends Circle {
     private Integer sequence;
     private Integer area;
     private Integer types;
+    private Integer circleItemCount;
 
     public Integer getSequence() {
         return sequence;
@@ -35,5 +36,13 @@ public class JxCircleVo extends Circle {
 
     public void setTypes(Integer types) {
         this.types = types;
+    }
+
+    public Integer getCircleItemCount() {
+        return circleItemCount;
+    }
+
+    public void setCircleItemCount(Integer circleItemCount) {
+        this.circleItemCount = circleItemCount;
     }
 }
