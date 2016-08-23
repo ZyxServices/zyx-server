@@ -42,6 +42,12 @@
 			and
 			lab = #{lab}
 		</if>
+
+		ORDER BY
+		create_time DESC
+		<!--<if test="pager!=null">
+
+		</if>-->
 		<!--<if test="userIds!=null">
 			and
 			user_id in
@@ -73,6 +79,6 @@
 		SELECT id,nickname,avatar
 		FROM user
 		WHERE
-		id = #{id}
+		id = #{user_id}
 	</select>
 </mapper>
