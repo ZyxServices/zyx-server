@@ -17,6 +17,7 @@ public class CollectionFacadeImpl implements CollectionFacade {
 
     @Override
     public void addCollection(Collection collection) {
+        collection.setCreateTime(System.currentTimeMillis());
         collectionService.save(collection);
     }
 

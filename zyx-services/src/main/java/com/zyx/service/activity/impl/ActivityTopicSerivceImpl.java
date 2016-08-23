@@ -69,24 +69,11 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
     @Override
     public Map<String, Object> dynamicQuery(QueryTopicParm topicParm) {
 
-        Map<String, Object> map = new HashMap<>();
-
         if (topicParm != null && topicParm.getActivityId() != null) {
             if (topicParm.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-
-            Integer pageNumber = topicParm.getPageNumber();
-            Integer pages = topicParm.getPages();
-            if (pages == 0) pages = 1;
-            if (pages == 1) {
-                topicParm.setPages(pageNumber == 1 ? pageNumber : pageNumber - 1);
-                topicParm.setPageNumber(0);
-            } else {
-                topicParm.setPageNumber(pageNumber);
-                topicParm.setPages((pageNumber * pages) - 1);
-            }
-
+            topicParm.setPages(topicParm.getPages() - 1);
             List<ActivityTopic> topics = activityTopicMapper.dynamicQuery(topicParm);
             if (topics != null && topics.size() > 0) {
                 Map<String, Object> objectMap = new HashMap<>();

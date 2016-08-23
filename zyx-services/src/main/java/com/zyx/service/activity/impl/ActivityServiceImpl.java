@@ -103,14 +103,10 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 //===================================================
             }
             activity.setExamine(examine == null ? 0 : examine);
-            if (activity.getExamine() == 1) {
-                if (!memberTemplate.equals("")) {
-                    activity.setMemberTemplate(memberTemplate);
-                } else {
-                    return Constants.MAP_PARAM_MISS;
-                }
+            if (!memberTemplate.equals("")) {
+                activity.setMemberTemplate(memberTemplate);
             } else {
-                activity.setMemberTemplate("");
+                return Constants.MAP_PARAM_MISS;
             }
             activity.setActivityType(1);
             activity.setCreateTime(System.currentTimeMillis());
@@ -137,17 +133,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                     || (parm.getEndTime() != null && parm.getStartTime() == null)) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10009, "时间参数有误");
             }
-            Integer pageNumber = parm.getPageNumber();
-            Integer page = parm.getPage();
-            if (page == 0) page = 1;
-            if (page == 1) {
-                parm.setPage(pageNumber == 1 ? pageNumber : pageNumber - 1);
-                parm.setPageNumber(0);
-            } else {
-                parm.setPageNumber(pageNumber);
-                parm.setPage((pageNumber * page) - 1);
-            }
-
+            parm.setPage(parm.getPage()-1);
             List<ActivityVo> activities = activityMapper.queryActivity(parm);
             if (activities.size() > 0) {
                 if (parm.getEditState() != 0) {
@@ -239,17 +225,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             if (history.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-            Integer pageNumber = history.getPageNumber();
-            Integer page = history.getPageHis();
-            if (page == 0) page = 1;
-            if (page == 1) {
-                history.setPageHis(pageNumber == 1 ? 9 : pageNumber - 1);
-                history.setPageNumber(0);
-            } else {
-                history.setPageNumber(pageNumber);
-                history.setPageHis((pageNumber * page) - 1);
-            }
-
+            history.setPageHis(history.getPageHis() -1);
             List<ActivityVo> activityHistory = activityMapper.queryActivityHistory(history);
 
             List<ActivityVo> activities = activityHistory
