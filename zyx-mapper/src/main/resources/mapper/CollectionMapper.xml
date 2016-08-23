@@ -10,6 +10,10 @@
         <collection property="activityInfoVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"
                     column="model_id"/>
     </resultMap>
+    <resultMap id="getCircleItem" type="com.zyx.vo.collection.CollCircleItemVo" extends="BaseCollection">
+        <collection property="circleItemVo" select="com.zyx.mapper.pg.CircleItemMapper.selectCircleItemById"
+                    column="model_id"/>
+    </resultMap>
     <resultMap id="BaseCollection" type="com.zyx.vo.collection.CollectionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
@@ -19,6 +23,7 @@
         <discriminator javaType="java.lang.Integer" column="model">
             <case value="1" resultMap="getActivityInfo"/>
             <case value="2" resultMap="getLiveInfo"/>
+            <case value="4" resultMap="getCircleItem"/>
         </discriminator>
     </resultMap>
 
@@ -68,16 +73,16 @@
 
     <resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
         <id column="id" property="id"/>
-        <id column="creat_time" property="createTime"/>
-        <id column="auth" property="auth"/>
-        <id column="type" property="type"/>
-        <id column="start" property="start"/>
-        <id column="end" property="end"/>
-        <id column="title" property="title"/>
-        <id column="lab" property="lab"/>
-        <id column="bgm_url" property="bgmUrl"/>
-        <id column="vedio_url" property="vedioUrl"/>
-        <id column="state" property="state"/>
+        <result column="creat_time" property="createTime"/>
+        <result column="auth" property="auth"/>
+        <result column="type" property="type"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="title" property="title"/>
+        <result column="lab" property="lab"/>
+        <result column="bgm_url" property="bgmUrl"/>
+        <result column="vedio_url" property="vedioUrl"/>
+        <result column="state" property="state"/>
         <association property="userIconVo" column="user_id" select="selectUserIcon"></association>
     </resultMap>
     <select id="selectCollLiveInfo" parameterType="java.lang.Integer" resultMap="LiveInfoVo">
