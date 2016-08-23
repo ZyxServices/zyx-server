@@ -131,4 +131,8 @@
         SELECT * FROM circle_item WHERE id=#{id}
     </select>
 
+    <select id="getTjCircleItem" resultMap="CircleItemCustomMap">
+
+    </select>
+
 </mapper>

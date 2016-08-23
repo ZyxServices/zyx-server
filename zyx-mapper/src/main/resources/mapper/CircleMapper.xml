@@ -46,12 +46,13 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="details" property="details" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
-        <association property="circleItemCount" column="id" select="selectCircleItemCount"></association>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
     </resultMap>
     <resultMap id="CircleJxDtoResultMap" type="com.zyx.vo.pg.JxCircleVo" extends="CircleResultMap">
-        <result column="sequence" property="sequence" jdbcType="INTEGER"></result>
-        <result column="area" property="area" jdbcType="INTEGER"></result>
-        <result column="types" property="types" jdbcType="INTEGER"></result>
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="area" property="area" jdbcType="INTEGER"/>
+        <result column="types" property="types" jdbcType="INTEGER"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
     </resultMap>
 
     <select id="circleList" resultMap="CircleResultMap">
@@ -113,15 +114,7 @@
         circle.head_img_url,
         devaluation.sequence,
         devaluation.area,
-        devaluation.model as types,
-        (
-            SELECT
-                COUNT('id')
-            FROM
-                circle_item
-            WHERE
-                circle.id = circle_item.circle_id
-        ) AS circleItemCount
+        devaluation.model as types
     FROM
         circle
     INNER JOIN devaluation ON circle.id = devaluation.model_id

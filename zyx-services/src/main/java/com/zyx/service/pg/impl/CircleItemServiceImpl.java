@@ -7,6 +7,7 @@ import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleItemService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.pg.CircleItemVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -154,8 +155,33 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30033_MSG);
             }
             CircleItemLunBoVo vo = circleItemMapper.getOneCircleItem(circleItemId);
-
+            if (!Objects.equals(vo, null)) {
+                vo.setContent("<p>" + vo.getContent() + "</p>");
+                if (vo.getImgUrl() != null) {
+                    if (vo.getImgUrl().contains(",")) {
+                        StringBuilder sb = new StringBuilder();
+                        String[] imgOne = vo.getImgUrl().split(",");
+                        for (int i = 0; i < imgOne.length; i++) {
+                            sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
+                        }
+                        vo.setContent(vo.getContent() + "</br>" + sb.toString());
+                    }
+                }
+            }
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, vo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> getTjCircleItem(Integer start,Integer pageSize) {
+        try {
+            Optional.ofNullable(start).orElse(0);
+            Optional.ofNullable(pageSize).orElse(0);
+            List<CircleItemVo> circleItemVos = circleItemMapper.getTjCircleItem(start*pageSize,pageSize);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItemVos);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;

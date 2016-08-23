@@ -109,6 +109,10 @@
         SELECT* FROM concern WHERE concern.type=3 ORDER BY concern.create_time DESC LIMIT 0,#{max}
     </select>
 
+    <select id="exitConcernSelect" parameterType="java.util.Map" resultType="int">
+                SELECT id FROM USER_ATTENTION where from_user_id = #{loginUserId} AND  to_user_id=#{cocernCreateId}
+    </select>
+
     <select id="getOne" resultMap="ConcernMyMap">
         SELECT * FROM concern WHERE id=#{id}
     </select>
