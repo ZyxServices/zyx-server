@@ -4,9 +4,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class DubboProvider {
+public class UserDubboProvider {
 	
-	private static final Log log = LogFactory.getLog(DubboProvider.class);
+	private static final Log log = LogFactory.getLog(UserDubboProvider.class);
 
 	public static void main(String[] args) {
 		try {
@@ -16,12 +16,12 @@ public class DubboProvider {
 			context.start();
 			System.in.read();
 		} catch (Exception e) {
-			log.error("== DubboProvider context start error:",e);
+			log.error("== UserDubboProvider context start error:",e);
 		}
-//		synchronized (DubboProvider.class) {
+//		synchronized (UserDubboProvider.class) {
 //			while (true) {
 //				try {
-//					DubboProvider.class.wait();
+//					UserDubboProvider.class.wait();
 //				} catch (InterruptedException e) {
 //					log.error("== synchronized error:",e);
 //				}

@@ -3,8 +3,8 @@
 <mapper namespace="com.zyx.mapper.collection.CollectionMapper">
 
     <resultMap id="getLiveInfo" type="com.zyx.vo.collection.CollLiveVo" extends="BaseCollection">
-    <collection property="liveInfoVo" select="com.zyx.mapper.collection.CollectionMapper.selectCollLiveInfo"
-                column="model_id"/>
+        <collection property="liveInfoVo" select="com.zyx.mapper.collection.CollectionMapper.selectCollLiveInfo"
+                    column="model_id"/>
     </resultMap>
     <resultMap id="getActivityInfo" type="com.zyx.vo.collection.CollActivityVo" extends="BaseCollection">
         <collection property="activityInfoVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"
@@ -45,6 +45,19 @@
         <if test="pager != null">
             LIMIT #{pager.offset},#{pager.pageSize}
         </if>
+    </select>
+
+    <select id="myCollectionList" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+        SELECT id,create_time,user_id,model,model_id
+        FROM t_collection
+        WHERE
+        1=1
+        <if test="userId!=null">
+            AND
+            user_id=#{userId}
+        </if>
+        ORDER BY
+        create_time DESC
     </select>
 
     <select id="selectModelIds" parameterType="com.zyx.param.collection.CollectionParam" resultType="java.lang.Integer">

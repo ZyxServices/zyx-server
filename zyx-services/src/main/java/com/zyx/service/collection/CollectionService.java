@@ -11,6 +11,9 @@ import java.util.List;
  * Created by MrDeng on 2016/8/16.
  */
 public interface CollectionService extends BaseService<Collection> {
-    public List<Integer> selectModelIds(CollectionParam param);
-    public List<CollectionVo> selectCollections(CollectionParam param);
+    List<Integer> selectModelIds(CollectionParam param);
+
+    List<CollectionVo> selectCollections(CollectionParam param);
+
+    List<CollectionVo> myCollectionList(Integer accountId);
 }
