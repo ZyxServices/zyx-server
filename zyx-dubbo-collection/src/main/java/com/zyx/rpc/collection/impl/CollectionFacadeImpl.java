@@ -30,12 +30,17 @@ public class CollectionFacadeImpl implements CollectionFacade {
     }
 
     @Override
-    public void cancelCollect(CollectionParam param) {
-        collectionService.deleteCollection(param);
+    public void cancelCollect(Collection record) {
+        collectionService.deleteRecords(record);
     }
 
     @Override
     public List<CollectionVo> selectCollections(CollectionParam param) {
         return collectionService.selectCollections(param);
+    }
+
+    @Override
+    public int count(Collection collection) {
+        return collectionService.selectCount(collection);
     }
 }

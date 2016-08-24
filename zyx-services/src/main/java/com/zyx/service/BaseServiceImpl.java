@@ -126,6 +126,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public int deleteRecords(T record) {
+        return mapper.delete(record);
+    }
+    @Override
     public int selectCount(T record) {
         return mapper.selectCount(record);
     }

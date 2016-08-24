@@ -33,11 +33,6 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
     }
 
     @Override
-    public void deleteCollection(CollectionParam param) {
-        collectionMapper.deleteCollection(param);
-    }
-
-    @Override
     public List<CollectionVo> selectCollections(CollectionParam param) {
         return collectionMapper.selectCollections(param);
     }

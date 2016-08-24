@@ -24,12 +24,14 @@ public interface CollectionFacade {
 
     /**
      * 取消收藏
-     * @param param
+     * @param record
      */
-    public void cancelCollect(CollectionParam param);
+    public void cancelCollect(Collection record);
 
     /**
      * 查询收藏
      */
     public List<CollectionVo> selectCollections(CollectionParam param);
+
+    public int count(Collection collection);
 }

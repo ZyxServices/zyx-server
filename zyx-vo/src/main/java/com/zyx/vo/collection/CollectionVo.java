@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Created by MrDeng on 2016/8/18.
  */
 public class CollectionVo implements Serializable {
+    private Integer id;
     private Long createTime;
     private Integer userId;
     private Integer model;
@@ -20,6 +21,14 @@ public class CollectionVo implements Serializable {
 //    public void setLiveInfoVo(CollLiveVo liveInfoVo) {
 //        this.liveInfoVo = liveInfoVo;
 //    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Long getCreateTime() {
         return createTime;

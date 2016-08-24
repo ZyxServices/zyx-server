@@ -12,6 +12,5 @@ import java.util.List;
  */
 public interface CollectionService extends BaseService<Collection> {
     public List<Integer> selectModelIds(CollectionParam param);
-    public void deleteCollection(CollectionParam param);
     public List<CollectionVo> selectCollections(CollectionParam param);
 }

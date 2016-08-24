@@ -84,6 +84,7 @@ public interface BaseService<T> {
      */
     int delete(Object key);
 
+    int deleteRecords(T record);
     /**
      * 更新实体
      * @param entity

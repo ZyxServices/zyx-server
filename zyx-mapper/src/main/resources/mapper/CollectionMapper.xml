@@ -28,7 +28,7 @@
     </resultMap>
 
     <select id="selectCollections" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
-        SELECT create_time,user_id,model,model_id
+        SELECT id,create_time,user_id,model,model_id
         FROM t_collection
         WHERE
         1=1
@@ -57,19 +57,6 @@
 		AND
 		model=#{model}
 	</select>
-
-    <delete id="deleteCollection" parameterType="com.zyx.param.collection.CollectionParam">
-        <if test="userId!=null and modelId!=null">
-            DELETE
-            FROM t_collection
-            WHERE
-            1=1
-            AND
-            user_id=#{userId}
-            AND
-            model_id=#{modelId}
-        </if>
-    </delete>
 
     <resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
         <id column="id" property="id"/>

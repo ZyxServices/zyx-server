@@ -14,6 +14,5 @@ import java.util.List;
 public interface CollectionMapper extends BaseMapper<Collection> {
     public List<CollectionVo> selectCollections(CollectionParam param);
     public List<Integer> selectModelIds(CollectionParam param);
-    public void deleteCollection(CollectionParam param);
     public CollLiveVo selectCollLiveInfo(Integer id);
 }
