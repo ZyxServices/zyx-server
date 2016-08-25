@@ -24,8 +24,6 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Autowired
     LiveInfoService liveInfoService;
-    @Autowired
-    private RedisTemplate<String, ArrayList<LiveInfo>> redisTemplate;
     @Override
     public Integer add(LiveInfo liveInfo) {
         // 修正开始时间

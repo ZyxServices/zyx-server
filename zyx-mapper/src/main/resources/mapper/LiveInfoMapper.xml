@@ -30,6 +30,8 @@
 			and
 			lab = #{lab}
 		</if>
+		AND
+		del = 0
 	</select>
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"
@@ -42,7 +44,8 @@
 			and
 			lab = #{lab}
 		</if>
-
+		AND
+		del = 0
 		ORDER BY
 		create_time DESC
 		<if test="pager != null">
@@ -55,11 +58,15 @@
 		FROM t_live
 		WHERE
 		id = #{id}
+		AND
+		del = 0
 	</select>
 	<select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user
 		WHERE
 		id = #{user_id}
+		AND
+		del = 0
 	</select>
 </mapper>

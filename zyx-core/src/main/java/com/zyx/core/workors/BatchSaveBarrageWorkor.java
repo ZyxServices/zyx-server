@@ -6,7 +6,6 @@ import com.zyx.entity.live.Barrage;
 import com.zyx.service.live.BarrageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-
 import java.util.ArrayList;
 
 /**
@@ -15,20 +14,19 @@ import java.util.ArrayList;
 public class BatchSaveBarrageWorkor extends Workor{
     private static final long serialVersionUID = 728737816012587458L;
     private static final Logger logger = LoggerFactory.getLogger(BatchSaveBarrageWorkor.class);
-    @Autowired
-    private RedisTemplate<String, Barrage> redisTemplate;
     ArrayList<Barrage> cacheBarrage;
-
-    @Autowired
-    BarrageService barrageService;
     @Override
     public void work() {
-        logger.info("批处理弹幕存储…………START");
-        barrageService.batchSave(cacheBarrage);
-        cacheBarrage.clear();
-        logger.info("批处理弹幕存储…………END");
+//        logger.info("批处理弹幕存储…………START");
+        try {
+            BarrageService barrageService = (BarrageService) context.getBean("barrageService");
+            barrageService.batchSave(cacheBarrage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            cacheBarrage.clear();
+        }
     }
-
     public ArrayList<Barrage> getCacheBarrage() {
         return cacheBarrage;
     }
