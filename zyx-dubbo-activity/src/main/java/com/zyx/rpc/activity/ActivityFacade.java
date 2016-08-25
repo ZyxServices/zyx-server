@@ -24,7 +24,7 @@ public interface ActivityFacade {
      * @param endTime        活动结束时间
      * @param lastTime       活动报名结束时间
      * @param maxPeople      活动人数上线
-     * @param visible        活动可见范围（0,所有人可见  1,朋友可见）
+     * @param visible        活动可见范围（0 所有可见，1我的粉丝，2我的关注）
      * @param phone          发起人联系电话
      * @param price          活动价格
      * @param type           活动类型：线上或者线下(0 线上活动, 1线下活动)

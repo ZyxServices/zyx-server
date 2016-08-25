@@ -44,9 +44,9 @@ public class SystemTest extends TestCase {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 					"classpath:spring/spring-context.xml");
 			DevaFacadeImpl devaFacadeImpl = context.getBean("devaFacade", DevaFacadeImpl.class);
-//			List devas = devaFacadeImpl.getDevaByModel(6);
-//			System.out.println(JSON.toJSONString(devas));
-//			System.out.println(JSON.toJSONString(devas==null?0:devas.size()));
+			List devas = devaFacadeImpl.getDevaByModel(1,6);
+			System.out.println(JSON.toJSONString(devas));
+			System.out.println(JSON.toJSONString(devas==null?0:devas.size()));
 //			 devas = devaFacadeImpl.getDevaByModel(2);
 //			System.out.println(JSON.toJSONString(devas==null?0:devas.size()));
 //			 devas = devaFacadeImpl.getDevaByModel(3);
