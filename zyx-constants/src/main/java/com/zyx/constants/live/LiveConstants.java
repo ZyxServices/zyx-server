@@ -52,12 +52,12 @@ public interface LiveConstants extends Constants{
 	String MARK_REDIS_LIVE_LAB_LIST = "lab_list";
 	String MARK_HASH_REDIS_LAB_TYPE_LIST = "hash_lab_list";
 
-	String MARK_REDIS_BARRAGE_QUEUE = "barrage";
-	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage";
+	String MARK_REDIS_BARRAGE_QUEUE = "barrage:";
+	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage:";
 	/**
 	 * 弹幕默认最大缓存数量
 	 */
-	long REDIS_MAX_BARRAGE_QUEUE_SIZE = 10000;
+	long REDIS_MAX_BARRAGE_QUEUE_SIZE = 10;
 
 	/**
 	 * 批量存储弹幕 条数阈值  测试实则为5
@@ -65,4 +65,22 @@ public interface LiveConstants extends Constants{
 	// TODO: 2016/8/3 正式时修改该数值
 	long CACHE_BATACH_SAVE_PROFIXE = 5;
 	String MARK_REDIS_BARRAGE_SIZE = "b_size";
+
+
+	/**
+	 * 直播已结束
+	 */
+	int LIVE_STATUS_END=-1;
+	/**
+	 * 直播未开始
+	 */
+	int LIVE_STATUS_READY=0;
+	/**
+	 * 直播进行中
+	 */
+	int LIVE_STATUS_LIVING=1;
+	/**
+	直播暂停
+	 */
+	int LIVE_STATUS_PAUSE=2;
 }
