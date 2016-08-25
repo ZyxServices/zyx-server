@@ -24,7 +24,8 @@
 
     <dubbo:service interface="com.zyx.rpc.account.RegisterFacade" ref="registerFacade" timeout="10000"/>
 
-    <dubbo:service interface="com.zyx.rpc.account.UserLoginFacade" ref="userLoginFacade" executes="100" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.account.UserLoginFacade" ref="userLoginFacade" executes="100"
+                   timeout="10000"/>
 
     <!-- 用户签到接口 -->
     <dubbo:service interface="com.zyx.rpc.account.MarkFacade" ref="markFacade"/>
@@ -40,5 +41,8 @@
 
     <!-- 我的动态接口 -->
     <dubbo:service interface="com.zyx.rpc.account.MyConcernFacade" ref="myConcernFacade"/>
+
+    <!-- 我的收藏接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.MyCollectionFacade" ref="myCollectionFacade"/>
 
 </beans>

@@ -4,8 +4,11 @@ import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.rpc.collection.CollectionFacade;
 import com.zyx.service.collection.CollectionService;
+import com.zyx.vo.collection.CollectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by MrDeng on 2016/8/15.
@@ -27,7 +30,17 @@ public class CollectionFacadeImpl implements CollectionFacade {
     }
 
     @Override
-    public void cancelCollect(CollectionParam param) {
-        collectionService.deleteCollection(param);
+    public void cancelCollect(Collection record) {
+        collectionService.deleteRecords(record);
+    }
+
+    @Override
+    public List<CollectionVo> selectCollections(CollectionParam param) {
+        return collectionService.selectCollections(param);
+    }
+
+    @Override
+    public int count(Collection collection) {
+        return collectionService.selectCount(collection);
     }
 }

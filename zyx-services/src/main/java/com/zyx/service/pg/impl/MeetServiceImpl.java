@@ -29,7 +29,6 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
         Meet meet = new Meet();
-        Map<String, Object> map = new HashMap<>();
         try {
             if (circleId == null) {
 //                map.put(PgConstants.STATE, PG_ERROR_CODE_30001);

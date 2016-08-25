@@ -1,16 +1,34 @@
 package com.zyx.param.collection;
 
 import com.zyx.param.BaseParam;
+import com.zyx.param.Pager;
 
 /**
  * Created by MrDeng on 2016/8/16.
  */
 public class CollectionParam extends BaseParam {
+    private Integer id;
     private Integer userId;
     private Integer model;
     private Integer modelId;
+    private Pager pager;
+    public Pager getPager() {
+        return pager;
+    }
+
+    public void setPager(Pager pager) {
+        this.pager = pager;
+    }
 
     public CollectionParam() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public CollectionParam(Integer userId, Integer model) {

@@ -2,30 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.collection.CollectionMapper">
 
-	<resultMap id="getLiveInfo" type="com.zyx.entity.live.LiveInfo" extends="BaseCollection">
-		<collection property="infos" select="com.zyx.mapper.live.LiveInfoMapper.selectLiveInfo" column="model_id"/>
-	</resultMap>
-
-	<resultMap id="BaseCollection" type="com.zyx.entity.collection.Collection">
+    <resultMap id="getLiveInfo" type="com.zyx.vo.collection.CollLiveVo" extends="BaseCollection">
+        <collection property="liveInfoVo" select="com.zyx.mapper.collection.CollectionMapper.selectCollLiveInfo"
+                    column="model_id"/>
+    </resultMap>
+    <resultMap id="getActivityInfo" type="com.zyx.vo.collection.CollActivityVo" extends="BaseCollection">
+        <collection property="activityInfoVo" select="com.zyx.mapper.activity.ActivityMapper.queryActivityById"
+                    column="model_id"/>
+    </resultMap>
+    <resultMap id="getCircleItem" type="com.zyx.vo.collection.CollCircleItemVo" extends="BaseCollection">
+        <collection property="circleItemVo" select="com.zyx.mapper.pg.CircleItemMapper.selectCircleItemById"
+                    column="model_id"/>
+    </resultMap>
+    <resultMap id="BaseCollection" type="com.zyx.vo.collection.CollectionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="model" property="model" jdbcType="VARCHAR"/>
         <result column="model_id" property="modelId" jdbcType="VARCHAR"/>
-        <discriminator javaType="int" column="model">
-            <case value="2" resultType="com.zyx.entity.live.LiveInfo"/>
+        <discriminator javaType="java.lang.Integer" column="model">
+            <case value="1" resultMap="getActivityInfo"/>
+            <case value="2" resultMap="getLiveInfo"/>
+            <case value="4" resultMap="getCircleItem"/>
         </discriminator>
     </resultMap>
 
-    <select id="selectCollection" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
-		SELECT *
-		FROM t_collection
-		WHERE
-		1=1
-		AND
-		user_id=#{userId}
-		AND
-		model=#{model}
+    <select id="selectCollections" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+        SELECT id,create_time,user_id,model,model_id
+        FROM t_collection
+        WHERE
+        1=1
+        <if test="userId!=null">
+            AND
+            user_id=#{userId}
+        </if>
+        <if test="model!=null">
+            AND
+            model=#{model}
+        </if>
+        ORDER BY
+        create_time DESC
+        <if test="pager != null">
+            LIMIT #{pager.offset},#{pager.pageSize}
+        </if>
+    </select>
+
+    <select id="myCollectionList" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+        SELECT id,create_time,user_id,model,model_id
+        FROM t_collection
+        WHERE
+        1=1
+        <if test="userId!=null">
+            AND
+            user_id=#{userId}
+        </if>
+        ORDER BY
+        create_time DESC
     </select>
 
     <select id="selectModelIds" parameterType="com.zyx.param.collection.CollectionParam" resultType="java.lang.Integer">
@@ -39,15 +71,30 @@
 		model=#{model}
 	</select>
 
-    <delete id="deleteCollection" parameterType="com.zyx.param.collection.CollectionParam">
-		DELETE
-		FROM t_collection
+    <resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
+        <id column="id" property="id"/>
+        <result column="creat_time" property="createTime"/>
+        <result column="auth" property="auth"/>
+        <result column="type" property="type"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="title" property="title"/>
+        <result column="lab" property="lab"/>
+        <result column="bgm_url" property="bgmUrl"/>
+        <result column="vedio_url" property="vedioUrl"/>
+        <result column="state" property="state"/>
+        <association property="userIconVo" column="user_id" select="selectUserIcon"></association>
+    </resultMap>
+    <select id="selectCollLiveInfo" parameterType="java.lang.Integer" resultMap="LiveInfoVo">
+		SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+		FROM t_live
 		WHERE
-		1=1
-		AND
-		user_id=#{userId}
-		AND
-		model=#{model}
-
-	</delete>
+		id = #{id}
+	</select>
+    <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+		SELECT id,nickname,avatar
+		FROM user
+		WHERE
+		id = #{user_id}
+	</select>
 </mapper>
