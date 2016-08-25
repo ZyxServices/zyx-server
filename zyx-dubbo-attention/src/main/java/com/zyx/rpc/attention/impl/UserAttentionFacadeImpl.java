@@ -91,6 +91,22 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
         }
     }
 
+    @Override
+    public Map<String, Object> myDKGZList(AttentionParam attentionParam) {
+        try {
+            String token = attentionParam.getToken();
+            // 判断token是否失效
+            if (isTokenFailure(token)) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
+
+            List<AttentionVo> _list = userAttentionService.myDKGZList(attentionParam);
+            return getStringObjectMap(_list);
+        } catch (Exception e) {
+            return UserAttentionConstants.MAP_500;
+        }
+    }
+
     private Map<String, Object> getStringObjectMap(List<AttentionVo> _list) {
         if (_list == null) {
             return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70002, UserAttentionConstants.ATTENTION_70002_MSG);
