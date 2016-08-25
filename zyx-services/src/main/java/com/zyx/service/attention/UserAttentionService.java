@@ -23,4 +23,6 @@ public interface UserAttentionService extends BaseService<UserAttention> {
     List<AttentionVo> myGZList(AttentionParam attentionParam);
 
     int selectAttentionCount(AttentionParam attentionParam);
+
+    List<AttentionVo> myDKGZList(AttentionParam attentionParam);
 }

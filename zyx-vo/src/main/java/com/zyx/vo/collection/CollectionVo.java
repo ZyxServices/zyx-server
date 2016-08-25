@@ -1,8 +1,5 @@
 package com.zyx.vo.collection;
 
-import com.zyx.vo.account.UserIconVo;
-import com.zyx.vo.live.LiveInfoVo;
-
 import java.io.Serializable;
 
 /**

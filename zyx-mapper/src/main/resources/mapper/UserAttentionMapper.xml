@@ -12,6 +12,12 @@
         <association property="attentions" column="from_user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
     </resultMap>
+
+    <resultMap id="MyCenterDKGZVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="to_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionDKAccountById"></association>
+    </resultMap>
     
     <select id="selectAttentionCount" parameterType="int" resultType="int">
         SELECT count(id) FROM USER_ATTENTION where 1 = 1
@@ -36,5 +42,9 @@
 
     <select id="myFSList" parameterType="int" resultMap="MyCenterFSVoResultMap">
         SELECT * FROM USER_ATTENTION where to_user_id = #{toId}
+    </select>
+
+    <select id="myDKGZList" parameterType="int" resultMap="MyCenterDKGZVoResultMap">
+        SELECT * FROM USER_ATTENTION where from_user_id = #{fromId}
     </select>
 </mapper>

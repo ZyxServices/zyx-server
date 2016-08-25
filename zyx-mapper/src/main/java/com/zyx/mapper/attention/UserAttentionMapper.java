@@ -25,4 +25,6 @@ public interface UserAttentionMapper extends BaseMapper<UserAttention> {
     List<AttentionVo> myGZList(AttentionParam attentionParam);
 
     int selectAttentionCount(AttentionParam attentionParam);
+
+    List<AttentionVo> myDKGZList(AttentionParam attentionParam);
 }
