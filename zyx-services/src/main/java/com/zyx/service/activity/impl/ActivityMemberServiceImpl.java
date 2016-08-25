@@ -47,8 +47,7 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     @Override
     public Map<String, Object> addActivityMember(MemberInfoParm parm) {
 
-        if (parm.getActivityId() != null && parm.getUserId() != null
-                && parm.getMemberInfo() != null && parm.getUserNick() != null
+        if (parm.getActivityId() != null && parm.getUserId() != null && parm.getUserNick() != null
                 && parm.getPhone() != null) {
 
             QueryMemberParm queryMemberParm = new QueryMemberParm();

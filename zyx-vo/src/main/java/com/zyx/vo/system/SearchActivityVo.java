@@ -1,4 +1,4 @@
-package com.zyx.vo.activity;
+package com.zyx.vo.system;
 
 import com.zyx.vo.account.AccountAttentionVo;
 
@@ -6,16 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by SubDong on 16-8-10.
- *
- * @author SubDong
- * @version V1.0
- *          Copyright (c)2016 tyj-版权所有
- * @title ActivityVo
- * @package com.zyx.entity.activity.vo
- * @update 16-8-10 上午11:30
+ * Created by Rainbow on 2016/8/23.
  */
-public class ActivityVo implements Serializable {
+public class SearchActivityVo implements Serializable {
     /**
      * 主键ID
      **/
@@ -29,6 +22,7 @@ public class ActivityVo implements Serializable {
      * 创建者(用户ID)
      */
     private AccountAttentionVo user;
+
     /**
      * 收藏
      */
@@ -43,11 +37,6 @@ public class ActivityVo implements Serializable {
      * 活动图片
      */
     private String imgUrls;
-
-    /**
-     * 活动描述
-     */
-    private String descContent;
 
     /**
      * 活动开始时间
@@ -70,11 +59,6 @@ public class ActivityVo implements Serializable {
     private Integer maxPeople;
 
     /**
-     * 活动可见范围 0 所有可见, 1 朋友可见
-     */
-    private Integer visible;
-
-    /**
      * 咨询电话
      */
     private String phone;
@@ -85,31 +69,9 @@ public class ActivityVo implements Serializable {
     private double price;
 
     /**
-     * 活动分类
-     * 0 线上活动, 1  线下活动
-     */
-    private Integer type;
-
-    /**
-     * 线上活动跳转地址
-     */
-    private String targetUrl;
-
-    /**
      * 活动地址
      */
     private String address;
-
-    /**
-     * 活动是否需要审核（活动发起者审核）
-     * 0 不许要审核 , 1 需要审核
-     */
-    private Integer examine;
-
-    /**
-     * 报名活动模板
-     */
-    private String memberTemplate;
 
     /**
      * 当前活动报名人数
@@ -117,19 +79,24 @@ public class ActivityVo implements Serializable {
     private int memberCount;
 
     /**
-     * 编辑所用纯文本
-     */
-    private String editDesc;
-
-    /**
-     * 编辑所用图片url
-     */
-    private List<String> editDescImgUrl;
-
-    /**
      * 是否屏蔽(0正常 1屏蔽)
      */
     private Integer mask;
+
+    /**
+     * 当前登录用户是否收藏次活动
+     */
+    private boolean isColl;
+
+    /**
+     * 当前直播点赞数
+     */
+    private Integer zanCount;
+
+    /**
+     * 当前直播弹幕数
+     */
+    private Integer msgCount;
 
     public Integer getId() {
         return id;
@@ -182,14 +149,6 @@ public class ActivityVo implements Serializable {
         this.imgUrls = imgUrls;
     }
 
-    public String getDescContent() {
-        return descContent;
-    }
-
-    public void setDescContent(String descContent) {
-        this.descContent = descContent;
-    }
-
     public Long getStartTime() {
         return startTime;
     }
@@ -222,14 +181,6 @@ public class ActivityVo implements Serializable {
         this.maxPeople = maxPeople;
     }
 
-    public Integer getVisible() {
-        return visible;
-    }
-
-    public void setVisible(Integer visible) {
-        this.visible = visible;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -246,44 +197,12 @@ public class ActivityVo implements Serializable {
         this.price = price;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getTargetUrl() {
-        return targetUrl;
-    }
-
-    public void setTargetUrl(String targetUrl) {
-        this.targetUrl = targetUrl;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Integer getExamine() {
-        return examine;
-    }
-
-    public void setExamine(Integer examine) {
-        this.examine = examine;
-    }
-
-    public String getMemberTemplate() {
-        return memberTemplate;
-    }
-
-    public void setMemberTemplate(String memberTemplate) {
-        this.memberTemplate = memberTemplate;
     }
 
     public int getMemberCount() {
@@ -294,22 +213,6 @@ public class ActivityVo implements Serializable {
         this.memberCount = memberCount;
     }
 
-    public String getEditDesc() {
-        return editDesc;
-    }
-
-    public void setEditDesc(String editDesc) {
-        this.editDesc = editDesc;
-    }
-
-    public List<String> getEditDescImgUrl() {
-        return editDescImgUrl;
-    }
-
-    public void setEditDescImgUrl(List<String> editDescImgUrl) {
-        this.editDescImgUrl = editDescImgUrl;
-    }
-
     public Integer getMask() {
         return mask;
     }
@@ -318,4 +221,29 @@ public class ActivityVo implements Serializable {
         this.mask = mask;
     }
 
+    public boolean isColl() {
+        return isColl;
+    }
+
+    public void setColl(boolean coll) {
+        isColl = coll;
+    }
+
+    public Integer getZanCount() {
+        if(zanCount == null) zanCount = 0;
+        return zanCount;
+    }
+
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
+
+    public Integer getMsgCount() {
+        if(msgCount == null) msgCount = 0;
+        return msgCount;
+    }
+
+    public void setMsgCount(Integer msgCount) {
+        this.msgCount = msgCount;
+    }
 }

@@ -68,7 +68,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
 
         if (createId != null && title != null && desc != null && image != null && startTime != null
-                && endTime != null && type != null && price != null && address != null) {
+                && endTime != null && type != null && price != null && address != null && phone != null && !phone.equals("")) {
 
             activity.setUserId(createId);
             activity.setTitle(title);
@@ -78,7 +78,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setStartTime(startTime);
             activity.setEndTime(endTime);
             activity.setLastTime(lastTime);
-            activity.setMaxPeople(maxPeople);
+            activity.setMaxPeople(maxPeople == null || maxPeople == 0 ? 999999 : maxPeople);
             activity.setVisible(visible);
             activity.setPhone(phone);
             activity.setPrice(price);
@@ -102,11 +102,11 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 activity.setTargetUrl(Constants.GET_LIVE_URL + liveInfo.getId());
                 //===================================================
             }
+            activity.setMask(0);
             activity.setExamine(examine == null ? 0 : examine);
             if (memberTemplate != null && !memberTemplate.equals("")) {
                 activity.setMemberTemplate(memberTemplate);
             }
-            activity.setActivityType(1);
             activity.setCreateTime(System.currentTimeMillis());
         } else {
             return Constants.MAP_PARAM_MISS;
@@ -131,7 +131,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                     || (parm.getEndTime() != null && parm.getStartTime() == null)) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10009, "时间参数有误");
             }
-            parm.setPage(parm.getPage()-1);
+            parm.setPage(parm.getPage() - 1);
             List<ActivityVo> activities = activityMapper.queryActivity(parm);
             if (activities.size() > 0) {
                 if (parm.getEditState() != 0) {
@@ -223,7 +223,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             if (history.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-            history.setPageHis(history.getPageHis() -1);
+            history.setPageHis(history.getPageHis() - 1);
             List<ActivityVo> activityHistory = activityMapper.queryActivityHistory(history);
 
             List<ActivityVo> activities = activityHistory

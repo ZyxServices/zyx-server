@@ -124,13 +124,6 @@ public class Activity extends BaseEntity {
     private String address;
 
     /**
-     * 活动启用状态 (0 不起用，1 启用)
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer activityType;
-
-    /**
      * 活动是否需要审核（活动发起者审核）
      * 0 不许要审核 , 1 需要审核
      */
@@ -264,14 +257,6 @@ public class Activity extends BaseEntity {
         this.address = address;
     }
 
-    public Integer getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
-    }
-
     public Integer getExamine() {
         return examine;
     }
@@ -313,7 +298,6 @@ public class Activity extends BaseEntity {
                 ", type=" + type +
                 ", targetUrl='" + targetUrl + '\'' +
                 ", address='" + address + '\'' +
-                ", activityType=" + activityType +
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
                 ", mask='" + mask + '\'' +

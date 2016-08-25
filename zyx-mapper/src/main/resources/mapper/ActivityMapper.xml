@@ -24,7 +24,6 @@
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
-        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
         <result column="examine" property="examine" jdbcType="INTEGER"/>
         <result column="member_template" property="memberTemplate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
@@ -46,7 +45,6 @@
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
-        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
         <result column="examine" property="examine" jdbcType="INTEGER"/>
         <result column="member_template" property="memberTemplate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
@@ -71,7 +69,7 @@
             and create_time &gt;= #{startTime}
             and end_time &lt;= #{endTime}
         </if>
-        AND del != 1
+        AND del != 1 AND mask = 0
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
             limit #{page}, #{pageNumber}
@@ -79,28 +77,24 @@
     </select>
 
     <select id="queryActivityMember" parameterType="java.lang.Integer" resultMap="member_template">
-        select * from activity where id = #{id} AND del != 1 ORDER BY create_time desc
+        select * from activity where id = #{id} AND del != 1 AND mask = 0 ORDER BY create_time desc
     </select>
 
     <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="queryActivity">
-        select * from activity where id = #{id} AND del != 1 ORDER BY create_time desc
+        select * from activity where id = #{id} AND del != 1 AND mask = 0 ORDER BY create_time desc
     </select>
 
     <select id="queryActivityHistory" parameterType="com.zyx.entity.activity.parm.QueryHistoryParm"
             resultMap="queryActivity">
-        select * from activity where 1=1 AND del != 1
+        select * from activity where 1=1 AND del != 1 AND mask = 0
         ORDER BY create_time desc
         <if test="pageNumber != null and pageHis != null">
             limit #{pageHis}, #{pageNumber}
         </if>
     </select>
 
-    <!--<update id="updateDevaluation" parameterType="com.zyx.entity.activity.parm.UpdateDevaluationParm">-->
-        <!--UPDATE activity SET devaluation = ${devaluation} where id = #{id}-->
-    <!--</update>-->
-
     <select id="queryActivityDevaluation" parameterType="java.util.List" resultMap="queryActivity">
-        select * from activity where  del != 1 AND id IN
+        select * from activity where  del != 1 AND mask = 0 AND id IN
         <foreach item="item" index="index" collection="list"
                  open="(" separator="," close=")">
             #{item}
