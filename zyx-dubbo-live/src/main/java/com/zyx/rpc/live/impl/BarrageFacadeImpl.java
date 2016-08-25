@@ -63,7 +63,7 @@ public class BarrageFacadeImpl implements BarrageFacade {
     }
 
     @Override
-    public Map getLast(BarrageParam param) {
+    public List<Barrage> getLast(BarrageParam param) {
 //        if (param == null || param.getLiveId() == null)
 //            return null;
         Long size = barrageRedis.opsForList().size(LiveConstants.MARK_REDIS_BARRAGE_QUEUE + param.getLiveId());
@@ -87,9 +87,7 @@ public class BarrageFacadeImpl implements BarrageFacade {
 //            result.put("barrages", barrages);
 //        }
         List<Barrage> barrages = barrageRedis.opsForList().range(LiveConstants.MARK_REDIS_BARRAGE_QUEUE + param.getLiveId(), 0, size);
-        result.put("size", barrages==null?0:barrages.size());
-        result.put("barrages", barrages);
-        return result;
+        return barrages;
     }
 
     @Override
