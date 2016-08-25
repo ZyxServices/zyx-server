@@ -35,5 +35,6 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     List<CircleItemVo> getTjCircleItem(@Param("start") Integer start, @Param("end") Integer end);
 
+    CircleItemVo selectCircleItemById(Integer id);
 
 }

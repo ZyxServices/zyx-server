@@ -2,10 +2,10 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.vo.pg.CircleListVo;
 import com.zyx.rpc.account.MyCircleFacade;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.pg.CircleListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MyCircleFacadeImpl.java
+ * @         MyCircleFacadeImpl.java
  */
 @Service("myCircleFacade")
 public class MyCircleFacadeImpl implements MyCircleFacade {
@@ -41,19 +41,19 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
             if (isTokenFailure(token)) {
                 return AccountConstants.MAP_TOKEN_FAILURE;
             }
-            List<CircleListVo> _list_create = new ArrayList<CircleListVo>();
+            List<CircleListVo> _list_create = new ArrayList<>();
             try {
                 _list_create = circleService.myCreateList(accountId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            List<CircleListVo> _list_concern = new ArrayList<CircleListVo>();
+            List<CircleListVo> _list_concern = new ArrayList<>();
             try {
                 _list_concern = circleService.myConcernList(accountId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Map<String, Object> _temp = new HashMap<String, Object>();
+            Map<String, Object> _temp = new HashMap<>();
             _temp.put("myCreateCircle", _list_create);
             _temp.put("myConcernCircle", _list_concern);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _temp);

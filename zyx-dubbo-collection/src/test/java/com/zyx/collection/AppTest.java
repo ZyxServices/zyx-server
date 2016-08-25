@@ -47,7 +47,7 @@ public class AppTest extends TestCase {
 			CollectionParam param = new CollectionParam();
 			param.setUserId(1);
 			param.setModel(2);
-			List<CollectionVo> list = collectionService.selectCollection(param);
+			List<CollectionVo> list = collectionService.selectCollections(param);
 			System.out.println(JSON.toJSONString(list));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package com.zyx.rpc.collection;
 
 import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
+import com.zyx.vo.collection.CollectionVo;
 
 import java.util.List;
 
@@ -23,13 +24,14 @@ public interface CollectionFacade {
 
     /**
      * 取消收藏
-     * @param param
+     * @param record
      */
-    public void cancelCollect(CollectionParam param);
+    public void cancelCollect(Collection record);
 
     /**
      * 查询收藏
      */
+    public List<CollectionVo> selectCollections(CollectionParam param);
 
-//    public List<Integer>
+    public int count(Collection collection);
 }

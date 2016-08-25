@@ -17,17 +17,13 @@ import java.util.List;
  * Created by MrDeng on 2016/8/16.
  */
 @Service("collectionService")
-public class CollectionServiceImpl extends BaseServiceImpl<Collection> implements CollectionService{
+public class CollectionServiceImpl extends BaseServiceImpl<Collection> implements CollectionService {
     public CollectionServiceImpl() {
         super(Collection.class);
     }
+
     @Autowired
     CollectionMapper collectionMapper;
-
-    @Override
-    public List<CollectionVo> selectCollection(CollectionParam param) {
-        return collectionMapper.selectCollection(param);
-    }
 
     @Override
     public List<Integer> selectModelIds(CollectionParam param) {
@@ -38,7 +34,17 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
     }
 
     @Override
-    public void deleteCollection(CollectionParam param) {
-        collectionMapper.deleteCollection(param);
+    public List<CollectionVo> selectCollections(CollectionParam param) {
+        return collectionMapper.selectCollections(param);
+    }
+
+    @Override
+    public List<CollectionVo> myCollectionList(Integer accountId) {
+        if (accountId == null) {
+            return null;
+        }
+        CollectionParam cp = new CollectionParam();
+        cp.setUserId(accountId);
+        return collectionMapper.myCollectionList(cp);
     }
 }
