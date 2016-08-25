@@ -164,7 +164,7 @@
         FROM
             devaluation
         INNER JOIN circle_item ON circle_item.id = devaluation.model_id
-        WHERE devaluation.model=6 AND devaluation.area=2 AND circle_item.state!=-1
+        WHERE devaluation.model=6 AND devaluation.area=3 AND circle_item.state!=-1
         ORDER BY
             devaluation.sequence DESC
         LIMIT 0,#{max}
