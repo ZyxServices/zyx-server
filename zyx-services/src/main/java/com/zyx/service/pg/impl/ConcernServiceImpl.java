@@ -41,7 +41,6 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
-        Map<String, Object> map = new HashMap<>();
         Concern insertCern = new Concern();
         insertCern.setCreateTime(new Date().getTime());
         Optional.ofNullable(userId).ifPresent(insertCern::setUserId);

@@ -45,10 +45,30 @@
         <association property="zanCount" column="circle_id" select="zanSelect"/>
         <association property="meetCount" column="circle_id" select="meetSelect"/>
     </resultMap>
+    <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="admin_ids" property="adminIds" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <result column="tag" property="tag" jdbcType="INTEGER"/>
+    </resultMap>
 
     <resultMap id="CircleItemLunBoMap" type="com.zyx.vo.pg.CircleItemLunBoVo" extends="CircleItemResultMap">
         <association property="userVo" column="create_id" select="userVoSelect"/>
+        <association property="circleVo" column="circle_id" select="circleVoSelect"/>
     </resultMap>
+
+    <select id="circleVoSelect" parameterType="int" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE id=#{circleId} AND  state!=-1
+    </select>
 
     <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
@@ -98,11 +118,11 @@
     </update>
 
     <select id="topList" resultMap="CircleItemResultMap">
-        SELECT * FROM circle_item where circle_id=#{circleId} AND top!='null' ORDER BY create_time DESC,top DESC limit 0,#{max}
+        SELECT * FROM circle_item where circle_id=#{circleId} AND top!='null' AND state!=-1 ORDER BY create_time DESC,top DESC limit 0,#{max}
     </select>
 
     <select id="getCircleItemCounts" resultType="java.lang.Integer">
-        SELECT COUNT(*) as circleItemCount FROM circle_item WHERE circle_id=#{circleId}
+        SELECT COUNT(*) as circleItemCount FROM circle_item WHERE circle_id=#{circleId} AND state!=-1
     </select>
 
     <select id="findById" resultMap="CircleItemResultMap">
@@ -121,7 +141,7 @@
         FROM
             devaluation
         INNER JOIN circle_item ON circle_item.id = devaluation.model_id
-        WHERE devaluation.model=6 AND devaluation.area=2
+        WHERE devaluation.model=6 AND devaluation.area=2 AND circle_item.state!=-1
         ORDER BY
             devaluation.sequence DESC
         LIMIT 0,#{max}
@@ -151,7 +171,7 @@
         INNER JOIN devaluation ON circle_item.id = devaluation.model_id
         INNER JOIN `user` ON circle_item.create_id = `user`.id
         INNER JOIN circle ON circle_item.circle_id = circle.id
-        where model=6 and area=2
+        where model=6 and area=2 and circle_item.state!=-1
         LIMIT #{start},#{end}
     </select>
 

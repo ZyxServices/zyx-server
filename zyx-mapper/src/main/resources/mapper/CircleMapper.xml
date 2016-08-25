@@ -119,7 +119,7 @@
         circle
     INNER JOIN devaluation ON circle.id = devaluation.model_id
     WHERE
-        devaluation.model = #{devTypes}
+        devaluation.model = #{devTypes} AND  circle.state!=-1
     ORDER BY
         sequence DESC
     LIMIT 0,#{max}

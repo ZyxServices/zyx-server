@@ -1,5 +1,6 @@
 package com.zyx.vo.pg;
 
+import com.zyx.entity.pg.Circle;
 import com.zyx.entity.pg.CircleItem;
 
 /**
@@ -11,6 +12,7 @@ import com.zyx.entity.pg.CircleItem;
 public class CircleItemLunBoVo extends CircleItem {
     private UserVo userVo;
     private String tjImgae_url;
+    private Circle circleVo;
 
     public String getTjImgae_url() {
         return tjImgae_url;
@@ -26,5 +28,13 @@ public class CircleItemLunBoVo extends CircleItem {
 
     public void setUserVo(UserVo userVo) {
         this.userVo = userVo;
+    }
+
+    public Circle getCircleVo() {
+        return circleVo;
+    }
+
+    public void setCircleVo(Circle circleVo) {
+        this.circleVo = circleVo;
     }
 }
