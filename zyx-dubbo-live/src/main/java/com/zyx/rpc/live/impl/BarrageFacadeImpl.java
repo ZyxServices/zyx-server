@@ -1,9 +1,6 @@
 package com.zyx.rpc.live.impl;
 
 import com.zyx.constants.live.LiveConstants;
-import com.zyx.core.SpringContextUtil;
-import com.zyx.core.thread.GlobalTreadPool;
-import com.zyx.core.workors.Workor;
 import com.zyx.entity.live.Barrage;
 import com.zyx.param.live.BarrageParam;
 import com.zyx.rpc.live.BarrageFacade;
@@ -23,19 +20,15 @@ public class BarrageFacadeImpl implements BarrageFacade {
     BarrageService barrageService;
     @Autowired
     private RedisTemplate<String, Barrage> barrageRedis;
-    @Autowired
-    RedisTemplate<String, Workor> redisTemplate;
+//    @Autowired
+//    RedisTemplate<String, Workor> redisTemplate;
     //    @Autowired
     //    private RedisTemplate<String, Long> barrageSizeRedis;
-    @Autowired
-    GlobalTreadPool globalThreadPool;
-
-    @Autowired
-    SpringContextUtil springContextUtil;
+//    @Autowired
+//    SpringContextUtil springContextUtil;
 
 //    ConcurrentHashMap<Integer, Long> barrageSizeMap = new ConcurrentHashMap<>();
 //    ConcurrentHashMap<Integer, ArrayList<Barrage>> cacheBarrage = new ConcurrentHashMap<Integer, ArrayList<Barrage>>();
-
     @Override
     public void add(Barrage barrage) {
         if (barrage == null || barrage.getLiveId() == null)
