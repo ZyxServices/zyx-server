@@ -25,7 +25,7 @@ public class SearchServiceImpl implements SearchService {
         if (searchParam != null && searchParam.getModel() != null && searchParam.getPageNumber() != null
                 && searchParam.getPages() != null && searchParam.getUserId() != null) {
             if(searchParam.getCharacter() == null) searchParam.setCharacter("");
-            searchParam.setPages(searchParam.getPages() - 1);
+            searchParam.setPages((searchParam.getPages() - 1) * searchParam.getPageNumber());
             switch (searchParam.getModel()) {
                 case 1:
                     List<SearchAccountVo> searchAccountVos = searchMapper.searchAccount(searchParam);
