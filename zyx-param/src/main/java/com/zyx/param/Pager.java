@@ -12,6 +12,14 @@ public class Pager implements Serializable{
     private Long count;
     private Integer offset;
 
+    public Pager(Integer pageNum,Integer pageSize) {
+        this.pageSize = pageSize;
+        this.pageNum = pageNum;
+        if(this.pageNum!=null&&this.pageSize!=null){
+            offset=(pageNum-1)*pageSize;
+        }
+    }
+
     public Integer getOffset() {
         if(this.pageNum!=null&&this.pageSize!=null){
             offset=(pageNum-1)*pageSize;
@@ -20,7 +28,6 @@ public class Pager implements Serializable{
         }
         return offset;
     }
-
     public void setOffset(Integer offset) {
         this.offset = offset;
     }
@@ -38,7 +45,6 @@ public class Pager implements Serializable{
             offset=(pageNum-1)*pageSize;
         }
     }
-
     public void setCount(Long count) {
         this.count = count;
     }
@@ -53,5 +59,14 @@ public class Pager implements Serializable{
 
     public Long getCount() {
         return count;
+    }
+
+    public boolean verifyPager(){
+        if(this.pageSize!=null&&this.pageNum!=null){
+            if(getOffset()!=null&&getOffset()>=0){
+                return true;
+            }
+        }
+        return false;
     }
 }

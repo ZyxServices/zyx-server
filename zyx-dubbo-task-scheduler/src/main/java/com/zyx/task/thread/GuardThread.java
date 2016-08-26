@@ -2,6 +2,7 @@ package com.zyx.task.thread;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.zyx.core.thread.GlobalTreadPool;
 import com.zyx.core.workors.Workor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

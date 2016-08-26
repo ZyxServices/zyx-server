@@ -2,6 +2,7 @@ package com.zyx.service.live.impl;
 
 import java.util.List;
 
+import com.zyx.param.live.BarrageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,9 @@ public class BarrageServiceImpl extends BaseServiceImpl<Barrage> implements Barr
 	}
 
 	@Override
-	public void addBarrage(Barrage barrage) {
-	}
-	@Override
-	public List<Barrage> getTop(BarrageVo vo) {
-		return barrageMapper.selectTop(vo);
+	public List<Barrage> getList(BarrageParam barrageParam) {
+		if(barrageParam.getPager()!=null&&!barrageParam.getPager().verifyPager())
+			barrageParam.setPager(null);
+		return barrageMapper.selectList(barrageParam);
 	}
 }
