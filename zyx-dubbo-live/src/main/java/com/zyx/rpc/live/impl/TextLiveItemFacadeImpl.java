@@ -51,9 +51,9 @@ public class TextLiveItemFacadeImpl implements TextLiveItemFacade {
 		}else if(textLiveItemVo.getCreateTimeUpper()!=null){
 			criteria.andBetween("createTime", 0,textLiveItemVo.getCreateTimeUpper() );
 		}
+		example.setOrderByClause("create_time desc");
 		return textLiveItemService.selectByExample(example);
 	}
-
 	@Override
 	public void deleteById(Integer id) {
 		textLiveItemService.delete(id);

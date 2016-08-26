@@ -30,6 +30,8 @@ public class PgFacadeImpl implements PgFacade {
     private CircleItemService circleItemService;
     @Autowired
     private ReplyService replyService;
+    @Autowired
+    private CircleTypeService circleTypeService;
 
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
@@ -172,8 +174,13 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> getTjCircleItem(Integer start,Integer pageSize) {
-        return circleItemService.getTjCircleItem(start,pageSize);
+    public Map<String, Object> getTjCircleItem(Integer start, Integer pageSize) {
+        return circleItemService.getTjCircleItem(start, pageSize);
+    }
+
+    @Override
+    public Map<String, Object> getCircleTypeList() {
+        return circleTypeService.getList();
     }
 
 }

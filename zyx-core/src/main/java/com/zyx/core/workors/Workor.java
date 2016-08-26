@@ -1,5 +1,7 @@
 package com.zyx.core.workors;
 
+import org.springframework.context.ApplicationContext;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,16 @@ import java.util.Map;
  */
 public abstract  class Workor implements Runnable,Serializable {
     private static final long serialVersionUID = -5832717692258803068L;
+    protected ApplicationContext context;
+
+    public ApplicationContext getContext() {
+        return context;
+    }
+
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
+
     /**
      * 线程ID
      */

@@ -296,7 +296,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     public Map<String, Object> jxCircle(Integer max) {
         try {
             Optional.ofNullable(max).orElse(3);
-            List<JxCircleVo> jxCircleVos = circleMapper.jxCircle(3, max);
+            List<JxCircleVo> jxCircleVos = circleMapper.jxCircle(2, max);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, jxCircleVos);
         } catch (Exception e) {
             e.printStackTrace();

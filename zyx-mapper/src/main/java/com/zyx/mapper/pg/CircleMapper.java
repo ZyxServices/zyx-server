@@ -100,4 +100,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
 
     List<JxCircleVo> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
+
+
 }

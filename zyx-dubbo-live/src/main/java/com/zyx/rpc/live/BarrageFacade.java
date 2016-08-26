@@ -1,8 +1,10 @@
 package com.zyx.rpc.live;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyx.entity.live.Barrage;
+import com.zyx.param.live.BarrageParam;
 import com.zyx.vo.live.BarrageVo;
 
 public interface BarrageFacade {
@@ -33,15 +35,11 @@ public interface BarrageFacade {
 	 * @author MrDeng
 	 * @update 2016年6月22日 上午10:30:21
 	 */
-	public List<Barrage> getLast( BarrageVo barrageVo);
-//	/**
-//	 * 
-//	 * @param token
-//	 * @param id
-//	 * @description 删除直播 需要Token验证
-//	 * @version 1.0
-//	 * @author MrDeng
-//	 * @update 2016年6月22日 上午10:30:06
-//	 */
-//	public void delete(String token,Integer id);
+	public List<Barrage> getLast(BarrageParam param);
+
+	/**
+	 *
+	 * @param param
+     */
+	public void endLiveCleanBarrage(BarrageParam param);
 }

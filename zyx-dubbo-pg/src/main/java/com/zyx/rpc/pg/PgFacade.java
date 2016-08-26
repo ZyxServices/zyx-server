@@ -272,4 +272,10 @@ public interface PgFacade {
      * @return
      */
     Map<String,Object> getTjCircleItem(Integer start,Integer pageSize);
+
+    /**
+     * 获取圈子类别列表
+     * @return
+     */
+    Map<String,Object> getCircleTypeList();
 }

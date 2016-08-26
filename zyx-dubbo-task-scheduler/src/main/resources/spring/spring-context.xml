@@ -29,6 +29,6 @@
     <import resource="classpath:applicationContext.xml"/>
     <bean id="guardThread" class="com.zyx.task.thread.GuardThread" lazy-init="false" scope="singleton">
     </bean>
-    <bean id="globalThreadPool" class="com.zyx.task.thread.GlobalTreadPool" lazy-init="false" scope="singleton">
+    <bean id="globalThreadPool" class="com.zyx.core.thread.GlobalTreadPool" lazy-init="false" scope="singleton">
     </bean>
 </beans>

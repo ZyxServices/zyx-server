@@ -92,6 +92,10 @@
         SELECT * FROM user WHERE id = #{id} AND del != 1
     </select>
 
+    <select id="selectAttentionDKAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1 AND authenticate = 2
+    </select>
+
     <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
         update user set password = #{password2} where phone = #{phone}
     </update>

@@ -25,6 +25,4 @@
 	
 	<import resource="classpath:applicationContext.xml" />
 	<import resource="classpath:spring/dubbo-provider.xml" />
-
-	<bean id="workorHelper" class="com.zyx.core.workors.WorkorHelper" lazy-init="false"></bean>
 </beans>
