@@ -39,6 +39,7 @@
     <resultMap id="CircleItemCustomMap" type="com.zyx.vo.pg.CircleItemVo" extends="CircleItemResultMap">
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
         <!--<result column="zanCount" property="zanCount" jdbcType="INTEGER"/>-->
         <!--<result column="meetCount" property="meetCount" jdbcType="INTEGER"/>-->
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
@@ -127,10 +128,12 @@
             circle_item.state,
             `user`.nickname,
             `user`.avatar,
+            `user_auth`.authinfo AS authInfo,
             circle.title AS circleTitle
             FROM
             circle_item
             INNER JOIN `user` ON circle_item.create_id = `user`.id
+            LEFT JOIN `user_auth` ON circle_item.create_id = `user_auth`.user_id
             INNER JOIN circle ON circle_item.circle_id = circle.id
             WHERE
             circle_item.id=#{id}
