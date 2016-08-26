@@ -76,6 +76,7 @@
 		model=#{model}
 	</select>
 
+    <!-- 直播 -->
     <resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
         <id column="id" property="id"/>
         <result column="creat_time" property="createTime"/>
@@ -88,14 +89,38 @@
         <result column="bgm_url" property="bgmUrl"/>
         <result column="vedio_url" property="vedioUrl"/>
         <result column="state" property="state"/>
+        <result column="authInfo" property="authInfo"/>
+        <association property="msgCount" column="id" select="queryLiveMsgCount"/>
+        <association property="zanCount" column="id" select="queryLiveZan"/>
         <association property="userIconVo" column="user_id" select="selectUserIcon"></association>
     </resultMap>
     <select id="selectCollLiveInfo" parameterType="java.lang.Integer" resultMap="LiveInfoVo">
-		SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+		SELECT
+		t_live.id,
+		t_live.create_time,
+		t_live.auth,
+		t_live.type,
+		t_live.start,
+		t_live.end,
+		t_live.user_id,
+		t_live.title,
+		t_live.lab,
+		t_live.bgm_url,
+		t_live.vedio_url,
+		t_live.state,
+		`user_auth`.authinfo AS authInfo
 		FROM t_live
+		LEFT JOIN `user_auth` ON t_live.user_id = `user_auth`.user_id
 		WHERE
-		id = #{id}
+		t_live.id = #{id}
 	</select>
+    <!--直播-->
+    <select id="queryLiveMsgCount" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM reply WHERE reply_type = 1 AND reply_id=#{id}
+    </select>
+    <select id="queryLiveZan" parameterType="int" resultType="int">
+        SELECT COUNT(id) from zan where body_type=4 AND body_id=#{id}
+    </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
 		SELECT id,nickname,avatar
 		FROM user
