@@ -20,6 +20,7 @@ public class LiveInfoVo implements Serializable {
 	private String title;
 	private Integer lab;
 	private String bgmUrl;
+	private Long groupId;
 	private String vedioUrl;
 	private Integer state;
 	// 用户认证标签
@@ -119,6 +120,13 @@ public class LiveInfoVo implements Serializable {
 		return vedioUrl;
 	}
 
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 	public Integer getState() {
 		return state;
 	}
