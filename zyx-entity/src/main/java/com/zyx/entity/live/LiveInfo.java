@@ -46,9 +46,11 @@ public class LiveInfo extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String vedioUrl;
     @Column
+    @ColumnType(jdbcType = JdbcType.BIGINT )
+    private Long groupId;
+    @Column
     @ColumnType(jdbcType = JdbcType.INTEGER )
     private Integer state;
-
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer del;
@@ -123,6 +125,14 @@ public class LiveInfo extends BaseEntity {
 
     public void setVedioUrl(String vedioUrl) {
         this.vedioUrl = vedioUrl;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public Integer getState() {

@@ -16,13 +16,14 @@
 		<id column="lab" property="lab" />
 		<id column="bgm_url" property="bgmUrl" />
 		<id column="vedio_url" property="vedioUrl" />
+		<id column="group_id" property="groupId" />
 		<id column="state" property="state" />
 		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
 	</resultMap>
 
 	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
 		resultType="java.lang.Long">
-		select count(*)
+		select count(id)
 		from t_live
 		where
 		1=1
@@ -36,7 +37,7 @@
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"
 		resultMap="LiveInfoVo">
-		select id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+		select id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,group_id,state
 		from t_live
 		where
 		1=1

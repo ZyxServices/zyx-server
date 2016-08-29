@@ -46,6 +46,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
@@ -89,7 +90,7 @@
     </select>
 
     <select id="selectAttentionAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
-        SELECT * FROM user WHERE id = #{id} AND del != 1
+        SELECT u.id,u.nickname,u.avatar,ua.authinfo as authInfo FROM user as u LEFT JOIN user_auth as ua ON u.id = ua.user_id WHERE u.id = #{id} AND u.del != 1
     </select>
 
     <select id="selectAttentionDKAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
