@@ -68,7 +68,7 @@
     </select>
 
     <select id="commentSelect" parameterType="int" resultType="int">
-     SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply_id=#{concernId}
+     SELECT COUNT(id) FROM comment WHERE comment.comment_type=3 AND comment_id=#{concernId}
     </select>
 
     <select id="getAttentionIds" parameterType="int" resultMap="userAttentionResultMap">
