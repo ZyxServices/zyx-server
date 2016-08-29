@@ -18,6 +18,7 @@ public class AccountAttentionVo implements Serializable {
 
     private String avatar;
 
+    private String authInfo;
 
     public Integer getId() {
         return id;
@@ -43,12 +44,21 @@ public class AccountAttentionVo implements Serializable {
         this.avatar = avatar;
     }
 
+    public String getAuthInfo() {
+        return authInfo;
+    }
+
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
+    }
+
     @Override
     public String toString() {
         return "AccountAttentionVo{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", authInfo='" + authInfo + '\'' +
                 '}';
     }
 }
