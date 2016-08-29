@@ -23,7 +23,9 @@ public class SearchAccountVo implements Serializable {
 
     private boolean isAtten;
 
-    private SearchUserAuthVo account;
+    private Integer authenticate;
+
+    private SearchUserAuthVo auth;
 
     public Integer getId() {
         return id;
@@ -57,11 +59,19 @@ public class SearchAccountVo implements Serializable {
         isAtten = atten;
     }
 
-    public SearchUserAuthVo getAccount() {
-        return account;
+    public SearchUserAuthVo getAuth() {
+        return auth;
     }
 
-    public void setAccount(SearchUserAuthVo account) {
-        this.account = account;
+    public void setAuth(SearchUserAuthVo auth) {
+        this.auth = auth;
+    }
+
+    public Integer getAuthenticate() {
+        return authenticate;
+    }
+
+    public void setAuthenticate(Integer authenticate) {
+        this.authenticate = authenticate;
     }
 }

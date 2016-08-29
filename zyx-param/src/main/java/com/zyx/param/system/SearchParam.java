@@ -56,15 +56,4 @@ public class SearchParam implements Serializable {
     public void setModel(Integer model) {
         this.model = model;
     }
-
-    @Override
-    public String toString() {
-        return "SearchParam{" +
-                "userId=" + userId +
-                ", character='" + character + '\'' +
-                ", pageNumber=" + pageNumber +
-                ", pages=" + pages +
-                ", model=" + model +
-                '}';
-    }
 }

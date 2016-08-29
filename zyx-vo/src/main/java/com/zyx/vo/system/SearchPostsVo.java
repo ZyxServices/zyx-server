@@ -13,11 +13,7 @@ public class SearchPostsVo implements Serializable {
 
     private String title;
 
-    private Long createTime;
-
-    private AccountAttentionVo account;
-
-    private boolean isColl;
+    private SearchAccountVo account;
 
     private Integer zanCount;
 
@@ -39,28 +35,12 @@ public class SearchPostsVo implements Serializable {
         this.title = title;
     }
 
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public AccountAttentionVo getAccount() {
+    public SearchAccountVo getAccount() {
         return account;
     }
 
-    public void setAccount(AccountAttentionVo account) {
+    public void setAccount(SearchAccountVo account) {
         this.account = account;
-    }
-
-    public boolean isColl() {
-        return isColl;
-    }
-
-    public void setColl(boolean coll) {
-        isColl = coll;
     }
 
     public Integer getZanCount() {
