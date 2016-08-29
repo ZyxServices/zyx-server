@@ -14,6 +14,7 @@ public class CircleItemVo extends CircleItem {
     private Integer zanCount;
     private Integer meetCount;
     private String circleTitle;
+    private String authInfo;
 
     public Integer getZanCount() {
         return zanCount;
@@ -53,5 +54,13 @@ public class CircleItemVo extends CircleItem {
 
     public void setCircleTitle(String circleTitle) {
         this.circleTitle = circleTitle;
+    }
+
+    public String getAuthInfo() {
+        return authInfo;
+    }
+
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
     }
 }

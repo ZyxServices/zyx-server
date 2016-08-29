@@ -20,8 +20,21 @@ public class LiveInfoVo implements Serializable {
 	private String title;
 	private Integer lab;
 	private String bgmUrl;
+	private Long groupId;
 	private String vedioUrl;
 	private Integer state;
+	// 用户认证标签
+	private String authInfo;
+
+	/**
+	 * 当前直播的点赞数量
+	 */
+	private Integer zanCount;
+
+	/**
+	 * 当前直播消息数量
+	 */
+	private Integer msgCount;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -107,8 +120,38 @@ public class LiveInfoVo implements Serializable {
 		return vedioUrl;
 	}
 
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 	public Integer getState() {
 		return state;
 	}
 
+	public String getAuthInfo() {
+		return authInfo;
+	}
+
+	public void setAuthInfo(String authInfo) {
+		this.authInfo = authInfo;
+	}
+
+	public Integer getZanCount() {
+		return zanCount;
+	}
+
+	public void setZanCount(Integer zanCount) {
+		this.zanCount = zanCount;
+	}
+
+	public Integer getMsgCount() {
+		return msgCount;
+	}
+
+	public void setMsgCount(Integer msgCount) {
+		this.msgCount = msgCount;
+	}
 }

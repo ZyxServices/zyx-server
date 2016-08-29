@@ -51,6 +51,7 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
         <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
         <association column="id" property="memberCount" javaType="int" select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
+        <association column="id" property="collection" javaType="int" select="queryCollCount"/>
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.entity.activity.parm.QueryActivityParm"
@@ -74,6 +75,10 @@
         <if test="pageNumber != null and page != null">
             limit #{page}, #{pageNumber}
         </if>
+    </select>
+
+    <select id="queryCollCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id) from t_collection where model_id = #{id} AND model = 1
     </select>
 
     <select id="queryActivityMember" parameterType="java.lang.Integer" resultMap="member_template">

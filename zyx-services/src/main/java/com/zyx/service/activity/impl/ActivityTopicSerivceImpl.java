@@ -39,7 +39,6 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
 
     @Override
     public Map<String, Object> addActivityTopic(AddTopicParm parm) {
-        Map<String, Object> map = new HashMap<>();
         if (parm == null) {
             return Constants.MAP_PARAM_MISS;
         }
@@ -73,7 +72,7 @@ public class ActivityTopicSerivceImpl extends BaseServiceImpl<ActivityTopic> imp
             if (topicParm.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-            topicParm.setPages(topicParm.getPages() - 1);
+            topicParm.setPages((topicParm.getPages() - 1) * topicParm.getPageNumber());
             List<ActivityTopic> topics = activityTopicMapper.dynamicQuery(topicParm);
             if (topics != null && topics.size() > 0) {
                 Map<String, Object> objectMap = new HashMap<>();

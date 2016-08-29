@@ -1,5 +1,7 @@
 package com.zyx.param.live;
 
+import com.zyx.param.Pager;
+
 import java.io.Serializable;
 
 /**
@@ -17,19 +19,8 @@ public class BarrageParam implements Serializable{
 	 /**serialVersionUID TODO*/
 	private static final long serialVersionUID = 1L;
 	private Integer liveId;
-//    private Long createTimeLower;
-//    private Long createTimeUpper;
 
-	private Long index;
-
-	public Long getIndex() {
-		return index;
-	}
-
-	public void setIndex(Long index) {
-		this.index = index;
-	}
-
+	private Pager pager;
 	public Integer getLiveId() {
 		return liveId;
 	}
@@ -38,23 +29,11 @@ public class BarrageParam implements Serializable{
 		this.liveId = liveId;
 	}
 
-//	public Long getCreateTimeLower() {
-//		return createTimeLower;
-//	}
-//
-//	public void setCreateTimeLower(Long createTimeLower) {
-//		this.createTimeLower = createTimeLower;
-//	}
-//
-//	public Long getCreateTimeUpper() {
-//		return createTimeUpper;
-//	}
-//
-//	public void setCreateTimeUpper(Long createTimeUpper) {
-//		this.createTimeUpper = createTimeUpper;
-//	}
+	public Pager getPager() {
+		return pager;
+	}
 
-
-    
-
+	public void setPager(Pager pager) {
+		this.pager = pager;
+	}
 }

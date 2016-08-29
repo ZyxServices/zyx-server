@@ -8,18 +8,9 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="start_time" property="startTime" jdbcType="BIGINT"/>
-        <result column="end_time" property="endTime" jdbcType="BIGINT"/>
-        <result column="last_time" property="lastTime" jdbcType="BIGINT"/>
-        <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
-        <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="address" property="address" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
-        <result column="is_coll" property="isColl" jdbcType="TINYINT"/>
         <association column="user_id" property="user"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
-        <association column="id" property="memberCount" javaType="int"
-                     select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
     </resultMap>
 
 
@@ -34,8 +25,9 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="is_atten" property="isAtten" jdbcType="TINYINT"/>
-        <association property="account" column="id" select="authByUserId"></association>
+        <result column="is_atten" property="isAtten" jdbcType="VARCHAR"/>
+        <result column="authenticate" property="authenticate" jdbcType="VARCHAR"/>
+        <association property="auth" column="id" select="authByUserId"></association>
     </resultMap>
 
 
@@ -45,44 +37,27 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="headImgUrl" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="is_atten" property="isAtten" jdbcType="TINYINT"/>
-        <result column="countNum" property="countNum" jdbcType="INTEGER"/>
-        <association property="account" column="create_id"
-                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
     </resultMap>
 
     <!--直播-->
     <resultMap id="liveInfoVo" type="com.zyx.vo.system.SearchLiveVo">
         <id column="id" property="id"/>
-        <id column="create_time" property="createTime"/>
-        <id column="auth" property="auth"/>
-        <id column="type" property="type"/>
-        <id column="start" property="start"/>
-        <id column="end" property="end"/>
         <id column="title" property="title"/>
-        <id column="lab" property="lab"/>
         <id column="bgm_url" property="bgmUrl"/>
-        <id column="vedio_url" property="vedioUrl"/>
-        <id column="state" property="state"/>
         <id column="msgCount" property="msgCount"/>
         <association property="account" column="user_id"
-                     select="com.zyx.mapper.live.LiveInfoMapper.selectUserIcon"></association>
+                     select="searchUserAndAuth"></association>
         <association property="zanCount" column="id" select="queryLiveZan"/>
     </resultMap>
 
     <!--动态-->
     <resultMap id="concernInfoVo" type="com.zyx.vo.system.SearchConcernVo">
         <id column="id" property="id"/>
-        <id column="type" property="type"/>
-        <id column="topic_title" property="topicTitle"/>
-        <id column="img_url" property="imgUrl"/>
-        <id column="video_url" property="videoUrl"/>
-        <id column="topic_visible" property="topicVisible"/>
-        <id column="state" property="state"/>
-        <id column="isColl" property="isColl"/>
+        <id column="topic_content" property="topicContent"/>
         <id column="msgCount" property="msgCount"/>
         <association property="zanCount" column="id" select="queryConcernZan"/>
         <association property="account" column="user_id"
-                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+                     select="searchUserAndAuth"></association>
     </resultMap>
 
 
@@ -90,23 +65,18 @@
     <resultMap id="searchPostsVo" type="com.zyx.vo.system.SearchPostsVo">
         <id column="id" property="id"/>
         <id column="title" property="title"/>
-        <id column="create_time" property="createTime"/>
-        <id column="isColl" property="isColl"/>
         <id column="msgCount" property="msgCount"/>
         <association property="zanCount" column="id" select="queryPostsZan"/>
         <association property="account" column="create_id"
-                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+                     select="searchUserAndAuth"></association>
     </resultMap>
 
 
     <!--SQL语句-->
     <!--活动-->
     <select id="searchActivtiy" parameterType="com.zyx.param.system.SearchParam" resultMap="queryActivity">
-        SELECT ac.title,ac.img_urls,ac.start_time,
-        ac.end_time,ac.last_time,ac.max_people,ac.price,
-        ac.address,ac.create_time,ac.mask,ac.user_id, NOT ISNULL(B.id) as is_coll
-        FROM activity ac LEFT JOIN t_collection B ON ac.id = B.model_id AND B.model=1 AND B.user_id=#{userId}
-        WHERE (ac.title LIKE CONCAT('%',#{character},'%')
+        SELECT ac.title,ac.img_urls,ac.start_time,ac.create_time,ac.mask,ac.user_id
+        FROM activity ac WHERE (ac.title LIKE CONCAT('%',#{character},'%')
         OR ac.desc_content LIKE CONCAT('%',#{character},'%'))
         AND ac.del != 1 AND ac.visible = 0 AND ac.mask = 0
         ORDER BY ac.create_time desc
@@ -116,12 +86,17 @@
     </select>
 
     <!--用户-->
+    <select id="searchUserAndAuth" parameterType="java.lang.Integer" resultMap="queryAccount">
+        SELECT id,nickname,avatar,create_time, authenticate FROM user
+        where mask = 0 AND del = 0 and id = #{user_id}
+    </select>
+
     <select id="authByUserId" parameterType="int" resultMap="queryUserAuthInfo">
         SELECT * FROM user_auth where user_id = #{id}
     </select>
 
     <select id="searchAccount" parameterType="com.zyx.param.system.SearchParam" resultMap="queryAccount">
-        SELECT u.id,u.nickname,u.avatar,u.create_time,
+        SELECT u.id,u.nickname,u.avatar,u.create_time, u.authenticate,
         NOT ISNULL(a.id) as is_atten
         FROM user u LEFT JOIN USER_ATTENTION a ON u.id = a.to_user_id and a.from_user_id = #{userId} AND a.rel_type = 1
         where u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0
@@ -133,8 +108,7 @@
 
     <!--圈子-->
     <select id="searchCirle" parameterType="com.zyx.param.system.SearchParam" resultMap="queryCirle">
-        SELECT c.id, c.title, c.create_id, c.head_img_url, NOT ISNULL(m.id) as is_atten,
-        (SELECT COUNT(id) FROM myconcern b WHERE c.id = b.concern_id) as countNum
+        SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id NOT ISNULL(m.id) as is_atten
         FROM circle c LEFT JOIN myconcern m ON c.id = m.concern_id AND m.concern_type = 4 AND m.account_id = #{userId}
         WHERE title LIKE CONCAT('%',#{character},'%') AND c.state != -1 AND c.state != -2
         ORDER BY c.create_time desc
@@ -149,10 +123,9 @@
     </select>
 
     <select id="searchLive" parameterType="com.zyx.param.system.SearchParam" resultMap="liveInfoVo">
-        SELECT a.id,a.auth,a.type,a.start,a.end,a.title,a.lab,a.bgm_url,a.vedio_url,a.state,a.create_time,
-        NOT ISNULL(b.id) as is_coll, (SELECT COUNT(id) FROM t_barrage c WHERE c.live_id = a.id) as msgCount
-        FROM t_live a LEFT JOIN t_collection b ON a.id = b.model_id AND b.model = 2 AND b.user_id = #{userId}
-        WHERE a.title LIKE CONCAT('%',#{character},'%') and a.del = 0
+        SELECT a.id,a.title,a.lab,a.bgm_url,a.create_time,a.user_id,
+        (SELECT COUNT(id) FROM t_barrage c WHERE c.live_id = a.id) as msgCount
+        FROM t_live a WHERE a.title LIKE CONCAT('%',#{character},'%') and a.del = 0
         ORDER BY a.create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
@@ -165,10 +138,10 @@
     </select>
 
     <select id="searchConcern" parameterType="com.zyx.param.system.SearchParam" resultMap="concernInfoVo">
-        SELECT a.id,a.user_id,a.type,a.topic_title,a.img_url,a.video_url,a.topic_visible,a.state,NOT ISNULL(b.id) as is_coll,
+        SELECT a.id,a.user_id,a.topic_content,a.create_time,
         (SELECT count(id) FROM reply c WHERE c.reply_id = a.id AND c.reply_type = 3) as msgCount
-        FROM concern a LEFT JOIN t_collection b ON a.id = b.model_id AND b.model = 5 AND b.user_id = #{userId}
-        WHERE a.topic_title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
+        FROM concern a WHERE a.topic_content LIKE CONCAT('%',#{character},'%')
+        AND a.state != -1 AND a.state != -2
         ORDER BY a.create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
@@ -181,15 +154,13 @@
     </select>
 
     <select id="searchPosts" parameterType="com.zyx.param.system.SearchParam" resultMap="searchPostsVo">
-        SELECT a.id,a.create_id,a.title,a.create_time,NOT ISNULL(b.id) as is_coll,
+        SELECT a.id,a.create_id,a.title,a.create_time,
         (SELECT count(id) FROM reply c WHERE a.id = c.reply_id AND c.reply_type = 1) as msgCount
-        FROM circle_item a LEFT JOIN t_collection b ON a.id = b.model_id AND b.model = 4 AND b.user_id = #{userId}
-        WHERE a.title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
+        FROM circle_item a WHERE a.title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
         </if>
     </select>
-
 
 
 </mapper>

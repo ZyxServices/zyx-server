@@ -37,6 +37,7 @@ public interface BarrageFacade {
 	 */
 	public List<Barrage> getLast(BarrageParam param);
 
+	public List<Barrage> getList(BarrageParam param);
 	/**
 	 *
 	 * @param param

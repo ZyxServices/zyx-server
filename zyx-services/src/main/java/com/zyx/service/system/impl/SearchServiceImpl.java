@@ -22,47 +22,52 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Map<String, Object> modularSearch(SearchParam searchParam) {
-        if (searchParam != null && searchParam.getModel() != null && searchParam.getPageNumber() != null
-                && searchParam.getPages() != null && searchParam.getUserId() != null) {
-            if(searchParam.getCharacter() == null) searchParam.setCharacter("");
-            searchParam.setPages(searchParam.getPages() - 1);
+        if (searchParam != null && searchParam.getModel() != null && searchParam.getPageNumber() != null && searchParam.getPages() != null) {
+            if (searchParam.getCharacter() == null) searchParam.setCharacter("");
+            searchParam.setPages((searchParam.getPages() - 1) * searchParam.getPageNumber());
             switch (searchParam.getModel()) {
-                case 1:
+                case 1: // 用户
+                    if (searchParam.getUserId() == null) {
+                        return Constants.MAP_PARAM_MISS;
+                    }
                     List<SearchAccountVo> searchAccountVos = searchMapper.searchAccount(searchParam);
                     if (searchAccountVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchAccountVos);
                     } else {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
-                case 2:
+                case 2: //圈子
+                    if (searchParam.getUserId() == null) {
+                        return Constants.MAP_PARAM_MISS;
+                    }
                     List<SearchCirleVo> searchCirleVos = searchMapper.searchCirle(searchParam);
                     if (searchCirleVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchCirleVos);
                     } else {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
-                case 3:
+                case 3: //活动
                     List<SearchActivityVo> searchActivityVos = searchMapper.searchActivtiy(searchParam);
                     if (searchActivityVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchActivityVos);
                     } else {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
-                case 4:
+                case 4: //直播
                     List<SearchLiveVo> searchLiveVos = searchMapper.searchLive(searchParam);
                     if (searchLiveVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchLiveVos);
                     } else {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
-                case 5:
+                case 5: //动态
                     List<SearchConcernVo> searchConcernVos = searchMapper.searchConcern(searchParam);
                     if (searchConcernVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchConcernVos);
                     } else {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
-                case 6:
+                case 6: //帖子
                     List<SearchPostsVo> searchPostsVos = searchMapper.searchPosts(searchParam);
                     if (searchPostsVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchPostsVos);

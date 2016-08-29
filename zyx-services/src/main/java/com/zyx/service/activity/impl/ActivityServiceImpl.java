@@ -64,9 +64,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                                               String phone, Double price, Integer type, String address, Integer examine,
                                               String memberTemplate) {
         Activity activity = new Activity();
-        Map<String, Object> map = new HashMap<>();
-
-
         if (createId != null && title != null && desc != null && image != null && startTime != null
                 && endTime != null && type != null && price != null && address != null && phone != null && !phone.equals("")) {
 
@@ -131,7 +128,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                     || (parm.getEndTime() != null && parm.getStartTime() == null)) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10009, "时间参数有误");
             }
-            parm.setPage(parm.getPage() - 1);
+            parm.setPage((parm.getPage() - 1) * parm.getPageNumber());
             List<ActivityVo> activities = activityMapper.queryActivity(parm);
             if (activities.size() > 0) {
                 if (parm.getEditState() != 0) {
@@ -166,9 +163,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
     @Override
     public Map<String, Object> queryActivityMember(Integer id) {
-
-        Map<String, Object> map = new HashMap<>();
-
         if (id != null && id > 0) {
             MemberTemplate template = activityMapper.queryActivityMember(id);
             if (template != null) {
@@ -217,13 +211,11 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
     @Override
     public Map<String, Object> queryActivityHistory(QueryHistoryParm history) {
-        Map<String, Object> map = new HashMap<>();
-
         if (history != null && history.getPageNumber() != null && history.getPageHis() != null) {
             if (history.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-            history.setPageHis(history.getPageHis() - 1);
+            history.setPageHis((history.getPageHis() - 1) * history.getPageNumber());
             List<ActivityVo> activityHistory = activityMapper.queryActivityHistory(history);
 
             List<ActivityVo> activities = activityHistory

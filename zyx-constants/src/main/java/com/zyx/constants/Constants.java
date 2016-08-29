@@ -129,6 +129,11 @@ public interface Constants {
      */
     int PARAM_ILIGAL = 302;
 
+    /**
+     * 分页信息错误
+     */
+    int PARAM_PAGER_ILEGAL = 303;
+
     /// 请求类型代码
     /**
      * 请求错误
@@ -190,7 +195,9 @@ public interface Constants {
 
     String MSG_PARAM_MISS = "missing paragrams";
 
-    String MSG_PARAM_ILIGAL = "iligal paragram";
+    String MSG_PARAM_ILIGAL = "ilegal paragram";
+
+    String MSG_PARAM_PAGER_ILEGAL = "iligal pager paragram";
 
     String MSG_REQUEST_ERROR = "request error";
 

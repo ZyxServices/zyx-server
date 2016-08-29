@@ -19,11 +19,6 @@ public class SearchCirleVo implements Serializable {
     private String title;
 
     /**
-     * 创建圈子用户基础信息
-     */
-    private AccountAttentionVo account;
-
-    /**
      * 圈子图片
      */
     private String headImgUrl;
@@ -32,11 +27,6 @@ public class SearchCirleVo implements Serializable {
      * 当前登录用户是否关注圈子
      */
     private boolean isAtten;
-
-    /**
-     * 当前圈子关注总数
-     */
-    private Integer countNum;
 
     public Integer getId() {
         return id;
@@ -52,14 +42,6 @@ public class SearchCirleVo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public AccountAttentionVo getAccount() {
-        return account;
-    }
-
-    public void setAccount(AccountAttentionVo account) {
-        this.account = account;
     }
 
     public String getHeadImgUrl() {
@@ -78,12 +60,4 @@ public class SearchCirleVo implements Serializable {
         isAtten = atten;
     }
 
-    public Integer getCountNum() {
-        if(countNum == null) countNum = 0;
-        return countNum;
-    }
-
-    public void setCountNum(Integer countNum) {
-        this.countNum = countNum;
-    }
 }

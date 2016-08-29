@@ -1,5 +1,6 @@
 package com.zyx.rpc.live.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.zyx.constants.live.LiveConstants;
 import com.zyx.entity.live.Barrage;
 import com.zyx.param.live.BarrageParam;
@@ -88,6 +89,11 @@ public class BarrageFacadeImpl implements BarrageFacade {
 //        }
         List<Barrage> barrages = barrageRedis.opsForList().range(LiveConstants.MARK_REDIS_BARRAGE_QUEUE + param.getLiveId(), 0, size);
         return barrages;
+    }
+
+    @Override
+    public List<Barrage> getList(BarrageParam param) {
+        return barrageService.getList(param);
     }
 
     @Override
