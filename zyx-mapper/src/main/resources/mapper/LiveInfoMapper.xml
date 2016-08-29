@@ -16,6 +16,7 @@
 		<id column="lab" property="lab" />
 		<id column="bgm_url" property="bgmUrl" />
 		<id column="vedio_url" property="vedioUrl" />
+		<id column="group_id" property="groupId" />
 		<id column="state" property="state" />
 		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
 	</resultMap>

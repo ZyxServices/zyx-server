@@ -32,7 +32,6 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         liveInfo.setStart(liveInfo.getStart() == null || liveInfo.getStart() < now ? now : liveInfo.getStart());
         liveInfo.setState(0);
         liveInfo.setDel(0);
-        System.out.println(JSON.toJSONString(liveInfo));
         liveInfoService.save(liveInfo);
         return liveInfo.getId();
     }
