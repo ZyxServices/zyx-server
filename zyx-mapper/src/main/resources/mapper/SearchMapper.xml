@@ -75,6 +75,7 @@
         <result column="title" property="title"/>
         <result column="msgCount" property="msgCount"/>
         <result column="create_time" property="createTime"/>
+        <result column="circle_id" property="circleId"/>
         <result column="circleName" property="circleName"/>
         <association property="zanCount" column="id" select="queryPostsZan"/>
         <association property="account" column="create_id"
@@ -168,7 +169,7 @@
     </select>
 
     <select id="searchPosts" parameterType="com.zyx.param.system.SearchParam" resultMap="searchPostsVo">
-        SELECT a.id,a.create_id,a.title,a.create_time, b.title as circleName,
+        SELECT a.id,a.create_id,a.title,a.create_time, a.circle_id, b.title as circleName,
         (SELECT count(id) FROM comment c WHERE a.id = c.comment_id AND c.comment_type = 1) as msgCount
         FROM circle_item a LEFT JOIN circle b ON a.circle_id = b.id WHERE a.title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
         <if test="pageNumber != null and pages != null">
