@@ -3,6 +3,7 @@ package com.zyx.rpc.account.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.MyCircleFacade;
+import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.pg.CircleListVo;
@@ -31,7 +32,7 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     private CircleService circleService;
 
     @Autowired
-    protected RedisTemplate<String, String> stringRedisTemplate;
+    private TokenFacade tokenFacade;
 
     @Override
     public Map<String, Object> myCircleList(String token, Integer accountId) {
@@ -89,13 +90,5 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
         } catch (Exception e) {
             return Constants.MAP_500;
         }
-    }
-
-    private boolean isTokenFailure(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return true;
-        }
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        return StringUtils.isEmpty(phone);
     }
 }

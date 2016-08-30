@@ -4,14 +4,13 @@ import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserLoginParam;
 import com.zyx.entity.account.param.AccountInfoParam;
 import com.zyx.rpc.account.AccountInfoFacade;
+import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -31,14 +30,15 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
     private AccountInfoService accountInfoService;
 
     @Autowired
-    protected RedisTemplate<String, String> stringRedisTemplate;
+    private TokenFacade tokenFacade;
 
     @Override
     public Map<String, Object> queryAccountInfo(String token, int userId) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, userId);
+            if (map != null) {
+                return map;
             }
             UserLoginParam userLoginParam = new UserLoginParam();
             userLoginParam.setToken(token);
@@ -47,13 +47,7 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (list == null || list.size() == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
             } else {
-                AccountInfoVo accountInfo = list.get(0);
-                // 获取token相关的手机号码
-                String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-                if (accountInfo.getPhone().equals(phone)) {
-                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", accountInfo);
-                }
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50301, AccountConstants.ACCOUNT_ERROR_CODE_50301_MSG);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", list.get(0));
             }
         } catch (Exception e) {
             return AccountConstants.MAP_500;
@@ -64,8 +58,9 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
     public Map<String, Object> editAccountInfo(String token, int userId, AccountInfoParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, userId);
+            if (map != null) {
+                return map;
             }
             param.setId(userId);
             param.setToken(token);
@@ -84,8 +79,9 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
     public Map<String, Object> queryMyCenterInfo(String token, int userId) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateTokenIncludeOther(token, userId);
+            if (map != null) {
+                return map;
             }
             UserLoginParam userLoginParam = new UserLoginParam();
             userLoginParam.setId(userId);
@@ -93,23 +89,11 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (_info == null) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
             } else {
-                // 获取token相关的手机号码
-                String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-                if (_info.getPhone().equals(phone)) {
-                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", _info);
-                }
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50301, AccountConstants.ACCOUNT_ERROR_CODE_50301_MSG);
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", _info);
             }
         } catch (Exception e) {
             return AccountConstants.MAP_500;
         }
     }
 
-    private boolean isTokenFailure(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return true;
-        }
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        return StringUtils.isEmpty(phone);
-    }
 }
