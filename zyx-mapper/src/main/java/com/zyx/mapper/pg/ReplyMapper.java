@@ -1,6 +1,6 @@
 package com.zyx.mapper.pg;
 
-import com.zyx.entity.pg.Reply;
+import com.zyx.entity.system.Reply;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

@@ -131,5 +131,14 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30033= 30033;
     String PG_ERROR_CODE_30033_MSG = "帖子id不能为空";
 
+    int PG_ERROR_CODE_30034= 30034;
+    String PG_ERROR_CODE_30034_MSG = "评论类型不能为空";
+
+    int PG_ERROR_CODE_30035= 30035;
+    String PG_ERROR_CODE_30035_MSG = "评论modelId不能为空";
+
+    int PG_ERROR_CODE_30036= 30036;
+    String PG_ERROR_CODE_30036_MSG = "用户id不能为空";
+
     String PG_RESULT = "result";
 }

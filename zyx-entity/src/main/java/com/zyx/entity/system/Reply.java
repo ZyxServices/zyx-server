@@ -1,4 +1,4 @@
-package com.zyx.entity.pg;
+package com.zyx.entity.system;
 
 import com.zyx.entity.BaseEntity;
 import org.apache.ibatis.type.JdbcType;

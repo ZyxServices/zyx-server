@@ -1,6 +1,6 @@
 package com.zyx.service.pg;
 
-import com.zyx.entity.pg.Reply;
+import com.zyx.entity.system.Reply;
 import com.zyx.service.BaseService;
 
 import java.util.Map;

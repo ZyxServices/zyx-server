@@ -8,7 +8,7 @@ import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import com.zyx.constants.pg.PgConstants;
-import com.zyx.entity.pg.Reply;
+import com.zyx.entity.system.Reply;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ReplyService;
 

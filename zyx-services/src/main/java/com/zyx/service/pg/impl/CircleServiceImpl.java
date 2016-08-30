@@ -74,9 +74,9 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 //                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
 //            }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
-            if (tag == null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30027, PgConstants.PG_ERROR_CODE_30027_MSG);
-            }
+//            if (tag == null) {
+//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30027, PgConstants.PG_ERROR_CODE_30027_MSG);
+//            }
             Optional.ofNullable(tag).ifPresent(insertCircle::setTag);
             insertCircle.setType(0);
             insertCircle.setCreateTime(new Date().getTime());
