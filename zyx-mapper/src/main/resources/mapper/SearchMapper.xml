@@ -8,7 +8,9 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="start_time" property="startTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <association property="zanCount" column="id" select="queryActivityZan"/>
         <association column="user_id" property="user"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
@@ -27,6 +29,7 @@
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="is_atten" property="isAtten" jdbcType="VARCHAR"/>
         <result column="authenticate" property="authenticate" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="auth" column="id" select="authByUserId"></association>
     </resultMap>
 
@@ -37,24 +40,29 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="headImgUrl" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="is_atten" property="isAtten" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association property="account" column="create_id"
+                     select="searchUserAndAuth"></association>
     </resultMap>
 
     <!--直播-->
     <resultMap id="liveInfoVo" type="com.zyx.vo.system.SearchLiveVo">
-        <id column="id" property="id"/>
-        <id column="title" property="title"/>
-        <id column="bgm_url" property="bgmUrl"/>
-        <id column="msgCount" property="msgCount"/>
+        <result column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="bgm_url" property="bgmUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="state" property="state"/>
         <association property="account" column="user_id"
                      select="searchUserAndAuth"></association>
-        <association property="zanCount" column="id" select="queryLiveZan"/>
     </resultMap>
 
     <!--动态-->
     <resultMap id="concernInfoVo" type="com.zyx.vo.system.SearchConcernVo">
-        <id column="id" property="id"/>
-        <id column="topic_content" property="topicContent"/>
-        <id column="msgCount" property="msgCount"/>
+        <result column="id" property="id"/>
+        <result column="topic_content" property="topicContent"/>
+        <result column="msgCount" property="msgCount"/>
+        <result column="img_url" property="imageUrl"/>
+        <result column="create_time" property="createTime"/>
         <association property="zanCount" column="id" select="queryConcernZan"/>
         <association property="account" column="user_id"
                      select="searchUserAndAuth"></association>
@@ -63,9 +71,11 @@
 
     <!--帖子-->
     <resultMap id="searchPostsVo" type="com.zyx.vo.system.SearchPostsVo">
-        <id column="id" property="id"/>
-        <id column="title" property="title"/>
-        <id column="msgCount" property="msgCount"/>
+        <result column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="msgCount" property="msgCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="circleName" property="circleName"/>
         <association property="zanCount" column="id" select="queryPostsZan"/>
         <association property="account" column="create_id"
                      select="searchUserAndAuth"></association>
@@ -74,8 +84,13 @@
 
     <!--SQL语句-->
     <!--活动-->
+    <select id="queryActivityZan" parameterType="int" resultType="int">
+        SELECT COUNT(id) from zan where body_type=3 AND body_id=#{id}
+    </select>
+
     <select id="searchActivtiy" parameterType="com.zyx.param.system.SearchParam" resultMap="queryActivity">
-        SELECT ac.title,ac.img_urls,ac.start_time,ac.create_time,ac.mask,ac.user_id
+        SELECT ac.id, ac.title,ac.img_urls,ac.start_time,ac.create_time,ac.mask,ac.user_id,
+        (SELECT COUNT(id) FROM comment c WHERE c.comment_id = ac.id and c.comment_type = 2) as msgCount
         FROM activity ac WHERE (ac.title LIKE CONCAT('%',#{character},'%')
         OR ac.desc_content LIKE CONCAT('%',#{character},'%'))
         AND ac.del != 1 AND ac.visible = 0 AND ac.mask = 0
@@ -123,8 +138,7 @@
     </select>
 
     <select id="searchLive" parameterType="com.zyx.param.system.SearchParam" resultMap="liveInfoVo">
-        SELECT a.id,a.title,a.lab,a.bgm_url,a.create_time,a.user_id,
-        (SELECT COUNT(id) FROM t_barrage c WHERE c.live_id = a.id) as msgCount
+        SELECT a.id,a.title,a.lab,a.bgm_url,a.create_time,a.user_id,a.state
         FROM t_live a WHERE a.title LIKE CONCAT('%',#{character},'%') and a.del = 0
         ORDER BY a.create_time desc
         <if test="pageNumber != null and pages != null">
@@ -138,8 +152,8 @@
     </select>
 
     <select id="searchConcern" parameterType="com.zyx.param.system.SearchParam" resultMap="concernInfoVo">
-        SELECT a.id,a.user_id,a.topic_content,a.create_time,
-        (SELECT count(id) FROM reply c WHERE c.reply_id = a.id AND c.reply_type = 3) as msgCount
+        SELECT a.id,a.user_id,a.topic_content,a.create_time,a.img_url,
+        (SELECT COUNT(id) FROM comment c WHERE c.comment_id = a.id and c.comment_type = 3) as msgCount
         FROM concern a WHERE a.topic_content LIKE CONCAT('%',#{character},'%')
         AND a.state != -1 AND a.state != -2
         ORDER BY a.create_time desc
@@ -154,9 +168,9 @@
     </select>
 
     <select id="searchPosts" parameterType="com.zyx.param.system.SearchParam" resultMap="searchPostsVo">
-        SELECT a.id,a.create_id,a.title,a.create_time,
-        (SELECT count(id) FROM reply c WHERE a.id = c.reply_id AND c.reply_type = 1) as msgCount
-        FROM circle_item a WHERE a.title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
+        SELECT a.id,a.create_id,a.title,a.create_time, b.title as circleName,
+        (SELECT count(id) FROM comment c WHERE a.id = c.comment_id AND c.comment_type = 1) as msgCount
+        FROM circle_item a LEFT JOIN circle b ON a.circle_id = b.id WHERE a.title LIKE CONCAT('%',#{character},'%') AND a.state != -1 AND a.state != -2
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
         </if>

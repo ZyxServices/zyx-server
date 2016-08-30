@@ -34,6 +34,21 @@ public class SearchActivityVo implements Serializable {
     private Long startTime;
 
     /**
+     *
+     */
+    private Long createTime;
+
+    /**
+     * 当前活动点赞数
+     */
+    private Integer zanCount;
+
+    /**
+     * 当前活动弹幕数
+     */
+    private Integer msgCount;
+
+    /**
      * 是否屏蔽(0正常 1屏蔽)
      */
     private Integer mask;
@@ -84,5 +99,29 @@ public class SearchActivityVo implements Serializable {
 
     public void setMask(Integer mask) {
         this.mask = mask;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getZanCount() {
+        return zanCount;
+    }
+
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
+
+    public Integer getMsgCount() {
+        return msgCount;
+    }
+
+    public void setMsgCount(Integer msgCount) {
+        this.msgCount = msgCount;
     }
 }

@@ -28,6 +28,13 @@ public class SearchCirleVo implements Serializable {
      */
     private boolean isAtten;
 
+    /**
+     * 发布圈子用户基础信息
+     */
+    private SearchAccountVo account;
+
+    private Long createTime;
+
     public Integer getId() {
         return id;
     }
@@ -60,4 +67,19 @@ public class SearchCirleVo implements Serializable {
         isAtten = atten;
     }
 
+    public SearchAccountVo getAccount() {
+        return account;
+    }
+
+    public void setAccount(SearchAccountVo account) {
+        this.account = account;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
 }
