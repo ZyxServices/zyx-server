@@ -3,13 +3,12 @@ package com.zyx.rpc.account.impl;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.param.UserAddressParam;
 import com.zyx.rpc.account.AccountAddressFacade;
+import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountAddressInfoService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.UserAddressVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -29,14 +28,15 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     private AccountAddressInfoService accountAddressInfoService;
 
     @Autowired
-    protected RedisTemplate<String, String> stringRedisTemplate;
+    private TokenFacade tokenFacade;
 
     @Override
     public Map<String, Object> insertAccountAddressInfo(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             int result = accountAddressInfoService.insertAccountAddressInfo(param);
             if (result == 0) {
@@ -53,8 +53,9 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> queryAccountAddressInfo(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             UserAddressVo userAddressVo = accountAddressInfoService.selectAddressByAddressId(param);
             if (userAddressVo == null) {
@@ -71,8 +72,9 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> queryAccountAddressList(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             List<UserAddressVo> result = accountAddressInfoService.selectAddressList(param);
             if (result == null || result.size() == 0) {
@@ -89,8 +91,9 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> deleteAccountAddressInfo(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             int result = accountAddressInfoService.deleteByAddressId(param);
             if (result == 0) {
@@ -107,8 +110,9 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> editReceiptAddress(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             int result = accountAddressInfoService.editReceiptAddress(param);
             if (result == 0) {
@@ -125,8 +129,9 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> setDefaultReceiptAddress(UserAddressParam param) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(param.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            if (map != null) {
+                return map;
             }
             int result = accountAddressInfoService.setDefaultReceiptAddress(param);
             if (result == 0) {
@@ -137,13 +142,5 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
             e.printStackTrace();
             return AccountConstants.MAP_500;
         }
-    }
-
-    private boolean isTokenFailure(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return true;
-        }
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        return StringUtils.isEmpty(phone);
     }
 }

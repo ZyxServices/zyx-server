@@ -1,5 +1,6 @@
 package com.zyx.rpc.attention.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.constants.attention.UserAttentionConstants;
 import com.zyx.entity.attention.UserAttention;
@@ -37,12 +38,11 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
 
     @Override
     public Map<String, Object> attentionFromAToB(AttentionParam attentionParam) {
-        String token = attentionParam.getToken();
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return UserAttentionConstants.MAP_TOKEN_FAILURE;
-        }
         try {
+            // 判断token是否失效
+            if (isTokenFailure(attentionParam.getToken())) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
             UserAttention _attention = buildUserAttention(attentionParam);
             attentionParam.setType(1);// 关注、粉丝
             if (userAttentionService.selectAttentionCount(attentionParam) > 0) {
@@ -61,13 +61,11 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
 
     @Override
     public Map<String, Object> myFSList(AttentionParam attentionParam) {
-        String token = attentionParam.getToken();
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return UserAttentionConstants.MAP_TOKEN_FAILURE;
-        }
-
         try {
+            // 判断token是否失效
+            if (isTokenFailure(attentionParam.getToken())) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
             List<AttentionVo> _list = userAttentionService.myFSList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
@@ -77,13 +75,11 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
 
     @Override
     public Map<String, Object> myGZList(AttentionParam attentionParam) {
-        String token = attentionParam.getToken();
-        // 判断token是否失效
-        if (isTokenFailure(token)) {
-            return UserAttentionConstants.MAP_TOKEN_FAILURE;
-        }
-
         try {
+            // 判断token是否失效
+            if (isTokenFailure(attentionParam.getToken())) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
             List<AttentionVo> _list = userAttentionService.myGZList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
@@ -94,12 +90,10 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
     @Override
     public Map<String, Object> myDKGZList(AttentionParam attentionParam) {
         try {
-            String token = attentionParam.getToken();
             // 判断token是否失效
-            if (isTokenFailure(token)) {
+            if (isTokenFailure(attentionParam.getToken())) {
                 return UserAttentionConstants.MAP_TOKEN_FAILURE;
             }
-
             List<AttentionVo> _list = userAttentionService.myDKGZList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
@@ -131,6 +125,9 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
     private boolean isTokenFailure(String token) {
         if (StringUtils.isEmpty(token)) {
             return true;
+        }
+        if (Constants.OTHER_TOKEN.equals(token)) {
+            return false;
         }
         String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
         return StringUtils.isEmpty(phone);

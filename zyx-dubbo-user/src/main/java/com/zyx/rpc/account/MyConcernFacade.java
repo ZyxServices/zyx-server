@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Created by wms on 2016/8/12.
+ * 我的动态相关接口
  *
  * @author WeiMinSheng
  * @version V1.0

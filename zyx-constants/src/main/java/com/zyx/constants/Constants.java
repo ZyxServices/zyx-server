@@ -305,5 +305,6 @@ public interface Constants {
 
     //******************自动生成动态 ebd*************************
 
+    String OTHER_TOKEN = "tiyujia2016";
 
 }

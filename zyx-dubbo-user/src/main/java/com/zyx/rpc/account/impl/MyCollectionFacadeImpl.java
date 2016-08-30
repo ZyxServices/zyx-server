@@ -1,15 +1,13 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.MyCollectionFacade;
+import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.collection.CollectionService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.collection.CollectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -29,14 +27,15 @@ public class MyCollectionFacadeImpl implements MyCollectionFacade {
     private CollectionService collectionService;
 
     @Autowired
-    protected RedisTemplate<String, String> stringRedisTemplate;
+    private TokenFacade tokenFacade;
 
     @Override
     public Map<String, Object> myList(String token, Integer accountId) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, accountId);
+            if (map != null) {
+                return map;
             }
             List<CollectionVo> _list = collectionService.myCollectionList(accountId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
@@ -46,11 +45,4 @@ public class MyCollectionFacadeImpl implements MyCollectionFacade {
         }
     }
 
-    private boolean isTokenFailure(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return true;
-        }
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        return StringUtils.isEmpty(phone);
-    }
 }
