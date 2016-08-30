@@ -23,7 +23,7 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @         MyCircleFacadeImpl.java
+ * @ MyCircleFacadeImpl.java
  */
 @Service("myCircleFacade")
 public class MyCircleFacadeImpl implements MyCircleFacade {
@@ -37,10 +37,10 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     @Override
     public Map<String, Object> myCircleList(String token, Integer accountId) {
         try {
-
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, accountId);
+            if (map != null) {
+                return map;
             }
             List<CircleListVo> _list_create = new ArrayList<>();
             try {
@@ -68,8 +68,9 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     public Map<String, Object> myCreateList(String token, Integer createId) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, createId);
+            if (map != null) {
+                return map;
             }
             List<CircleListVo> _list = circleService.myCreateList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
@@ -82,8 +83,9 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
     public Map<String, Object> myConcernList(String token, Integer createId) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(token)) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(token, createId);
+            if (map != null) {
+                return map;
             }
             List<CircleListVo> _list = circleService.myConcernList(createId);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
