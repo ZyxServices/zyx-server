@@ -27,9 +27,6 @@ public class SearchServiceImpl implements SearchService {
             searchParam.setPages((searchParam.getPages() - 1) * searchParam.getPageNumber());
             switch (searchParam.getModel()) {
                 case 1: // 用户
-                    if (searchParam.getUserId() == null) {
-                        return Constants.MAP_PARAM_MISS;
-                    }
                     List<SearchAccountVo> searchAccountVos = searchMapper.searchAccount(searchParam);
                     if (searchAccountVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchAccountVos);
@@ -37,9 +34,6 @@ public class SearchServiceImpl implements SearchService {
                         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
                     }
                 case 2: //圈子
-                    if (searchParam.getUserId() == null) {
-                        return Constants.MAP_PARAM_MISS;
-                    }
                     List<SearchCirleVo> searchCirleVos = searchMapper.searchCirle(searchParam);
                     if (searchCirleVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchCirleVos);

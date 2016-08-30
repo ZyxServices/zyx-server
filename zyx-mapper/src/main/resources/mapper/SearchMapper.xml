@@ -113,7 +113,7 @@
     <select id="searchAccount" parameterType="com.zyx.param.system.SearchParam" resultMap="queryAccount">
         SELECT u.id,u.nickname,u.avatar,u.create_time, u.authenticate,
         NOT ISNULL(a.id) as is_atten
-        FROM user u LEFT JOIN USER_ATTENTION a ON u.id = a.to_user_id and a.from_user_id = #{userId} AND a.rel_type = 1
+        FROM user u LEFT JOIN USER_ATTENTION a ON u.id = a.to_user_id AND a.rel_type = 1 and a.from_user_id = #{userId}
         where u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0
         ORDER BY u.create_time desc
         <if test="pageNumber != null and pages != null">
