@@ -1,4 +1,4 @@
-package com.zyx.service.pg;
+package com.zyx.service.system;
 
 import com.zyx.entity.system.Reply;
 import com.zyx.service.BaseService;
@@ -12,6 +12,6 @@ import java.util.Map;
  * Create by XiaoWei on 2016/6/27
  */
 public interface ReplyService extends BaseService<Reply> {
-    Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content);
+    Map<String, Object> addReply(Integer replyType, Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent, Integer replyState);
 
 }
