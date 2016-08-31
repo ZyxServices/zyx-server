@@ -91,11 +91,11 @@
     </select>
 
     <select id="myListCount" parameterType="int" resultType="int">
-        SELECT count(id) FROM concern WHERE user_id = #{accountId}
+        SELECT count(id) FROM concern WHERE user_id = #{accountId} AND  state = 0
     </select>
 
     <select id="myConcernList" parameterType="int" resultMap="ConcernMyMap">
-        SELECT * FROM concern WHERE concern.user_id=#{accountId} ORDER BY concern.create_time DESC
+        SELECT * FROM concern WHERE concern.user_id=#{accountId} AND state = 0 ORDER BY concern.create_time DESC
     </select>
 
     <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMap">
@@ -103,10 +103,11 @@
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
         </foreach>
+        AND state = 0
     </select>
 
     <select id="starConcern" resultMap="ConcernMyMap">
-        SELECT* FROM concern WHERE concern.type=3 ORDER BY concern.create_time DESC LIMIT 0,#{max}
+        SELECT* FROM concern WHERE concern.type=3 AND state = 0 ORDER BY concern.create_time DESC LIMIT 0,#{max}
     </select>
 
     <select id="exitConcernSelect" parameterType="java.util.Map" resultType="int">
@@ -114,7 +115,11 @@
     </select>
 
     <select id="getOne" resultMap="ConcernMyMap">
-        SELECT * FROM concern WHERE id=#{id}
+        SELECT * FROM concern WHERE id=#{id} AND state = 0
     </select>
+
+    <update id="delConcern">
+        UPDATE concern SET state=-1 WHERE id=#{id}
+    </update>
 
 </mapper>

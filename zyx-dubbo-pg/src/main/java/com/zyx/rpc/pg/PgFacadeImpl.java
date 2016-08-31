@@ -29,8 +29,6 @@ public class PgFacadeImpl implements PgFacade {
     @Autowired
     private CircleItemService circleItemService;
     @Autowired
-    private ReplyService replyService;
-    @Autowired
     private CircleTypeService circleTypeService;
 
     @Override
@@ -99,9 +97,10 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content) {
-        return replyService.addReply(reply_type, reply_id, account_id, content);
+    public Map<String, Object> delCern(Integer id, Integer loginUserId) {
+        return concrenService.delCern(id, loginUserId);
     }
+
 
     @Override
     public List<ZanCountVo> countZanByBodyId(Integer type, List<Integer> bodyIds) {
@@ -181,6 +180,11 @@ public class PgFacadeImpl implements PgFacade {
     @Override
     public Map<String, Object> getCircleTypeList() {
         return circleTypeService.getList();
+    }
+
+    @Override
+    public Map<String, Object> delMyConcern(Integer circleId, Integer accountId) {
+        return myConcernService.delMyConcern(circleId, accountId);
     }
 
 }

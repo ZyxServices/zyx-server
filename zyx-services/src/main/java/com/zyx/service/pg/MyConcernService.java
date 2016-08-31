@@ -15,4 +15,6 @@ public interface MyConcernService extends BaseService<MyConcern> {
     Map<String, Object> addMyConcern(Integer concernId, Integer concern_type, Integer accountId);
 
     Map<String, Object> findByParams(Integer concernId, Integer concernType);
+
+    Map<String, Object> delMyConcern(Integer circleId, Integer accountId);
 }

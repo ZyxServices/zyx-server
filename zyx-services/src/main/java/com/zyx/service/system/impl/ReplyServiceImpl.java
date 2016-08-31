@@ -19,7 +19,7 @@ import com.zyx.service.BaseServiceImpl;
  * @package com.zyx.service.pg.impl
  * Create by XiaoWei on 2016/6/27
  */
-@Service
+@Service("replyService")
 public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplyService {
     public ReplyServiceImpl() {
         super(Reply.class);
@@ -52,7 +52,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
             reply.setReplyContent(replyContent);
             reply.setCreateTime(new Date().getTime());
             reply.setReplyState(replyState);
-            save(reply);
+            mapper.insert(reply);
 //            resultMap.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            resultMap.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return resultMap;

@@ -13,6 +13,8 @@ import java.util.Map;
 public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible);
 
+    Map<String,Object> delCern(Integer id,Integer loginUserId);
+
     Map<String, Object> starRandom(Integer type, Integer n);
 
     Map<String, Object> getMyFollowList(Integer loginUserId);

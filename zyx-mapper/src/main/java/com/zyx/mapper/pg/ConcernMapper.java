@@ -33,4 +33,6 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     MyFollowVo getOne(@Param("id") Integer concernId);
 
+    Integer delConcern(@Param("id") Integer id);
+
 }

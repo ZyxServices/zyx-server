@@ -21,4 +21,6 @@ public interface MyConcernMapper extends BaseMapper<MyConcern> {
     MyConcern existConcern(@Param(value = "accountId") Integer accountId, @Param(value = "concernId") Integer concernId, @Param(value = "concernType") Integer concernType);
 
     List<MyConcernVo> findByParams(@Param("concernId") Integer concernId, @Param("concernType") Integer concernType);
+
+    Integer delMyConcern(@Param("id") Integer concernId);
 }
