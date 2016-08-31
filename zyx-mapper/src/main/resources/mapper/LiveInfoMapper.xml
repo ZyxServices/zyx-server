@@ -10,8 +10,8 @@
 		<id column="creat_time" property="createTime" />
 		<id column="auth" property="auth" />
 		<id column="type" property="type" />
-		<id column="start" property="start" />
-		<id column="end" property="end" />
+		<id column="start_time" property="startTime" />
+		<id column="end_time" property="endTime" />
 		<id column="title" property="title" />
 		<id column="lab" property="lab" />
 		<id column="bgm_url" property="bgmUrl" />
@@ -37,7 +37,7 @@
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"
 		resultMap="LiveInfoVo">
-		select id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,group_id,state
+		select id,create_time,auth,type,start_time,end_time,user_id,title,lab,bgm_url,vedio_url,group_id,state
 		from t_live
 		where
 		1=1
