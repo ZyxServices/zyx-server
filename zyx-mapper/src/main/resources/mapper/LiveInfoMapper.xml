@@ -70,4 +70,9 @@
 		AND
 		del = 0
 	</select>
+	<insert id="saveLiveInfo" parameterType="com.zyx.entity.live.LiveInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		 t_live(create_time,auth,type,start_time,end_time,user_id,title,lab,bgm_url,vedio_url,group_id,state,del)
+		 VALUES (#{createTime},#{auth},#{type},#{startTime},#{endTime},#{userId},#{title},#{lab},#{bgmUrl},#{vedioUrl},#{groupId},#{state},#{del})
+	</insert>
 </mapper>
