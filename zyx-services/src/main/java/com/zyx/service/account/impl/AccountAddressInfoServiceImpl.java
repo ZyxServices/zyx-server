@@ -8,11 +8,13 @@ import com.zyx.service.account.AccountAddressInfoService;
 import com.zyx.vo.account.UserAddressVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by WeiMinSheng on 2016/6/21.
+ * Created by wms on 2016/6/21.
  *
  * @author WeiMinSheng
  * @version V1.0

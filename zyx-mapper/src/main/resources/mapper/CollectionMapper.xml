@@ -116,7 +116,7 @@
 	</select>
     <!--直播-->
     <select id="queryLiveMsgCount" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM reply WHERE reply_type = 1 AND reply_id=#{id}
+        SELECT COUNT(id) FROM comment WHERE comment_type = 1 AND comment_id=#{id}
     </select>
     <select id="queryLiveZan" parameterType="int" resultType="int">
         SELECT COUNT(id) from zan where body_type=4 AND body_id=#{id}
