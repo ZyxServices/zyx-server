@@ -14,8 +14,8 @@ public class LiveInfoVo implements Serializable {
 	private Integer id;
 	private Integer auth;
 	private Integer type;
-	private Long start;
-	private Long end;
+	private Long startTime;
+	private Long endTime;
 	private UserIconVo userIconVo;
 	private String title;
 	private Integer lab;
@@ -48,13 +48,6 @@ public class LiveInfoVo implements Serializable {
 		this.type = type;
 	}
 
-	public void setStart(Long start) {
-		this.start = start;
-	}
-
-	public void setEnd(Long end) {
-		this.end = end;
-	}
 
 	public void setUserIconVo(UserIconVo userIconVo) {
 		this.userIconVo = userIconVo;
@@ -90,14 +83,6 @@ public class LiveInfoVo implements Serializable {
 
 	public Integer getType() {
 		return type;
-	}
-
-	public Long getStart() {
-		return start;
-	}
-
-	public Long getEnd() {
-		return end;
 	}
 
 	public UserIconVo getUserIconVo() {
@@ -153,5 +138,21 @@ public class LiveInfoVo implements Serializable {
 
 	public void setMsgCount(Integer msgCount) {
 		this.msgCount = msgCount;
+	}
+
+	public Long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
+
+	public Long getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Long endTime) {
+		this.endTime = endTime;
 	}
 }
