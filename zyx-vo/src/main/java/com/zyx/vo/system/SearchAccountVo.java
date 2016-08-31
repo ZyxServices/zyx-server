@@ -27,6 +27,8 @@ public class SearchAccountVo implements Serializable {
 
     private SearchUserAuthVo auth;
 
+    private Long createTime;
+
     public Integer getId() {
         return id;
     }
@@ -73,5 +75,13 @@ public class SearchAccountVo implements Serializable {
 
     public void setAuthenticate(Integer authenticate) {
         this.authenticate = authenticate;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }

@@ -33,6 +33,13 @@ public class SearchConcernVo implements Serializable {
      */
     private Integer msgCount;
 
+    /**
+     * 动态图片
+     */
+    private String imageUrl;
+
+    private Long createTime;
+
     public Integer getId() {
         return id;
     }
@@ -74,5 +81,21 @@ public class SearchConcernVo implements Serializable {
 
     public void setMsgCount(Integer msgCount) {
         this.msgCount = msgCount;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }

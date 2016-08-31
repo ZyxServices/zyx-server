@@ -13,7 +13,15 @@ public class SearchPostsVo implements Serializable {
 
     private String title;
 
+    private String content;
+
+    private Long createTime;
+
     private SearchAccountVo account;
+
+    private String circleId;
+
+    private String circleName;
 
     private Integer zanCount;
 
@@ -59,5 +67,37 @@ public class SearchPostsVo implements Serializable {
 
     public void setMsgCount(Integer msgCount) {
         this.msgCount = msgCount;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCircleName() {
+        return circleName;
+    }
+
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
+
+    public String getCircleId() {
+        return circleId;
+    }
+
+    public void setCircleId(String circleId) {
+        this.circleId = circleId;
     }
 }

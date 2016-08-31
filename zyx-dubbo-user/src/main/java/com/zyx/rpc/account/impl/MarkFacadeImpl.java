@@ -5,14 +5,13 @@ import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserMarkInfo;
 import com.zyx.entity.account.param.UserMarkParam;
 import com.zyx.rpc.account.MarkFacade;
+import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.UserMarkService;
 import com.zyx.utils.DateUtils;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.MarkInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -36,14 +35,15 @@ public class MarkFacadeImpl implements MarkFacade {
     private UserMarkService userMarkService;
 
     @Autowired
-    protected RedisTemplate<String, String> stringRedisTemplate;
+    private TokenFacade tokenFacade;
 
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(userMarkParam.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(userMarkParam.getToken(), userMarkParam.getUserId());
+            if (map != null) {
+                return map;
             }
             // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
@@ -60,8 +60,9 @@ public class MarkFacadeImpl implements MarkFacade {
     public Map<String, Object> querySign(UserMarkParam userMarkParam) {
         try {
             // 判断token是否失效
-            if (isTokenFailure(userMarkParam.getToken())) {
-                return AccountConstants.MAP_TOKEN_FAILURE;
+            Map<String, Object> map = tokenFacade.validateToken(userMarkParam.getToken(), userMarkParam.getUserId());
+            if (map != null) {
+                return map;
             }
             // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
@@ -134,7 +135,7 @@ public class MarkFacadeImpl implements MarkFacade {
      * @throws IOException
      */
     private String getMarkHistory(Long t) throws IOException {
-        Map<Integer, int[]> map = new HashMap<Integer, int[]>();
+        Map<Integer, int[]> map = new HashMap<>();
         int[] days = new int[400];
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(t);
@@ -167,11 +168,4 @@ public class MarkFacadeImpl implements MarkFacade {
         return JSON.json(map);
     }
 
-    private boolean isTokenFailure(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return true;
-        }
-        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
-        return StringUtils.isEmpty(phone);
-    }
 }

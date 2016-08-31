@@ -28,15 +28,12 @@ public class SearchLiveVo implements Serializable {
      */
     private String bgmUrl;
 
-    /**
-     * 当前直播的点赞数量
-     */
-    private Integer zanCount;
+    private Long createTime;
 
     /**
-     * 当前直播消息数量
+     * 0-未开始，1-正在直播，2-直播结束
      */
-    private Integer msgCount;
+    private Integer state;
 
     public Integer getId() {
         return id;
@@ -70,19 +67,19 @@ public class SearchLiveVo implements Serializable {
         this.bgmUrl = bgmUrl;
     }
 
-    public Integer getZanCount() {
-        return zanCount;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setZanCount(Integer zanCount) {
-        this.zanCount = zanCount;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getMsgCount() {
-        return msgCount;
+    public Integer getState() {
+        return state;
     }
 
-    public void setMsgCount(Integer msgCount) {
-        this.msgCount = msgCount;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

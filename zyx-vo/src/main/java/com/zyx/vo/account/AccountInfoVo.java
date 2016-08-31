@@ -1,16 +1,16 @@
 package com.zyx.vo.account;
 
-import com.zyx.vo.BaseVo;
+import java.io.Serializable;
 
 /**
- * Created by WeiMinSheng on 2016/6/14.
+ * Created by wms on 2016/6/14.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
  * @title AccountInfoVo.java
  */
-public class AccountInfoVo extends BaseVo {
+public class AccountInfoVo implements Serializable {
     /**
      *
      */
@@ -137,7 +137,7 @@ public class AccountInfoVo extends BaseVo {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     @Override
     public String toString() {
         return "AccountInfoVo{" +
