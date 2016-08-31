@@ -6,6 +6,7 @@ import com.zyx.entity.system.Devaluation;
 import com.zyx.rpc.system.DevaFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.activity.ActivityService;
+import com.zyx.service.pg.ConcernService;
 import com.zyx.service.system.DevaService;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.pg.CircleItemService;
@@ -43,7 +44,7 @@ public class DevaFacadeImpl implements DevaFacade {
     @Autowired
     CircleItemService circleItemService;
     @Autowired
-    MyConcernService myConcernService;
+    ConcernService concernService;
     @Override
     public List getDevaByModel(Integer area,Integer model) {
         //// TODO: 2016/8/3 判定Model范围
@@ -109,7 +110,7 @@ public class DevaFacadeImpl implements DevaFacade {
             case Constants.MODEL_CIRCLE_ITEM:
                 return circleItemService.selectByIds(ids);
             case Constants.MODEL_CONCERN:
-                return myConcernService.selectByIds(ids);
+                return concernService.selectByIds(ids);
 //            case Constants.MODEL_SHOP:
 //                break;
             case Constants.MODEL_USER:

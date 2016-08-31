@@ -269,10 +269,27 @@ public interface Constants {
      */
     int MODEL_SYSTEM = 7;
 
+    /**
+     * 推荐展示位置：首页
+     */
+    int AREA_HOME_PAGE=1;
+
+    /**
+     * 推荐展示位置：看台
+     */
+    int AREA_STAND=2;
+    /**
+     * 推荐展示位置：精选圈子
+     */
+    int AREA_SELECTED=3;
+
+
+
     Map<Integer, String> devaNames = new HashMap() {{
         put(1, "activityDevas");
         put(2, "liveDevas");
         put(3, "cirleDevas");
+        put(4, "cirleItemDevas");
         put(5, "concerDevas");
         put(6, "userDevas");
     }};
