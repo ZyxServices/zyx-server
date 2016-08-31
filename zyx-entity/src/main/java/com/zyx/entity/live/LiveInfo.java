@@ -24,10 +24,10 @@ public class LiveInfo extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;
-    @Column
+    @Column(name = "start")
     @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long start;
-    @Column
+    @Column(name = "end")
     @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long end;
     @Column
