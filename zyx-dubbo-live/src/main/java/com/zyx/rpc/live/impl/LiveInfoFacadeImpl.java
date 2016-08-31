@@ -46,7 +46,6 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         LiveInfo liveInfo = new LiveInfo();
         liveInfo.setId(id);
         liveInfo.setDel(0);
-        liveInfo.setState(0);
         List<LiveInfo> liveInfos = liveInfoService.select(liveInfo);
         return liveInfos!=null&&liveInfos.size()==1?liveInfos.get(0):null;
     }
