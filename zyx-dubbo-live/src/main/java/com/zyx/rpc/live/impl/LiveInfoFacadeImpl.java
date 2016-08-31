@@ -31,7 +31,10 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         long now = System.currentTimeMillis();
         liveInfo.setState((null!=liveInfo.getStart()&&liveInfo.getStart()<now)?1:0);
         liveInfo.setDel(0);
+        liveInfo.setStart(3333333L);
+        System.out.println("before:"+liveInfo.getStart());
         liveInfoService.save(liveInfo);
+        System.out.println("after:"+liveInfo.getStart());
         return liveInfo.getId();
     }
 
