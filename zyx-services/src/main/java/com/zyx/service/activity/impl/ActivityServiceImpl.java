@@ -87,8 +87,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 liveInfo.setCreateTime(System.currentTimeMillis());
                 liveInfo.setAuth(1);
                 liveInfo.setType(1);
-                liveInfo.setStart(startTime);
-                liveInfo.setEnd(endTime);
+                liveInfo.setStartTime(startTime);
+                liveInfo.setEndTime(endTime);
                 liveInfo.setUserId(createId);
                 liveInfo.setTitle(title);
                 liveInfo.setLab(1);
