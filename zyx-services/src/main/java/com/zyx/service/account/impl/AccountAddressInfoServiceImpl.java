@@ -70,7 +70,7 @@ public class AccountAddressInfoServiceImpl extends BaseServiceImpl<UserAddressIn
     }
 
     @Override
-    public int setDefaultReceiptAddress(UserAddressParam userAddressParam) {
+    public int setDefaultReceiptAddress(UserAddressParam userAddressParam) throws Exception {
         int result = userAddressMapper.setDefaultReceiptAddress(userAddressParam);
         if (result == 1) {
             userAddressMapper.cancelDefaultReceiptAddress(userAddressParam);

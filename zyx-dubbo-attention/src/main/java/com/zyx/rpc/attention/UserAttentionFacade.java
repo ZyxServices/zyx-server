@@ -16,6 +16,14 @@ public interface UserAttentionFacade {
 
     Map<String, Object> attentionFromAToB(AttentionParam attentionParam);
 
+    /**
+     * 取消关注，取消拉黑
+     *
+     * @param attentionParam
+     * @return
+     */
+    Map<String, Object> unAttentionFromAToB(AttentionParam attentionParam);
+
     Map<String, Object> myFSList(AttentionParam attentionParam);
 
     Map<String, Object> myGZList(AttentionParam attentionParam);

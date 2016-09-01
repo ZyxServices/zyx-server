@@ -29,4 +29,10 @@ public interface UserAttentionConstants extends Constants {
      */
     int ATTENTION_70003 = 70003;
     String ATTENTION_70003_MSG = "重复关注";
+
+    /**
+     * 取消关注失败
+     */
+    int ATTENTION_70004 = 70004;
+    String ATTENTION_70004_MSG = "取消关注对象失败";
 }

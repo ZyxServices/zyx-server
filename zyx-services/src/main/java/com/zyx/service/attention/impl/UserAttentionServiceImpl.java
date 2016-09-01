@@ -49,4 +49,9 @@ public class UserAttentionServiceImpl extends BaseServiceImpl<UserAttention> imp
     public List<AttentionVo> myDKGZList(AttentionParam attentionParam) {
         return userAttentionMapper.myDKGZList(attentionParam);
     }
+
+    @Override
+    public int deleteAttention(AttentionParam attentionParam) {
+        return userAttentionMapper.deleteAttention(attentionParam);
+    }
 }
