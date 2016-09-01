@@ -51,22 +51,22 @@ public class DevaFacadeImpl implements DevaFacade {
         if (model == null) {
             return null;
         }
-//        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
-//        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
-//            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
-//            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
-//            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
+        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
+        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
+            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
+            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
+            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
                 return queryAndRefreshFromDB(area,model);//刷新流程
-//            } else {
-//                devas = queryModelDevas(area,model,innerDevaIds);
-//                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
-//                    return queryAndRefreshFromDB(area,model);//刷新流程
-//                }
-//                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
-//                return devas;
-//            }
-//        }
-//        return devas;
+            } else {
+                devas = queryModelDevas(area,model,innerDevaIds);
+                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
+                    return queryAndRefreshFromDB(area,model);//刷新流程
+                }
+                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+                return devas;
+            }
+        }
+        return devas;
     }
 
     /**
