@@ -51,22 +51,22 @@ public class DevaFacadeImpl implements DevaFacade {
         if (model == null) {
             return null;
         }
-        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
-        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
-            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
-            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
-            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
+//        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
+//        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
+//            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
+//            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
+//            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
                 return queryAndRefreshFromDB(area,model);//刷新流程
-            } else {
-                devas = queryModelDevas(area,model,innerDevaIds);
-                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
-                    return queryAndRefreshFromDB(area,model);//刷新流程
-                }
-                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
-                return devas;
-            }
-        }
-        return devas;
+//            } else {
+//                devas = queryModelDevas(area,model,innerDevaIds);
+//                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
+//                    return queryAndRefreshFromDB(area,model);//刷新流程
+//                }
+//                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+//                return devas;
+//            }
+//        }
+//        return devas;
     }
 
     /**
@@ -86,9 +86,9 @@ public class DevaFacadeImpl implements DevaFacade {
             return null;
         }
         //刷新Redis
-        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
-        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
-        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+//        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
+//        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
+//        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
         return devas;
     }
 
@@ -106,9 +106,9 @@ public class DevaFacadeImpl implements DevaFacade {
             case Constants.MODEL_LIVE:
                 return liveInfoService.selectByIds(ids);
             case Constants.MODEL_CIRCLE:
-                return circleService.selectByIds(ids);
+                return circleService.getDevaCircle(ids);
             case Constants.MODEL_CIRCLE_ITEM:
-                return circleItemService.selectByIds(ids);
+                return circleItemService.getCircleItemByIds(ids);
             case Constants.MODEL_CONCERN:
                 return concernService.selectByIds(ids);
 //            case Constants.MODEL_SHOP:

@@ -3,7 +3,7 @@ package com.zyx.service.pg;
 import com.zyx.entity.pg.Circle;
 import com.zyx.vo.pg.CircleListVo;
 import com.zyx.service.BaseService;
-
+import com.zyx.vo.pg.DevaCircleVo;
 import java.util.List;
 import java.util.Map;
 
@@ -96,4 +96,6 @@ public interface CircleService extends BaseService<Circle> {
      * @return
      */
     Map<String, Object> jxCircle(Integer max);
+
+    List<DevaCircleVo> getDevaCircle(List<Integer> ids);
 }

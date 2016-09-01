@@ -6,6 +6,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.MyConcern;
 import com.zyx.vo.pg.CircleListVo;
+import com.zyx.vo.pg.DevaCircleVo;
 import com.zyx.vo.pg.JxCircleVo;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.mapper.pg.CircleMapper;
@@ -302,6 +303,11 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public List<DevaCircleVo> getDevaCircle(List<Integer> ids) {
+        return circleMapper.selectDevaCircle(ids);
     }
 
 }
