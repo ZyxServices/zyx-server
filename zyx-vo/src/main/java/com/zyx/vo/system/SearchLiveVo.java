@@ -31,6 +31,11 @@ public class SearchLiveVo implements Serializable {
     private Long createTime;
 
     /**
+     * 环信ID
+     */
+    private Long number;
+
+    /**
      * 0-未开始，1-正在直播，2-直播结束
      */
     private Integer state;
@@ -81,5 +86,13 @@ public class SearchLiveVo implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 }

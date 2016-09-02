@@ -52,6 +52,7 @@
         <result column="bgm_url" property="bgmUrl"/>
         <result column="create_time" property="createTime"/>
         <result column="state" property="state"/>
+        <result column="group_id" property="number"/>
         <association property="account" column="user_id"
                      select="searchUserAndAuth"></association>
     </resultMap>
@@ -139,7 +140,7 @@
     </select>
 
     <select id="searchLive" parameterType="com.zyx.param.system.SearchParam" resultMap="liveInfoVo">
-        SELECT a.id,a.title,a.lab,a.bgm_url,a.create_time,a.user_id,a.state
+        SELECT a.id,a.title,a.lab,a.bgm_url,a.create_time,a.user_id,a.state,a.group_id
         FROM t_live a WHERE a.title LIKE CONCAT('%',#{character},'%') and a.del = 0
         ORDER BY a.create_time desc
         <if test="pageNumber != null and pages != null">
