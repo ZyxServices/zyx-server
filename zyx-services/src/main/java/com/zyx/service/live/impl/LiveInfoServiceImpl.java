@@ -5,6 +5,7 @@ import java.util.List;
 import com.zyx.entity.live.dto.LiveInfoDto;
 import com.zyx.param.live.LiveInfoParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zyx.entity.live.LiveInfo;
@@ -48,4 +49,6 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		liveInfo.setDel(-1);
 		updateNotNull(liveInfo);
 	}
+
+
 }
