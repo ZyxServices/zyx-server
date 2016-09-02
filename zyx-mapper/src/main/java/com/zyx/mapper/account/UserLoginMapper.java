@@ -1,7 +1,7 @@
 package com.zyx.mapper.account;
 
 import com.zyx.entity.account.UserLoginInfo;
-import com.zyx.entity.account.UserLoginParam;
+import com.zyx.param.account.UserLoginParam;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.AccountInfoVo;
 

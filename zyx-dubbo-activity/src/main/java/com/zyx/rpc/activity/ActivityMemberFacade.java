@@ -1,7 +1,7 @@
 package com.zyx.rpc.activity;
 
-import com.zyx.entity.activity.parm.MemberInfoParm;
-import com.zyx.entity.activity.parm.QueryMemberParm;
+import com.zyx.param.activity.MemberInfoParm;
+import com.zyx.param.activity.QueryMemberParm;
 
 import java.util.Map;
 

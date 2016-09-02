@@ -29,7 +29,7 @@
 
 
 
-    <select id="queryActivityMemberInfo" parameterType="com.zyx.entity.activity.parm.QueryMemberParm"
+    <select id="queryActivityMemberInfo" parameterType="com.zyx.param.activity.QueryMemberParm"
             resultMap="activityMember">
         select * from activity_member where 1=1 AND del != 1
         <if test="userId != null">
@@ -49,7 +49,7 @@
         UPDATE activity_member SET examine_type = true where id = #{id}
     </update>
 
-    <delete id="delActivityMember" parameterType="com.zyx.entity.activity.parm.MemberInfoParm">
+    <delete id="delActivityMember" parameterType="com.zyx.param.activity.MemberInfoParm">
         DELETE FROM activity_member WHERE user_id = #{userId} AND activity_id = #{activityId}
     </delete>
 </mapper>

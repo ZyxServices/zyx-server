@@ -1,7 +1,7 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.entity.account.param.UserAddressParam;
+import com.zyx.param.account.UserAddressParam;
 import com.zyx.rpc.account.AccountAddressFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountAddressInfoService;

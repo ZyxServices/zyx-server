@@ -1,7 +1,7 @@
 package com.zyx.service.account;
 
 import com.zyx.entity.account.UserAddressInfo;
-import com.zyx.entity.account.param.UserAddressParam;
+import com.zyx.param.account.UserAddressParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.account.UserAddressVo;
 

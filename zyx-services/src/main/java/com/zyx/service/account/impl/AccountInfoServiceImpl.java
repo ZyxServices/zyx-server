@@ -1,8 +1,8 @@
 package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.AccountInfo;
-import com.zyx.entity.account.UserLoginParam;
-import com.zyx.entity.account.param.AccountInfoParam;
+import com.zyx.param.account.UserLoginParam;
+import com.zyx.param.account.AccountInfoParam;
 import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;

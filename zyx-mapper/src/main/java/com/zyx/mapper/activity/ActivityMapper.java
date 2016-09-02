@@ -1,8 +1,8 @@
 package com.zyx.mapper.activity;
 
 import com.zyx.entity.activity.Activity;
-import com.zyx.entity.activity.parm.QueryActivityParm;
-import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.param.activity.QueryActivityParm;
+import com.zyx.param.activity.QueryHistoryParm;
 import com.zyx.vo.activity.ActivityVo;
 import com.zyx.vo.activity.MemberTemplate;
 import com.zyx.mapper.BaseMapper;

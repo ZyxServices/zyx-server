@@ -1,8 +1,8 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.entity.account.UserLoginParam;
-import com.zyx.entity.account.param.AccountInfoParam;
+import com.zyx.param.account.UserLoginParam;
+import com.zyx.param.account.AccountInfoParam;
 import com.zyx.rpc.account.AccountInfoFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountInfoService;
