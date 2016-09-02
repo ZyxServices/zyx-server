@@ -24,7 +24,7 @@ public interface AccountAddressInfoService extends BaseService<UserAddressInfo> 
 
     int deleteByAddressId(UserAddressParam userAddressParam);
 
-    int setDefaultReceiptAddress(UserAddressParam userAddressParam);
+    int setDefaultReceiptAddress(UserAddressParam userAddressParam) throws Exception;
 
     int editReceiptAddress(UserAddressParam userAddressParam);
 }

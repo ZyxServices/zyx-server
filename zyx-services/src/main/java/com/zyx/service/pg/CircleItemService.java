@@ -2,7 +2,9 @@ package com.zyx.service.pg;
 
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.service.BaseService;
+import com.zyx.vo.pg.CircleItemVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +29,6 @@ public interface CircleItemService extends BaseService<CircleItem> {
     Map<String,Object> getOneCircleItem(Integer circleItemId);
 
     Map<String,Object> getTjCircleItem(Integer start,Integer pageSize);
+
+    List<CircleItemVo> getCircleItemByIds(List<Integer> ids);
 }

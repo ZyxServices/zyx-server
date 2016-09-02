@@ -5,15 +5,28 @@
     <resultMap id="BaseBarrage" type="com.zyx.entity.live.Barrage">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <result column="live_id" property="userId" jdbcType="BIGINT"/>
+        <result column="live_id" property="liveId" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="BarrageVo" type="com.zyx.vo.live.BarrageVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="live_id" property="liveId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <association property="zanCount" column="id" select="zanSelect"/>
+    </resultMap>
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT count(id) from zan where body_type=6 AND body_id=#{circle_item_id}
+    </select>
 
     <select id="selectList" parameterType="com.zyx.param.live.BarrageParam"
-            resultMap="BaseBarrage">
+            resultMap="BarrageVo">
         select *
         from t_barrage
         WHERE

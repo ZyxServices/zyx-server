@@ -1,52 +1,81 @@
 package com.zyx.vo.live;
 
-import com.zyx.vo.BaseVo;
+import java.io.Serializable;
 
 /**
- * 
- * @title Barrage.java
- * @package com.zyx.entity.live
- * @description 弹幕内容
- * @author MrDeng   
- * @update 2016年6月22日 上午11:13:45
- * @version V1.0  
- * Copyright (c)2012 chantsoft-版权所有
+ * Created by MrDeng on 2016/9/1.
  */
-public class BarrageVo extends BaseVo{
+public class BarrageVo implements Serializable {
+    private Integer id;
+    private Long createTime;
+    private Integer liveId;
+    private Integer userId;
+    private String nickName;
+    private String avatar;
+    private String content;
+    private Integer zanCount;
 
-    
-	 /**serialVersionUID TODO*/ 
-	
-	private static final long serialVersionUID = 1L;
+    public Integer getId() {
+        return id;
+    }
 
-	private Integer liveId;
-    private Long createTimeLower;
-    private Long createTimeUpper;
-	public Integer getLiveId() {
-		return liveId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setLiveId(Integer liveId) {
-		this.liveId = liveId;
-	}
+    public Long getCreateTime() {
+        return createTime;
+    }
 
-	public Long getCreateTimeLower() {
-		return createTimeLower;
-	}
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setCreateTimeLower(Long createTimeLower) {
-		this.createTimeLower = createTimeLower;
-	}
+    public Integer getLiveId() {
+        return liveId;
+    }
 
-	public Long getCreateTimeUpper() {
-		return createTimeUpper;
-	}
+    public void setLiveId(Integer liveId) {
+        this.liveId = liveId;
+    }
 
-	public void setCreateTimeUpper(Long createTimeUpper) {
-		this.createTimeUpper = createTimeUpper;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-    
+    public String getNickName() {
+        return nickName;
+    }
 
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Integer getZanCount() {
+        return zanCount;
+    }
+
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
 }

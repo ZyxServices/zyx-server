@@ -189,4 +189,9 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             return PgConstants.MAP_500;
         }
     }
+
+    @Override
+    public List<CircleItemVo> getCircleItemByIds(List<Integer> ids) {
+        return circleItemMapper.selectCircleItemByIds(ids);
+    }
 }

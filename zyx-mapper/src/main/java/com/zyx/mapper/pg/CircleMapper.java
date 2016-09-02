@@ -2,6 +2,7 @@ package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Circle;
 import com.zyx.vo.pg.CircleListVo;
+import com.zyx.vo.pg.DevaCircleVo;
 import com.zyx.vo.pg.JxCircleVo;
 import com.zyx.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -101,5 +102,6 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     List<JxCircleVo> jxCircle(@Param("devTypes") Integer devTypes, @Param("max") Integer max);
 
+    List<DevaCircleVo> selectDevaCircle(@Param("ids")List<Integer> ids);
 
 }

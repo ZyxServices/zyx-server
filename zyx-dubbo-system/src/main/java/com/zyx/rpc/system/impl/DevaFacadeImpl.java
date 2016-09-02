@@ -86,9 +86,9 @@ public class DevaFacadeImpl implements DevaFacade {
             return null;
         }
         //刷新Redis
-        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
-        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
-        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+//        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
+//        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
+//        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
         return devas;
     }
 
@@ -106,9 +106,9 @@ public class DevaFacadeImpl implements DevaFacade {
             case Constants.MODEL_LIVE:
                 return liveInfoService.selectByIds(ids);
             case Constants.MODEL_CIRCLE:
-                return circleService.selectByIds(ids);
+                return circleService.getDevaCircle(ids);
             case Constants.MODEL_CIRCLE_ITEM:
-                return circleItemService.selectByIds(ids);
+                return circleItemService.getCircleItemByIds(ids);
             case Constants.MODEL_CONCERN:
                 return concernService.selectByIds(ids);
 //            case Constants.MODEL_SHOP:

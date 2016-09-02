@@ -48,6 +48,18 @@
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
     </resultMap>
+    <resultMap id="DevaCircleResultMap" type="com.zyx.vo.pg.DevaCircleVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
+    </resultMap>
+
     <resultMap id="CircleJxDtoResultMap" type="com.zyx.vo.pg.JxCircleVo" extends="CircleResultMap">
         <result column="sequence" property="sequence" jdbcType="INTEGER"/>
         <result column="area" property="area" jdbcType="INTEGER"/>
@@ -125,4 +137,19 @@
     LIMIT 0,#{max}
     </select>
 
+    <select id="selectDevaCircle" resultMap="DevaCircleResultMap">
+        SELECT
+        circle.id,
+        circle.title,
+        circle.head_img_url,
+        circle.create_time
+        FROM
+        circle
+        WHERE
+        circle.id IN
+        <foreach collection="ids" index="index" item="tag" open="("
+                 separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
 </mapper>

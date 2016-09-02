@@ -21,5 +21,5 @@ public interface TokenFacade {
 
     Map<String, Object> validateToken(String token, Integer userId);
 
-    Map<String,Object> validateTokenIncludeOther(String token, Integer userId);
+    Map<String, Object> validateTokenIncludeOther(String token, Integer userId);
 }
