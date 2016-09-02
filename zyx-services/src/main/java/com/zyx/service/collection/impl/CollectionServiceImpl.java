@@ -6,6 +6,7 @@ import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.BaseService;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.collection.CollectionService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.collection.CollectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,13 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
         CollectionParam cp = new CollectionParam();
         cp.setUserId(accountId);
         return collectionMapper.myCollectionList(cp);
+    }
+
+    @Override
+    public List<UserIconVo> getCollUserIcons(Integer model, Integer modelId) {
+        CollectionParam param = new CollectionParam();
+        param.setModel(model);
+        param.setModelId(modelId);
+        return collectionMapper.getCollUserIcons(param);
     }
 }

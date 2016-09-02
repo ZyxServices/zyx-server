@@ -1,16 +1,14 @@
 package com.zyx.rpc.activity.impl;
 
-import com.zyx.constants.Constants;
 import com.zyx.rpc.activity.ActivityMemberFacade;
-import com.zyx.entity.activity.parm.MemberInfoParm;
-import com.zyx.entity.activity.parm.QueryMemberParm;
+import com.zyx.param.activity.MemberInfoParm;
+import com.zyx.param.activity.QueryMemberParm;
 import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityMemberService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

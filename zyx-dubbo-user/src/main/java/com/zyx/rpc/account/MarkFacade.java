@@ -1,6 +1,6 @@
 package com.zyx.rpc.account;
 
-import com.zyx.entity.account.param.UserMarkParam;
+import com.zyx.param.account.UserMarkParam;
 
 import java.util.Map;
 

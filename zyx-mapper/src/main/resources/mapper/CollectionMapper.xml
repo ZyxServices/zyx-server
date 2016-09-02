@@ -129,5 +129,16 @@
 	</select>
     <select id="existCollection" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
         SELECT id,model FROM t_collection WHERE model = #{model} AND user_id=#{userId}
+    <select id="getCollUserIcons" parameterType="com.zyx.param.collection.CollectionParam" resultType="com.zyx.vo.account.UserIconVo">
+        SELECT
+        tu.`id` AS id,tu.`nickname`,tu.`avatar`
+        FROM t_collection tc
+        RIGHT JOIN user tu ON tc.`user_id` = tu.`id`
+        WHERE
+        tc.`model`=#{model}
+        AND
+        tc.`model_id`=#{modelId}
+        ORDER BY
+        tc.`create_time` DESC
     </select>
 </mapper>

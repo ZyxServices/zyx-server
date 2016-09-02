@@ -2,6 +2,7 @@ package com.zyx.rpc.collection;
 
 import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.collection.CollectionVo;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface CollectionFacade {
     public List<CollectionVo> selectCollections(CollectionParam param);
 
     public int count(Collection collection);
+
+    public List<UserIconVo> getCollUserIcons(Integer model, Integer modelId);
 }

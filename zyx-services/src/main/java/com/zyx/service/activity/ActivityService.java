@@ -1,11 +1,10 @@
 package com.zyx.service.activity;
 
 import com.zyx.entity.activity.Activity;
-import com.zyx.entity.activity.parm.QueryActivityParm;
-import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.param.activity.QueryActivityParm;
+import com.zyx.param.activity.QueryHistoryParm;
 import com.zyx.service.BaseService;
 
-import java.util.List;
 import java.util.Map;
 
 /**

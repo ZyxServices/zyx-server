@@ -1,8 +1,8 @@
 package com.zyx.mapper.activity;
 
 import com.zyx.entity.activity.ActivityMember;
-import com.zyx.entity.activity.parm.MemberInfoParm;
-import com.zyx.entity.activity.parm.QueryMemberParm;
+import com.zyx.param.activity.MemberInfoParm;
+import com.zyx.param.activity.QueryMemberParm;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

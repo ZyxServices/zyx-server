@@ -14,6 +14,7 @@ import java.util.Map;
  * @title MapUtils
  */
 public final class MapUtils {
+
     public static Map<String, Object> buildSuccessMap(Object data) {
         return buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, data);
     }
@@ -22,7 +23,9 @@ public final class MapUtils {
         Map<String, Object> map = new HashMap<>();
         map.put(Constants.STATE, state);
         map.put(Constants.SUCCESS_MSG, msg);
-        map.put(Constants.DATA, data);
+        if (data != null) {
+            map.put(Constants.DATA, data);
+        }
         return map;
     }
 

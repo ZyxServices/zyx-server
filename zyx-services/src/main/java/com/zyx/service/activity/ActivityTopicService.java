@@ -1,8 +1,8 @@
 package com.zyx.service.activity;
 
 import com.zyx.entity.activity.ActivityTopic;
-import com.zyx.entity.activity.parm.AddTopicParm;
-import com.zyx.entity.activity.parm.QueryTopicParm;
+import com.zyx.param.activity.AddTopicParm;
+import com.zyx.param.activity.QueryTopicParm;
 import com.zyx.service.BaseService;
 
 import java.util.Map;

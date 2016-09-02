@@ -1,4 +1,4 @@
-package com.zyx.entity.account.param;
+package com.zyx.param.account;
 
 import java.io.Serializable;
 

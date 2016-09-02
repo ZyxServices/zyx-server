@@ -10,7 +10,7 @@
         <result column="mask" property="mask" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="queryCombiation" parameterType="com.zyx.entity.activity.parm.QueryCombiationParm" resultMap="combination">
+    <select id="queryCombiation" parameterType="com.zyx.param.activity.QueryCombiationParm" resultMap="combination">
         select * from combination where 1 = 1
         <if test="name != null and name != ''">
             and name = #{name}

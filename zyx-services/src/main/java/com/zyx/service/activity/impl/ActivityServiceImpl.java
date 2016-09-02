@@ -5,9 +5,9 @@ import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.entity.activity.Combination;
 import com.zyx.entity.activity.CombinedData;
-import com.zyx.entity.activity.parm.QueryActivityParm;
-import com.zyx.entity.activity.parm.QueryCombiationParm;
-import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.param.activity.QueryActivityParm;
+import com.zyx.param.activity.QueryCombiationParm;
+import com.zyx.param.activity.QueryHistoryParm;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.mapper.live.LiveInfoMapper;
 import com.zyx.service.pg.ConcernService;
@@ -25,11 +25,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Rainbow on 16-6-12.

@@ -37,7 +37,7 @@
         select * from user_mark where user_id = #{userId}
     </select>
 
-    <update id="updateMarkInfo" parameterType="com.zyx.entity.account.param.UserMarkParam">
+    <update id="updateMarkInfo" parameterType="com.zyx.param.account.UserMarkParam">
         update user_mark set mark_time = #{markTime} , mark_history = #{markHistory} , mark_count = #{markCount} where id = #{id}
     </update>
 </mapper>

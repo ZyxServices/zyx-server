@@ -1,11 +1,10 @@
 package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.UserLoginInfo;
-import com.zyx.entity.account.UserLoginParam;
+import com.zyx.param.account.UserLoginParam;
 import com.zyx.mapper.account.UserLoginMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.UserLoginService;
-import com.zyx.utils.CipherUtil;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.stereotype.Service;
 

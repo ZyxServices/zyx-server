@@ -1,7 +1,7 @@
 package com.zyx.mapper.account;
 
 import com.zyx.entity.account.UserMarkInfo;
-import com.zyx.entity.account.param.UserMarkParam;
+import com.zyx.param.account.UserMarkParam;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.MarkInfoVo;
 

@@ -1,7 +1,7 @@
 package com.zyx.rpc.activity;
 
-import com.zyx.entity.activity.parm.AddTopicParm;
-import com.zyx.entity.activity.parm.QueryTopicParm;
+import com.zyx.param.activity.AddTopicParm;
+import com.zyx.param.activity.QueryTopicParm;
 
 import java.util.Map;
 

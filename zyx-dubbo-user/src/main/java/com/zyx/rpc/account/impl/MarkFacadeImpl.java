@@ -3,7 +3,7 @@ package com.zyx.rpc.account.impl;
 import com.alibaba.dubbo.common.json.JSON;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserMarkInfo;
-import com.zyx.entity.account.param.UserMarkParam;
+import com.zyx.param.account.UserMarkParam;
 import com.zyx.rpc.account.MarkFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.UserMarkService;

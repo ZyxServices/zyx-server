@@ -16,4 +16,11 @@ public interface LiveInfoService extends BaseService<LiveInfo> {
 	public List<LiveInfoVo> selectLives(LiveInfoParam param);
 
 	public void logicDelete(Integer id);
+
+//	/**
+//	 * 获取直播观看人数
+//	 * @param liveId
+//	 * @return
+//     */
+//	public Integer getLiveWatcherNumber(Integer liveId);
 }

@@ -1,7 +1,7 @@
 package com.zyx.mapper.activity;
 
 import com.zyx.entity.activity.ActivityTopic;
-import com.zyx.entity.activity.parm.QueryTopicParm;
+import com.zyx.param.activity.QueryTopicParm;
 import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

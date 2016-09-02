@@ -1,7 +1,7 @@
 package com.zyx.mapper.account;
 
 import com.zyx.entity.account.UserAddressInfo;
-import com.zyx.entity.account.param.UserAddressParam;
+import com.zyx.param.account.UserAddressParam;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.account.UserAddressVo;
 import org.springframework.stereotype.Repository;

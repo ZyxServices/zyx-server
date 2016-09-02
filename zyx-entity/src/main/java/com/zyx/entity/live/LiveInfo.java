@@ -2,6 +2,7 @@ package com.zyx.entity.live;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.ibatis.type.JdbcType;
 
@@ -54,6 +55,17 @@ public class LiveInfo extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer del;
+
+    @Transient
+    private Integer watchNumber;
+
+    public void setWatchNumber(Integer watchNumber) {
+        this.watchNumber = watchNumber;
+    }
+
+    public Integer getWatchNumber() {
+        return watchNumber;
+    }
 
     public Integer getAuth() {
         return auth;
