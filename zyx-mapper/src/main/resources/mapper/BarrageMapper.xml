@@ -36,11 +36,10 @@
             live_id = #{liveId}
         </if>
         order by
-        create_time
+        create_time DESC
         <if test="pager!=null">
             limit
             #{pager.offset},#{pager.pageSize}
         </if>
     </select>
-
 </mapper>
