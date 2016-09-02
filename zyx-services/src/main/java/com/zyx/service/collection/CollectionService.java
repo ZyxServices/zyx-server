@@ -3,6 +3,7 @@ package com.zyx.service.collection;
 import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.BaseService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.collection.CollectionVo;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface CollectionService extends BaseService<Collection> {
     List<CollectionVo> selectCollections(CollectionParam param);
 
     List<CollectionVo> myCollectionList(Integer accountId);
+    public List<UserIconVo> getCollUserIcons(Integer model, Integer modelId);
+
 }
