@@ -19,7 +19,6 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.0</version>
         </dependency>
       <dependency>
           <groupId>org.slf4j</groupId>
@@ -29,6 +28,18 @@
           <groupId>tiyujia-parent</groupId>
           <artifactId>zyx-constants</artifactId>
           <version>${zyx.constants.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-redis</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>fastjson</artifactId>
       </dependency>
   </dependencies>
     <build>

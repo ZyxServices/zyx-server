@@ -53,8 +53,28 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         insertCern.setState(0);
         save(insertCern);
         return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
-//        map.put(Constants.STATE, Constants.SUCCESS);
-//        return map;
+    }
+
+    @Override
+    public Map<String, Object> delCern(Integer id, Integer loginUserId) {
+        if (id == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
+        }
+        Concern concernFind = concernMapper.getOne(id);
+        if (concernFind != null) {
+            if (Objects.equals(concernFind.getUserId(), loginUserId)) {
+                Integer result = concernMapper.delConcern(id);
+                if (result > 0) {
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                }
+            } else {
+                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG, null);
+            }
+        } else {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+        }
+
+        return PgConstants.MAP_500;
     }
 
     @Override
