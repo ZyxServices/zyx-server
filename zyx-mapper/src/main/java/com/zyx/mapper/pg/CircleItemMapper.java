@@ -37,4 +37,6 @@ public interface CircleItemMapper extends BaseMapper<CircleItem> {
 
     CircleItemVo selectCircleItemById(Integer id);
 
+    List<CircleItemVo> selectCircleItemByIds(@Param("ids")List<Integer> ids);
+
 }

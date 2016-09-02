@@ -1,6 +1,6 @@
 package com.zyx.vo.account;
 
-import com.zyx.vo.BaseVo;
+import java.io.Serializable;
 
 /**
  * Created by WeiMinSheng on 2016/6/21.
@@ -10,7 +10,7 @@ import com.zyx.vo.BaseVo;
  *          Copyright (c)2016 tyj-版权所有
  * @title UserAddressVo.java
  */
-public class UserAddressVo extends BaseVo {
+public class UserAddressVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;

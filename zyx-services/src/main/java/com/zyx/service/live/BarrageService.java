@@ -8,5 +8,5 @@ import com.zyx.service.BaseService;
 import com.zyx.vo.live.BarrageVo;
 
 public interface BarrageService extends BaseService<Barrage> {
-	public List<Barrage> getList(BarrageParam barrageParam);
+	public List<BarrageVo> getList(BarrageParam barrageParam);
 }

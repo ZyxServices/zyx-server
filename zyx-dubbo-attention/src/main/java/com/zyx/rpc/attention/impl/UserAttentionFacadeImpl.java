@@ -55,6 +55,27 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
                 return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70001, UserAttentionConstants.ATTENTION_70001_MSG);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+            return UserAttentionConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> unAttentionFromAToB(AttentionParam attentionParam) {
+        try {
+            // 判断token是否失效
+            if (isTokenFailure(attentionParam.getToken())) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
+            attentionParam.setType(1);// 关注、粉丝
+            int result = userAttentionService.deleteAttention(attentionParam);
+            if (result == 1) {// 成功
+                return MapUtils.buildSuccessMap(UserAttentionConstants.SUCCESS, UserAttentionConstants.SUCCESS_MSG, result);
+            } else {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70004, UserAttentionConstants.ATTENTION_70004_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
     }

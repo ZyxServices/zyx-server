@@ -29,13 +29,11 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     public Integer add(LiveInfo liveInfo) {
         // 修正开始时间
         long now = System.currentTimeMillis();
-        liveInfo.setStart(liveInfo.getStart() == null || liveInfo.getStart() < now ? now : liveInfo.getStart());
-        liveInfo.setState(0);
+        liveInfo.setState((null!=liveInfo.getStartTime()&&liveInfo.getStartTime()<now)?1:0);
         liveInfo.setDel(0);
         liveInfoService.save(liveInfo);
         return liveInfo.getId();
     }
-
     @Override
     public void updateNotNull(LiveInfo liveInfo) {
         liveInfoService.updateNotNull(liveInfo);
@@ -46,7 +44,6 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         LiveInfo liveInfo = new LiveInfo();
         liveInfo.setId(id);
         liveInfo.setDel(0);
-        liveInfo.setState(0);
         List<LiveInfo> liveInfos = liveInfoService.select(liveInfo);
         return liveInfos!=null&&liveInfos.size()==1?liveInfos.get(0):null;
     }

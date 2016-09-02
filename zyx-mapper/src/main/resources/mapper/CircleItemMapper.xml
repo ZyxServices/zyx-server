@@ -138,6 +138,34 @@
             WHERE
             circle_item.id=#{id}
     </select>
+    <select id="selectCircleItemByIds" resultType="java.util.List" resultMap="CircleItemCustomMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.img_url,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        `user_auth`.authinfo AS authInfo,
+        circle.title AS circleTitle
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        LEFT JOIN `user_auth` ON circle_item.create_id = `user_auth`.user_id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        WHERE
+        circle_item.id in
+        <foreach collection="ids" index="index" item="tag" open="("
+                 separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
 
     <update id="setTop">
         UPDATE circle_item SET top=#{top} WHERE id=#{circleItemId}

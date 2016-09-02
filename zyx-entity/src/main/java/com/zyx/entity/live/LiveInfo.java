@@ -24,12 +24,12 @@ public class LiveInfo extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer type;
-    @Column
+    @Column(name = "start_time")
     @ColumnType(jdbcType = JdbcType.BIGINT)
-    private Long start;
-    @Column
+    private Long startTime;
+    @Column(name = "end_time")
     @ColumnType(jdbcType = JdbcType.BIGINT)
-    private Long end;
+    private Long endTime;
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer userId;
@@ -71,20 +71,20 @@ public class LiveInfo extends BaseEntity {
         this.type = type;
     }
 
-    public Long getStart() {
-        return start;
+    public Long getStartTime() {
+        return startTime;
     }
 
-    public void setStart(Long start) {
-        this.start = start;
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
     }
 
-    public Long getEnd() {
-        return end;
+    public Long getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(Long end) {
-        this.end = end;
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getUserId() {

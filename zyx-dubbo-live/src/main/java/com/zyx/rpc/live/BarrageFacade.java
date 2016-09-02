@@ -1,7 +1,6 @@
 package com.zyx.rpc.live;
 
 import java.util.List;
-import java.util.Map;
 
 import com.zyx.entity.live.Barrage;
 import com.zyx.param.live.BarrageParam;
@@ -37,7 +36,7 @@ public interface BarrageFacade {
 	 */
 	public List<Barrage> getLast(BarrageParam param);
 
-	public List<Barrage> getList(BarrageParam param);
+	public List<BarrageVo> getList(BarrageParam param);
 	/**
 	 *
 	 * @param param

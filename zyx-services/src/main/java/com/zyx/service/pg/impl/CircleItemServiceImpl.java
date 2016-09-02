@@ -70,9 +70,13 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                     StringBuilder sb = new StringBuilder();
                     String[] imgOne = circleItem.getImgUrl().split(",");
                     for (int i = 0; i < imgOne.length; i++) {
-                        sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
+                        sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img><p>&nbsp;</p>");
                     }
-                    circleItem.setContent(circleItem.getContent() + "</br>" + sb.toString());
+                    circleItem.setContent(circleItem.getContent() + sb.toString());
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("<img src='http://image.tiyujia.com/" + circleItem.getImgUrl() + "'></img>");
+                    circleItem.setContent(circleItem.getContent() + sb.toString());
                 }
             }
             save(circleItem);
@@ -184,5 +188,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             e.printStackTrace();
             return PgConstants.MAP_500;
         }
+    }
+
+    @Override
+    public List<CircleItemVo> getCircleItemByIds(List<Integer> ids) {
+        return circleItemMapper.selectCircleItemByIds(ids);
     }
 }

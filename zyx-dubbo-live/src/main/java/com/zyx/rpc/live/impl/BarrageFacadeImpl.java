@@ -6,6 +6,7 @@ import com.zyx.entity.live.Barrage;
 import com.zyx.param.live.BarrageParam;
 import com.zyx.rpc.live.BarrageFacade;
 import com.zyx.service.live.BarrageService;
+import com.zyx.vo.live.BarrageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -92,7 +93,7 @@ public class BarrageFacadeImpl implements BarrageFacade {
     }
 
     @Override
-    public List<Barrage> getList(BarrageParam param) {
+    public List<BarrageVo> getList(BarrageParam param) {
         return barrageService.getList(param);
     }
 

@@ -24,6 +24,12 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 	public LiveInfoServiceImpl() {
 		super(LiveInfo.class);
 	}
+
+	@Override
+	public void saveLiveInfo(LiveInfo liveInfo) {
+		liveInfoMapper.saveLiveInfo(liveInfo);
+	}
+
 	@Override
 	public Long countLive(LiveInfoParam param) {
 		return liveInfoMapper.countLives(param);
