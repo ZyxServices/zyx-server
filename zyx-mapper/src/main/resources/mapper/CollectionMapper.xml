@@ -129,6 +129,7 @@
 	</select>
     <select id="existCollection" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
         SELECT id,model FROM t_collection WHERE model = #{model} AND user_id=#{userId}
+    </select>
     <select id="getCollUserIcons" parameterType="com.zyx.param.collection.CollectionParam" resultType="com.zyx.vo.account.UserIconVo">
         SELECT
         tu.`id` AS id,tu.`nickname`,tu.`avatar`
