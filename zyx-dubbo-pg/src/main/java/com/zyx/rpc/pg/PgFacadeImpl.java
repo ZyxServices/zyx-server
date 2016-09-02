@@ -163,13 +163,13 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> getOneConcern(Integer concernId) {
-        return concrenService.getOne(concernId);
+    public Map<String, Object> getOneConcern(Integer concernId,Integer accountId) {
+        return concrenService.getOne(concernId,accountId);
     }
 
     @Override
-    public Map<String, Object> getOneCircleItem(Integer circleItemId) {
-        return circleItemService.getOneCircleItem(circleItemId);
+    public Map<String, Object> getOneCircleItem(Integer circleItemId,Integer accountId) {
+        return circleItemService.getOneCircleItem(circleItemId,accountId);
     }
 
     @Override

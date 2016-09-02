@@ -22,7 +22,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
-        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="INTEGER"/>
         <result column="model_id" property="modelId" jdbcType="VARCHAR"/>
         <discriminator javaType="java.lang.Integer" column="model">
             <case value="1" resultMap="getActivityInfo"/>
@@ -127,4 +127,7 @@
 		WHERE
 		id = #{user_id}
 	</select>
+    <select id="existCollection" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+        SELECT id,model FROM t_collection WHERE model = #{model} AND user_id=#{userId}
+    </select>
 </mapper>

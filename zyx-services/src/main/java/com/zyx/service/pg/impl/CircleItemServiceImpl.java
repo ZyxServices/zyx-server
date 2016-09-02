@@ -1,7 +1,12 @@
 package com.zyx.service.pg.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
+import com.zyx.entity.collection.*;
 import com.zyx.entity.pg.CircleItem;
+import com.zyx.mapper.collection.CollectionMapper;
+import com.zyx.param.collection.CollectionParam;
+import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.CircleItemLunBoVo;
 import com.zyx.mapper.pg.CircleItemMapper;
 import com.zyx.service.BaseServiceImpl;
@@ -23,6 +28,9 @@ import java.util.*;
 public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implements CircleItemService {
     @Resource
     private CircleItemMapper circleItemMapper;
+
+    @Resource
+    private CollectionMapper collectionMapper;
 
     public CircleItemServiceImpl() {
         super(CircleItem.class);
@@ -164,13 +172,26 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> getOneCircleItem(Integer circleItemId) {
+    public Map<String, Object> getOneCircleItem(Integer circleItemId, Integer accountId) {
         try {
             if (Objects.equals(circleItemId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30033_MSG);
             }
             CircleItemLunBoVo vo = circleItemMapper.getOneCircleItem(circleItemId);
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, vo);
+            CollectionParam param = new CollectionParam();
+            Boolean isCollection = false;
+            if (!Objects.equals(accountId, null)) {
+                param.setUserId(accountId);
+                param.setModel(Constants.MODEL_CIRCLE_ITEM);
+                CollectionVo collectionFind = collectionMapper.existCollection(param);
+                if (!Objects.equals(collectionFind, null)) {
+                    isCollection = true;
+                }
+            }
+            Map resultMap = new HashMap<>();
+            resultMap.put("circleItem", vo);
+            resultMap.put("isCollection", isCollection);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
