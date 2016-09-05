@@ -289,6 +289,25 @@ public class DateUtils {
         return new Timestamp(calendar.getTimeInMillis());
     }
 
+    public static Date setDateStart(Integer dateOffset) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.add(Calendar.DATE, dateOffset);
+        return calendar.getTime();
+    }
+
+    public static Date setDateEnd(Integer dateOffset) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.add(Calendar.DATE, dateOffset);
+        return calendar.getTime();
+    }
     public static long getMissDay(long t, long markTime) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(t);

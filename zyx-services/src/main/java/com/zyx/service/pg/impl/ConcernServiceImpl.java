@@ -226,6 +226,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //            }
             CollectionParam param = new CollectionParam();
             Boolean isCollection = false;
+
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CONCERN);

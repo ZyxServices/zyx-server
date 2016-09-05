@@ -35,6 +35,7 @@
         <result column="hot" property="hot" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="CircleItemCustomMap" type="com.zyx.vo.pg.CircleItemVo" extends="CircleItemResultMap">
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
@@ -96,7 +97,8 @@
         circle_item.state,
         `user`.nickname,
         `user`.avatar,
-        circle.title AS circleTitle
+        circle.title AS circleTitle,
+        circle_item.base_content
         FROM
         circle_item
         INNER JOIN `user` ON circle_item.create_id = `user`.id
@@ -129,7 +131,8 @@
             `user`.nickname,
             `user`.avatar,
             `user_auth`.authinfo AS authInfo,
-            circle.title AS circleTitle
+            circle.title AS circleTitle,
+            circle_item.base_content
             FROM
             circle_item
             INNER JOIN `user` ON circle_item.create_id = `user`.id
@@ -153,7 +156,8 @@
         `user`.nickname,
         `user`.avatar,
         `user_auth`.authinfo AS authInfo,
-        circle.title AS circleTitle
+        circle.title AS circleTitle,
+        circle_item.base_content
         FROM
         circle_item
         INNER JOIN `user` ON circle_item.create_id = `user`.id
@@ -219,7 +223,8 @@
         `user`.nickname,
         `user`.avatar,
         circle.title as circleTitle,
-        circle_item.img_url
+        circle_item.img_url,
+        circle_item.base_content
         FROM
         circle_item
         INNER JOIN devaluation ON circle_item.id = devaluation.model_id

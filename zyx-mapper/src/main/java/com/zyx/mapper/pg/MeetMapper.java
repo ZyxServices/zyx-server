@@ -2,6 +2,7 @@ package com.zyx.mapper.pg;
 
 import com.zyx.entity.pg.Meet;
 import com.zyx.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,4 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("meetMapper")
 public interface MeetMapper extends BaseMapper<Meet> {
+    Integer existTodayMeet(@Param("accountId") Integer accountId, @Param("startTime") Long startTime, @Param("endTime") Long endTime);
 }

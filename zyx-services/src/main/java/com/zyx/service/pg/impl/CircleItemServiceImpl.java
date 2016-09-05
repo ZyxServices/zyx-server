@@ -69,6 +69,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30007, PgConstants.PG_ERROR_CODE_30007_MSG);
 
             }
+            Optional.ofNullable(content).ifPresent(circleItem::setBaseContent);
             circleItem.setState(0);
             circleItem.setImgUrl(img_url);
             circleItem.setCreateTime(new Date().getTime());
@@ -183,6 +184,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CIRCLE_ITEM);
+                param.setModel(circleItemId);
                 CollectionVo collectionFind = collectionMapper.existCollection(param);
                 if (!Objects.equals(collectionFind, null)) {
                     isCollection = true;

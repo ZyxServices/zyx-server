@@ -5,6 +5,8 @@ import java.util.*;
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.MyConcern;
+import com.zyx.mapper.pg.MeetMapper;
+import com.zyx.utils.DateUtils;
 import com.zyx.vo.pg.CircleListVo;
 import com.zyx.vo.pg.DevaCircleVo;
 import com.zyx.vo.pg.JxCircleVo;
@@ -35,6 +37,9 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
     @Resource
     CircleItemMapper circleItemMapper;
+
+    @Resource
+    MeetMapper meetMapper;
 
     public CircleServiceImpl() {
         super(Circle.class);
@@ -210,6 +215,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         resultMap.put("circleItemCount", circleItemCount);
         resultMap.put("isConcern", isConcern);
         resultMap.put("circle", circleMapper.findById(circleId));
+        resultMap.put("isMeet",meetMapper.existTodayMeet(accountId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime()));
 
         return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
     }

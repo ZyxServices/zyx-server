@@ -31,4 +31,8 @@
     <result column="account_id" property="accountId" jdbcType="INTEGER" />
   </resultMap>
 
+  <select id="existTodayMeet"  resultType="java.lang.Integer">
+    SELECT count(id) FROM meet WHERE account_id=#{accountId} AND create_time BETWEEN #{startTime} AND #{endTime}
+  </select>
+
 </mapper>
