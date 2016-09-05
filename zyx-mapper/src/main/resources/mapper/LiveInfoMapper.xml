@@ -33,6 +33,8 @@
 		</if>
 		AND
 		del = 0
+		AND
+		<![CDATA[ START_TIME < NOW()]]>
 	</select>
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"
@@ -47,8 +49,10 @@
 		</if>
 		AND
 		del = 0
+		AND
+		<![CDATA[ START_TIME < NOW()]]>
 		ORDER BY
-		create_time DESC
+		START_TIME DESC
 		<if test="pager != null">
 			LIMIT #{pager.offset},#{pager.pageSize}
 		</if>
