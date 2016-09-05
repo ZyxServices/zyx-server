@@ -30,9 +30,14 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Override
     public Integer add(LiveInfo liveInfo) {
-        // 修正开始时间
+        // 修正开始时间 默认状态
         long now = System.currentTimeMillis();
-        liveInfo.setState((null != liveInfo.getStartTime() && liveInfo.getStartTime() < now) ? 1 : 0);
+        if(null != liveInfo.getStartTime() && liveInfo.getStartTime() < now){
+            liveInfo.setStartTime(now );
+            liveInfo.setState(1);
+        }else{
+            liveInfo.setState(0);
+        }
         liveInfo.setDel(0);
         liveInfoService.save(liveInfo);
         watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveInfo.getId(), 0);
