@@ -252,14 +252,14 @@ public interface PgFacade {
      * @param concernId
      * @return
      */
-    Map<String, Object> getOneConcern(Integer concernId);
+    Map<String, Object> getOneConcern(Integer concernId,Integer accountId);
 
     /**
      * 获取帖子详情
      * @param circleItemId
      * @return
      */
-    Map<String,Object> getOneCircleItem(Integer circleItemId);
+    Map<String,Object> getOneCircleItem(Integer circleItemId,Integer accountId);
     /**
      * 获取推荐帖子数据
      * @param start

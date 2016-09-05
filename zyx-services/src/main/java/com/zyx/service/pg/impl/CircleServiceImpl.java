@@ -193,16 +193,18 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         if (circleId == null) {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
         }
-        if (accountId == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
-        }
+//        if (accountId == null) {
+//            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
+//        }
         Map<String, Object> resultMap = new HashMap<>();
         Boolean isConcern = false;
         Integer concernCount = myConcernMapper.getCounts(4, circleId);
         Integer circleItemCount = circleItemMapper.getCircleItemCounts(circleId);
-        MyConcern myConcern = myConcernMapper.existConcern(accountId, circleId, 4);
-        if (myConcern != null) {
-            isConcern = true;
+        if (!Objects.equals(accountId, null)) {
+            MyConcern myConcern = myConcernMapper.existConcern(accountId, circleId, 4);
+            if (myConcern != null) {
+                isConcern = true;
+            }
         }
         resultMap.put("concernCount", concernCount);
         resultMap.put("circleItemCount", circleItemCount);
