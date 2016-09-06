@@ -48,7 +48,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     public void updateNotNull(LiveInfo liveInfo) {
         if(liveInfo!=null&&liveInfo.getState()!=null){
             if(liveInfo.getState().equals(-1)){
-                endLiveWatcherNumber(liveInfo.getId());
+                liveInfoService.endLiveWatcherNumber(liveInfo.getId());
             }
         }
         liveInfoService.updateNotNull(liveInfo);
@@ -62,7 +62,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         List<LiveInfo> liveInfos = liveInfoService.select(liveInfo);
         liveInfo = liveInfos != null && liveInfos.size() == 1 ? liveInfos.get(0) : null;
         if(liveInfo!=null&&liveInfo.getState()!=null&&liveInfo.getState().equals(1))
-            liveInfo.setWatchNumber(getLiveWatcherNumber(liveInfo.getId()));
+            liveInfo.setWatchNumber(liveInfoService.getLiveWatcherNumber(liveInfo.getId()));
         return  liveInfo;
     }
 
@@ -72,7 +72,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
         if(null!=list&&!list.isEmpty()){
             for(LiveInfoVo vo:list){
                 if(vo.getState().equals(1))
-                vo.setWatchNumber(vo.getId());
+                vo.setWatchNumber(liveInfoService.getLiveWatcherNumber(vo.getId()));
             }
         }
         return list;
@@ -93,9 +93,9 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     public void inOrOutLive(Integer liveId, Integer inOrOut) {
         if(inOrOut!=null){
             if (inOrOut.equals(0)){
-                outLiveWatcherNumber(liveId);
+                liveInfoService.outLiveWatcherNumber(liveId);
             }else if(inOrOut.equals(1)){
-                inLiveWatcherNumber(liveId);
+                liveInfoService.inLiveWatcherNumber(liveId);
             }
         }
     }
@@ -111,23 +111,5 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 //        return numMap;
 //    }
 
-    ////////////////观看人数处理/////////////////////////////////
-    public Integer getLiveWatcherNumber(Integer liveId) {
-        return watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
-    }
 
-    public void inLiveWatcherNumber(Integer liveId) {
-        Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
-        watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId, num == null ? 0 : (num + 1));
-    }
-
-    public void outLiveWatcherNumber(Integer liveId) {
-        Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
-        watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId, (num == null||num<1) ? 0 : num-1);
-    }
-
-    public void endLiveWatcherNumber(Integer liveId) {
-        Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
-        watchNumberRedis.delete(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
-    }
 }

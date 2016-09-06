@@ -17,6 +17,30 @@ public interface LiveInfoService extends BaseService<LiveInfo> {
 
 	public void logicDelete(Integer id);
 
+
+	/**
+	 * 获取直播观看人数
+	 * @param liveId
+	 * @return
+	 */
+	Integer getLiveWatcherNumber(Integer liveId);
+
+	/**
+	 * 当前直播用户进入
+	 * @param liveId
+	 */
+	void inLiveWatcherNumber(Integer liveId);
+
+	/**
+	 * 当前直播用户退出
+	 */
+	void outLiveWatcherNumber(Integer liveId);
+
+	/**
+	 * 结束当前直播
+	 */
+	void endLiveWatcherNumber(Integer liveId);
+
 //	/**
 //	 * 获取直播观看人数
 //	 * @param liveId
