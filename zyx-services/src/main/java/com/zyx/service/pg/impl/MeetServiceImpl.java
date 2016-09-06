@@ -47,7 +47,7 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30014, PG_ERROR_CODE_30014_MSG);
 
             }
-            Integer exist = meetMapper.existTodayMeet(accountId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime());
+            Integer exist = meetMapper.existTodayMeet(accountId, circleId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime());
             if (Objects.equals(exist, 0)) {
                 Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
                 meet.setCreateTime(new Date().getTime());

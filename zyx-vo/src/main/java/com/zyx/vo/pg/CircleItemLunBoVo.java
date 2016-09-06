@@ -13,6 +13,7 @@ public class CircleItemLunBoVo extends CircleItem {
     private UserVo userVo;
     private String tjImgae_url;
     private Circle circleVo;
+    UserAuthVo userAuthVo;
 
     public String getTjImgae_url() {
         return tjImgae_url;
@@ -36,5 +37,13 @@ public class CircleItemLunBoVo extends CircleItem {
 
     public void setCircleVo(Circle circleVo) {
         this.circleVo = circleVo;
+    }
+
+    public UserAuthVo getUserAuthVo() {
+        return userAuthVo;
+    }
+
+    public void setUserAuthVo(UserAuthVo userAuthVo) {
+        this.userAuthVo = userAuthVo;
     }
 }
