@@ -19,4 +19,5 @@
 	<dubbo:service interface="com.zyx.rpc.system.DevaFacade" ref="devaFacade" timeout="10000"/>
 	<dubbo:service interface="com.zyx.rpc.system.SearchFacade" ref="searchFacade" timeout="10000"/>
 	<dubbo:service interface="com.zyx.rpc.system.CommentFacade" ref="commentFacade" timeout="10000"/>
+	<dubbo:service interface="com.zyx.rpc.system.ReplyFacade" ref="replyFacade" timeout="10000"/>
 </beans>

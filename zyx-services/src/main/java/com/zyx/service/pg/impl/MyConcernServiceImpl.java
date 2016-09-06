@@ -59,8 +59,8 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
             }
             Optional.ofNullable(accountId).ifPresent(myConcern::setAccountId);
             myConcern.setCreateTime(new Date().getTime());
-            MyConcern myConcernFind=myConcernMapper.existConcern(accountId, concernId, concern_type);
-            if(myConcernFind!=null){
+            MyConcern myConcernFind = myConcernMapper.existConcern(accountId, concernId, concern_type);
+            if (myConcernFind != null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PgConstants.PG_ERROR_CODE_30028_MSG);
             }
             save(myConcern);
@@ -84,5 +84,23 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
         }
 
         return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myConcernMapper.findByParams(concernId, concernType));
+    }
+
+    @Override
+    public Map<String, Object> delMyConcern(Integer circleId, Integer accountId) {
+        MyConcern myConcernFind = myConcernMapper.existConcern(accountId, circleId, 4);
+        if (myConcernFind != null) {
+            if (Objects.equals(accountId, myConcernFind.getAccountId())) {
+                Integer result = myConcernMapper.delMyConcern(myConcernFind.getId());
+                if (result > 0) {
+                  return  MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                }
+            } else {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+            }
+        } else {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+        }
+        return PgConstants.MAP_500;
     }
 }

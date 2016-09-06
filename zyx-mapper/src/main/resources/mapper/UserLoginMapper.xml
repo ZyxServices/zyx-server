@@ -30,7 +30,7 @@
         <result column="phone" property="phone" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="loginByPhoneAndPassword" parameterType="com.zyx.entity.account.UserLoginParam" resultMap="UserLoginMap">
+    <select id="loginByPhoneAndPassword" parameterType="com.zyx.param.account.UserLoginParam" resultMap="UserLoginMap">
         select * from user where phone = #{phone} and password = #{password} and del = 0
     </select>
 

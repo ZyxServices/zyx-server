@@ -4,6 +4,7 @@ import com.zyx.entity.collection.Collection;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.rpc.collection.CollectionFacade;
 import com.zyx.service.collection.CollectionService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.collection.CollectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class CollectionFacadeImpl implements CollectionFacade {
     @Override
     public int count(Collection collection) {
         return collectionService.selectCount(collection);
+    }
+
+    @Override
+    public List<UserIconVo> getCollUserIcons(Integer model, Integer modelId) {
+        return collectionService.getCollUserIcons(model,modelId);
     }
 }

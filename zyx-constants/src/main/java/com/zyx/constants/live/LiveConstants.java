@@ -54,6 +54,7 @@ public interface LiveConstants extends Constants{
 
 	String MARK_REDIS_BARRAGE_QUEUE = "barrage:";
 	String HASH_REDIS_BARRAGE_QUEUE = "hash_barrage:";
+	String MARK_LIVE_WATCH_NUMBER="lwn:";
 	/**
 	 * 弹幕默认最大缓存数量
 	 */

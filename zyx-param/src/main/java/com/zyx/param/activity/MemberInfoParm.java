@@ -1,4 +1,4 @@
-package com.zyx.entity.activity.parm;
+package com.zyx.param.activity;
 
 import java.io.Serializable;
 

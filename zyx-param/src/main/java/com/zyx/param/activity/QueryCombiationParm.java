@@ -1,4 +1,4 @@
-package com.zyx.entity.activity.parm;
+package com.zyx.param.activity;
 
 /**
  * Created by Rainbow on 2016/8/16.

@@ -58,17 +58,6 @@ public interface LiveInfoFacade {
 	 * @update 2016年6月22日 上午10:30:21
 	 */
 	public List<LiveInfoVo> getList(LiveInfoParam liveInfoParam);
-
-	/**
-	 *
-	 * @param liveSearchVo
-	 * @return
-	 * @description 搜索直播列表
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年6月22日 上午11:12:10
-	 */
-	public List<LiveInfo> searchList( LiveSearchVo liveSearchVo);
 	/**
 	 *
 	 * @param id
@@ -90,15 +79,22 @@ public interface LiveInfoFacade {
 	 */
 	public String getLiveUrl(Integer liveId);
 
-	/**
-	 * 获取直播的观看人数
-	 * @param liveIds
-	 * @return
-	 * @description TODO
-	 * @version 1.0
-	 * @author MrDeng
-	 * @update 2016年7月4日 下午2:21:39
-	 */
-	public Map<Integer,Integer> getLiveWatchNum(List<Integer> liveIds);
+//	/**
+//	 * 获取直播的观看人数
+//	 * @param liveIds
+//	 * @return
+//	 * @description TODO
+//	 * @version 1.0
+//	 * @author MrDeng
+//	 * @update 2016年7月4日 下午2:21:39
+//	 */
+//	public Map<Integer,Integer> getLiveWatchNum(List<Integer> liveIds);
 
+
+	/**
+	 * 进入或者推出直播间
+	 * @param liveId
+	 * @param inOrOut
+     */
+	public void  inOrOutLive(Integer liveId,Integer inOrOut);
 }

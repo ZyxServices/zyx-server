@@ -32,12 +32,12 @@
         <result column="zip_code" property="zipCode" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="queryAddressInfo" parameterType="com.zyx.entity.account.param.UserAddressParam"
+    <select id="queryAddressInfo" parameterType="com.zyx.param.account.UserAddressParam"
             resultMap="UserAddressMap">
         select * from user_address where address_id = #{addressId}
     </select>
 
-    <select id="queryAddressList" parameterType="com.zyx.entity.account.param.UserAddressParam"
+    <select id="queryAddressList" parameterType="com.zyx.param.account.UserAddressParam"
             resultMap="UserAddressMap">
         select * from user_address where 1 = 1
         <if test="userId != null and userId != ''">
@@ -45,7 +45,7 @@
         </if>
     </select>
 
-    <update id="editReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+    <update id="editReceiptAddress" parameterType="com.zyx.param.account.UserAddressParam">
         update user_address set address_id = #{addressId}
         <if test="receiver != null and receiver != ''">
             , receiver = #{receiver}
@@ -62,16 +62,16 @@
         where address_id = #{addressId}
     </update>
 
-    <update id="setDefaultReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+    <update id="setDefaultReceiptAddress" parameterType="com.zyx.param.account.UserAddressParam">
         update user_address set status = 1 where address_id = #{addressId}
     </update>
 
-    <update id="cancelDefaultReceiptAddress" parameterType="com.zyx.entity.account.param.UserAddressParam">
+    <update id="cancelDefaultReceiptAddress" parameterType="com.zyx.param.account.UserAddressParam">
         update user_address set status = 0 where address_id != #{addressId} and user_id = #{userId}
     </update>
 
     <!-- 删除一条记录 -->
-    <delete id="deleteByAddressId" parameterType="com.zyx.entity.account.param.UserAddressParam">
+    <delete id="deleteByAddressId" parameterType="com.zyx.param.account.UserAddressParam">
         delete from user_address where address_id = #{addressId}
     </delete>
 

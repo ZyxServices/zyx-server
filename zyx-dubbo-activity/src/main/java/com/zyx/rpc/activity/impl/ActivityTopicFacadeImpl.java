@@ -1,8 +1,7 @@
 package com.zyx.rpc.activity.impl;
 
-import com.zyx.constants.Constants;
-import com.zyx.entity.activity.parm.AddTopicParm;
-import com.zyx.entity.activity.parm.QueryTopicParm;
+import com.zyx.param.activity.AddTopicParm;
+import com.zyx.param.activity.QueryTopicParm;
 import com.zyx.rpc.activity.ActivityTopicFacade;
 import com.zyx.rpc.activity.utils.ActivityUtils;
 import com.zyx.service.activity.ActivityTopicService;
@@ -10,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

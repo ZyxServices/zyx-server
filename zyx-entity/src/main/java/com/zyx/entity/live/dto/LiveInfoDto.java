@@ -1,9 +1,5 @@
 package com.zyx.entity.live.dto;
 
-import org.apache.ibatis.type.JdbcType;
-import tk.mybatis.mapper.annotation.ColumnType;
-
-import javax.persistence.Column;
 import java.io.Serializable;
 
 /**

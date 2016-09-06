@@ -1,15 +1,13 @@
 package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.UserAddressInfo;
-import com.zyx.entity.account.param.UserAddressParam;
+import com.zyx.param.account.UserAddressParam;
 import com.zyx.mapper.account.UserAddressMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountAddressInfoService;
 import com.zyx.vo.account.UserAddressVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

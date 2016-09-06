@@ -138,16 +138,11 @@ public interface PgFacade {
     Map<String, Object> top(Integer max, Integer circleId);
 
     /**
-     * 添加回复
-     *
-     * @param reply_type 回复主体类型
-     * @param reply_id   回复主体id
-     * @param account_id 回复人
-     * @param content    回复内容
+     * 删除动态
+     * @param id
      * @return
      */
-    Map<String, Object> addReply(Integer reply_type, Integer reply_id, Integer account_id, String content);
-
+    Map<String,Object> delCern(Integer id,Integer loginUserId);
 
 
     /**
@@ -257,14 +252,14 @@ public interface PgFacade {
      * @param concernId
      * @return
      */
-    Map<String, Object> getOneConcern(Integer concernId);
+    Map<String, Object> getOneConcern(Integer concernId,Integer accountId);
 
     /**
      * 获取帖子详情
      * @param circleItemId
      * @return
      */
-    Map<String,Object> getOneCircleItem(Integer circleItemId);
+    Map<String,Object> getOneCircleItem(Integer circleItemId,Integer accountId);
     /**
      * 获取推荐帖子数据
      * @param start
@@ -278,4 +273,12 @@ public interface PgFacade {
      * @return
      */
     Map<String,Object> getCircleTypeList();
+
+    /**
+     * 圈子取消关注
+     * @param circleId
+     * @param accountId
+     * @return
+     */
+    Map<String, Object> delMyConcern(Integer circleId, Integer accountId);
 }

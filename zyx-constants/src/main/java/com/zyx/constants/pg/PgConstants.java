@@ -140,5 +140,14 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30036= 30036;
     String PG_ERROR_CODE_30036_MSG = "用户id不能为空";
 
+    int PG_ERROR_CODE_30037= 30037;
+    String PG_ERROR_CODE_30037_MSG = "回复父级id不能为空";
+
+    int PG_ERROR_CODE_30038= 30038;
+    String PG_ERROR_CODE_30038_MSG = "回复人id不能为空";
+
+    int PG_ERROR_CODE_30039= 30039;
+    String PG_ERROR_CODE_30039_MSG = "被回复人id不能为空";
+
     String PG_RESULT = "result";
 }

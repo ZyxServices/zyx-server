@@ -61,7 +61,7 @@
         select count("id") from user where phone = #{phone}
     </select>
 
-    <select id="selectAccountByParam" parameterType="com.zyx.entity.account.UserLoginParam" resultMap="AccountInfoMap">
+    <select id="selectAccountByParam" parameterType="com.zyx.param.account.UserLoginParam" resultMap="AccountInfoMap">
         select * from user where 1 = 1
         <if test="phone != null and phone != ''">
             and phone = #{phone}
@@ -97,11 +97,11 @@
         SELECT * FROM user WHERE id = #{id} AND del != 1 AND authenticate = 2
     </select>
 
-    <update id="renewpwd" parameterType="com.zyx.entity.account.UserLoginParam">
+    <update id="renewpwd" parameterType="com.zyx.param.account.UserLoginParam">
         update user set password = #{password2} where phone = #{phone}
     </update>
 
-    <update id="updateAccountByParam" parameterType="com.zyx.entity.account.param.AccountInfoParam">
+    <update id="updateAccountByParam" parameterType="com.zyx.param.account.AccountInfoParam">
         update user set id = #{id}
         <if test="avatar != null and avatar != ''">
             , avatar = #{avatar}
@@ -124,7 +124,7 @@
         where id = #{id}
     </update>
 
-    <select id="queryMyCenterInfo" parameterType="com.zyx.entity.account.UserLoginParam"
+    <select id="queryMyCenterInfo" parameterType="com.zyx.param.account.UserLoginParam"
             resultMap="MyCenterInfoVoResultMap">
         select * from user where 1 = 1
         <if test="id != null">

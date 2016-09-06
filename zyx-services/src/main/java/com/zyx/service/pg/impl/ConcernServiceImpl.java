@@ -8,10 +8,13 @@ import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.attention.UserAttentionMapper;
+import com.zyx.mapper.collection.CollectionMapper;
 import com.zyx.param.attention.AttentionParam;
+import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.attention.AttentionVo;
+import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.pg.ConcernMapper;
@@ -33,6 +36,8 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     @Resource
     private ConcernMapper concernMapper;
 
+    @Resource
+    private CollectionMapper collectionMapper;
 
     public ConcernServiceImpl() {
         super(Concern.class);
@@ -53,8 +58,28 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         insertCern.setState(0);
         save(insertCern);
         return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
-//        map.put(Constants.STATE, Constants.SUCCESS);
-//        return map;
+    }
+
+    @Override
+    public Map<String, Object> delCern(Integer id, Integer loginUserId) {
+        if (id == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
+        }
+        Concern concernFind = concernMapper.getOne(id);
+        if (concernFind != null) {
+            if (Objects.equals(concernFind.getUserId(), loginUserId)) {
+                Integer result = concernMapper.delConcern(id);
+                if (result > 0) {
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                }
+            } else {
+                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG, null);
+            }
+        } else {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+        }
+
+        return PgConstants.MAP_500;
     }
 
     @Override
@@ -180,7 +205,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public Map<String, Object> getOne(Integer concernId) {
+    public Map<String, Object> getOne(Integer concernId,Integer accountId) {
         try {
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
@@ -199,7 +224,21 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //                    }
 //                }
 //            }
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVo);
+            CollectionParam param = new CollectionParam();
+            Boolean isCollection = false;
+
+            if (!Objects.equals(accountId, null)) {
+                param.setUserId(accountId);
+                param.setModel(Constants.MODEL_CONCERN);
+                CollectionVo collectionFind = collectionMapper.existCollection(param);
+                if (!Objects.equals(collectionFind, null)) {
+                    isCollection = true;
+                }
+            }
+            Map resultMap = new HashMap<>();
+            resultMap.put("concern", myFollowVo);
+            resultMap.put("isCollection", isCollection);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;

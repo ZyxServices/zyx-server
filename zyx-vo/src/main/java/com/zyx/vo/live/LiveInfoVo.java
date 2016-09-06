@@ -26,6 +26,16 @@ public class LiveInfoVo implements Serializable {
 	// 用户认证标签
 	private String authInfo;
 
+	private Integer watchNumber;
+
+	public Integer getWatchNumber() {
+		return watchNumber;
+	}
+
+	public void setWatchNumber(Integer watchNumber) {
+		this.watchNumber = watchNumber;
+	}
+
 	/**
 	 * 当前直播的点赞数量
 	 */

@@ -63,4 +63,9 @@
     WHERE concern_id=#{concernId} and concern_type=#{concernType}
     </select>
 
+    <delete id="delMyConcern">
+        DELETE  FROM  myconcern WHERE id=#{id}
+    </delete>
+
+
 </mapper>

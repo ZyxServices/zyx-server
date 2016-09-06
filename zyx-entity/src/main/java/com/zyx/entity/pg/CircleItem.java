@@ -39,6 +39,9 @@ public class CircleItem extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String imgUrl;
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String baseContent;
 
     public Integer getCircleId() {
         return circleId;
@@ -102,5 +105,13 @@ public class CircleItem extends BaseEntity {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getBaseContent() {
+        return baseContent;
+    }
+
+    public void setBaseContent(String baseContent) {
+        this.baseContent = baseContent;
     }
 }

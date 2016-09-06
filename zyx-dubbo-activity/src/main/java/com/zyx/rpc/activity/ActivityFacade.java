@@ -1,7 +1,7 @@
 package com.zyx.rpc.activity;
 
-import com.zyx.entity.activity.parm.QueryActivityParm;
-import com.zyx.entity.activity.parm.QueryHistoryParm;
+import com.zyx.param.activity.QueryActivityParm;
+import com.zyx.param.activity.QueryHistoryParm;
 
 import java.util.Map;
 
