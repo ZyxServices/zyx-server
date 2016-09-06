@@ -28,6 +28,11 @@ public class SearchLiveVo implements Serializable {
      */
     private String bgmUrl;
 
+    /**
+     * 环信groupId
+     */
+    private Long groupId;
+
     private Long createTime;
 
     /**
@@ -39,6 +44,14 @@ public class SearchLiveVo implements Serializable {
      * 0-未开始，1-正在直播，2-直播结束
      */
     private Integer state;
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
 
     public Integer getId() {
         return id;
