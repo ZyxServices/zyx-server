@@ -7,6 +7,7 @@ import com.zyx.service.system.SearchService;
 import com.zyx.utils.MapUtils;
 import com.zyx.utils.easemob.EasemobAppKey;
 import com.zyx.vo.system.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ import java.util.Map;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-    @Resource
-    private RedisTemplate<String, String> redis;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Resource
     SearchMapper searchMapper;
@@ -56,7 +57,8 @@ public class SearchServiceImpl implements SearchService {
                 case 4: //直播
                     List<SearchLiveVo> searchLiveVos = searchMapper.searchLive(searchParam);
                     searchLiveVos.forEach(e -> {
-                        Long i = EasemobAppKey.getEasemobGroupUserinfo(redis, e.getNumber());
+                        e.setGroupId(e.getNumber());
+                        Long i = EasemobAppKey.getEasemobGroupUserinfo(redisTemplate, e.getNumber());
                         e.setNumber(i);
                     });
                     if (searchLiveVos.size() > 0) {
