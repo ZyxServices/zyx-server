@@ -2,6 +2,7 @@ package com.zyx.service.live.impl;
 
 import java.util.List;
 
+import com.zyx.constants.live.LiveConstants;
 import com.zyx.entity.live.dto.LiveInfoDto;
 import com.zyx.param.live.LiveInfoParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 
 	@Autowired
 	LiveInfoMapper liveInfoMapper ;
+
+	@Autowired
+	private RedisTemplate<String, Integer> watchNumberRedis;
+
 	public LiveInfoServiceImpl() {
 		super(LiveInfo.class);
 	}
@@ -50,5 +55,31 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 		updateNotNull(liveInfo);
 	}
 
+
+	////////////////观看人数处理/////////////////////////////////
+
+	/**
+	 * 获取直播人数
+	 * @param liveId
+	 * @return
+	 */
+	public Integer getLiveWatcherNumber(Integer liveId) {
+		return watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
+	}
+
+	public void inLiveWatcherNumber(Integer liveId) {
+		Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
+		watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId, num == null ? 0 : (num + 1));
+	}
+
+	public void outLiveWatcherNumber(Integer liveId) {
+		Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
+		watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId, (num == null||num<1) ? 0 : num-1);
+	}
+
+	public void endLiveWatcherNumber(Integer liveId) {
+		Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
+		watchNumberRedis.delete(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
+	}
 
 }

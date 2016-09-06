@@ -38,7 +38,7 @@ public class SearchLiveVo implements Serializable {
     /**
      * 环信ID
      */
-    private Long number;
+    private Integer number;
 
     /**
      * 0-未开始，1-正在直播，2-直播结束
@@ -101,11 +101,11 @@ public class SearchLiveVo implements Serializable {
         this.state = state;
     }
 
-    public Long getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 }

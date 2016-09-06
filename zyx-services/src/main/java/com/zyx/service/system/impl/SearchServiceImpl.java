@@ -3,6 +3,7 @@ package com.zyx.service.system.impl;
 import com.zyx.constants.Constants;
 import com.zyx.mapper.system.SearchMapper;
 import com.zyx.param.system.SearchParam;
+import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.system.SearchService;
 import com.zyx.utils.MapUtils;
 import com.zyx.utils.easemob.EasemobAppKey;
@@ -25,7 +26,10 @@ public class SearchServiceImpl implements SearchService {
     private RedisTemplate<String, String> redisTemplate;
 
     @Resource
-    SearchMapper searchMapper;
+    private LiveInfoService liveInfoService;
+
+    @Resource
+    private SearchMapper searchMapper;
 
     @Override
     public Map<String, Object> modularSearch(SearchParam searchParam) {
@@ -56,11 +60,7 @@ public class SearchServiceImpl implements SearchService {
                     }
                 case 4: //直播
                     List<SearchLiveVo> searchLiveVos = searchMapper.searchLive(searchParam);
-                    searchLiveVos.forEach(e -> {
-                        e.setGroupId(e.getNumber());
-                        Long i = EasemobAppKey.getEasemobGroupUserinfo(redisTemplate, e.getNumber());
-                        e.setNumber(i);
-                    });
+                    searchLiveVos.forEach(e -> e.setNumber(liveInfoService.getLiveWatcherNumber(e.getId())));
                     if (searchLiveVos.size() > 0) {
                         return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchLiveVos);
                     } else {
