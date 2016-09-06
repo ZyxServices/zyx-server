@@ -38,7 +38,7 @@ public interface ActivityService extends BaseService<Activity> {
     Map<String, Object> insterActivity(Integer createId, String title, String desc, String image, Long startTime,
                                        Long endTime, Long lastTime, Integer maxPeople, Integer visible,
                                        String phone, Double price, Integer type, String address, Integer examine,
-                                       String memberTemplate);
+                                       String memberTemplate, Long groupId);
 
     /**
      * 多条条件查询活动

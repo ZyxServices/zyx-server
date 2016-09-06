@@ -45,6 +45,11 @@ public class SearchLiveVo implements Serializable {
      */
     private Integer state;
 
+    /**
+     * 浏览量
+     */
+    private Integer pageviews;
+
     public Long getGroupId() {
         return groupId;
     }
@@ -107,5 +112,13 @@ public class SearchLiveVo implements Serializable {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Integer getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Integer pageviews) {
+        this.pageviews = pageviews;
     }
 }

@@ -5,7 +5,14 @@
 
 <mapper namespace="com.zyx.mapper.activity.PageViewsMapper">
 
-    <select id="queryPageView" resultType="com.zyx.entity.activity.PageViews">
+    <resultMap id="pageViews" type="com.zyx.entity.activity.PageViews">
+        <id column="id" property="id" ></id>
+        <result column="pageviews" property="pageviews"></result>
+        <result column="types" property="types"></result>
+        <result column="typeId" property="typeId"></result>
+    </resultMap>
+
+    <select id="queryPageView" resultMap="pageViews">
         SELECT * FROM pageviews WHERE types=#{types} AND typeId = #{typeId}
     </select>
 

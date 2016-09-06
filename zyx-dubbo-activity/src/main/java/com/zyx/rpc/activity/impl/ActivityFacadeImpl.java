@@ -31,9 +31,9 @@ public class ActivityFacadeImpl implements ActivityFacade {
     public Map<String, Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
                                               Long endTime, Long lastTime, Integer maxPeople, Integer visible,
                                               String phone, Double price, Integer type, String address, Integer examine,
-                                              String memberTemplate) {
+                                              String memberTemplate, Long groupId) {
         try {
-            return activityService.insterActivity(createId, title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate);
+            return activityService.insterActivity(createId, title, desc, image, startTime, endTime, lastTime, maxPeople, visible, phone, price, type, address, examine, memberTemplate, groupId);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

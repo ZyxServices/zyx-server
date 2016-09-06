@@ -40,6 +40,11 @@ public class SearchConcernVo implements Serializable {
 
     private Long createTime;
 
+    /**
+     * 浏览量
+     */
+    private Integer pageviews;
+
     public Integer getId() {
         return id;
     }
@@ -97,5 +102,13 @@ public class SearchConcernVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Integer pageviews) {
+        this.pageviews = pageviews;
     }
 }
