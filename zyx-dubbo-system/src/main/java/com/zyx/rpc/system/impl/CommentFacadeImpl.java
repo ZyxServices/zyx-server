@@ -17,8 +17,14 @@ import java.util.Map;
 public class CommentFacadeImpl implements CommentFacade {
     @Resource
     private CommentService commentService;
+
     @Override
     public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState) {
-        return commentService.addComment(commentType,commentId,commentContent,commentAccount,commentState);
+        return commentService.addComment(commentType, commentId, commentContent, commentAccount, commentState);
+    }
+
+    @Override
+    public Map<String, Object> queryComment(Integer commentType, Integer commentId) {
+        return commentService.queryComment(commentType, commentId);
     }
 }

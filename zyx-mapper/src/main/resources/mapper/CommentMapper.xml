@@ -27,11 +27,44 @@
 <mapper namespace="com.zyx.mapper.system.CommentMapper">
     <resultMap id="CommentResultMap" type="com.zyx.entity.system.Comment">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="comment_type" property="CommentType" jdbcType="INTEGER"/>
-        <result column="comment_id" property="CommentId" jdbcType="INTEGER"/>
-        <result column="comment_content" property="CommentContent" jdbcType="LONGVARCHAR"/>
-        <result column="comment_state" property="CommentState" jdbcType="INTEGER"/>
-        <result column="create_time" property="CreateTime" jdbcType="BIGINT"/>
+        <result column="comment_type" property="commentType" jdbcType="INTEGER"/>
+        <result column="comment_id" property="commentId" jdbcType="INTEGER"/>
+        <result column="comment_account" property="commentAccount" jdbcType="INTEGER"/>
+        <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR"/>
+        <result column="comment_state" property="commentState" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
+
+    <resultMap id="commentVoMap" type="com.zyx.vo.pg.CommentVo" extends="CommentResultMap">
+        <collection property="replyVos" column="id" select="replySelect"/>
+    </resultMap>
+
+    <resultMap id="replyResultMap" type="com.zyx.entity.system.Reply">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="reply_parent_id" property="replyParentId" jdbcType="INTEGER"/>
+        <result column="reply_from_user" property="replyFromUser" jdbcType="INTEGER"/>
+        <result column="reply_to_user" property="replyToUser" jdbcType="INTEGER"/>
+        <result column="reply_content" property="replyContent" jdbcType="VARCHAR"/>
+        <result column="reply_state" property="replyState" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="replyVoMap" type="com.zyx.vo.pg.ReplyVo" extends="replyResultMap">
+        <association property="fromUserVo" column="reply_from_user" select="userVoSelect"/>
+        <association property="toUserVo" column="reply_to_user" select="userVoSelect"/>
+    </resultMap>
+
+    <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
+        SELECT nickName,avatar,authenticate  FROM `user` WHERE id=#{userId}
+    </select>
+
+    <select id="replySelect" parameterType="int" resultMap="replyVoMap">
+        SELECT * FROM reply WHERE reply_parent_id=#{parentId}
+    </select>
+
+    <select id="commentQuery" resultMap="commentVoMap">
+        SELECT * FROM  comment WHERE comment_type=#{type} AND comment_id=#{commentId}
+    </select>
+
 
 </mapper>

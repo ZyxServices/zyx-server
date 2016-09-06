@@ -14,4 +14,5 @@ import java.util.Map;
 public interface CommentService extends BaseService<Comment> {
     Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount,Integer commentState);
 
+    Map<String,Object> queryComment(Integer commentType,Integer commentId);
 }

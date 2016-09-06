@@ -70,4 +70,6 @@ public class Comment  extends BaseEntity{
     public void setCommentState(Integer commentState) {
         this.commentState = commentState;
     }
+
+
 }

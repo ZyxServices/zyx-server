@@ -10,4 +10,7 @@ import java.util.Map;
  */
 public interface CommentFacade {
     Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState);
+
+
+    Map<String,Object> queryComment(Integer commentType,Integer commentId);
 }

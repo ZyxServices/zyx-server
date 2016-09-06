@@ -12,6 +12,6 @@ import java.util.Map;
  * Create by XiaoWei on 2016/6/27
  */
 public interface ReplyService extends BaseService<Reply> {
-    Map<String, Object> addReply(Integer replyType, Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent, Integer replyState);
+    Map<String, Object> addReply(Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent);
 
 }
