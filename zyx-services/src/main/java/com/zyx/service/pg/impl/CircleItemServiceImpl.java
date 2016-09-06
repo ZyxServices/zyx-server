@@ -184,7 +184,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CIRCLE_ITEM);
-                param.setModel(circleItemId);
+                param.setModelId(circleItemId);
                 CollectionVo collectionFind = collectionMapper.existCollection(param);
                 if (!Objects.equals(collectionFind, null)) {
                     isCollection = true;

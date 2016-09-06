@@ -230,6 +230,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CONCERN);
+                param.setModelId(concernId);
                 CollectionVo collectionFind = collectionMapper.existCollection(param);
                 if (!Objects.equals(collectionFind, null)) {
                     isCollection = true;

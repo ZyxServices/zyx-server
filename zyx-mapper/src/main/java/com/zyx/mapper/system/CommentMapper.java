@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("commentMapper")
 public interface CommentMapper extends BaseMapper<Comment> {
+
 }
