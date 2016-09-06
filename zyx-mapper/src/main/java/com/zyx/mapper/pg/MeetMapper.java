@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("meetMapper")
 public interface MeetMapper extends BaseMapper<Meet> {
-    Integer existTodayMeet(@Param("accountId") Integer accountId, @Param("startTime") Long startTime, @Param("endTime") Long endTime);
+    Integer existTodayMeet(@Param("accountId") Integer accountId, @Param("circleId") Integer circleId, @Param("startTime") Long startTime, @Param("endTime") Long endTime);
 }
