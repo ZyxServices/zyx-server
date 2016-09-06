@@ -66,7 +66,12 @@
     <resultMap id="CircleItemLunBoMap" type="com.zyx.vo.pg.CircleItemLunBoVo" extends="CircleItemResultMap">
         <association property="userVo" column="create_id" select="userVoSelect"/>
         <association property="circleVo" column="circle_id" select="circleVoSelect"/>
+        <association property="userAuthVo" column="create_id" select="userAuthSelect"/>
     </resultMap>
+
+    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.pg.UserAuthVo">
+        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    </select>
 
     <select id="circleVoSelect" parameterType="int" resultMap="CircleResultMap">
         SELECT * FROM circle WHERE id=#{circleId} AND  state!=-1
