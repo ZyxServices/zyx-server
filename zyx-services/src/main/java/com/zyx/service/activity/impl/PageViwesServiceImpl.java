@@ -59,9 +59,9 @@ public class PageViwesServiceImpl implements PageViwesService {
     }
 
     @Override
-    public Map<String,Object> getPageViwes(Integer types, Integer typeId) {
-        Map<String,Object> map = new HashMap<>();
-        if(typeId != null && types != null){
+    public Map<String, Object> getPageViwes(Integer types, Integer typeId) {
+        Map<String, Object> map = new HashMap<>();
+        if (typeId != null && types != null) {
             PageViews pageViews = new PageViews();
             pageViews.setTypes(types);
             pageViews.setTypeId(typeId);
@@ -73,10 +73,10 @@ public class PageViwesServiceImpl implements PageViwesService {
             if (views != null) {
                 views.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + (sidValue == null ? 0 : Integer.valueOf(sidValue)));
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", views);
-            }else{
+            } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10002, "查无数据");
             }
-        }else{
+        } else {
             return Constants.MAP_PARAM_MISS;
         }
     }
@@ -92,9 +92,15 @@ public class PageViwesServiceImpl implements PageViwesService {
 
         String sidValue = stringRedisTemplate.opsForValue().get(typeId + "_" + types);
 
-        if(views != null){
-            views.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + (sidValue == null ? 0 : Integer.valueOf(sidValue)));
+        if (views != null && sidValue != null) {
+            pageViews.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + Integer.valueOf(sidValue));
+        } else {
+            if(sidValue != null){
+                pageViews.setPageviews(Integer.valueOf(sidValue));
+            }else{
+                pageViews.setPageviews(0);
+            }
         }
-        return views;
+        return pageViews;
     }
 }

@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 public class SearchPostsVo implements Serializable {
 
+    /**
+     * 帖子
+     */
     private Integer id;
 
     private String title;
@@ -26,6 +29,11 @@ public class SearchPostsVo implements Serializable {
     private Integer zanCount;
 
     private Integer msgCount;
+
+    /**
+     * 浏览量
+     */
+    private Integer pageviews;
 
     public Integer getId() {
         return id;
@@ -99,5 +107,13 @@ public class SearchPostsVo implements Serializable {
 
     public void setCircleId(String circleId) {
         this.circleId = circleId;
+    }
+
+    public Integer getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Integer pageviews) {
+        this.pageviews = pageviews;
     }
 }

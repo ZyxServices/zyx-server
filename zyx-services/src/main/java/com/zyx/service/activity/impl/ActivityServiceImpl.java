@@ -60,7 +60,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     public Map<String, Object> insterActivity(Integer createId, String title, String desc, String image, Long startTime,
                                               Long endTime, Long lastTime, Integer maxPeople, Integer visible,
                                               String phone, Double price, Integer type, String address, Integer examine,
-                                              String memberTemplate) {
+                                              String memberTemplate, Long groupId) {
         Activity activity = new Activity();
         if (createId != null && title != null && desc != null && image != null && startTime != null
                 && endTime != null && type != null && price != null && address != null && phone != null && !phone.equals("")) {
@@ -85,6 +85,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 liveInfo.setCreateTime(System.currentTimeMillis());
                 liveInfo.setAuth(1);
                 liveInfo.setType(1);
+                liveInfo.setGroupId(groupId);
                 liveInfo.setStartTime(startTime);
                 liveInfo.setEndTime(endTime);
                 liveInfo.setUserId(createId);

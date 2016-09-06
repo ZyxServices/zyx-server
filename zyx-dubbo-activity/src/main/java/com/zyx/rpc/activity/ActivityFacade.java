@@ -36,7 +36,7 @@ public interface ActivityFacade {
     Map<String, Object> insertActivity(Integer createId, String title, String desc, String image, Long startTime,
                                        Long endTime, Long lastTime, Integer maxPeople, Integer visible,
                                        String phone, Double price, Integer type, String address, Integer examine,
-                                       String memberTemplate);
+                                       String memberTemplate, Long groupId);
 
     /**
      * 多条条件查询活动

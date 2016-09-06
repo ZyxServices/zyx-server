@@ -49,6 +49,11 @@ public class SearchActivityVo implements Serializable {
     private Integer msgCount;
 
     /**
+     * 浏览量
+     */
+    private Integer pageviews;
+
+    /**
      * 是否屏蔽(0正常 1屏蔽)
      */
     private Integer mask;
@@ -123,5 +128,13 @@ public class SearchActivityVo implements Serializable {
 
     public void setMsgCount(Integer msgCount) {
         this.msgCount = msgCount;
+    }
+
+    public Integer getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Integer pageviews) {
+        this.pageviews = pageviews;
     }
 }
