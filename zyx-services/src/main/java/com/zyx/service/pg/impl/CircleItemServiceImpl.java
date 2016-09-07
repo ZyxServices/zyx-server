@@ -6,6 +6,7 @@ import com.zyx.entity.collection.*;
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.collection.CollectionMapper;
 import com.zyx.param.collection.CollectionParam;
+import com.zyx.service.activity.PageViwesService;
 import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.CircleItemLunBoVo;
 import com.zyx.mapper.pg.CircleItemMapper;
@@ -31,6 +32,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
 
     @Resource
     private CollectionMapper collectionMapper;
+
+
+    @Resource
+    private PageViwesService pageViwesService;
 
     public CircleItemServiceImpl() {
         super(CircleItem.class);
@@ -97,11 +102,12 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer max, Integer circleId) {
+    public Map<String, Object> circleItemList(Integer circleId, Integer start, Integer pageSize) {
         try {
-            Optional.ofNullable(max).orElse(10);
-
-            List<CircleItem> list = circleItemMapper.circleItemList(max, circleId);
+            start = Optional.ofNullable(start).orElse(0);
+            pageSize = Optional.ofNullable(pageSize).orElse(0);
+            List<CircleItemVo> list = circleItemMapper.circleItemList(circleId, start * pageSize, pageSize);
+            list.stream().forEach(s -> s.setPageViews(pageViwesService.getPageViwesByInternal(3, s.getId())));
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, list);
         } catch (Exception e) {
             e.printStackTrace();

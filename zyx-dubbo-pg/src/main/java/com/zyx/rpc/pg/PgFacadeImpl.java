@@ -82,8 +82,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer max, Integer circleId) {
-        return circleItemService.circleItemList(max, circleId);
+    public Map<String, Object> circleItemList(Integer circleId,Integer start,Integer pageSize) {
+        return circleItemService.circleItemList(circleId,start,pageSize);
     }
 
     @Override
@@ -153,8 +153,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> getMyFollowList(Integer loginUserId) {
-        return concrenService.getMyFollowList(loginUserId);
+    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
+        return concrenService.getMyFollowList(loginUserId, start, pageSize);
     }
 
     @Override
@@ -163,13 +163,13 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> getOneConcern(Integer concernId,Integer accountId) {
-        return concrenService.getOne(concernId,accountId);
+    public Map<String, Object> getOneConcern(Integer concernId, Integer accountId) {
+        return concrenService.getOne(concernId, accountId);
     }
 
     @Override
-    public Map<String, Object> getOneCircleItem(Integer circleItemId,Integer accountId) {
-        return circleItemService.getOneCircleItem(circleItemId,accountId);
+    public Map<String, Object> getOneCircleItem(Integer circleItemId, Integer accountId) {
+        return circleItemService.getOneCircleItem(circleItemId, accountId);
     }
 
     @Override

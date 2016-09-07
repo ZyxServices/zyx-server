@@ -104,6 +104,8 @@
             #{item}
         </foreach>
         AND state = 0
+        ORDER BY create_time
+        LIMIT #{start},#{end}
     </select>
 
     <select id="starConcern" resultMap="ConcernMyMap">

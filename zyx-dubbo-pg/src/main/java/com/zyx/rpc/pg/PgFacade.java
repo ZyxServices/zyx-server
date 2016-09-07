@@ -116,10 +116,10 @@ public interface PgFacade {
     /**
      * 帖子列表
      *
-     * @param max
+     * @param
      * @return
      */
-    Map<String, Object> circleItemList(Integer max, Integer circleId);
+    Map<String, Object> circleItemList(Integer circleId,Integer start,Integer pageSize);
 
     /**
      * 设置置顶帖子
@@ -238,7 +238,7 @@ public interface PgFacade {
      * @param loginUserId
      * @return
      */
-    Map<String, Object> getMyFollowList(Integer loginUserId);
+    Map<String, Object> getMyFollowList(Integer loginUserId,Integer start,Integer pageSize);
 
     /**
      *大咖动态

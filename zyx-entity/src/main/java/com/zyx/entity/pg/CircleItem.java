@@ -1,6 +1,7 @@
 package com.zyx.entity.pg;
 
 import com.zyx.entity.BaseEntity;
+import com.zyx.entity.activity.PageViews;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
