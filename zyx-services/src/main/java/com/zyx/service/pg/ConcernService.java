@@ -21,7 +21,7 @@ public interface ConcernService extends BaseService<Concern> {
 
     List<MyFollowVo> queryMyConcernList(Integer accountId);
 
-    Map<String, Object> starConcern(Integer max);
+    Map<String, Object> starConcern(Integer start,Integer pageSize);
 
     /**
      * 自动生成动态

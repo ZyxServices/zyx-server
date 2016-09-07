@@ -242,10 +242,10 @@ public interface PgFacade {
 
     /**
      *大咖动态
-     * @param max
+     * @param
      * @return
      */
-    Map<String, Object> starConcern(Integer max);
+    Map<String, Object> starConcern(Integer start,Integer pageSize);
 
     /**
      * 获取动态详情

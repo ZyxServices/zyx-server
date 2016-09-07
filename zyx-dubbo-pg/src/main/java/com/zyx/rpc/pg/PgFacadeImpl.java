@@ -158,8 +158,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> starConcern(Integer max) {
-        return concrenService.starConcern(max);
+    public Map<String, Object> starConcern(Integer start,Integer pageSize) {
+        return concrenService.starConcern(start,pageSize);
     }
 
     @Override

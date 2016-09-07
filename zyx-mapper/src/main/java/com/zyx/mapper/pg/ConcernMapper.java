@@ -19,7 +19,7 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     List<UserAttention> getAttentionIds(@Param("loginUserId") Integer logInUserId);
 
-    List<MyFollowVo> myFollowList(@Param("ids") List<Integer> ids,@Param("start") Integer start,@Param("end") Integer end);
+    List<MyFollowVo> myFollowList(@Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
 
     /**
      * 我的动态列表
@@ -29,7 +29,7 @@ public interface ConcernMapper extends BaseMapper<Concern> {
      */
     List<MyFollowVo> myConcernList(@Param("accountId") Integer accountId);
 
-    List<MyFollowVo> starConcern(@Param("max") Integer max);
+    List<MyFollowVo> starConcern(@Param("start") Integer max, @Param("end") Integer end);
 
     MyFollowVo getOne(@Param("id") Integer concernId);
 
