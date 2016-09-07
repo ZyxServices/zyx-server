@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -135,12 +136,13 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     }
 
     @Override
-    public Map<String, Object> updateMemberByExamine(Integer id) {
+    public Map<String, Object> updateMemberByExamine(Integer[] id) {
 
         if (id == null) {
             return Constants.MAP_PARAM_MISS;
         }
-        int integer = activityMemberMapper.updateMemberByExamine(id);
+        List<Integer> asList = Arrays.asList(id);
+        int integer = activityMemberMapper.updateMemberByExamine(asList);
         if (integer > 0) {
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "审核成功", null);
         } else {

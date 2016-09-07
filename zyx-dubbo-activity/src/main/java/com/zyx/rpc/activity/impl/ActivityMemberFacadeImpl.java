@@ -61,7 +61,7 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     }
 
     @Override
-    public Map<String, Object> updateMemberByExamine(Integer id) {
+    public Map<String, Object> updateMemberByExamine(Integer[] id) {
         try {
             return activityMemberService.updateMemberByExamine(id);
         } catch (Exception e) {
