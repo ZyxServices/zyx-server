@@ -27,7 +27,6 @@
 <mapper namespace="com.zyx.mapper.pg.ReplyMapper">
     <resultMap id="replyResultMap" type="com.zyx.entity.system.Reply">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="reply_type" property="replyType" jdbcType="INTEGER"/>
         <result column="reply_parent_id" property="replyParentId" jdbcType="INTEGER"/>
         <result column="reply_from_user" property="replyParentId" jdbcType="INTEGER"/>
         <result column="reply_to_user" property="replyParentId" jdbcType="INTEGER"/>
@@ -38,9 +37,6 @@
     <resultMap id="replyVoMap" type="com.zyx.vo.pg.ReplyVo" extends="replyResultMap">
         <association property="fromUserVo" column="reply_from_user" select="userVoSelect"/>
         <association property="toUserVo" column="reply_to_user" select="userVoSelect"/>
-        <discriminator javaType="java.lang.Integer" column="reply_parent_id">
-            <case value="1"></case>
-        </discriminator>
     </resultMap>
 
     <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
@@ -48,6 +44,6 @@
     </select>
 
     <!--<select id="findByParams">-->
-        <!--SELECT * FROM reply WHERE reply_type=#{type} AND reply_parent_id=#{parentId}-->
+    <!--SELECT * FROM reply WHERE reply_type=#{type} AND reply_parent_id=#{parentId}-->
     <!--</select>-->
 </mapper>

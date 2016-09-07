@@ -26,13 +26,10 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
     }
 
     @Override
-    public Map<String, Object> addReply(Integer replyType, Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent, Integer replyState) {
+    public Map<String, Object> addReply( Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent) {
         Map<String, Object> resultMap = new HashMap<>();
         Reply reply = new Reply();
         try {
-            if (replyType == null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30008, PgConstants.PG_ERROR_CODE_30008_MSG);
-            }
             if (replyParentId == null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30037, PgConstants.PG_ERROR_CODE_30037_MSG);
             }
@@ -45,13 +42,12 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
             if (replyContent == null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
             }
-            reply.setReplyType(replyType);
             reply.setReplyParentId(replyParentId);
             reply.setReplyFromUser(replyFromUser);
             reply.setReplyToUser(replyToUser);
             reply.setReplyContent(replyContent);
             reply.setCreateTime(new Date().getTime());
-            reply.setReplyState(replyState);
+            reply.setReplyState(0);
             mapper.insert(reply);
 //            resultMap.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            resultMap.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);

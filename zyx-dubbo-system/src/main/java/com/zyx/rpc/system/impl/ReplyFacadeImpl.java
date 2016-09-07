@@ -20,7 +20,7 @@ public class ReplyFacadeImpl implements ReplyFacade {
     ReplyService replyService;
 
     @Override
-    public Map<String, Object> addReply(Integer replyType, Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent, Integer replyState) {
-        return replyService.addReply(replyType, replyParentId, replyFromUser, replyToUser, replyContent, replyState);
+    public Map<String, Object> addReply( Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent) {
+        return replyService.addReply(replyParentId, replyFromUser, replyToUser, replyContent);
     }
 }

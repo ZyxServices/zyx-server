@@ -11,4 +11,20 @@ import com.zyx.entity.system.Reply;
 public class ReplyVo extends Reply {
     private UserVo fromUserVo;
     private UserVo toUserVo;
+
+    public UserVo getFromUserVo() {
+        return fromUserVo;
+    }
+
+    public void setFromUserVo(UserVo fromUserVo) {
+        this.fromUserVo = fromUserVo;
+    }
+
+    public UserVo getToUserVo() {
+        return toUserVo;
+    }
+
+    public void setToUserVo(UserVo toUserVo) {
+        this.toUserVo = toUserVo;
+    }
 }

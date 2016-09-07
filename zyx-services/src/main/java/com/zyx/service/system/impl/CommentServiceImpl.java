@@ -6,13 +6,11 @@ import com.zyx.mapper.system.CommentMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.system.CommentService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.pg.CommentVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author XiaoWei
@@ -25,6 +23,9 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
     public CommentServiceImpl() {
         super(Comment.class);
     }
+
+    @Resource
+    private CommentMapper commentMapper;
 
     @Override
     public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState) {
@@ -53,6 +54,23 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
                 return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
             else
                 return PgConstants.MAP_500;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryComment(Integer commentType, Integer commentId) {
+        if (Objects.equals(commentType, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30034, PgConstants.PG_ERROR_CODE_30034_MSG);
+        }
+        if (Objects.equals(commentId, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30035, PgConstants.PG_ERROR_CODE_30035_MSG);
+        }
+        try {
+            List<CommentVo> commentVos = commentMapper.commentQuery(commentType, commentId);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, commentVos);
         } catch (Exception e) {
             e.printStackTrace();
             return PgConstants.MAP_500;
