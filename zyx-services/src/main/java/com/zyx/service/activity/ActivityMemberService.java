@@ -42,10 +42,10 @@ public interface ActivityMemberService extends BaseService<ActivityMember> {
     Map<String, Object> queryActivityMemberInfo(QueryMemberParm queryMemberParm);
 
     /**
-     * 发起这审核报名
+     * 发起者批量审核报名
      *
      * @param id
      * @return
      */
-    Map<String, Object> updateMemberByExamine(Integer id);
+    Map<String, Object> updateMemberByExamine(Integer[] id);
 }

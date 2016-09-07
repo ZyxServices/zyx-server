@@ -18,11 +18,11 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> starRandom(Integer type, Integer n);
 
-    Map<String, Object> getMyFollowList(Integer loginUserId);
+    Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer end);
 
     List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam);
 
-    Map<String, Object> starConcern(Integer max);
+    Map<String, Object> starConcern(Integer start,Integer pageSize);
 
     /**
      * 自动生成动态

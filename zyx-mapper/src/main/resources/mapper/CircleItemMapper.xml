@@ -118,7 +118,7 @@
         </if>
 
         ORDER BY circle_item.create_time
-        limit 0,#{max}
+        limit #{start},#{end}
     </select>
 
     <select id="selectCircleItemById" resultType="java.lang.Integer" resultMap="CircleItemCustomMap">

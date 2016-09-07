@@ -107,10 +107,12 @@
             #{item}
         </foreach>
         AND state = 0
+        ORDER BY create_time
+        LIMIT #{start},#{end}
     </select>
 
     <select id="starConcern" resultMap="ConcernMyMap">
-        SELECT* FROM concern WHERE concern.type=3 AND state = 0 ORDER BY concern.create_time DESC LIMIT 0,#{max}
+        SELECT* FROM concern WHERE concern.type=3 AND state = 0 ORDER BY concern.create_time DESC LIMIT #{start},#{end}
     </select>
 
     <select id="exitConcernSelect" parameterType="java.util.Map" resultType="int">

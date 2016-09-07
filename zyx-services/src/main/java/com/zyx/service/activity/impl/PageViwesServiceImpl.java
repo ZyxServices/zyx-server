@@ -95,11 +95,14 @@ public class PageViwesServiceImpl implements PageViwesService {
         if (views != null && sidValue != null) {
             pageViews.setPageviews((views.getPageviews() == null ? 0 : views.getPageviews()) + Integer.valueOf(sidValue));
         } else {
-            if(sidValue != null){
+            if (sidValue != null && !sidValue.equals("null") && !sidValue.equals("")) {
                 pageViews.setPageviews(Integer.valueOf(sidValue));
-            }else{
+            } else {
                 pageViews.setPageviews(0);
             }
+        }
+        if(pageViews.getPageviews() == null){
+            pageViews.setPageviews(0);
         }
         return pageViews;
     }

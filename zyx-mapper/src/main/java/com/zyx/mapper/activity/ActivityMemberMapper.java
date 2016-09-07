@@ -36,10 +36,10 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
     List<ActivityMember> queryActivityMemberInfo(QueryMemberParm parm);
 
     /**
-     * 发起这审核报名
+     * 发起者批量审核报名
      *
      * @param id
      * @return
      */
-    int updateMemberByExamine(Integer id);
+    int updateMemberByExamine(List<Integer> id);
 }
