@@ -40,10 +40,10 @@ public interface ActivityMemberFacade {
     Map<String, Object> queryActivityMember(QueryMemberParm queryMemberParm);
 
     /**
-     * 发起这审核报名
+     * 发起者批量审核报名
      *
      * @param id
      * @return
      */
-    Map<String, Object> updateMemberByExamine(Integer id);
+    Map<String, Object> updateMemberByExamine(Integer[] id);
 }

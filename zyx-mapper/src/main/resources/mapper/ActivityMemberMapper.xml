@@ -45,8 +45,12 @@
         select COUNT(*) from activity_member where activity_id = #{id} AND del != 1
     </select>
 
-    <update id="updateMemberByExamine" parameterType="java.lang.Integer">
-        UPDATE activity_member SET examine_type = true where id = #{id}
+    <update id="updateMemberByExamine" parameterType="java.util.List">
+        UPDATE activity_member SET examine_type = true where id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
     <delete id="delActivityMember" parameterType="com.zyx.param.activity.MemberInfoParm">
