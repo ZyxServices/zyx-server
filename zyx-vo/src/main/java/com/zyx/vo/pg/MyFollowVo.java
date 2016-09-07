@@ -11,11 +11,18 @@ import com.zyx.entity.pg.Concern;
  */
 public class MyFollowVo extends Concern {
     UserVo userVo;
+    private Integer pageViews;
     private Integer zanCounts;
     private Integer commentCounts;
     UserAuthVo userAuthVo;
 
+    public Integer getPageViews() {
+        return pageViews;
+    }
 
+    public void setPageViews(Integer pageViews) {
+        this.pageViews = pageViews;
+    }
 
     public Integer getZanCounts() {
         return zanCounts;

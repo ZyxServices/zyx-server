@@ -94,8 +94,11 @@
         SELECT count(id) FROM concern WHERE user_id = #{accountId} AND  state = 0
     </select>
 
-    <select id="myConcernList" parameterType="int" resultMap="ConcernMyMap">
-        SELECT * FROM concern WHERE concern.user_id=#{accountId} AND state = 0 ORDER BY concern.create_time DESC
+    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMap">
+        SELECT * FROM concern WHERE concern.user_id=#{userId} AND state = 0 ORDER BY concern.create_time DESC
+        <if test="page != null">
+            limit #{page}, #{pageSize}
+        </if>
     </select>
 
     <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMap">

@@ -53,7 +53,7 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> queryAccountAddressInfo(UserAddressParam param) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken());
             if (map != null) {
                 return map;
             }
@@ -91,7 +91,7 @@ public class AccountAddressFacadeImpl implements AccountAddressFacade {
     public Map<String, Object> deleteAccountAddressInfo(UserAddressParam param) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken());
             if (map != null) {
                 return map;
             }

@@ -11,6 +11,7 @@ public class CollectionVo implements Serializable {
     private Integer userId;
     private Integer model;
     private Integer modelId;
+    private Integer pageViews;
 //    private CollLiveVo liveInfoVo;
 //    public CollLiveVo getLiveInfoVo() {
 //        return liveInfoVo;
@@ -55,5 +56,13 @@ public class CollectionVo implements Serializable {
 
     public Integer getModelId() {
         return modelId;
+    }
+
+    public Integer getPageViews() {
+        return pageViews;
+    }
+
+    public void setPageViews(Integer pageViews) {
+        this.pageViews = pageViews;
     }
 }

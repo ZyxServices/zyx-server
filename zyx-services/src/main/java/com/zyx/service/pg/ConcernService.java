@@ -1,6 +1,7 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Concern;
+import com.zyx.param.account.UserConcernParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.pg.MyFollowVo;
 
@@ -13,18 +14,19 @@ import java.util.Map;
 public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible);
 
-    Map<String,Object> delCern(Integer id,Integer loginUserId);
+    Map<String, Object> delCern(Integer id, Integer loginUserId);
 
     Map<String, Object> starRandom(Integer type, Integer n);
 
     Map<String, Object> getMyFollowList(Integer loginUserId);
 
-    List<MyFollowVo> queryMyConcernList(Integer accountId);
+    List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam);
 
     Map<String, Object> starConcern(Integer max);
 
     /**
      * 自动生成动态
+     *
      * @param fromId
      * @param fromType 目前3个模块用到，1：直播，2活动，3帖子（调用Constants key）
      * @param formObj
@@ -32,5 +34,6 @@ public interface ConcernService extends BaseService<Concern> {
      */
     Integer fromConcern(Integer fromId, Integer fromType, Object formObj);
 
-    Map<String, Object> getOne(Integer concernId,Integer accountId);
+    Map<String, Object> getOne(Integer concernId, Integer accountId);
+
 }

@@ -1,6 +1,7 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.param.account.UserCollectionParam;
 import com.zyx.rpc.account.MyCollectionFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.collection.CollectionService;
@@ -30,14 +31,14 @@ public class MyCollectionFacadeImpl implements MyCollectionFacade {
     private TokenFacade tokenFacade;
 
     @Override
-    public Map<String, Object> myList(String token, Integer accountId) {
+    public Map<String, Object> myList(UserCollectionParam param) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(token, accountId);
+            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
             if (map != null) {
                 return map;
             }
-            List<CollectionVo> _list = collectionService.myCollectionList(accountId);
+            List<CollectionVo> _list = collectionService.myCollectionList(param);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _list);
         } catch (Exception e) {
             e.printStackTrace();
