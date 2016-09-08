@@ -36,6 +36,7 @@
     </resultMap>
 
     <resultMap id="commentVoMap" type="com.zyx.vo.pg.CommentVo" extends="CommentResultMap">
+        <association property="userVo" column="comment_account" select="userVoSelect"/>
         <collection property="replyVos" column="id" select="replySelect"/>
     </resultMap>
 
