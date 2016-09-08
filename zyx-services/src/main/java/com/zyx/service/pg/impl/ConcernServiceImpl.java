@@ -117,9 +117,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             }
             List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
             myFollowVos.stream().forEach(s -> {
-                if (!Objects.equals(s.getFromId(), null))
-                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
-                else
+//                if (!Objects.equals(s.getFromId(), null))
+//                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+//                else
                     s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
             });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
@@ -147,9 +147,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             pageSize = Optional.ofNullable(pageSize).orElse(0);
             List<MyFollowVo> myFollowVos = concernMapper.starConcern(start * pageSize, pageSize);
             myFollowVos.stream().forEach(s -> {
-                if (!Objects.equals(s.getFromId(), null))
-                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
-                else
+//                if (!Objects.equals(s.getFromId(), null))
+//                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+//                else
                     s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
             });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
