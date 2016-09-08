@@ -24,6 +24,7 @@ import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ObjectError;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -119,7 +120,12 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                 ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
             }
             List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
-            myFollowVos.stream().forEach(s -> s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId())));
+            myFollowVos.stream().forEach(s -> {
+                if (!Objects.equals(s.getFromId(), null))
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+                else
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+            });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,7 +149,12 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             start = Optional.ofNullable(start).orElse(0);
             pageSize = Optional.ofNullable(pageSize).orElse(0);
             List<MyFollowVo> myFollowVos = concernMapper.starConcern(start * pageSize, pageSize);
-            myFollowVos.stream().forEach(s->s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId())));
+            myFollowVos.stream().forEach(s -> {
+                if (!Objects.equals(s.getFromId(), null))
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+                else
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+            });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
