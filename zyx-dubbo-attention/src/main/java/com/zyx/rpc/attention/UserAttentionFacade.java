@@ -10,7 +10,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserAttentionFacade.java
  */
 public interface UserAttentionFacade {
 
@@ -18,9 +17,6 @@ public interface UserAttentionFacade {
 
     /**
      * 取消关注，取消拉黑
-     *
-     * @param attentionParam
-     * @return
      */
     Map<String, Object> unAttentionFromAToB(AttentionParam attentionParam);
 
@@ -30,10 +26,12 @@ public interface UserAttentionFacade {
 
     /**
      * 我的关注大咖列表
-     *
-     * @param attentionParam
-     * @return
      */
     Map<String, Object> myDKGZList(AttentionParam attentionParam);
+
+    /**
+     * 检查用户A是否已经关注用户B
+     */
+    Map<String, Object> checkAttentionFromAToB(AttentionParam param);
 
 }
