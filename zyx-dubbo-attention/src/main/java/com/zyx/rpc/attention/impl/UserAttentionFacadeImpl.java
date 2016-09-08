@@ -25,7 +25,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserAttentionFacadeImpl.java
  */
 @Service("userAttentionFacade")
 public class UserAttentionFacadeImpl implements UserAttentionFacade {
@@ -118,6 +117,21 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
             List<AttentionVo> _list = userAttentionService.myDKGZList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
+            return UserAttentionConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> checkAttentionFromAToB(AttentionParam param) {
+        try {
+            // 判断token是否失效
+            if (isTokenFailure(param.getToken())) {
+                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+            }
+            param.setType(1);
+            return MapUtils.buildSuccessMap(userAttentionService.selectAttentionCount(param));
+        } catch (Exception e) {
+            e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
     }
