@@ -17,8 +17,6 @@ public class MyFollowVo extends Concern {
     UserAuthVo userAuthVo;
     PageViews pageViews;
 
-
-
     public Integer getZanCounts() {
         return zanCounts;
     }

@@ -2,16 +2,18 @@ package com.zyx.service.collection.impl;
 
 import com.zyx.entity.collection.Collection;
 import com.zyx.mapper.collection.CollectionMapper;
+import com.zyx.param.account.UserCollectionParam;
 import com.zyx.param.collection.CollectionParam;
-import com.zyx.service.BaseService;
 import com.zyx.service.BaseServiceImpl;
+import com.zyx.service.activity.PageViwesService;
 import com.zyx.service.collection.CollectionService;
 import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.collection.CollectionVo;
+import com.zyx.vo.pg.MyFollowVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,6 +27,9 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
 
     @Autowired
     CollectionMapper collectionMapper;
+
+    @Resource
+    private PageViwesService pageViwesService;
 
     @Override
     public List<Integer> selectModelIds(CollectionParam param) {
@@ -40,13 +45,27 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection> implement
     }
 
     @Override
-    public List<CollectionVo> myCollectionList(Integer accountId) {
-        if (accountId == null) {
+    public List<CollectionVo> myCollectionList(UserCollectionParam userCollectionParam) {
+        if (userCollectionParam == null) {
             return null;
         }
-        CollectionParam cp = new CollectionParam();
-        cp.setUserId(accountId);
-        return collectionMapper.myCollectionList(cp);
+        List<CollectionVo> list = collectionMapper.myCollectionList(userCollectionParam);
+        list.stream().filter(e -> e.getId() != null).forEach(s -> s.setPageViews(pageViwesService.getPageViwesByInternal(getType(s.getModel()), s.getModelId()).getPageviews()));
+        return collectionMapper.myCollectionList(userCollectionParam);
+    }
+
+    private Integer getType(Integer model) {
+        switch (model) {
+            case 1:
+                return 2;
+            case 2:
+                return 0;
+            case 4:
+                return 3;
+            case 5:
+                return 1;
+        }
+        return 0;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zyx.service.pg;
 
 import com.zyx.entity.pg.Concern;
+import com.zyx.param.account.UserConcernParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.pg.MyFollowVo;
 
@@ -19,7 +20,7 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer end);
 
-    List<MyFollowVo> queryMyConcernList(Integer accountId);
+    List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam);
 
     Map<String, Object> starConcern(Integer start,Integer pageSize);
 
@@ -34,4 +35,5 @@ public interface ConcernService extends BaseService<Concern> {
     Integer fromConcern(Integer fromId, Integer fromType, Object formObj);
 
     Map<String, Object> getOne(Integer concernId, Integer accountId);
+
 }

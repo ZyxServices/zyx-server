@@ -52,7 +52,7 @@
         </if>
     </select>
 
-    <select id="myCollectionList" resultMap="BaseCollection" parameterType="com.zyx.param.collection.CollectionParam">
+    <select id="myCollectionList" resultMap="BaseCollection" parameterType="com.zyx.param.account.UserCollectionParam">
         SELECT id,create_time,user_id,model,model_id
         FROM t_collection
         WHERE
@@ -63,6 +63,9 @@
         </if>
         ORDER BY
         create_time DESC
+        <if test="page != null">
+            limit #{page}, #{pageSize}
+        </if>
     </select>
 
     <select id="selectModelIds" parameterType="com.zyx.param.collection.CollectionParam" resultType="java.lang.Integer">

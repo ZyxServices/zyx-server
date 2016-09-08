@@ -4,25 +4,21 @@ package com.zyx.service.pg.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.activity.Activity;
-import com.zyx.entity.activity.PageViews;
 import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.pg.CircleItem;
-import com.zyx.mapper.attention.UserAttentionMapper;
+import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.collection.CollectionMapper;
+import com.zyx.mapper.pg.ConcernMapper;
+import com.zyx.param.account.UserConcernParam;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.collection.CollectionParam;
-import com.zyx.service.activity.PageViwesService;
-import com.zyx.service.attention.UserAttentionService;
-import com.zyx.vo.account.AccountAttentionVo;
-import com.zyx.vo.attention.AttentionVo;
-import com.zyx.vo.collection.CollectionVo;
-import com.zyx.vo.pg.MyFollowVo;
-import com.zyx.entity.pg.Concern;
-import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.service.BaseServiceImpl;
+import com.zyx.service.activity.PageViwesService;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.collection.CollectionVo;
+import com.zyx.vo.pg.MyFollowVo;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
@@ -135,12 +131,13 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public List<MyFollowVo> queryMyConcernList(Integer accountId) {
-        if (accountId == null) {
+    public List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam) {
+        if (userConcernParam == null) {
             return null;
         }
-        return concernMapper.myConcernList(accountId);
-
+        List<MyFollowVo> list = concernMapper.myConcernList(userConcernParam);
+        list.stream().filter(e -> e.getId() != null).forEach(s -> s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId())));
+        return list;
     }
 
     @Override

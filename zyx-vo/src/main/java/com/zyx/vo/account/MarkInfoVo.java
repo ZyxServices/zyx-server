@@ -1,16 +1,15 @@
 package com.zyx.vo.account;
 
-import com.zyx.vo.BaseVo;
+import java.io.Serializable;
 
 /**
- * Created by WeiMinSheng on 2016/6/16.
+ * Created by wms on 2016/6/16.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MarkInfoVo.java
  */
-public class MarkInfoVo extends BaseVo {
+public class MarkInfoVo implements Serializable {
     /**
      *
      */
