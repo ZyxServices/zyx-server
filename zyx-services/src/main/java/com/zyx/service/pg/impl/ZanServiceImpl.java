@@ -65,7 +65,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
             } else {
                 Integer deleteResult = zanMapper.cancelZan(body_id, body_type, account_id);
                 if (deleteResult > 0)
-                    return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30040_MSG);
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30040_MSG, null);
                 else
                     return PgConstants.MAP_500;
             }
