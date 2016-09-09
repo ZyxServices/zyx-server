@@ -1,9 +1,6 @@
 package com.zyx.service.pg.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import com.zyx.vo.pg.ZanCountVo;
 import com.zyx.mapper.pg.ZanMapper;
@@ -62,7 +59,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
             }
             Optional.ofNullable(account_id).ifPresent(zan::setAccountId);
             Integer result = zanMapper.exist(body_id, body_type, account_id);
-            if (result < 0) {
+            if (Objects.equals(result, 0)) {
                 save(zan);
                 return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
             } else {
