@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class CommentVo extends Comment {
     List<ReplyVo> replyVos;
+    UserVo userVo;
 
     public List<ReplyVo> getReplyVos() {
         return replyVos;
@@ -19,5 +20,13 @@ public class CommentVo extends Comment {
 
     public void setReplyVos(List<ReplyVo> replyVos) {
         this.replyVos = replyVos;
+    }
+
+    public UserVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
     }
 }
