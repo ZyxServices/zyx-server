@@ -2,9 +2,9 @@ package com.zyx.mapper.pg;
 
 import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.pg.Concern;
-import com.zyx.vo.attention.AttentionVo;
-import com.zyx.vo.pg.MyFollowVo;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.param.account.UserConcernParam;
+import com.zyx.vo.pg.MyFollowVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,17 +19,14 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     List<UserAttention> getAttentionIds(@Param("loginUserId") Integer logInUserId);
 
-    List<MyFollowVo> myFollowList(@Param("ids") List<Integer> ids);
+    List<MyFollowVo> myFollowList(@Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
 
     /**
      * 我的动态列表
-     *
-     * @param accountId
-     * @return
      */
-    List<MyFollowVo> myConcernList(@Param("accountId") Integer accountId);
+    List<MyFollowVo> myConcernList(UserConcernParam userConcernParam);
 
-    List<MyFollowVo> starConcern(@Param("max") Integer max);
+    List<MyFollowVo> starConcern(@Param("start") Integer max, @Param("end") Integer end);
 
     MyFollowVo getOne(@Param("id") Integer concernId);
 

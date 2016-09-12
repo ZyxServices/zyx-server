@@ -2,16 +2,12 @@ package com.zyx.constants.account;
 
 import com.zyx.constants.Constants;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
- * Created by WeiMinSheng on 2016/6/14.
+ * Created by wms on 2016/6/14.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AuthAccountConstants.java
  */
 public interface AccountConstants extends Constants {
 
@@ -111,6 +107,12 @@ public interface AccountConstants extends Constants {
     int ACCOUNT_ERROR_CODE_50100 = 50100;
     String ACCOUNT_ERROR_CODE_50100_MSG = "发送验证码失败，手机号格式有误";
 
+    /**
+     * 发送验证码失败，短信类型设置有误
+     */
+    int ACCOUNT_ERROR_CODE_50101 = 50101;
+    String ACCOUNT_ERROR_CODE_50101_MSG = "发送验证码失败，短信类型设置有误";
+
 
     /**
      * 该用户第一次签到，插入数据失败！！！
@@ -201,5 +203,15 @@ public interface AccountConstants extends Constants {
     String TIMESTAMP_STRING = "timestamp_string";
 
     String MARK_INFO = "mark_info";
+
+    /**
+     * 注册-发验证码
+     */
+    String SEND_REGISTER = "register";
+
+    /**
+     * 公共-发验证码
+     */
+    String SEND_PUBLIC = "public";
 
 }

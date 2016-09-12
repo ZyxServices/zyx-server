@@ -149,5 +149,8 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30039= 30039;
     String PG_ERROR_CODE_30039_MSG = "被回复人id不能为空";
 
+    int PG_ERROR_CODE_30040= 30040;
+    String PG_ERROR_CODE_30040_MSG = "取消点赞成功";
+
     String PG_RESULT = "result";
 }

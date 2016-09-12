@@ -1,9 +1,6 @@
 package com.zyx.service.pg.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import com.zyx.vo.pg.ZanCountVo;
 import com.zyx.mapper.pg.ZanMapper;
@@ -61,11 +58,21 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
 
             }
             Optional.ofNullable(account_id).ifPresent(zan::setAccountId);
-            save(zan);
+            Integer result = zanMapper.exist(body_id, body_type, account_id);
+            if (Objects.equals(result, 0)) {
+                save(zan);
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            } else {
+                Integer deleteResult = zanMapper.cancelZan(body_id, body_type, account_id);
+                if (deleteResult > 0)
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30040_MSG, null);
+                else
+                    return PgConstants.MAP_500;
+            }
 //            map.put(PgConstants.STATE, PgConstants.SUCCESS);
 //            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return map;
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +96,7 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
         ZanCountVo dto = new ZanCountVo();
         dto.setBodyId(bodyId);
         dto.setBodyType(type);
-        dto.setZanCount( selectCount(record));
+        dto.setZanCount(selectCount(record));
         return dto;
     }
 }

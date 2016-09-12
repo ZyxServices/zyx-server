@@ -10,7 +10,6 @@ import com.zyx.entity.pg.MyConcern;
  */
 public class MyConcernVo extends MyConcern {
     private Integer userId;
-    private String userName;
     private String nickName;
     private String avatar;
 
@@ -22,13 +21,6 @@ public class MyConcernVo extends MyConcern {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getNickName() {
         return nickName;

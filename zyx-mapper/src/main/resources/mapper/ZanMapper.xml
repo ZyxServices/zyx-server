@@ -24,31 +24,39 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.pg.ZanMapper" >
-  <resultMap id="ZanResultMap" type="com.zyx.entity.pg.Zan" >
-    <id column="Id" property="id" jdbcType="INTEGER" />
-    <result column="body_id" property="bodyId" jdbcType="INTEGER" />
-    <result column="body_type" property="bodyType" jdbcType="INTEGER" />
-    <result column="account_id" property="accountId" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.zyx.mapper.pg.ZanMapper">
+    <resultMap id="ZanResultMap" type="com.zyx.entity.pg.Zan">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="body_id" property="bodyId" jdbcType="INTEGER"/>
+        <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+    </resultMap>
 
-  <select id="countZanByBodyId" parameterType="com.zyx.vo.pg.ZanVo" resultType="com.zyx.vo.pg.ZanCountVo">
-    SELECT body_type as bodyType,body_id AS bodyId,COUNT(body_id) AS zanCount
-    FROM zan
-    WHERE
-    1=1
-    <if test="type!=null ">
-      AND
-      body_type=#{type}
-    </if>
-    <if test="bodyIds!=null">
-      AND
-      body_id in
-      <foreach collection="bodyIds" index="index" item="tag" open="("
-               separator="," close=")">
-        #{tag}
-      </foreach>
-    </if>
-    GROUP BY body_id
+    <select id="countZanByBodyId" parameterType="com.zyx.vo.pg.ZanVo" resultType="com.zyx.vo.pg.ZanCountVo">
+        SELECT body_type as bodyType,body_id AS bodyId,COUNT(body_id) AS zanCount
+        FROM zan
+        WHERE
+        1=1
+        <if test="type!=null ">
+            AND
+            body_type=#{type}
+        </if>
+        <if test="bodyIds!=null">
+            AND
+            body_id in
+            <foreach collection="bodyIds" index="index" item="tag" open="("
+                     separator="," close=")">
+                #{tag}
+            </foreach>
+        </if>
+        GROUP BY body_id
+    </select>
+
+    <select id="exist" resultType="java.lang.Integer">
+    SELECT count(id) FROM zan WHERE body_id=#{bodyId} AND body_type=#{bodyType} AND account_id=#{accountId}
   </select>
+
+    <delete id="cancelZan">
+        DELETE FROM zan WHERE body_id=#{bodyId} AND body_type=#{bodyType} AND account_id=#{accountId}
+    </delete>
 </mapper>

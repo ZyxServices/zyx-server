@@ -1,5 +1,7 @@
 package com.zyx.rpc.account;
 
+import com.zyx.param.account.UserConcernParam;
+
 import java.util.Map;
 
 /**
@@ -9,8 +11,12 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MyConcernFacade.java
  */
 public interface MyConcernFacade {
-    Map<String, Object> myList(String token, Integer accountId);
+
+    /**
+     * 我的动态列表
+     */
+    Map<String, Object> myList(UserConcernParam userConcernParam);
+
 }

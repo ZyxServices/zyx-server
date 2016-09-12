@@ -7,21 +7,20 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.pg.CircleItem;
-import com.zyx.mapper.attention.UserAttentionMapper;
+import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.collection.CollectionMapper;
+import com.zyx.mapper.pg.ConcernMapper;
+import com.zyx.param.account.UserConcernParam;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.collection.CollectionParam;
-import com.zyx.service.attention.UserAttentionService;
-import com.zyx.vo.account.AccountAttentionVo;
-import com.zyx.vo.attention.AttentionVo;
-import com.zyx.vo.collection.CollectionVo;
-import com.zyx.vo.pg.MyFollowVo;
-import com.zyx.entity.pg.Concern;
-import com.zyx.mapper.pg.ConcernMapper;
 import com.zyx.service.BaseServiceImpl;
+import com.zyx.service.activity.PageViwesService;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.collection.CollectionVo;
+import com.zyx.vo.pg.MyFollowVo;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ObjectError;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -38,6 +37,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
     @Resource
     private CollectionMapper collectionMapper;
+
+    @Resource
+    private PageViwesService pageViwesService;
 
     public ConcernServiceImpl() {
         super(Concern.class);
@@ -99,8 +101,10 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public Map<String, Object> getMyFollowList(Integer loginUserId) {
+    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
         try {
+            start = Optional.ofNullable(start).orElse(0);
+            pageSize = Optional.ofNullable(pageSize).orElse(0);
             if (Objects.equals(loginUserId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30000, PgConstants.PG_ERROR_CODE_30000_MSG);
             }
@@ -111,7 +115,13 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (attentionIds.size() > 0) {
                 ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
             }
-            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids);
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
+            myFollowVos.stream().forEach(s -> {
+//                if (!Objects.equals(s.getFromId(), null))
+//                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+//                else
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+            });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,19 +131,27 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public List<MyFollowVo> queryMyConcernList(Integer accountId) {
-        if (accountId == null) {
+    public List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam) {
+        if (userConcernParam == null) {
             return null;
         }
-        return concernMapper.myConcernList(accountId);
-
+        List<MyFollowVo> list = concernMapper.myConcernList(userConcernParam);
+        list.stream().filter(e -> e.getId() != null).forEach(s -> s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId())));
+        return list;
     }
 
     @Override
-    public Map<String, Object> starConcern(Integer max) {
+    public Map<String, Object> starConcern(Integer start, Integer pageSize) {
         try {
-            Optional.ofNullable(max).orElse(5);
-            List<MyFollowVo> myFollowVos = concernMapper.starConcern(max);
+            start = Optional.ofNullable(start).orElse(0);
+            pageSize = Optional.ofNullable(pageSize).orElse(0);
+            List<MyFollowVo> myFollowVos = concernMapper.starConcern(start * pageSize, pageSize);
+            myFollowVos.stream().forEach(s -> {
+//                if (!Objects.equals(s.getFromId(), null))
+//                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
+//                else
+                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+            });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -205,7 +223,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public Map<String, Object> getOne(Integer concernId,Integer accountId) {
+    public Map<String, Object> getOne(Integer concernId, Integer accountId) {
         try {
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);

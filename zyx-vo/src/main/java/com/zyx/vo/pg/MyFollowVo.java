@@ -1,6 +1,7 @@
 package com.zyx.vo.pg;
 
 
+import com.zyx.entity.activity.PageViews;
 import com.zyx.entity.pg.Concern;
 
 /**
@@ -14,8 +15,7 @@ public class MyFollowVo extends Concern {
     private Integer zanCounts;
     private Integer commentCounts;
     UserAuthVo userAuthVo;
-
-
+    PageViews pageViews;
 
     public Integer getZanCounts() {
         return zanCounts;
@@ -48,5 +48,13 @@ public class MyFollowVo extends Concern {
 
     public void setUserAuthVo(UserAuthVo userAuthVo) {
         this.userAuthVo = userAuthVo;
+    }
+
+    public PageViews getPageViews() {
+        return pageViews;
+    }
+
+    public void setPageViews(PageViews pageViews) {
+        this.pageViews = pageViews;
     }
 }

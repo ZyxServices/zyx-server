@@ -18,7 +18,6 @@ import java.util.List;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserAttentionServiceImpl.java
  */
 @Service("userAttentionService")
 public class UserAttentionServiceImpl extends BaseServiceImpl<UserAttention> implements UserAttentionService {

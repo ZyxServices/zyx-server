@@ -44,7 +44,7 @@
         <!--<result column="zanCount" property="zanCount" jdbcType="INTEGER"/>-->
         <!--<result column="meetCount" property="meetCount" jdbcType="INTEGER"/>-->
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
-        <association property="zanCount" column="circle_id" select="zanSelect"/>
+        <association property="zanCount" column="Id" select="zanSelect"/>
         <association property="meetCount" column="circle_id" select="meetSelect"/>
     </resultMap>
     <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
@@ -118,7 +118,7 @@
         </if>
 
         ORDER BY circle_item.create_time
-        limit 0,#{max}
+        limit #{start},#{end}
     </select>
 
     <select id="selectCircleItemById" resultType="java.lang.Integer" resultMap="CircleItemCustomMap">
