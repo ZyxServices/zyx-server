@@ -40,9 +40,9 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
 
     @Override
     public Map<String, Object> delActivityMember(MemberInfoParm memberInfoParm) {
-        try{
+        try {
             return activityMemberService.delActivityMember(memberInfoParm);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);
             return ActivityUtils.Error500();
@@ -61,9 +61,9 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
     }
 
     @Override
-    public Map<String, Object> updateMemberByExamine(Integer[] id) {
+    public Map<String, Object> updateMemberByExamine(Integer type, String id) {
         try {
-            return activityMemberService.updateMemberByExamine(id);
+            return activityMemberService.updateMemberByExamine(type, id);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);

@@ -31,6 +31,11 @@ public class QueryMemberVo implements Serializable {
     private String userNick;
 
     /**
+     * 用户头像
+     */
+    private String avatar;
+
+    /**
      * 报名时间
      */
     private Long joinTime;
@@ -39,7 +44,7 @@ public class QueryMemberVo implements Serializable {
      * 审核状态（默认为审核通过，如果发起者开启审核则不同）
      * true 通过， false 未通过
      */
-    private Boolean examineType;
+    private int examineType;
 
     /**
      * 报名者联系电话
@@ -106,11 +111,19 @@ public class QueryMemberVo implements Serializable {
         this.joinTime = joinTime;
     }
 
-    public Boolean getExamineType() {
+    public int getExamineType() {
         return examineType;
     }
 
-    public void setExamineType(Boolean examineType) {
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setExamineType(int examineType) {
         this.examineType = examineType;
     }
 
@@ -161,6 +174,7 @@ public class QueryMemberVo implements Serializable {
                 ", activityId=" + activityId +
                 ", userId=" + userId +
                 ", userNick='" + userNick + '\'' +
+                ", avatar='" + avatar + '\'' +
                 ", joinTime=" + joinTime +
                 ", examineType=" + examineType +
                 ", phone='" + phone + '\'' +

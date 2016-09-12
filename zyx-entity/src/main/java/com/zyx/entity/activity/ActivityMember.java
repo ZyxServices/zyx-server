@@ -55,7 +55,7 @@ public class ActivityMember extends BaseEntity {
      */
     @Column
     @ColumnType(jdbcType = JdbcType.TINYINT)
-    private boolean examineType;
+    private int examineType;
 
     /**
      * 报名者联系电话
@@ -110,11 +110,11 @@ public class ActivityMember extends BaseEntity {
         this.joinTime = joinTime;
     }
 
-    public boolean isExamineType() {
+    public int getExamineType() {
         return examineType;
     }
 
-    public void setExamineType(boolean examineType) {
+    public void setExamineType(int examineType) {
         this.examineType = examineType;
     }
 

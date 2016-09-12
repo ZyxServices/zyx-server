@@ -17,10 +17,7 @@ import com.zyx.vo.account.QueryUserInfoVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Rainbow on 16-6-14.
@@ -73,8 +70,8 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
 
             Activity activity = activityMapper.selectByPrimaryKey(parm.getActivityId());
 
-            if (activity.getExamine() == 1) activityMember.setExamineType(false);
-            else activityMember.setExamineType(true);
+            if (activity.getExamine() == 1) activityMember.setExamineType(0);
+            else activityMember.setExamineType(1);
             activity.setMask(0);
 
             int insert = mapper.insert(activityMember);
@@ -116,8 +113,9 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
             QueryMemberVo queryMemberVo = new QueryMemberVo();
             queryMemberVo.setId(e.getId());
             queryMemberVo.setActivityId(e.getActivityId());
+            queryMemberVo.setAvatar(queryUserInfoVo.getAvatar());
             queryMemberVo.setJoinTime(e.getJoinTime());
-            queryMemberVo.setExamineType(e.isExamineType());
+            queryMemberVo.setExamineType(e.getExamineType());
             queryMemberVo.setMemberInfo(e.getMemberInfo());
             queryMemberVo.setPhone(e.getPhone());
             queryMemberVo.setUserId(e.getUserId());
@@ -136,13 +134,21 @@ public class ActivityMemberServiceImpl extends BaseServiceImpl<ActivityMember> i
     }
 
     @Override
-    public Map<String, Object> updateMemberByExamine(Integer[] id) {
+    public Map<String, Object> updateMemberByExamine(Integer type, String id) {
 
-        if (id == null) {
+        if (id == null || type == null) {
             return Constants.MAP_PARAM_MISS;
         }
-        List<Integer> asList = Arrays.asList(id);
-        int integer = activityMemberMapper.updateMemberByExamine(asList);
+
+        String[] strings = id.split(",");
+        List<Integer> asList = new ArrayList<>();
+        for (String string : strings) {
+            asList.add(Integer.valueOf(string));
+        }
+        Map<String, Object> stringObjectMap = new HashMap<>();
+        stringObjectMap.put("type", type);
+        stringObjectMap.put("id", asList);
+        int integer = activityMemberMapper.updateMemberByExamine(stringObjectMap);
         if (integer > 0) {
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "审核成功", null);
         } else {

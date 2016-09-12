@@ -38,7 +38,7 @@
     <resultMap id="queryCirle" type="com.zyx.vo.system.SearchCirleVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="headImgUrl" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="is_atten" property="isAtten" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="account" column="create_id"
