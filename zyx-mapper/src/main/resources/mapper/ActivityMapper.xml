@@ -67,7 +67,7 @@
             and group_name = #{groupName}
         </if>
         <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-            and create_time &gt;= #{startTime}
+            and start_time &gt;= #{startTime}
             and end_time &lt;= #{endTime}
         </if>
         AND del != 1 AND mask = 0
