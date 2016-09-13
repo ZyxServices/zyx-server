@@ -89,8 +89,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                     circleItem.setContent(circleItem.getContent() + sb.toString());
                 } else {
                     StringBuilder sb = new StringBuilder();
-                    sb.append("<img src='http://image.tiyujia.com/" + circleItem.getImgUrl() + "'></img>");
-                    circleItem.setContent(circleItem.getContent() + sb.toString());
+                    if(!Objects.equals(circleItem.getImgUrl(),null)||!Objects.equals(circleItem.getImgUrl(),"")){
+                        sb.append("<img src='http://image.tiyujia.com/" + circleItem.getImgUrl() + "'></img>");
+                        circleItem.setContent(circleItem.getContent() + sb.toString());
+                    }
                 }
             }
             save(circleItem);

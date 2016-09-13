@@ -81,7 +81,7 @@
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
     <select id="meetSelect" parameterType="int" resultType="int">
-        SELECT count(*) from meet where circle_id=#{circle_item_id}
+        SELECT count(id) from comment where comment_id=#{circle_item_id} AND comment_type=1
     </select>
 
     <select id="zanSelect" parameterType="int" resultType="int">
