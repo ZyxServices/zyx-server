@@ -21,6 +21,11 @@ public class QueryUserInfoVo {
     private String nickname;
 
     /**
+     * 用户昵称
+     */
+    private String avatar;
+
+    /**
      * 用户手机号
      */
     private String phone;
@@ -78,6 +83,14 @@ public class QueryUserInfoVo {
         return phone;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -120,20 +133,5 @@ public class QueryUserInfoVo {
 
     public void setOffcial(Integer offcial) {
         this.offcial = offcial;
-    }
-
-    @Override
-    public String toString() {
-        return "QueryUserInfoVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthday=" + birthday +
-                ", sex=" + sex +
-                ", idcard='" + idcard + '\'' +
-                ", mask=" + mask +
-                ", offcial=" + offcial +
-                '}';
     }
 }

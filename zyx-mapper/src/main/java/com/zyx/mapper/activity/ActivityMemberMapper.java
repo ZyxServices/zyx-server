@@ -7,6 +7,7 @@ import com.zyx.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Rainbow on 16-6-14.
@@ -38,8 +39,8 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
     /**
      * 发起者批量审核报名
      *
-     * @param id
+     * @param stringObjectMap
      * @return
      */
-    int updateMemberByExamine(List<Integer> id);
+    int updateMemberByExamine(Map<String, Object> stringObjectMap);
 }
