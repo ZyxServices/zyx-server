@@ -18,6 +18,8 @@ public class SearchPostsVo implements Serializable {
 
     private String content;
 
+    private String baseContent;
+
     private Long createTime;
 
     private SearchAccountVo account;
@@ -115,5 +117,13 @@ public class SearchPostsVo implements Serializable {
 
     public void setPageviews(Integer pageviews) {
         this.pageviews = pageviews;
+    }
+
+    public String getBaseContent() {
+        return baseContent;
+    }
+
+    public void setBaseContent(String baseContent) {
+        this.baseContent = baseContent;
     }
 }
