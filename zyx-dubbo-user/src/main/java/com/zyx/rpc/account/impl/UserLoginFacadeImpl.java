@@ -57,23 +57,19 @@ public class UserLoginFacadeImpl implements UserLoginFacade {
                 String token = phoneTime.substring(phoneTime.indexOf("【") + 1, phoneTime.indexOf("】"));
                 stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
                 stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + phone);
-                AccountInfoVo _accountInfo = accountRedisService.get(phone);
-                if (_accountInfo != null) {
-                    String token_new = UUID.randomUUID().toString().replaceAll("-", "");
-                    String _newTyjPhone = phoneTime.replaceAll(token, token_new);
-                    stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token_new, phone);
-                    stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, _newTyjPhone);
-                    _accountInfo.setToken(token_new);
-                    accountRedisService.put(_accountInfo);
-                    return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "登录成功", _accountInfo);
-                }
+                String token_new = UUID.randomUUID().toString().replaceAll("-", "");
+                String _newTyjPhone = phoneTime.replaceAll(token, token_new);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token_new, phone);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, _newTyjPhone);
+                accountInfo.setToken(token_new);
+            } else {
+                // 登录成功返回
+                String token = UUID.randomUUID().toString().replaceAll("-", "");
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token, phone);
+                stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, System.currentTimeMillis() + "【" + token + "】");
+                accountInfo.setToken(token);
             }
-            // 登录成功返回
-            String token = UUID.randomUUID().toString().replaceAll("-", "");
-            accountInfo.setToken(token);
-            stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_TOKEN + token, phone);
             accountRedisService.put(accountInfo);
-            stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE + phone, System.currentTimeMillis() + "【" + token + "】");
             return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "登录成功", accountInfo);
         } catch (Exception e) {
             e.printStackTrace();
