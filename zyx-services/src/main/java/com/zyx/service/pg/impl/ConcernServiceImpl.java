@@ -115,12 +115,15 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (attentionIds.size() > 0) {
                 ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
             }
+            if (!Objects.equals(loginUserId, null)) {
+                ids.add(loginUserId);
+            }
             List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
             myFollowVos.stream().forEach(s -> {
 //                if (!Objects.equals(s.getFromId(), null))
 //                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
 //                else
-                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+                s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
             });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
@@ -150,7 +153,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //                if (!Objects.equals(s.getFromId(), null))
 //                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getFromId()));
 //                else
-                    s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
+                s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
             });
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
