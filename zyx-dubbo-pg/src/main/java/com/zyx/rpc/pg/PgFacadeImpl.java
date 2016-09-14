@@ -37,8 +37,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag) {
-        return circleService.insertCircle(title, createId, circleType, details, headImgUrl, tag);
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Long groupId) {
+        return circleService.insertCircle(title, createId, circleType, details, headImgUrl, tag, groupId);
     }
 
     @Override
@@ -82,8 +82,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> circleItemList(Integer circleId,Integer start,Integer pageSize) {
-        return circleItemService.circleItemList(circleId,start,pageSize);
+    public Map<String, Object> circleItemList(Integer circleId, Integer start, Integer pageSize) {
+        return circleItemService.circleItemList(circleId, start, pageSize);
     }
 
     @Override
@@ -158,8 +158,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> starConcern(Integer start,Integer pageSize) {
-        return concrenService.starConcern(start,pageSize);
+    public Map<String, Object> starConcern(Integer start, Integer pageSize) {
+        return concrenService.starConcern(start, pageSize);
     }
 
     @Override
