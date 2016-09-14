@@ -39,6 +39,7 @@
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="hot" property="hot" jdbcType="INTEGER"/>
         <result column="tag" property="tag" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="CircleListDtoResultMap" type="com.zyx.vo.pg.CircleListVo">
