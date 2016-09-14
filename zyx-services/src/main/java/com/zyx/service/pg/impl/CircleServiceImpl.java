@@ -47,7 +47,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Integer groupId) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Long groupId) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {

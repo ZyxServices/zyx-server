@@ -37,7 +37,7 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Integer groupId) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Long groupId) {
         return circleService.insertCircle(title, createId, circleType, details, headImgUrl, tag, groupId);
     }
 

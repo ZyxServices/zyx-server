@@ -30,7 +30,7 @@ public interface PgFacade {
      * @param headImgUrl 圈子头像url
      * @param tag        圈子标签
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag,Integer groupId);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag,Long groupId);
 
 
     /**
