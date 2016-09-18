@@ -8,6 +8,7 @@ import java.util.Random;
 
 import com.alibaba.fastjson.JSON;
 import com.zyx.entity.live.dto.LiveInfoDto;
+import com.zyx.param.Pager;
 import com.zyx.param.live.LiveInfoParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -74,6 +75,9 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     @Override
     public List<LiveInfoVo> getList(LiveInfoParam liveInfoParam) {
         List<LiveInfoVo> list = liveInfoService.selectLives(liveInfoParam);
+        if(liveInfoParam.getPager()==null||liveInfoParam.getPager().getPageNum()==null||liveInfoParam.getPager().getPageSize()==null){
+            liveInfoParam.setPager(new Pager(1,10));
+        }
         if(null!=list&&!list.isEmpty()){
             for(LiveInfoVo vo:list){
                 if(vo.getState().equals(1))
