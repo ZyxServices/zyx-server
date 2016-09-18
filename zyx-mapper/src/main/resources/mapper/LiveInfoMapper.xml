@@ -19,6 +19,7 @@
 		<id column="group_id" property="groupId" />
 		<id column="state" property="state" />
 		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
+		<association property="zanCount" column="id" select="zanSelect"/>
 	</resultMap>
 
 	<resultMap id="EndLiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
@@ -63,7 +64,7 @@
 		<![CDATA[ START_TIME < NOW()]]>
 		ORDER BY
 		state DESC,
-		CREATE_TIME DESC,
+		CREATE_TIME DESC
 		<if test="pager != null">
 			LIMIT #{pager.offset},#{pager.pageSize}
 		</if>
