@@ -21,6 +21,16 @@
 		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
 	</resultMap>
 
+	<resultMap id="EndLiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
+		<id column="id" property="id" />
+		<id column="creat_time" property="createTime" />
+		<id column="start_time" property="startTime" />
+		<id column="end_time" property="endTime" />
+		<!--<id column="group_id" property="groupId" />-->
+		<id column="state" property="state" />
+		<association property="zanCount" column="id" select="zanSelect"/>
+	</resultMap>
+
 	<select id="countLives" parameterType="com.zyx.param.live.LiveInfoParam"
 		resultType="java.lang.Long">
 		select count(id)
@@ -52,14 +62,15 @@
 		AND
 		<![CDATA[ START_TIME < NOW()]]>
 		ORDER BY
-		START_TIME DESC
+		state DESC,
+		CREATE_TIME DESC,
 		<if test="pager != null">
 			LIMIT #{pager.offset},#{pager.pageSize}
 		</if>
 	</select>
 
-	<select id="selectLiveInfo" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">
-		SELECT *
+	<select id="selectEndLiveInfo" parameterType="java.lang.Integer" resultMap="EndLiveInfoVo">
+		SELECT id,create_time,start_time,end_time,state
 		FROM t_live
 		WHERE
 		id = #{id}
@@ -73,6 +84,9 @@
 		id = #{user_id}
 		AND
 		del = 0
+	</select>
+	<select id="zanSelect" parameterType="int" resultType="int">
+		SELECT count(id) from zan where body_type=4 AND body_id=#{circle_item_id}
 	</select>
 	<insert id="saveLiveInfo" parameterType="com.zyx.entity.live.LiveInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO

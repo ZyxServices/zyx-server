@@ -48,6 +48,13 @@ public interface LiveInfoFacade {
 	 * @update 2016年6月22日 上午10:30:44
 	 */
 	public LiveInfo getById(Integer id);
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
+	public LiveInfoVo endLive(Integer id);
 	/**
 	 *
 	 * @param liveInfoParam
@@ -95,6 +102,6 @@ public interface LiveInfoFacade {
 	 * 进入或者推出直播间
 	 * @param liveId
 	 * @param inOrOut
-     */
+	 */
 	public void  inOrOutLive(Integer liveId,Integer inOrOut);
 }
