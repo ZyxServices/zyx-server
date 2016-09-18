@@ -57,7 +57,18 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
         updateNotNull(liveInfo);
     }
 
-
+    @Override
+    public LiveInfoVo endLive(Integer id) {
+        LiveInfo liveInfo = new LiveInfo();
+        liveInfo.setId(id);
+        liveInfo.setState(-1);
+        liveInfo.setEndTime(System.currentTimeMillis());
+        updateNotNull(liveInfo);
+        LiveInfoVo liveInfoVo = liveInfoMapper.selectEndLiveInfo(id);
+        liveInfoVo.countLiveTime();//计算直播时长
+        liveInfoVo.setWatchNumber(getLiveWatcherNumber(id));
+        return liveInfoMapper.selectEndLiveInfo(id);
+    }
     ////////////////观看人数处理/////////////////////////////////
 
     /**
@@ -85,5 +96,7 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
         Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
         watchNumberRedis.delete(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
     }
+
+
 
 }

@@ -67,6 +67,11 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     }
 
     @Override
+    public LiveInfoVo endLive(Integer id) {
+        return liveInfoService.endLive(id);
+    }
+
+    @Override
     public List<LiveInfoVo> getList(LiveInfoParam liveInfoParam) {
         List<LiveInfoVo> list = liveInfoService.selectLives(liveInfoParam);
         if(null!=list&&!list.isEmpty()){
