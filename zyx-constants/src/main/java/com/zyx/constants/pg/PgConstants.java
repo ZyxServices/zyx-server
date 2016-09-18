@@ -152,5 +152,8 @@ public interface PgConstants extends Constants{
     int PG_ERROR_CODE_30040= 30040;
     String PG_ERROR_CODE_30040_MSG = "取消点赞成功";
 
+    int PG_ERROR_CODE_30041= 30041;
+    String PG_ERROR_CODE_30041_MSG = "该用户没有关注该模块数据";
+
     String PG_RESULT = "result";
 }

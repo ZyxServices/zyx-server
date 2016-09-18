@@ -1,8 +1,11 @@
 package com.zyx.service.pg.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.Meet;
+import com.zyx.entity.pg.MyConcern;
 import com.zyx.mapper.pg.MeetMapper;
+import com.zyx.mapper.pg.MyConcernMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.MeetService;
 import com.zyx.utils.DateUtils;
@@ -26,8 +29,13 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
         super(Meet.class);
     }
 
+    public static final int MODEL_CIRCLE = 4;
+
     @Resource
     private MeetMapper meetMapper;
+
+    @Resource
+    private MyConcernMapper myConcernMapper;
 
     @Override
     public Map<String, Object> addMeet(Integer circleId, Integer accountId) {
@@ -47,17 +55,19 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30014, PG_ERROR_CODE_30014_MSG);
 
             }
-            Integer exist = meetMapper.existTodayMeet(accountId, circleId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime());
-            if (Objects.equals(exist, 0)) {
-                Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
-                meet.setCreateTime(new Date().getTime());
-                save(meet);
-//            map.put(PgConstants.STATE, PgConstants.SUCCESS);
-//            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
-//            return map;
-                return MapUtils.buildSuccessMap(SUCCESS, PG_ERROR_CODE_33000_MSG, null);
-            } else {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PG_ERROR_CODE_30028_MSG);
+            MyConcern myConcernFind = myConcernMapper.existConcern(accountId, circleId, MODEL_CIRCLE);
+            if (!Objects.equals(myConcernFind, null)) {
+                Integer exist = meetMapper.existTodayMeet(accountId, circleId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime());
+                if (Objects.equals(exist, 0)) {
+                    Optional.ofNullable(accountId).ifPresent(meet::setAccountId);
+                    meet.setCreateTime(new Date().getTime());
+                    save(meet);
+                    return MapUtils.buildSuccessMap(SUCCESS, PG_ERROR_CODE_33000_MSG, null);
+                } else {
+                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PG_ERROR_CODE_30028_MSG);
+                }
+            }else{
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30041, PG_ERROR_CODE_30041_MSG);
             }
         } catch (Exception e) {
             e.printStackTrace();
