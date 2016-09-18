@@ -107,7 +107,7 @@
             #{item}
         </foreach>
         AND state = 0
-        ORDER BY create_time
+        ORDER BY create_time DESC
         LIMIT #{start},#{end}
     </select>
 

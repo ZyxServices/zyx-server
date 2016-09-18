@@ -118,7 +118,7 @@
             circle_item.state!=-1
         </if>
 
-        ORDER BY circle_item.create_time
+        ORDER BY circle_item.create_time DESC
         limit #{start},#{end}
     </select>
 
