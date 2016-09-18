@@ -11,158 +11,176 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Column;
 
 public class LiveInfoVo implements Serializable {
-	private Integer id;
-	private Integer auth;
-	private Integer type;
-	private Long startTime;
-	private Long endTime;
-	private UserIconVo userIconVo;
-	private String title;
-	private Integer lab;
-	private String bgmUrl;
-	private Long groupId;
-	private String vedioUrl;
-	private Integer state;
-	// 用户认证标签
-	private String authInfo;
+    private Integer id;
+    private Integer auth;
+    private Integer type;
+    private Long startTime;
+    private Long endTime;
+    private UserIconVo userIconVo;
+    private String title;
+    private Integer lab;
+    private String bgmUrl;
+    private Long groupId;
+    private String vedioUrl;
+    private Integer state;
+    // 用户认证标签
+    private String authInfo;
 
-	private Integer watchNumber;
+    private Integer watchNumber;
 
-	public Integer getWatchNumber() {
-		return watchNumber;
-	}
+    private Long liveTime;
 
-	public void setWatchNumber(Integer watchNumber) {
-		this.watchNumber = watchNumber;
-	}
+    public Integer getWatchNumber() {
+        return watchNumber;
+    }
 
-	/**
-	 * 当前直播的点赞数量
-	 */
-	private Integer zanCount;
+    public void setWatchNumber(Integer watchNumber) {
+        this.watchNumber = watchNumber;
+    }
 
-	/**
-	 * 当前直播消息数量
-	 */
-	private Integer msgCount;
+    /**
+     * 当前直播的点赞数量
+     */
+    private Integer zanCount;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    /**
+     * 当前直播消息数量
+     */
+    private Integer msgCount;
 
-	public void setAuth(Integer auth) {
-		this.auth = auth;
-	}
+    public Long getLiveTime() {
+//        if (this.watchTime == null) {
+//            watchTime = (getStartTime() == null || getEndTime() == null || getStartTime() > this.getEndTime()) ? 0 : getStartTime() - getEndTime();
+//        }
+        return liveTime;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void countLiveTime() {
+        liveTime = (getStartTime() == null || getEndTime() == null || getStartTime() > this.getEndTime()) ? 0 : getEndTime() - getStartTime();
+    }
+
+    public void setLiveTime(Long liveTime) {
+        this.liveTime = liveTime;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setAuth(Integer auth) {
+        this.auth = auth;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
 
-	public void setUserIconVo(UserIconVo userIconVo) {
-		this.userIconVo = userIconVo;
-	}
+    public void setUserIconVo(UserIconVo userIconVo) {
+        this.userIconVo = userIconVo;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setLab(Integer lab) {
-		this.lab = lab;
-	}
+    public void setLab(Integer lab) {
+        this.lab = lab;
+    }
 
-	public void setBgmUrl(String bgmUrl) {
-		this.bgmUrl = bgmUrl;
-	}
+    public void setBgmUrl(String bgmUrl) {
+        this.bgmUrl = bgmUrl;
+    }
 
-	public void setVedioUrl(String vedioUrl) {
-		this.vedioUrl = vedioUrl;
-	}
+    public void setVedioUrl(String vedioUrl) {
+        this.vedioUrl = vedioUrl;
+    }
 
-	public void setState(Integer state) {
-		this.state = state;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getAuth() {
-		return auth;
-	}
+    public Integer getAuth() {
+        return auth;
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public UserIconVo getUserIconVo() {
-		return userIconVo;
-	}
+    public UserIconVo getUserIconVo() {
+        return userIconVo;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public Integer getLab() {
-		return lab;
-	}
+    public Integer getLab() {
+        return lab;
+    }
 
-	public String getBgmUrl() {
-		return bgmUrl;
-	}
+    public String getBgmUrl() {
+        return bgmUrl;
+    }
 
-	public String getVedioUrl() {
-		return vedioUrl;
-	}
+    public String getVedioUrl() {
+        return vedioUrl;
+    }
 
-	public Long getGroupId() {
-		return groupId;
-	}
+    public Long getGroupId() {
+        return groupId;
+    }
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	}
-	public Integer getState() {
-		return state;
-	}
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
 
-	public String getAuthInfo() {
-		return authInfo;
-	}
+    public Integer getState() {
+        return state;
+    }
 
-	public void setAuthInfo(String authInfo) {
-		this.authInfo = authInfo;
-	}
+    public String getAuthInfo() {
+        return authInfo;
+    }
 
-	public Integer getZanCount() {
-		return zanCount;
-	}
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
+    }
 
-	public void setZanCount(Integer zanCount) {
-		this.zanCount = zanCount;
-	}
+    public Integer getZanCount() {
+        return zanCount;
+    }
 
-	public Integer getMsgCount() {
-		return msgCount;
-	}
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
 
-	public void setMsgCount(Integer msgCount) {
-		this.msgCount = msgCount;
-	}
+    public Integer getMsgCount() {
+        return msgCount;
+    }
 
-	public Long getStartTime() {
-		return startTime;
-	}
+    public void setMsgCount(Integer msgCount) {
+        this.msgCount = msgCount;
+    }
 
-	public void setStartTime(Long startTime) {
-		this.startTime = startTime;
-	}
+    public Long getStartTime() {
+        return startTime;
+    }
 
-	public Long getEndTime() {
-		return endTime;
-	}
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
 
-	public void setEndTime(Long endTime) {
-		this.endTime = endTime;
-	}
+    public Long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
+    }
 }
