@@ -4,6 +4,7 @@ import com.zyx.entity.pg.Circle;
 import com.zyx.vo.pg.CircleListVo;
 import com.zyx.service.BaseService;
 import com.zyx.vo.pg.DevaCircleVo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface CircleService extends BaseService<Circle> {
      * @param details    内容
      * @param headImgUrl 圈子头像url
      */
-    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag,Long groupId);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer circleType, String details, String headImgUrl, Integer tag, Long groupId);
 
     /**
      * 圈子签到
@@ -91,7 +92,13 @@ public interface CircleService extends BaseService<Circle> {
     List<CircleListVo> myConcernList(Integer accountId);
 
     /**
-     *  获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     * 我关注的圈子列表
+     */
+    List<CircleListVo> myConcernListFilter(List<CircleListVo> list, Integer accountId);
+
+    /**
+     * 获取精选圈子数据，max为指定最多条数，按jx圈子排序
+     *
      * @param max
      * @return
      */

@@ -15,12 +15,11 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Created by WeiMinSheng on 2016/6/12.
+ * Created by wms on 2016/6/12.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserLoginFacadeImpl.java
  */
 @Service("userLoginFacade")
 public class UserLoginFacadeImpl implements UserLoginFacade {

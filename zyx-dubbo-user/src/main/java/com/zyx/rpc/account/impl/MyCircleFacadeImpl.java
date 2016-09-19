@@ -38,23 +38,16 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
             if (map != null) {
                 return map;
             }
-//            List<CircleListVo> _list_create = new ArrayList<>();
-//            try {
-//                _list_create = circleService.myCreateList(accountId);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
             List<CircleListVo> _list_create = new ArrayList<>();
+            try {
+                _list_create = circleService.myCreateList(accountId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             List<CircleListVo> _list_concern = new ArrayList<>();
             try {
                 List<CircleListVo> _list_concern_temp = circleService.myConcernList(accountId);
-                _list_concern_temp.stream().forEach(e -> {
-                    if (e.getCreateId().equals(accountId)) {
-                        _list_create.add(e);
-                    } else {
-                        _list_concern.add(e);
-                    }
-                });
+                _list_concern = circleService.myConcernListFilter(_list_concern_temp, accountId);
             } catch (Exception e) {
                 e.printStackTrace();
             }

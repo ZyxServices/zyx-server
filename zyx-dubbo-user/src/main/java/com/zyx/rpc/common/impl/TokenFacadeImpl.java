@@ -21,7 +21,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title TokenFacadeImpl.java
  */
 @Service("tokenFacade")
 public class TokenFacadeImpl implements TokenFacade {

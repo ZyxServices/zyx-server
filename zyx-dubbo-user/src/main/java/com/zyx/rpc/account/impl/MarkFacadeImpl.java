@@ -26,7 +26,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MarkFacadeImpl.java
  */
 @Service("markFacade")
 public class MarkFacadeImpl implements MarkFacade {

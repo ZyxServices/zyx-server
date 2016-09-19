@@ -83,6 +83,7 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (map != null) {
                 return map;
             }
+            param.setId(userId);
             param.setUserId(userId);
             param.setToken(token);
             param.setAuthenticate(1);

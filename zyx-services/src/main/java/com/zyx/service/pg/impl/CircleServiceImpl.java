@@ -92,8 +92,8 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
 //            map.put(Constants.STATE, PgConstants.SUCCESS);
 //            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return map;
-            if(result>0){
-                MyConcern myConcern=new MyConcern();
+            if (result > 0) {
+                MyConcern myConcern = new MyConcern();
                 myConcern.setAccountId(createId);
                 myConcern.setConcernId(insertCircle.getId());
                 myConcern.setConcernType(4);
@@ -296,7 +296,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         if (createId == null) {
             return null;
         }
-
         return circleMapper.myCreateList(createId);
     }
 
@@ -305,8 +304,22 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         if (accountId == null) {
             return null;
         }
-
         return circleMapper.myConcernList(accountId);
+    }
+
+    @Override
+    public List<CircleListVo> myConcernListFilter(List<CircleListVo> list, Integer accountId) {
+        List<CircleListVo> temp = new ArrayList<>();
+        if (list == null) {
+            return temp;
+        }
+
+        list.forEach(x -> {
+            if (!x.getCreateId().equals(accountId)) {
+                temp.add(x);
+            }
+        });
+        return temp;
     }
 
     @Override
