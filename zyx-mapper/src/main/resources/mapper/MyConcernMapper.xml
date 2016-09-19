@@ -59,6 +59,9 @@
     myconcern
     INNER JOIN `user` ON myconcern.account_id = `user`.id
     WHERE concern_id=#{concernId} and concern_type=#{concernType}
+    <if test="keyWord !=null and keyWord != ''">
+        AND `user`.nickname LIKE  CONCAT('%',#{keyWord},'%')
+    </if>
     </select>
 
     <delete id="delMyConcern">

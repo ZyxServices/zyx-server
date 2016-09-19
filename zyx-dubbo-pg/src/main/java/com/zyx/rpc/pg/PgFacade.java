@@ -180,7 +180,7 @@ public interface PgFacade {
      * @param concernType
      * @return
      */
-    Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType);
+    Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType,String keyWord);
 
     /**
      * 根据用户id删除帖子

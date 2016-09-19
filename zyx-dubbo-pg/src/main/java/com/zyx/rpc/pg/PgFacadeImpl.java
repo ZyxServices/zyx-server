@@ -118,8 +118,8 @@ public class PgFacadeImpl implements PgFacade {
     }
 
     @Override
-    public Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType) {
-        return myConcernService.findByParams(concernId, concernType);
+    public Map<String, Object> findMyConcernParams(Integer concernId, Integer concernType,String keyWord) {
+        return myConcernService.findByParams(concernId, concernType,keyWord);
     }
 
     @Override
