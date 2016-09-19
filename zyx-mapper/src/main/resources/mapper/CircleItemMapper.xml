@@ -45,7 +45,7 @@
         <!--<result column="meetCount" property="meetCount" jdbcType="INTEGER"/>-->
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
         <association property="zanCount" column="Id" select="zanSelect"/>
-        <association property="meetCount" column="circle_id" select="meetSelect"/>
+        <association property="meetCount" column="id" select="meetSelect"/>
     </resultMap>
     <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
         <id column="Id" property="id" jdbcType="INTEGER"/>
