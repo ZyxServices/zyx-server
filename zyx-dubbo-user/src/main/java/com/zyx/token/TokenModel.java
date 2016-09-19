@@ -7,7 +7,6 @@ package com.zyx.token;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title TokenModel.java
  */
 public class TokenModel {
 
