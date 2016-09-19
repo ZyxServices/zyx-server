@@ -20,9 +20,17 @@ public class UserAuthParam extends BaseParam {
 
     private Integer authenticate;
 
-    private String authInfo;
+    private String authName;
+
+    private String authIDCard;
+
+    private String authMob;
 
     private String authFile;
+
+    private String authInfo;
+
+    private String authFileWork;
 
     private long modifyTime;
 
@@ -50,12 +58,28 @@ public class UserAuthParam extends BaseParam {
         this.authenticate = authenticate;
     }
 
-    public String getAuthInfo() {
-        return authInfo;
+    public String getAuthName() {
+        return authName;
     }
 
-    public void setAuthInfo(String authInfo) {
-        this.authInfo = authInfo;
+    public void setAuthName(String authName) {
+        this.authName = authName;
+    }
+
+    public String getAuthIDCard() {
+        return authIDCard;
+    }
+
+    public void setAuthIDCard(String authIDCard) {
+        this.authIDCard = authIDCard;
+    }
+
+    public String getAuthMob() {
+        return authMob;
+    }
+
+    public void setAuthMob(String authMob) {
+        this.authMob = authMob;
     }
 
     public String getAuthFile() {
@@ -64,6 +88,22 @@ public class UserAuthParam extends BaseParam {
 
     public void setAuthFile(String authFile) {
         this.authFile = authFile;
+    }
+
+    public String getAuthInfo() {
+        return authInfo;
+    }
+
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
+    }
+
+    public String getAuthFileWork() {
+        return authFileWork;
+    }
+
+    public void setAuthFileWork(String authFileWork) {
+        this.authFileWork = authFileWork;
     }
 
     public long getModifyTime() {
