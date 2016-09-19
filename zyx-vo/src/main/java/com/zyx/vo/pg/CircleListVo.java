@@ -14,6 +14,7 @@ public class CircleListVo implements Serializable {
     private static final long serialVersionUID = 6886892223576540427L;
     private Integer id;
     private String title;
+    private Integer createId;
     private String details;
     private String headImgUrl;
     private Integer circleItemCount;
@@ -32,6 +33,14 @@ public class CircleListVo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Integer getCreateId() {
+        return createId;
+    }
+
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
     }
 
     public String getDetails() {

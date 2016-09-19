@@ -19,7 +19,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MyCollectionFacadeImpl.java
  */
 @Service("myCollectionFacade")
 public class MyCollectionFacadeImpl implements MyCollectionFacade {

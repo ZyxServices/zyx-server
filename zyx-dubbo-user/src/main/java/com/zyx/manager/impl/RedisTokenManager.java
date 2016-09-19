@@ -14,7 +14,6 @@ import java.util.UUID;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title RedisTokenManager.java
  */
 @Component
 public class RedisTokenManager implements TokenManager {

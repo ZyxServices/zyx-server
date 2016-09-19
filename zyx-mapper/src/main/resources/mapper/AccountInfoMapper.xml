@@ -125,6 +125,14 @@
         where id = #{id}
     </update>
 
+    <update id="updateAccountAuthStatusByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        update user set id = #{id}
+        <if test="authenticate != null">
+            , authenticate = #{authenticate}
+        </if>
+        where id = #{id}
+    </update>
+
     <select id="queryMyCenterInfo" parameterType="com.zyx.param.account.UserLoginParam"
             resultMap="MyCenterInfoVoResultMap">
         select * from user where 1 = 1
@@ -148,5 +156,27 @@
     <select id="selectDTCount" parameterType="int" resultType="int">
         SELECT count(id) FROM concern WHERE user_id = #{user_id}
     </select>
+
+    <select id="selectAccountAuthCount" parameterType="int" resultType="int">
+         SELECT count(id) FROM user_auth WHERE user_id = #{user_id}
+    </select>
+
+    <insert id="insertAccountAuthByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        INSERT INTO user_auth (user_id,authinfo,authfile,modify_time) VALUES (#{userId},#{authInfo},#{authFile},#{modifyTime})
+    </insert>
+
+    <update id="updateAccountAuthByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        update user_auth set user_id = #{userId}
+        <if test="authInfo != null and authInfo != ''">
+            , authinfo = #{authInfo}
+        </if>
+        <if test="authFile != null and authFile != ''">
+            , authfile = #{authFile}
+        </if>
+        <if test="modifyTime != null">
+            , modify_time = #{modifyTime}
+        </if>
+        where user_id = #{userId}
+    </update>
 
 </mapper>
