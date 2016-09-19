@@ -102,6 +102,12 @@ public interface AccountConstants extends Constants {
     String ACCOUNT_ERROR_CODE_50014_MSG = "手机号码不正确！！！";
 
     /**
+     * 用户提交审核失败
+     */
+    int ACCOUNT_ERROR_CODE_50015 = 50015;
+    String ACCOUNT_ERROR_CODE_50015_MSG = "用户提交审核失败！！！";
+
+    /**
      * 发送验证码失败，手机号格式有误
      */
     int ACCOUNT_ERROR_CODE_50100 = 50100;

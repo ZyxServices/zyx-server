@@ -1,6 +1,7 @@
 package com.zyx.service.account;
 
 import com.zyx.entity.account.AccountInfo;
+import com.zyx.param.account.UserAuthParam;
 import com.zyx.param.account.UserLoginParam;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.service.BaseService;
@@ -66,4 +67,12 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      * @return
      */
     MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam);
+
+    /**
+     * 审核信息提交接口
+     *
+     * @param userAuthParam
+     * @return
+     */
+    int submitAccountAuthByParam(UserAuthParam userAuthParam);
 }

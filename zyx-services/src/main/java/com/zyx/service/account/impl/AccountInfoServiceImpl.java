@@ -1,6 +1,7 @@
 package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.AccountInfo;
+import com.zyx.param.account.UserAuthParam;
 import com.zyx.param.account.UserLoginParam;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.mapper.account.AccountInfoMapper;
@@ -13,12 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by WeiMinSheng on 2016/6/13.
+ * Created by wms on 2016/6/13.
  *
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountInfoServiceImpl.java
  */
 @Service("accountInfoService")
 public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> implements AccountInfoService {
@@ -59,9 +59,22 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     @Override
     public MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
-        MyCenterInfoVo _info = accountInfoMapper.queryMyCenterInfo(userLoginParam);
+        return accountInfoMapper.queryMyCenterInfo(userLoginParam);
+    }
 
-        return _info;
+    @Override
+    public int submitAccountAuthByParam(UserAuthParam userAuthParam) {
+        AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
+        int result = accountInfoMapper.updateAccountAuthStatusByParam(userAuthParam);
+        if (result == 1) {
+            int temp = accountInfoMapper.selectAccountAuthCount(userAuthParam.getUserId());
+            if (temp != 0) {
+                result = accountInfoMapper.updateAccountAuthByParam(userAuthParam);
+            } else {
+                result = accountInfoMapper.insertAccountAuthByParam(userAuthParam);
+            }
+        }
+        return result;
     }
 
 }

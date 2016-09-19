@@ -1,16 +1,13 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.account.AccountConstants;
 import com.zyx.rpc.account.MyCircleFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.pg.CircleListVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +20,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @ MyCircleFacadeImpl.java
  */
 @Service("myCircleFacade")
 public class MyCircleFacadeImpl implements MyCircleFacade {
@@ -42,15 +38,23 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
             if (map != null) {
                 return map;
             }
+//            List<CircleListVo> _list_create = new ArrayList<>();
+//            try {
+//                _list_create = circleService.myCreateList(accountId);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
             List<CircleListVo> _list_create = new ArrayList<>();
-            try {
-                _list_create = circleService.myCreateList(accountId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             List<CircleListVo> _list_concern = new ArrayList<>();
             try {
-                _list_concern = circleService.myConcernList(accountId);
+                List<CircleListVo> _list_concern_temp = circleService.myConcernList(accountId);
+                _list_concern_temp.stream().forEach(e -> {
+                    if (e.getCreateId().equals(accountId)) {
+                        _list_create.add(e);
+                    } else {
+                        _list_concern.add(e);
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }

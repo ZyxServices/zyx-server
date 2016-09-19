@@ -1,6 +1,7 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
+import com.zyx.param.account.UserAuthParam;
 import com.zyx.param.account.UserLoginParam;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.rpc.account.AccountInfoFacade;
@@ -21,7 +22,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountInfoFacadeImpl.java
  */
 @Service("accountInfoFacade")
 public class AccountInfoFacadeImpl implements AccountInfoFacade {
@@ -69,6 +69,28 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息修改成功", null);
             } else {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50002, AccountConstants.ACCOUNT_ERROR_CODE_50002_MSG);
+            }
+        } catch (Exception e) {
+            return AccountConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> editAccountAuth(String token, int userId, UserAuthParam param) {
+        try {
+            // 判断token是否失效
+            Map<String, Object> map = tokenFacade.validateToken(token, userId);
+            if (map != null) {
+                return map;
+            }
+            param.setUserId(userId);
+            param.setToken(token);
+            param.setAuthenticate(1);
+            int result = accountInfoService.submitAccountAuthByParam(param);
+            if (result >= 1) {
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "提交认证信息成功", null);
+            } else {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50015, AccountConstants.ACCOUNT_ERROR_CODE_50015_MSG);
             }
         } catch (Exception e) {
             return AccountConstants.MAP_500;
