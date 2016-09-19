@@ -88,10 +88,18 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
             insertCircle.setGroupId(groupId);
-            mapper.insert(insertCircle);
+            Integer result = mapper.insert(insertCircle);
 //            map.put(Constants.STATE, PgConstants.SUCCESS);
 //            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return map;
+            if(result>0){
+                MyConcern myConcern=new MyConcern();
+                myConcern.setAccountId(createId);
+                myConcern.setConcernId(insertCircle.getId());
+                myConcern.setConcernType(4);
+                myConcern.setCreateTime(new Date().getTime());
+                myConcernMapper.insert(myConcern);
+            }
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
 
         } catch (Exception e) {
