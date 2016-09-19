@@ -44,23 +44,23 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-            List<CircleListVo> _list_create = new ArrayList<>();
-            List<CircleListVo> _list_concern = new ArrayList<>();
+            List<CircleListVo> list_create = new ArrayList<>();
+            List<CircleListVo> list_concern = new ArrayList<>();
             try {
-                List<CircleListVo> _list_concern_temp = circleService.myConcernList(accountId);
-                _list_concern_temp.stream().forEach(e -> {
-                    if (e.getCreateId().equals(accountId)) {
-                        _list_create.add(e);
-                    } else {
-                        _list_concern.add(e);
-                    }
+                List<CircleListVo> list_concern_temp = circleService.myConcernList(accountId);
+                list_concern_temp.forEach(x -> {
+                if (x.getCreateId().equals(accountId)) {
+                    list_create.add(x);
+                } else {
+                    list_concern.add(x);
+                }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
             Map<String, Object> _temp = new HashMap<>();
-            _temp.put("myCreateCircle", _list_create);
-            _temp.put("myConcernCircle", _list_concern);
+            _temp.put("myCreateCircle", list_create);
+            _temp.put("myConcernCircle", list_concern);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, _temp);
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,5 +96,12 @@ public class MyCircleFacadeImpl implements MyCircleFacade {
         } catch (Exception e) {
             return Constants.MAP_500;
         }
+    }
+
+    public static void main(String[] args) {
+        List<String> aaa = new ArrayList<>();
+        aaa.add("a");
+        aaa.add("b");
+        aaa.forEach(System.out::println);
     }
 }
