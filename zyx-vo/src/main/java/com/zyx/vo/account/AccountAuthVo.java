@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountAuthVo.java
  */
 public class AccountAuthVo implements Serializable {
     private static final long serialVersionUID = 7196206868032273866L;
@@ -17,9 +16,17 @@ public class AccountAuthVo implements Serializable {
 
     private Integer user_id;
 
-    private String authinfo;
+    private String authName;
+
+    private String authIDCard;
+
+    private String authMob;
 
     private String authfile;
+
+    private String authinfo;
+
+    private String authfilework;
 
     public Integer getId() {
         return id;

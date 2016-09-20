@@ -5,6 +5,7 @@ import com.zyx.param.account.UserAuthParam;
 import com.zyx.param.account.UserLoginParam;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.service.BaseService;
+import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
 
@@ -75,4 +76,6 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      * @return
      */
     int submitAccountAuthByParam(UserAuthParam userAuthParam);
+
+    AccountAuthVo queryMyAuthInfo(int userId);
 }

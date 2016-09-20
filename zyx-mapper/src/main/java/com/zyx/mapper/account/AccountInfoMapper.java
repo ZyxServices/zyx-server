@@ -5,6 +5,7 @@ import com.zyx.param.account.UserAuthParam;
 import com.zyx.param.account.UserLoginParam;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.QueryUserInfoVo;
 import org.springframework.stereotype.Repository;
@@ -43,4 +44,6 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
     int updateAccountAuthByParam(UserAuthParam userAuthParam);
 
     int selectAccountAuthCount(Integer user_id);
+
+    AccountAuthVo queryMyAuthInfo(int user_id);
 }

@@ -7,6 +7,7 @@ import com.zyx.param.account.AccountInfoParam;
 import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,12 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
             }
         }
         return result;
+    }
+
+    @Override
+    public AccountAuthVo queryMyAuthInfo(int userId) {
+        AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
+        return accountInfoMapper.queryMyAuthInfo(userId);
     }
 
 }
