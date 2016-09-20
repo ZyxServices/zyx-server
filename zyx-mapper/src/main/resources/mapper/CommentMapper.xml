@@ -64,7 +64,7 @@
     </select>
 
     <select id="commentQuery" resultMap="commentVoMap">
-        SELECT * FROM  comment WHERE comment_type=#{type} AND comment_id=#{commentId}
+        SELECT * FROM  comment WHERE comment_type=#{type} AND comment_id=#{commentId} ORDER BY create_time DESC
     </select>
 
 
