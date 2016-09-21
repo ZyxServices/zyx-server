@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountAuthVo.java
  */
 public class AccountAuthVo implements Serializable {
     private static final long serialVersionUID = 7196206868032273866L;
@@ -17,9 +16,17 @@ public class AccountAuthVo implements Serializable {
 
     private Integer user_id;
 
-    private String authinfo;
+    private String authName;
+
+    private String authIDCard;
+
+    private String authMob;
 
     private String authfile;
+
+    private String authinfo;
+
+    private String authfilework;
 
     public Integer getId() {
         return id;
@@ -37,12 +44,28 @@ public class AccountAuthVo implements Serializable {
         this.user_id = user_id;
     }
 
-    public String getAuthinfo() {
-        return authinfo;
+    public String getAuthName() {
+        return authName;
     }
 
-    public void setAuthinfo(String authinfo) {
-        this.authinfo = authinfo;
+    public void setAuthName(String authName) {
+        this.authName = authName;
+    }
+
+    public String getAuthIDCard() {
+        return authIDCard;
+    }
+
+    public void setAuthIDCard(String authIDCard) {
+        this.authIDCard = authIDCard;
+    }
+
+    public String getAuthMob() {
+        return authMob;
+    }
+
+    public void setAuthMob(String authMob) {
+        this.authMob = authMob;
     }
 
     public String getAuthfile() {
@@ -51,5 +74,21 @@ public class AccountAuthVo implements Serializable {
 
     public void setAuthfile(String authfile) {
         this.authfile = authfile;
+    }
+
+    public String getAuthinfo() {
+        return authinfo;
+    }
+
+    public void setAuthinfo(String authinfo) {
+        this.authinfo = authinfo;
+    }
+
+    public String getAuthfilework() {
+        return authfilework;
+    }
+
+    public void setAuthfilework(String authfilework) {
+        this.authfilework = authfilework;
     }
 }

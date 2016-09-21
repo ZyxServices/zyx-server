@@ -8,6 +8,7 @@ import com.zyx.rpc.account.AccountInfoFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,25 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             UserLoginParam userLoginParam = new UserLoginParam();
             userLoginParam.setId(userId);
             MyCenterInfoVo _info = accountInfoService.queryMyCenterInfo(userLoginParam);
+            if (_info == null) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
+            } else {
+                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", _info);
+            }
+        } catch (Exception e) {
+            return AccountConstants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryMyAuthInfo(String token, int userId) {
+        try {
+            // 判断token是否失效
+            Map<String, Object> map = tokenFacade.validateToken(token, userId);
+            if (map != null) {
+                return map;
+            }
+            AccountAuthVo _info = accountInfoService.queryMyAuthInfo(userId);
             if (_info == null) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50300, AccountConstants.ACCOUNT_ERROR_CODE_50300_MSG);
             } else {

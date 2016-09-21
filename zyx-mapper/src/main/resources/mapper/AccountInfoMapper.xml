@@ -145,6 +145,10 @@
         SELECT * FROM user_auth where user_id = #{user_id}
     </select>
 
+    <select id="queryMyAuthInfo" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
     <select id="selectGZCount" parameterType="int" resultType="int">
         SELECT count(id) FROM USER_ATTENTION WHERE from_user_id = #{user_id} and rel_type = 1
     </select>

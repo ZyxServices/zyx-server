@@ -42,6 +42,9 @@ public class UserAttentionFacadeImpl implements UserAttentionFacade {
             if (isTokenFailure(attentionParam.getToken())) {
                 return UserAttentionConstants.MAP_TOKEN_FAILURE;
             }
+            if (attentionParam.getFromId().equals(attentionParam.getToId())) {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70005, UserAttentionConstants.ATTENTION_70005_MSG);
+            }
             UserAttention _attention = buildUserAttention(attentionParam);
             attentionParam.setType(1);// 关注、粉丝
             if (userAttentionService.selectAttentionCount(attentionParam) > 0) {

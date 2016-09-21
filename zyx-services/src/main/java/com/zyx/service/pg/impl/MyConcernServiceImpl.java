@@ -75,7 +75,7 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
     }
 
     @Override
-    public Map<String, Object> findByParams(Integer concernId, Integer concernType) {
+    public Map<String, Object> findByParams(Integer concernId, Integer concernType,String keyWord) {
         if (concernId == null) {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30015, PgConstants.PG_ERROR_CODE_30015_MSG);
         }
@@ -83,7 +83,7 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30016, PgConstants.PG_ERROR_CODE_30016_MSG);
         }
 
-        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myConcernMapper.findByParams(concernId, concernType));
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myConcernMapper.findByParams(concernId, concernType,keyWord));
     }
 
     @Override
