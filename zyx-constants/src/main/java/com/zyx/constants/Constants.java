@@ -318,7 +318,7 @@ public interface Constants {
     /**
      * 帖子
      */
-    int DYNAMIC_CIRCLE = 3;
+    int DYNAMIC_CIRCLE_ITEM = 3;
 
     //******************自动生成动态 ebd*************************
 

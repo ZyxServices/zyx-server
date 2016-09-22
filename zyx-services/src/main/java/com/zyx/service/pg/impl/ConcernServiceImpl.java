@@ -20,7 +20,6 @@ import com.zyx.utils.MapUtils;
 import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.MyFollowVo;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.ObjectError;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -207,7 +206,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                 concernActivity.setUserId(activity.getUserId());
                 concernActivity.setState(0);
                 return concernMapper.insert(concernActivity);
-            case Constants.DYNAMIC_CIRCLE:
+            case Constants.DYNAMIC_CIRCLE_ITEM:
                 //帖子
                 CircleItem circleItem = (CircleItem) fromObj;
                 Concern concernItem = new Concern();
@@ -215,8 +214,11 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                 concernItem.setFromType(fromType);
                 concernItem.setType(6);
                 concernItem.setCreateTime(new Date().getTime());
+                if (!Objects.equals(circleItem.getImgUrl(), null)) {
+                    concernItem.setImgUrl(circleItem.getImgUrl());
+                }
                 concernItem.setTopicTitle(circleItem.getTitle());
-                concernItem.setTopicContent(circleItem.getContent());
+                concernItem.setTopicContent(circleItem.getBaseContent());
                 concernItem.setTopicVisible(1);
                 concernItem.setUserId(circleItem.getCreateId());
                 concernItem.setState(0);
