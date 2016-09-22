@@ -117,7 +117,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     }
 
     @Override
-    public Map<String, Object> queryActivity(QueryActivityParm parm) {
+    public Map<String, Object> queryActivity(QueryActivityParm parm, int api) {
 
         if (parm != null && parm.getPageNumber() != null && parm.getPage() != null) {
             if (parm.getPageNumber() == 0) {
@@ -128,7 +128,13 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10009, "时间参数有误");
             }
             parm.setPage((parm.getPage() - 1) * parm.getPageNumber());
-            List<ActivityVo> activities = activityMapper.queryActivity(parm);
+            List<ActivityVo> activities;
+            if (api == 0) {
+                activities = activityMapper.queryActivity(parm);
+            } else {
+                activities = activityMapper.queryActivityByMyList(parm);
+            }
+
             if (activities.size() > 0) {
                 if (parm.getEditState() != 0) {
                     activities.stream().filter(e -> e.getDescContent() != null && !e.getDescContent().equals("")).forEach(s -> {

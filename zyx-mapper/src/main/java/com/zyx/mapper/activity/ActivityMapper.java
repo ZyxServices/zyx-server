@@ -40,4 +40,9 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @return
      */
     List<ActivityVo> queryActivityHistory(QueryHistoryParm history);
+
+    /**
+     * 查询自己创建的说有活动
+     */
+    List<ActivityVo> queryActivityByMyList(QueryActivityParm parm);
 }

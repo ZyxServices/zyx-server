@@ -42,9 +42,9 @@ public class ActivityFacadeImpl implements ActivityFacade {
     }
 
     @Override
-    public Map<String, Object> queryActivity(QueryActivityParm parm) {
+    public Map<String, Object> queryActivity(QueryActivityParm parm, int api) {
         try {
-            return activityService.queryActivity(parm);
+            return activityService.queryActivity(parm, api);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);

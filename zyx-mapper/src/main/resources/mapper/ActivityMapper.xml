@@ -49,6 +49,7 @@
         <result column="member_template" property="memberTemplate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <result column="isCollection" property="isCollection" jdbcType="INTEGER"/>
         <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
         <association column="id" property="memberCount" javaType="int" select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
         <association column="id" property="collection" javaType="int" select="queryCollCount"/>
@@ -56,25 +57,31 @@
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParm"
             resultMap="queryActivity">
-        select * from activity where 1=1
+        select a.*, NOT ISNULL(c.id) as isCollection
+        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{createId}
+        where 1=1
         <if test="id != null">
-            AND id = #{id}
+            AND a.id = #{id}
         </if>
-        <if test="createId != null and createId != ''">
-            and user_id = #{createId}
-        </if>
-        <if test="groupName != null and groupName != ''">
-            and group_name = #{groupName}
-        </if>
-        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-            and start_time &gt;= #{startTime}
-            and end_time &lt;= #{endTime}
+        <if test="startTime != null and endTime != null">
+            and a.start_time &gt;= #{startTime}
+            and a.end_time &lt;= #{endTime}
         </if>
         AND del != 1 AND mask = 0
-        ORDER BY create_time desc
+        ORDER BY a.create_time desc
         <if test="pageNumber != null and page != null">
             limit #{page}, #{pageNumber}
         </if>
+    </select>
+
+    <select id="queryActivityByMyList" parameterType="com.zyx.param.activity.QueryActivityParm"
+            resultMap="queryActivity">
+        select a.*, NOT ISNULL(c.id) as isCollection
+        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{createId}
+        where a.user_id = #{createId}
+        AND del != 1 AND mask = 0
+        ORDER BY a.create_time desc
+        limit #{page}, #{pageNumber}
     </select>
 
     <select id="queryCollCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
@@ -86,7 +93,9 @@
     </select>
 
     <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="queryActivity">
-        select * from activity where id = #{id} AND del != 1 AND mask = 0 ORDER BY create_time desc
+        select a.*, NOT ISNULL(c.id) as isCollection
+        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{createId} where 1=1
+        where a.id = #{id} AND a.del != 1 AND a.mask = 0 ORDER BY a.create_time desc
     </select>
 
     <select id="queryActivityHistory" parameterType="com.zyx.param.activity.QueryHistoryParm"

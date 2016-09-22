@@ -46,7 +46,7 @@ public interface ActivityService extends BaseService<Activity> {
      * @param parm
      * @return
      */
-    Map<String, Object> queryActivity(QueryActivityParm parm);
+    Map<String, Object> queryActivity(QueryActivityParm parm, int api);
 
     /**
      * 查询活动发起者自定义报名模板
