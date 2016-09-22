@@ -218,7 +218,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                     concernItem.setImgUrl(circleItem.getImgUrl());
                 }
                 concernItem.setTopicTitle(circleItem.getTitle());
-                concernItem.setTopicContent(circleItem.getContent());
+                concernItem.setTopicContent(circleItem.getBaseContent());
                 concernItem.setTopicVisible(1);
                 concernItem.setUserId(circleItem.getCreateId());
                 concernItem.setState(0);
