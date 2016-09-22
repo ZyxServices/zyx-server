@@ -26,7 +26,7 @@ public class SearchCirleVo implements Serializable {
     /**
      * 当前登录用户是否关注圈子
      */
-    private boolean isAtten;
+//    private boolean isAtten;
 
     /**
      * 发布圈子用户基础信息
@@ -57,14 +57,6 @@ public class SearchCirleVo implements Serializable {
 
     public void setHeadImgUrl(String headImgUrl) {
         this.headImgUrl = headImgUrl;
-    }
-
-    public boolean isAtten() {
-        return isAtten;
-    }
-
-    public void setAtten(boolean atten) {
-        isAtten = atten;
     }
 
     public SearchAccountVo getAccount() {
