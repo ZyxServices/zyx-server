@@ -100,8 +100,10 @@
 
     <select id="queryActivityHistory" parameterType="com.zyx.param.activity.QueryHistoryParm"
             resultMap="queryActivity">
-        select * from activity where 1=1 AND del != 1 AND mask = 0
-        ORDER BY create_time desc
+        select a.*, NOT ISNULL(c.id) as isCollection
+        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{userId}
+        where a.del != 1 AND a.mask = 0
+        ORDER BY a.create_time desc
         <if test="pageNumber != null and pageHis != null">
             limit #{pageHis}, #{pageNumber}
         </if>
