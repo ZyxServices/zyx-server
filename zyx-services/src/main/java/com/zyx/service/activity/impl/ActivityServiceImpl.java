@@ -79,25 +79,26 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             activity.setPrice(price);
             activity.setType(type);
             activity.setAddress(address);
-            if (type == 0) {
-                //==== 生成图文直播  并获取ID  生成图文直播访问地址====
-                LiveInfo liveInfo = new LiveInfo();
-                liveInfo.setCreateTime(System.currentTimeMillis());
-                liveInfo.setAuth(1);
-                liveInfo.setType(1);
-                liveInfo.setGroupId(groupId);
-                liveInfo.setStartTime(startTime);
-                liveInfo.setEndTime(endTime);
-                liveInfo.setUserId(createId);
-                liveInfo.setTitle(title);
-                liveInfo.setLab(1);
-                liveInfo.setState(1);
-                liveInfo.setBgmUrl(image);
-                liveInfo.setDel(0);
-                liveInfoMapper.insert(liveInfo);
-                activity.setTargetUrl(Constants.GET_LIVE_URL + liveInfo.getId());
-                //===================================================
-            }
+            // TODO: 2016/9/23 直播生成 二期实现
+//            if (type == 0) {
+//                //==== 生成图文直播  并获取ID  生成图文直播访问地址====
+//                LiveInfo liveInfo = new LiveInfo();
+//                liveInfo.setCreateTime(System.currentTimeMillis());
+//                liveInfo.setAuth(1);
+//                liveInfo.setType(1);
+//                liveInfo.setGroupId(groupId);
+//                liveInfo.setStartTime(startTime);
+//                liveInfo.setEndTime(endTime);
+//                liveInfo.setUserId(createId);
+//                liveInfo.setTitle(title);
+//                liveInfo.setLab(1);
+//                liveInfo.setState(1);
+//                liveInfo.setBgmUrl(image);
+//                liveInfo.setDel(0);
+//                liveInfoMapper.insert(liveInfo);
+//                activity.setTargetUrl(Constants.GET_LIVE_URL + liveInfo.getId());
+//                //===================================================
+//            }
             activity.setMask(0);
             activity.setExamine(examine == null ? 0 : examine);
             if (memberTemplate != null && !memberTemplate.equals("")) {
