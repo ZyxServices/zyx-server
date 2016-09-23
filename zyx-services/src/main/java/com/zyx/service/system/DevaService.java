@@ -19,4 +19,6 @@ public interface DevaService extends BaseService<Devaluation>{
      */
     List<Devaluation> selectDevas(Integer area,Integer model);
     List<Integer> selectModelIds(Integer area,Integer model);
+
+    List selectDevasByAreaModel(Integer area,Integer model);
 }
