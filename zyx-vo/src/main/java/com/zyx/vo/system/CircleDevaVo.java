@@ -5,8 +5,6 @@ package com.zyx.vo.system;
  */
 public class CircleDevaVo extends BaseDevaVo {
     private String title;
-//    private Integer createId;
-//    private Long createTime;
     private Integer itemCount;
 
     public String getTitle() {
