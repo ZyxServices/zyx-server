@@ -112,7 +112,25 @@
     </select>
 
     <select id="starConcern" resultMap="ConcernMyMap">
-        SELECT* FROM concern WHERE concern.type=3 AND state = 0 ORDER BY concern.create_time DESC LIMIT #{start},#{end}
+        SELECT
+        concern.id,
+        concern.user_id,
+        concern.type,
+        concern.topic_content,
+        concern.topic_title,
+        concern.topic_visible,
+        concern.img_url,
+        concern.video_url,
+        concern.create_time,
+        concern.state,
+        concern.from_id,
+        concern.from_type
+        FROM
+        concern
+        INNER JOIN `user` ON concern.user_id = `user`.id
+        WHERE   state = 0 AND `user`.authenticate=2
+        ORDER BY concern.create_time DESC
+        LIMIT  #{start},#{end}
     </select>
 
     <select id="exitConcernSelect" parameterType="java.util.Map" resultType="int">

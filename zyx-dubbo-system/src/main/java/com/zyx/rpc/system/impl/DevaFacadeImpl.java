@@ -48,25 +48,27 @@ public class DevaFacadeImpl implements DevaFacade {
     @Override
     public List getDevaByModel(Integer area,Integer model) {
         //// TODO: 2016/8/3 判定Model范围
-        if (model == null) {
+        if (model == null||area==null) {
             return null;
         }
-        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
-        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
-            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
-            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
-            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
-                return queryAndRefreshFromDB(area,model);//刷新流程
-            } else {
-                devas = queryModelDevas(area,model,innerDevaIds);
-                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
-                    return queryAndRefreshFromDB(area,model);//刷新流程
-                }
-                devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
-                return devas;
-            }
-        }
-        return devas;
+        return devaService.selectDevasByAreaModel(area,model);
+//        List devas = devaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_DEVA+area+":" + model);
+//        if (devas == null || devas.isEmpty()) {//Redis无该模块Deva数据
+//            List<Devaluation> innerDevas = innerDevaTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model);
+//            List<Integer> innerDevaIds = innerDevaIdTemplate.opsForValue().get(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model);
+//            if (innerDevas == null || innerDevas.isEmpty() || innerDevaIds == null || innerDevaIds.isEmpty()) {//Redis中间表缓存无数据
+//                return queryAndRefreshFromDB(area,model);//刷新流程
+//            } else {
+//                devas = queryModelDevas(area,model,innerDevaIds);
+//                if (devas == null || devas.isEmpty()) {//DB 对应模块无数据
+//                    devas =  queryAndRefreshFromDB(area,model);//刷新流程
+//                }else{
+//                    devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+//                }
+//                return devas;
+//            }
+//        }
+//        return devas;
     }
 
     /**
@@ -86,9 +88,9 @@ public class DevaFacadeImpl implements DevaFacade {
             return null;
         }
         //刷新Redis
-//        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
-//        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
-//        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
+        innerDevaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA +area+":" + model, innerDevas);
+        innerDevaIdTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_INNER_DEVA_ID +area+":" + model, innerDevaIds);
+        devaTemplate.opsForValue().set(SystemConstants.MAKE_REDIS_DEVA +area+":" + model, devas);
         return devas;
     }
 

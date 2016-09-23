@@ -40,4 +40,11 @@ public interface DevaMapper extends BaseMapper<Devaluation> {
      */
     List<Integer> queryModelIds(DevaParam param);
 
+    List queryActivityDevas(Integer area);
+    List queryLiveDevas(Integer area);
+    List queryCircleDevas(Integer area);
+    List queryCircleItemDevas(Integer area);
+    List queryConcernDevas(Integer area);
+    List queryUserDevas(Integer area);
+
 }

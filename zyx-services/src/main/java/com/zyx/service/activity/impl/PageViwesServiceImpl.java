@@ -60,7 +60,6 @@ public class PageViwesServiceImpl implements PageViwesService {
 
     @Override
     public Map<String, Object> getPageViwes(Integer types, Integer typeId) {
-        Map<String, Object> map = new HashMap<>();
         if (typeId != null && types != null) {
             PageViews pageViews = new PageViews();
             pageViews.setTypes(types);

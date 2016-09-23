@@ -14,9 +14,19 @@ import java.io.Serializable;
  */
 public class QueryHistoryParm implements Serializable{
 
+    private Integer userId;
+
     private Integer pageNumber;
 
     private Integer pageHis;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getPageNumber() {
         return pageNumber;
@@ -32,13 +42,5 @@ public class QueryHistoryParm implements Serializable{
 
     public void setPageHis(Integer pageHis) {
         this.pageHis = pageHis;
-    }
-
-    @Override
-    public String toString() {
-        return "QueryAcitvityHistory{" +
-                ", pageNumber=" + pageNumber +
-                ", pageHis=" + pageHis +
-                '}';
     }
 }

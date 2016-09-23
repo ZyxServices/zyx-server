@@ -21,7 +21,7 @@ public class SearchAccountVo implements Serializable {
      */
     private String avatar;
 
-    private boolean isAtten;
+//    private boolean isAtten;
 
     private Integer authenticate;
 
@@ -51,14 +51,6 @@ public class SearchAccountVo implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public boolean isAtten() {
-        return isAtten;
-    }
-
-    public void setAtten(boolean atten) {
-        isAtten = atten;
     }
 
     public SearchUserAuthVo getAuth() {

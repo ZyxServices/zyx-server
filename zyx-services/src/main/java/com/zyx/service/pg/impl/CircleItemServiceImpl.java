@@ -2,11 +2,11 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
-import com.zyx.entity.collection.*;
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.collection.CollectionMapper;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.activity.PageViwesService;
+import com.zyx.service.pg.ConcernService;
 import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.CircleItemLunBoVo;
 import com.zyx.mapper.pg.CircleItemMapper;
@@ -32,6 +32,9 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
 
     @Resource
     private CollectionMapper collectionMapper;
+
+    @Resource
+    private ConcernService concernService;
 
 
     @Resource
@@ -96,6 +99,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 }
             }
             save(circleItem);
+            concernService.fromConcern(circleItem.getId(),Constants.DYNAMIC_CIRCLE_ITEM,circleItem);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();

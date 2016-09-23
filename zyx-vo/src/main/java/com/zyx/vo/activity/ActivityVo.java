@@ -35,6 +35,11 @@ public class ActivityVo implements Serializable {
     private Integer collection;
 
     /**
+     * 当前用户是否收藏此活动
+     */
+    private Integer isCollection;
+
+    /**
      * 活动标题
      */
     private String title;
@@ -170,6 +175,14 @@ public class ActivityVo implements Serializable {
             collection = 0;
         }
         return collection;
+    }
+
+    public Integer getIsCollection() {
+        return isCollection;
+    }
+
+    public void setIsCollection(Integer isCollection) {
+        this.isCollection = isCollection;
     }
 
     public void setCollection(Integer collection) {
