@@ -116,8 +116,11 @@
 
     <select id="searchAccount" parameterType="com.zyx.param.system.SearchParam" resultMap="queryAccount">
         SELECT u.id,u.nickname,u.avatar,u.create_time, u.authenticate FROM user u where
-        u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0 and u.id != #{userId} AND u.id NOT IN
-        (SELECT to_user_id FROM USER_ATTENTION a WHERE a.from_user_id = #{userId})
+        u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0
+        <if test="userId != null">
+            and u.id != #{userId}
+            AND u.id NOT IN (SELECT to_user_id FROM USER_ATTENTION a WHERE a.from_user_id = #{userId})
+        </if>
         ORDER BY u.create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
@@ -127,8 +130,11 @@
     <!--圈子-->
     <select id="searchCirle" parameterType="com.zyx.param.system.SearchParam" resultMap="queryCirle">
         SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id FROM circle c where
-        c.title LIKE CONCAT('%',#{character},'%') AND  c.state != -1 AND c.state != -2 AND c.create_id != #{userId} AND c.id NOT IN
-        (SELECT concern_id FROM myconcern m WHERE m.account_id = #{userId})
+        c.title LIKE CONCAT('%',#{character},'%') AND  c.state != -1 AND c.state != -2
+        <if test="userId != null">
+            AND c.create_id != #{userId}
+            AND c.id NOT IN (SELECT concern_id FROM myconcern m WHERE m.account_id = #{userId})
+        </if>
         ORDER BY c.create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
