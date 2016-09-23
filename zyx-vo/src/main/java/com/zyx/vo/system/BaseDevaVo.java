@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class BaseDevaVo implements Serializable {
     private Integer id;
     private Integer model;
-    private Integer modelId;
+//    private Integer modelId;
     private String imageUrl;
     private Integer sequence;
     private Integer area;//默认1,2为操场模块推荐
@@ -31,13 +31,13 @@ public class BaseDevaVo implements Serializable {
         this.model = model;
     }
 
-    public Integer getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(Integer modelId) {
-        this.modelId = modelId;
-    }
+//    public Integer getModelId() {
+//        return modelId;
+//    }
+//
+//    public void setModelId(Integer modelId) {
+//        this.modelId = modelId;
+//    }
 
     public String getImageUrl() {
         return imageUrl;

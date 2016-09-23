@@ -1,5 +1,7 @@
 package com.zyx.vo.system;
 
+import com.zyx.vo.account.UserIconVo;
+
 /**
  * Created by MrDeng on 2016/9/22.
  */
@@ -17,6 +19,8 @@ public class CircleItemDevaVo extends BaseDevaVo{
      * 当前直播消息数量
      */
     private Integer msgCount;
+//    private UserIconVo userIconVo;
+
     public String getTitle() {
         return title;
     }
@@ -64,4 +68,12 @@ public class CircleItemDevaVo extends BaseDevaVo{
     public void setMsgCount(Integer msgCount) {
         this.msgCount = msgCount;
     }
+
+//    public UserIconVo getUserIconVo() {
+//        return userIconVo;
+//    }
+//
+//    public void setUserIconVo(UserIconVo userIconVo) {
+//        this.userIconVo = userIconVo;
+//    }
 }

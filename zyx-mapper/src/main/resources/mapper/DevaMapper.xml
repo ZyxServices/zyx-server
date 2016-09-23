@@ -11,7 +11,7 @@
     <resultMap id="BaseDevaVo" type="com.zyx.vo.system.BaseDevaVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="model" property="model" jdbcType="INTEGER"/>
-        <result column="model_id" property="modelId" jdbcType="INTEGER"/>
+        <!--<result column="model_id" property="modelId" jdbcType="INTEGER"/>-->
         <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
         <result column="sequence" property="sequence" jdbcType="INTEGER"/>
         <result column="area" property="area" jdbcType="INTEGER"/>
@@ -24,9 +24,9 @@
     </resultMap>
     <select id="queryActivityDevas" parameterType="java.lang.Integer" resultMap="ActivityDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -56,9 +56,9 @@
     </resultMap>
     <select id="queryLiveDevas" parameterType="java.lang.Integer" resultMap="LiveDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -89,9 +89,9 @@
     </resultMap>
     <select id="queryCircleDevas" parameterType="java.lang.Integer" resultMap="CircleDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -114,13 +114,14 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <association property="zanCount" column="model_id" select="zanSelect"/>
+        <association property="zanCount" column="id" select="zanSelect"/>
+        <association property="bgmUrl" column="id" select="selectUserAvatar"/>
     </resultMap>
     <select id="queryCircleItemDevas" parameterType="java.lang.Integer" resultMap="CircleItemDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -145,9 +146,9 @@
     </resultMap>
     <select id="queryConcernDevas" parameterType="java.lang.Integer" resultMap="ConcernDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -165,14 +166,14 @@
     </select>
 
     <resultMap id="UserDevaVo" type="com.zyx.vo.system.UserDevaVo" extends="BaseDevaVo">
-        <result column="nickname" property="bgmUrl" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="bgmUrl" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="queryUserDevas" parameterType="java.lang.Integer" resultMap="UserDevaVo">
         SELECT
-        deva.`id` AS id,
+--         deva.`id` AS id,
         deva.`model`,
-        deva.`model_id` ,
+        deva.`model_id`AS id ,
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
@@ -191,7 +192,7 @@
     </select>
 
     <select id="zanSelect" parameterType="int" resultType="int">
-        SELECT count(id) from zan where body_type=4 AND body_id=#{circle_item_id}
+        SELECT count(id) from zan where body_type=4 AND body_id=#{id}
     </select>
 
     <select id="selectItemCount" parameterType="int" resultType="int">
@@ -207,9 +208,18 @@
         del = 0
     </select>
 
-   <!-- <delete id="deleteDevaluation" parameterType="com.zyx.entity.system.Devaluation">
-        DELETE FROM devaluation WHERE model = ${model} AND model_id = ${modelId}
-    </delete>-->
+    <select id="selectUserAvatar" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT avatar
+        FROM user
+        WHERE
+        id = #{id}
+        AND
+        del = 0
+    </select>
+
+    <!-- <delete id="deleteDevaluation" parameterType="com.zyx.entity.system.Devaluation">
+         DELETE FROM devaluation WHERE model = ${model} AND model_id = ${modelId}
+     </delete>-->
 
     <select id="queryDevas" parameterType="com.zyx.param.system.DevaParam" resultMap="devaluation">
         select *
