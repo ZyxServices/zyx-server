@@ -52,6 +52,8 @@
         <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
         <association column="id" property="memberCount" javaType="int" select="com.zyx.mapper.activity.ActivityMemberMapper.memberCount"/>
         <association column="id" property="collection" javaType="int" select="queryCollCount"/>
+        <association column="id" property="zanCount" javaType="int" select="queryZanCount"/>
+        <association column="id" property="commentCount" javaType="int" select="queryCommentCount"/>
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParm"
@@ -79,6 +81,14 @@
 
     <select id="queryCollCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select count(id) from t_collection where model_id = #{id} AND model = 1
+    </select>
+
+    <select id="queryZanCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id) from zan where body_id = #{id} AND body_type = 3
+    </select>
+
+    <select id="queryCommentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id) from comment where comment_id = #{id} AND comment_type = 2
     </select>
 
     <select id="queryActivityMember" parameterType="java.lang.Integer" resultMap="member_template">
