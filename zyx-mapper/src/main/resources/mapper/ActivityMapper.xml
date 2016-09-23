@@ -104,7 +104,7 @@
 
     <select id="queryActivityById" parameterType="java.lang.Integer" resultMap="queryActivity">
         select a.*, NOT ISNULL(c.id) as isCollection
-        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{createId} where 1=1
+        from activity a LEFT JOIN t_collection c ON a.id = c.model_id AND c.model = 1 AND c.user_id = #{createId}
         where a.id = #{id} AND a.del != 1 AND a.mask = 0 ORDER BY a.create_time desc
     </select>
 
