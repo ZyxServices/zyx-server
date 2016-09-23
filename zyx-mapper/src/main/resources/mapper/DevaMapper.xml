@@ -21,6 +21,7 @@
     <resultMap id="ActivityDevaVo" type="com.zyx.vo.system.ActivityDevaVo" extends="BaseDevaVo">
         <result column="img_urls" property="bgmUrl" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
     </resultMap>
     <select id="queryActivityDevas" parameterType="java.lang.Integer" resultMap="ActivityDevaVo">
         SELECT
@@ -31,7 +32,8 @@
         deva.`sequence`,
         deva.`area`,
         ac.`title`,
-        ac.`img_urls`
+        ac.`img_urls`,
+        ac.`user_id`
         FROM
         devaluation deva INNER JOIN activity ac ON deva.`model_id`=ac.`id`
         WHERE
@@ -82,7 +84,7 @@
     </select>
 
     <resultMap id="CircleDevaVo" type="com.zyx.vo.system.CircleDevaVo" extends="BaseDevaVo">
-        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="create_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="bgmUrl" jdbcType="VARCHAR"/>
         <association property="itemCount" column="model_id" select="selectItemCount"/>
@@ -96,7 +98,8 @@
         deva.`sequence`,
         deva.`area`,
         ci.`title`,
-        ci.`head_img_url`
+        ci.`head_img_url`,
+        ci.`create_id`
         FROM
         devaluation deva INNER JOIN circle ci  ON deva.`model_id`=ci.`id`
         WHERE
@@ -112,6 +115,7 @@
     <resultMap id="CircleItemDevaVo" type="com.zyx.vo.system.CircleItemDevaVo" extends="BaseDevaVo">
         <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="userId" jdbcType="INTEGER"/>
         <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="zanCount" column="id" select="zanSelect"/>
@@ -127,6 +131,7 @@
         deva.`area`,
         ci.`create_id`,
         ci.`title`,
+         ci.`create_id`,
         ci.`base_content`,
         ci.`create_time`
         FROM
@@ -143,6 +148,7 @@
 
     <resultMap id="ConcernDevaVo" type="com.zyx.vo.system.ConcernDevaVo" extends="BaseDevaVo">
         <result column="img_url" property="bgmUrl" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
     </resultMap>
     <select id="queryConcernDevas" parameterType="java.lang.Integer" resultMap="ConcernDevaVo">
         SELECT
@@ -152,7 +158,8 @@
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
-        co.`img_url`
+        co.`img_url`,
+        co.`user_id`
         FROM
 	    devaluation deva INNER JOIN concern co  ON deva.`model_id`=co.`id`
         WHERE

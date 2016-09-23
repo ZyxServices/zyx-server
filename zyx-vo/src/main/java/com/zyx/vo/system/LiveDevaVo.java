@@ -11,7 +11,6 @@ public class LiveDevaVo extends BaseDevaVo{
     private Integer type;
     private Long startTime;
     private Long endTime;
-    private Integer userId;
     private String title;
     private Integer lab;
 //    private String bgmUrl;
@@ -48,14 +47,6 @@ public class LiveDevaVo extends BaseDevaVo{
 
     public void setEndTime(Long endTime) {
         this.endTime = endTime;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getTitle() {
