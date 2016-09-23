@@ -8,9 +8,208 @@
         <result column="model_id" property="modelId" jdbcType="INTEGER"/>
     </resultMap>
 
-    <delete id="deleteDevaluation" parameterType="com.zyx.entity.system.Devaluation">
+    <resultMap id="BaseDevaVo" type="com.zyx.vo.system.BaseDevaVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="model" property="model" jdbcType="INTEGER"/>
+        <result column="model_id" property="modelId" jdbcType="INTEGER"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="area" property="area" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <resultMap id="ActivityDevaVo" type="com.zyx.vo.system.ActivityDevaVo" extends="BaseDevaVo">
+        <result column="img_urls" property="bgmUrl" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryActivityDevas" parameterType="java.lang.Integer" resultMap="ActivityDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        ac.`title`,
+        ac.`img_urls`
+        FROM
+        devaluation deva INNER JOIN activity ac ON deva.`model_id`=ac.`id`
+        WHERE
+        deva.`model`=1
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <resultMap id="LiveDevaVo" type="com.zyx.vo.system.LiveDevaVo" extends="BaseDevaVo">
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime"/>
+        <result column="user_id" property="userId" />
+        <result column="title" property="title" />
+        <result column="lab" property="lab" />
+        <result column="bgm_url" property="bgmUrl" />
+        <result column="group_id" property="groupId"/>
+        <association property="userIconVo" column="user_id" select="selectUserIcon"></association>
+    </resultMap>
+    <select id="queryLiveDevas" parameterType="java.lang.Integer" resultMap="LiveDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        live.`start_time` ,
+        live.`end_time`,
+        live.`user_id`,
+        live.`title`,
+        live.`lab`,
+        live.`bgm_url`,
+        live.`group_id`
+        FROM
+        devaluation deva INNER JOIN t_live live ON deva.`model_id`=live.`id`
+        WHERE
+        deva.`model`=2
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <resultMap id="CircleDevaVo" type="com.zyx.vo.system.CircleDevaVo" extends="BaseDevaVo">
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="bgmUrl" jdbcType="VARCHAR"/>
+        <association property="itemCount" column="model_id" select="selectItemCount"/>
+    </resultMap>
+    <select id="queryCircleDevas" parameterType="java.lang.Integer" resultMap="CircleDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        ci.`title`,
+        ci.`head_img_url`
+        FROM
+        devaluation deva INNER JOIN circle ci  ON deva.`model_id`=ci.`id`
+        WHERE
+        deva.`model`=3
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <resultMap id="CircleItemDevaVo" type="com.zyx.vo.system.CircleItemDevaVo" extends="BaseDevaVo">
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association property="zanCount" column="model_id" select="zanSelect"/>
+    </resultMap>
+    <select id="queryCircleItemDevas" parameterType="java.lang.Integer" resultMap="CircleItemDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        ci.`create_id`,
+        ci.`title`,
+        ci.`base_content`,
+        ci.`create_time`
+        FROM
+	    devaluation deva INNER JOIN circle_item ci  ON deva.`model_id`=ci.`id`
+        WHERE
+        deva.`model`=4
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <resultMap id="ConcernDevaVo" type="com.zyx.vo.system.ConcernDevaVo" extends="BaseDevaVo">
+        <result column="img_url" property="bgmUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryConcernDevas" parameterType="java.lang.Integer" resultMap="ConcernDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        co.`img_url`
+        FROM
+	    devaluation deva INNER JOIN concern co  ON deva.`model_id`=co.`id`
+        WHERE
+        deva.`model`=5
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <resultMap id="UserDevaVo" type="com.zyx.vo.system.UserDevaVo" extends="BaseDevaVo">
+        <result column="nickname" property="bgmUrl" jdbcType="VARCHAR"/>
+        <result column="avatar" property="bgmUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryUserDevas" parameterType="java.lang.Integer" resultMap="UserDevaVo">
+        SELECT
+        deva.`id` AS id,
+        deva.`model`,
+        deva.`model_id` ,
+        deva.`image_url`,
+        deva.`sequence`,
+        deva.`area`,
+        u.`nickname`,
+	    u.`avatar`
+        FROM
+	    devaluation deva INNER JOIN zyx.`user` u  ON deva.`model_id`=u.`id`
+        WHERE
+        deva.`model`=6
+        AND
+        deva.`area`=#{area}
+        AND
+        deva.`state`=1
+        ORDER BY
+        sequence
+    </select>
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT count(id) from zan where body_type=4 AND body_id=#{circle_item_id}
+    </select>
+
+    <select id="selectItemCount" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM circle_item WHERE circle_id = #{model_id}
+    </select>
+
+    <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+        SELECT id,nickname,avatar
+        FROM user
+        WHERE
+        id = #{user_id}
+        AND
+        del = 0
+    </select>
+
+   <!-- <delete id="deleteDevaluation" parameterType="com.zyx.entity.system.Devaluation">
         DELETE FROM devaluation WHERE model = ${model} AND model_id = ${modelId}
-    </delete>
+    </delete>-->
 
     <select id="queryDevas" parameterType="com.zyx.param.system.DevaParam" resultMap="devaluation">
         select *
@@ -27,6 +226,7 @@
         </if>
         ORDER BY create_time desc
     </select>
+
     <select id="queryModelIds" parameterType="com.zyx.param.system.DevaParam" resultType="java.lang.Integer">
         select model_id
         from devaluation
