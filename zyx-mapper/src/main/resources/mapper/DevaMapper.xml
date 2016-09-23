@@ -115,7 +115,7 @@
         <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="zanCount" column="id" select="zanSelect"/>
-        <association property="bgmUrl" column="id" select="selectUserAvatar"/>
+        <association property="userIconVo" column="id" select="selectUserIcon"/>
     </resultMap>
     <select id="queryCircleItemDevas" parameterType="java.lang.Integer" resultMap="CircleItemDevaVo">
         SELECT

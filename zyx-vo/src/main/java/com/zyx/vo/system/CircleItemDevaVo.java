@@ -19,8 +19,8 @@ public class CircleItemDevaVo extends BaseDevaVo{
      * 当前直播消息数量
      */
     private Integer msgCount;
-//    private UserIconVo userIconVo;
-
+    private UserIconVo userIconVo;
+private String nickname;
     public String getTitle() {
         return title;
     }
@@ -69,11 +69,24 @@ public class CircleItemDevaVo extends BaseDevaVo{
         this.msgCount = msgCount;
     }
 
-//    public UserIconVo getUserIconVo() {
-//        return userIconVo;
-//    }
-//
-//    public void setUserIconVo(UserIconVo userIconVo) {
-//        this.userIconVo = userIconVo;
-//    }
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public UserIconVo getUserIconVo() {
+        return userIconVo;
+    }
+    public void setUserIconVo(UserIconVo userIconVo) {
+        this.userIconVo = userIconVo;
+        if(userIconVo!=null){
+            if(userIconVo.getAvatar()!=null)
+            setBgmUrl(userIconVo.getAvatar());
+            if(userIconVo.getNickname()!=null)
+                setNickname(userIconVo.getNickname());
+        }
+    }
 }
