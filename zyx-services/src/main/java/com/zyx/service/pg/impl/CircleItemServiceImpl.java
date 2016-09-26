@@ -151,14 +151,14 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         try {
             CircleItem circleItemFind = circleItemMapper.findById(circleItemId);
             if (circleItemFind != null) {
-                if (Objects.equals(circleItemFind.getCreateId(),createThisId)) {
+//                if (Objects.equals(circleItemFind.getCreateId(),createThisId)) {
                     Integer result = circleItemMapper.delByThisUser(createThisId, circleItemId);
                     if (result > 0) {
                         return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG);
                     }
-                } else {
-                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
-                }
+//                } else {
+//                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+//                }
             } else {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
             }
