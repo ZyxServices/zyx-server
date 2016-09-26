@@ -205,13 +205,13 @@
     </select>
 
     <select id="zanSelect" parameterType="int" resultType="int">
-        SELECT count(id) from zan where body_type=4 AND body_id=#{id}
+        SELECT count(id) from zan where body_type=5 AND body_id=#{id}
     </select>
     <select id="commentSelect" parameterType="int" resultType="int">
-        SELECT count(id) from comment where comment_type=4 AND comment_id=#{id}
+        SELECT count(id) from comment where comment_type=1 AND comment_id=#{id}
     </select>
     <select id="viewSelect" parameterType="int" resultType="int">
-        SELECT pageviews from pageviews where types=4 AND typeId=#{id}
+        SELECT pageviews from pageviews where types=3 AND typeId=#{id}
     </select>
 
     <select id="selectItemCount" parameterType="int" resultType="int">
@@ -219,14 +219,16 @@
     </select>
 
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-        SELECT id,nickname,avatar
-        FROM user
-        WHERE
-        id = #{user_id}
-        AND
-        del = 0
-    </select>
+        SELECT u.`id`,nickname,avatar,authenticate AS authInfo,official,ua.`authinfo`
 
+        FROM zyx.`user` u
+        LEFT JOIN user_auth ua ON u.`id`=ua.`user_id`
+
+        WHERE
+        u.`id` = #{user_id}
+        AND
+        u.`del` = 0
+    </select>
     <select id="selectUserAvatar" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT avatar
         FROM user
