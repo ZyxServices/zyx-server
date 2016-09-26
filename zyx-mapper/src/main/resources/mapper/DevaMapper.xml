@@ -87,7 +87,7 @@
         <result column="create_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="bgmUrl" jdbcType="VARCHAR"/>
-        <association property="itemCount" column="model_id" select="selectItemCount"/>
+        <association property="circleItemCount" column="id" select="selectItemCount"/>
     </resultMap>
     <select id="queryCircleDevas" parameterType="java.lang.Integer" resultMap="CircleDevaVo">
         SELECT
@@ -215,12 +215,11 @@
     </select>
 
     <select id="selectItemCount" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM circle_item WHERE circle_id = #{model_id}
+        SELECT COUNT(id) FROM circle_item WHERE circle_id = #{id}
     </select>
 
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-        SELECT u.`id`,nickname,avatar,authenticate AS authInfo,official,ua.`authinfo`
-
+        SELECT u.`id`,nickname,avatar,authenticate AS auth,official,ua.`authinfo`
         FROM zyx.`user` u
         LEFT JOIN user_auth ua ON u.`id`=ua.`user_id`
 
