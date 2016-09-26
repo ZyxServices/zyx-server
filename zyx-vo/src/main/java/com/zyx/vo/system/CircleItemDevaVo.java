@@ -24,7 +24,6 @@ public class CircleItemDevaVo extends BaseDevaVo{
 
     private Integer viewCount=0;
     private UserIconVo userIconVo;
-private String nickname;
     public String getTitle() {
         return title;
     }
@@ -99,24 +98,24 @@ private String nickname;
         this.viewCount = viewCount;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+//    public String getNickname() {
+//        return nickname;
+//    }
+//
+//    public void setNickname(String nickname) {
+//        this.nickname = nickname;
+//    }
 
     public UserIconVo getUserIconVo() {
         return userIconVo;
     }
     public void setUserIconVo(UserIconVo userIconVo) {
         this.userIconVo = userIconVo;
-        if(userIconVo!=null){
-            if(userIconVo.getAvatar()!=null)
-            setBgmUrl(userIconVo.getAvatar());
-            if(userIconVo.getNickname()!=null)
-                setNickname(userIconVo.getNickname());
-        }
+//        if(userIconVo!=null){
+//            if(userIconVo.getAvatar()!=null)
+//            setBgmUrl(userIconVo.getAvatar());
+//            if(userIconVo.getNickname()!=null)
+//                setNickname(userIconVo.getNickname());
+//        }
     }
 }
