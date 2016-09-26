@@ -151,7 +151,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         try {
             CircleItem circleItemFind = circleItemMapper.findById(circleItemId);
             if (circleItemFind != null) {
-                if (circleItemFind.getCreateId() == createThisId) {
+                if (Objects.equals(circleItemFind.getCreateId(),createThisId)) {
                     Integer result = circleItemMapper.delByThisUser(createThisId, circleItemId);
                     if (result > 0) {
                         return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG);
