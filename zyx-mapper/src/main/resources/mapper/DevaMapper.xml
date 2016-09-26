@@ -122,7 +122,7 @@
         <association property="zanCount" column="id" select="zanSelect"/>
         <association property="comCount" column="id" select="commentSelect"/>
         <association property="viewCount" column="id" select="viewSelect"/>
-        <association property="userIconVo" column="id" select="selectUserIcon"/>
+        <association property="userIconVo" column="create_id" select="selectUserIcon"/>
     </resultMap>
     <select id="queryCircleItemDevas" parameterType="java.lang.Integer" resultMap="CircleItemDevaVo">
         SELECT
