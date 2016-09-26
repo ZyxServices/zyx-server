@@ -7,18 +7,22 @@ import com.zyx.vo.account.UserIconVo;
  */
 public class CircleItemDevaVo extends BaseDevaVo{
     private String title;
-    private Integer createId;
+    private Integer circleId;
+    private String circleTitle;
+    private Integer userId;
     private String baseContent;
     private Long createTime;
     /**
      * 当前直播的点赞数量
      */
-    private Integer zanCount;
+    private Integer zanCount=0;
 
     /**
      * 当前直播消息数量
      */
-    private Integer msgCount;
+    private Integer comCount=0;
+
+    private Integer viewCount=0;
     private UserIconVo userIconVo;
 private String nickname;
     public String getTitle() {
@@ -29,12 +33,30 @@ private String nickname;
         this.title = title;
     }
 
-    public Integer getCreateId() {
-        return createId;
+    public Integer getCircleId() {
+        return circleId;
     }
 
-    public void setCreateId(Integer createId) {
-        this.createId = createId;
+    public void setCircleId(Integer circleId) {
+        this.circleId = circleId;
+    }
+
+    @Override
+    public Integer getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getCircleTitle() {
+        return circleTitle;
+    }
+
+    public void setCircleTitle(String circleTitle) {
+        this.circleTitle = circleTitle;
     }
 
     public String getBaseContent() {
@@ -61,12 +83,20 @@ private String nickname;
         this.zanCount = zanCount;
     }
 
-    public Integer getMsgCount() {
-        return msgCount;
+    public Integer getComCount() {
+        return comCount;
     }
 
-    public void setMsgCount(Integer msgCount) {
-        this.msgCount = msgCount;
+    public void setComCount(Integer comCount) {
+        this.comCount = comCount;
+    }
+
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     public String getNickname() {
