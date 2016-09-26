@@ -10,8 +10,7 @@ public class UserIconVo implements Serializable {
     private String nickname;
     private String avatar;
     private String authInfo;
-
-    //    private Integer official;
+    private Integer auth;
     public Integer getId() {
         return id;
     }
@@ -36,15 +35,13 @@ public class UserIconVo implements Serializable {
         this.avatar = avatar;
     }
 
-//    public Integer getOfficial() {
-//        return official;
-//    }
-//
-//    public void setOfficial(Integer official) {
-//        this.official = official;
-//    }
+    public Integer getAuth() {
+        return auth;
+    }
 
-//}
+    public void setAuth(Integer auth) {
+        this.auth = auth;
+    }
 
     public String getAuthInfo() {
         return authInfo;

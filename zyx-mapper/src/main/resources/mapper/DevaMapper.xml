@@ -219,8 +219,7 @@
     </select>
 
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-        SELECT u.`id`,nickname,avatar,authenticate AS authInfo,official,ua.`authinfo`
-
+        SELECT u.`id`,nickname,avatar,authenticate AS auth,official,ua.`authinfo`
         FROM zyx.`user` u
         LEFT JOIN user_auth ua ON u.`id`=ua.`user_id`
 
