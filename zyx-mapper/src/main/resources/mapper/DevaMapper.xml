@@ -113,12 +113,15 @@
     </select>
 
     <resultMap id="CircleItemDevaVo" type="com.zyx.vo.system.CircleItemDevaVo" extends="BaseDevaVo">
-        <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="circle_id" property="circleId" jdbcType="INTEGER"/>
+        <result column="circle_title" property="circleTitle" jdbcType="INTEGER"/>
         <result column="create_id" property="userId" jdbcType="INTEGER"/>
         <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="zanCount" column="id" select="zanSelect"/>
+        <association property="comCount" column="id" select="commentSelect"/>
+        <association property="viewCount" column="id" select="viewSelect"/>
         <association property="userIconVo" column="id" select="selectUserIcon"/>
     </resultMap>
     <select id="queryCircleItemDevas" parameterType="java.lang.Integer" resultMap="CircleItemDevaVo">
@@ -129,13 +132,16 @@
         deva.`image_url`,
         deva.`sequence`,
         deva.`area`,
-        ci.`create_id`,
+        ci.`circle_id`,
         ci.`title`,
-         ci.`create_id`,
+        ci.`create_id`,
         ci.`base_content`,
-        ci.`create_time`
+        ci.`create_time`,
+        c.`title` as circle_title
         FROM
-	    devaluation deva INNER JOIN circle_item ci  ON deva.`model_id`=ci.`id`
+	    devaluation deva
+	    INNER JOIN circle_item ci  ON deva.`model_id`=ci.`id`
+	    INNER JOIN circle c ON ci.`circle_id`=c.`id`
         WHERE
         deva.`model`=4
         AND
@@ -200,6 +206,12 @@
 
     <select id="zanSelect" parameterType="int" resultType="int">
         SELECT count(id) from zan where body_type=4 AND body_id=#{id}
+    </select>
+    <select id="commentSelect" parameterType="int" resultType="int">
+        SELECT count(id) from comment where comment_type=4 AND comment_id=#{id}
+    </select>
+    <select id="viewSelect" parameterType="int" resultType="int">
+        SELECT pageviews from pageviews where types=4 AND typeId=#{id}
     </select>
 
     <select id="selectItemCount" parameterType="int" resultType="int">
