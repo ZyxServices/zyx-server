@@ -35,6 +35,11 @@ public class ActivityVo implements Serializable {
     private Integer collection;
 
     /**
+     * 当前用户是否收藏此活动
+     */
+    private Integer isCollection;
+
+    /**
      * 活动标题
      */
     private String title;
@@ -131,6 +136,16 @@ public class ActivityVo implements Serializable {
      */
     private Integer mask;
 
+    /**
+     * 当前活动点赞数
+     */
+    private Integer zanCount;
+
+    /**
+     * 当前活动点赞数
+     */
+    private Integer commentCount;
+
     public Integer getId() {
         return id;
     }
@@ -160,6 +175,14 @@ public class ActivityVo implements Serializable {
             collection = 0;
         }
         return collection;
+    }
+
+    public Integer getIsCollection() {
+        return isCollection;
+    }
+
+    public void setIsCollection(Integer isCollection) {
+        this.isCollection = isCollection;
     }
 
     public void setCollection(Integer collection) {
@@ -318,4 +341,19 @@ public class ActivityVo implements Serializable {
         this.mask = mask;
     }
 
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Integer getZanCount() {
+        return zanCount;
+    }
+
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
 }

@@ -2,9 +2,13 @@ package com.zyx.service.live.impl;
 
 import java.util.List;
 
+import com.zyx.constants.Constants;
+import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.constants.live.LiveConstants;
 import com.zyx.entity.live.dto.LiveInfoDto;
 import com.zyx.param.live.LiveInfoParam;
+import com.zyx.service.pg.ConcernService;
+import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,8 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
 
     @Autowired
     LiveInfoMapper liveInfoMapper;
-
+    @Autowired
+    ConcernService concernService;
     @Autowired
     private RedisTemplate<String, Integer> watchNumberRedis;
 
@@ -34,6 +39,9 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
     @Override
     public void saveLiveInfo(LiveInfo liveInfo) {
         liveInfoMapper.saveLiveInfo(liveInfo);
+        if (liveInfo != null && liveInfo.getId() != null) {
+            concernService.fromConcern(liveInfo.getId(), Constants.DYNAMIC_ACTIVITY, liveInfo);
+        }
     }
 
     @Override
@@ -96,7 +104,6 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
         Integer num = watchNumberRedis.opsForValue().get(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
         watchNumberRedis.delete(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveId);
     }
-
 
 
 }

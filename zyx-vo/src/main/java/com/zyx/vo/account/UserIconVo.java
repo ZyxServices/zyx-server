@@ -5,11 +5,13 @@ import java.io.Serializable;
 /**
  * Created by MrDeng on 2016/8/17.
  */
-public class UserIconVo implements Serializable{
+public class UserIconVo implements Serializable {
     private Integer id;
     private String nickname;
     private String avatar;
+    private String authInfo;
 
+    //    private Integer official;
     public Integer getId() {
         return id;
     }
@@ -32,5 +34,23 @@ public class UserIconVo implements Serializable{
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+//    public Integer getOfficial() {
+//        return official;
+//    }
+//
+//    public void setOfficial(Integer official) {
+//        this.official = official;
+//    }
+
+//}
+
+    public String getAuthInfo() {
+        return authInfo;
+    }
+
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
     }
 }
