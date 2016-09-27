@@ -302,6 +302,11 @@
             <artifactId>zyx-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>tiyujia-parent</groupId>
+            <artifactId>zyx-dubbo-user</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- dubbo 需要的jar end -->
 

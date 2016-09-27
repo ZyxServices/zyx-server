@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by xw on 16-6-12.
  */
-@Repository("concrenMapper")
+@Repository("concernMapper")
 public interface ConcernMapper extends BaseMapper<Concern> {
     List<Concern> starRandom(@Param("type") Integer type, @Param("n") Integer n);
 

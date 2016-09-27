@@ -19,7 +19,7 @@ public class PgFacadeImpl implements PgFacade {
     @Autowired
     private CircleService circleService;
     @Autowired
-    private ConcernService concrenService;
+    private ConcernService concernService;
     @Autowired
     private MeetService meetService;
     @Autowired
@@ -43,7 +43,7 @@ public class PgFacadeImpl implements PgFacade {
 
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
-        return concrenService.addCern(userId, type, cernTitle, content, cernImgurl, videoUrl, visible);
+        return concernService.addCern(userId, type, cernTitle, content, cernImgurl, videoUrl, visible);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class PgFacadeImpl implements PgFacade {
 
     @Override
     public Map<String, Object> starRandom(Integer type, Integer n) {
-        return concrenService.starRandom(type, n);
+        return concernService.starRandom(type, n);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class PgFacadeImpl implements PgFacade {
 
     @Override
     public Map<String, Object> delCern(Integer id, Integer loginUserId) {
-        return concrenService.delCern(id, loginUserId);
+        return concernService.delCern(id, loginUserId);
     }
 
 
@@ -154,17 +154,17 @@ public class PgFacadeImpl implements PgFacade {
 
     @Override
     public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
-        return concrenService.getMyFollowList(loginUserId, start, pageSize);
+        return concernService.getMyFollowList(loginUserId, start, pageSize);
     }
 
     @Override
     public Map<String, Object> starConcern(Integer start, Integer pageSize) {
-        return concrenService.starConcern(start, pageSize);
+        return concernService.starConcern(start, pageSize);
     }
 
     @Override
     public Map<String, Object> getOneConcern(Integer concernId, Integer accountId) {
-        return concrenService.getOne(concernId, accountId);
+        return concernService.getOne(concernId, accountId);
     }
 
     @Override

@@ -146,7 +146,7 @@
         SELECT count(id) FROM concern WHERE user_id = #{accountId} AND  state = 0
     </select>
 
-    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMap">
+    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMapSwitch">
         SELECT * FROM concern WHERE concern.user_id=#{userId} AND state = 0 ORDER BY concern.create_time DESC
         <if test="page != null">
             limit #{page}, #{pageSize}
