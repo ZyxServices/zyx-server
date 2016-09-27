@@ -10,12 +10,14 @@ import com.zyx.entity.pg.CircleItem;
 import com.zyx.entity.pg.Concern;
 import com.zyx.mapper.collection.CollectionMapper;
 import com.zyx.mapper.pg.ConcernMapper;
+import com.zyx.mapper.pg.ZanMapper;
 import com.zyx.param.account.UserConcernParam;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.PageViwesService;
 import com.zyx.service.pg.ConcernService;
+import com.zyx.service.pg.ZanService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.collection.CollectionVo;
 import com.zyx.vo.pg.MyFollowVo;
@@ -39,6 +41,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
     @Resource
     private PageViwesService pageViwesService;
+
+    @Resource
+    private ZanMapper zanMapper;
 
     public ConcernServiceImpl() {
         super(Concern.class);
@@ -134,7 +139,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                             s.setPageViews(pageViwesService.getPageViwesByInternal(3, s.getFromId()));
                             break;
                     }
-                }else{
+                } else {
                     s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
                 }
             });
@@ -178,7 +183,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                             s.setPageViews(pageViwesService.getPageViwesByInternal(3, s.getFromId()));
                             break;
                     }
-                }else{
+                } else {
                     s.setPageViews(pageViwesService.getPageViwesByInternal(1, s.getId()));
                 }
             });
@@ -275,9 +280,10 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //                    }
 //                }
 //            }
+            Map resultMap = new HashMap<>();
             CollectionParam param = new CollectionParam();
             Boolean isCollection = false;
-
+            Boolean isZan = false;
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CONCERN);
@@ -286,10 +292,11 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
                 if (!Objects.equals(collectionFind, null)) {
                     isCollection = true;
                 }
+                isZan = zanMapper.exist(concernId, 2, accountId)>0?true:false;
             }
-            Map resultMap = new HashMap<>();
             resultMap.put("concern", myFollowVo);
             resultMap.put("isCollection", isCollection);
+            resultMap.put("isZan", isZan);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
         } catch (Exception e) {
             e.printStackTrace();
