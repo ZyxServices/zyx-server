@@ -46,7 +46,29 @@
         <association property="commentCounts" column="id" select="commentSelect"/>
         <association property="userVo" column="user_id" select="userSelect"/>
         <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <discriminator javaType="java.lang.Integer" column="from_type">
+            <case value="1" resultMap="LiveInfoMap"/>
+            <case value="2" resultMap="ActivityMap"/>
+            <case value="3" resultMap="CircleItemMap"/>
+        </discriminator>
     </resultMap>
+
+
+    <resultMap id="LiveInfoMap" type="com.zyx.vo.collection.CollLiveVo" extends="ConcernMyMap">
+        <association property="zanCounts" column="from_id" select="zanSelect"/>
+        <association property="commentCounts" column="from_id" select="commentSelect"/>
+    </resultMap>
+
+    <resultMap id="ActivityMap" type="com.zyx.vo.collection.CollActivityVo" extends="ConcernMyMap">
+        <association property="zanCounts" column="from_id" select="zanSelect"/>
+        <association property="commentCounts" column="from_id" select="commentSelect"/>
+    </resultMap>
+
+    <resultMap id="CircleItemMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernMyMap">
+        <association property="zanCounts" column="from_id" select="zanSelect"/>
+        <association property="commentCounts" column="from_id" select="commentSelect"/>
+    </resultMap>
+
     <resultMap id="userAttentionResultMap" type="com.zyx.entity.attention.UserAttention">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="from_user_id" property="fromUserId" jdbcType="INTEGER"/>
