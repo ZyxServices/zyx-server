@@ -1,14 +1,18 @@
 package com.zyx.rpc.system.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.UserMsgInfo;
 import com.zyx.param.account.UserMsgParam;
-import com.zyx.rpc.common.TokenFacade;
 import com.zyx.rpc.system.MsgFacade;
+import com.zyx.service.account.AccountRedisService;
 import com.zyx.service.account.UserMsgService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -25,7 +29,10 @@ import java.util.Map;
 public class MsgFacadeImpl implements MsgFacade {
 
     @Autowired
-    private TokenFacade tokenFacade;
+    protected RedisTemplate<String, String> stringRedisTemplate;
+
+    @Autowired
+    private AccountRedisService accountRedisService;
 
     @Resource
     private UserMsgService userMsgService;
@@ -34,7 +41,7 @@ public class MsgFacadeImpl implements MsgFacade {
     public Map<String, Object> insertMsg(UserMsgParam userMsgParam) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
             if (map != null) {
                 return map;
             }
@@ -54,7 +61,7 @@ public class MsgFacadeImpl implements MsgFacade {
     public Map<String, Object> queryMsgCount(UserMsgParam userMsgParam) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
             if (map != null) {
                 return map;
             }
@@ -69,7 +76,7 @@ public class MsgFacadeImpl implements MsgFacade {
     public Map<String, Object> queryMsgList(UserMsgParam userMsgParam) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
             if (map != null) {
                 return map;
             }
@@ -90,5 +97,29 @@ public class MsgFacadeImpl implements MsgFacade {
         userMsgInfo.setToContent(userMsgParam.getToContent());
         userMsgInfo.setCreateTime(System.currentTimeMillis());
         return userMsgInfo;
+    }
+
+    private Map<String, Object> validateToken(String token, Integer userId) {
+
+        if (StringUtils.isEmpty(token)) {
+            return Constants.MAP_PARAM_MISS;
+        }
+
+        if (StringUtils.isEmpty(userId)) {
+            return Constants.MAP_PARAM_MISS;
+        }
+
+        String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + token);
+        if (StringUtils.isEmpty(phone)) {
+            return Constants.MAP_TOKEN_FAILURE;
+        }
+
+        AccountInfoVo vo = accountRedisService.get(phone);
+
+        if (vo == null || !vo.getId().equals(userId)) {
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_50301, AccountConstants.ACCOUNT_ERROR_CODE_50301_MSG);
+        }
+
+        return null;
     }
 }
