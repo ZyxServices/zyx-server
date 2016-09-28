@@ -11,12 +11,15 @@ import com.zyx.vo.live.LiveInfoVo;
 public interface LiveInfoService extends BaseService<LiveInfo> {
     public void saveLiveInfo(LiveInfo liveInfo);
 
+    public LiveInfo getById(Integer id);
+
+    public LiveInfoVo getLiveInfo(LiveInfoParam param);
+
     public Long countLive(LiveInfoParam param);
 
     public List<LiveInfoVo> selectLives(LiveInfoParam param);
 
     public void logicDelete(Integer id);
-
 
     /**
      * 获取直播观看人数
@@ -50,4 +53,7 @@ public interface LiveInfoService extends BaseService<LiveInfo> {
 //     */
 //	public Integer getLiveWatcherNumber(Integer liveId);
     public LiveInfoVo endLive(Integer id);
+
+
+
 }

@@ -40,7 +40,7 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
             liveInfo.setState(0);
         }
         liveInfo.setDel(0);
-        liveInfoService.save(liveInfo);
+        liveInfoService.saveLiveInfo(liveInfo);
         watchNumberRedis.opsForValue().set(LiveConstants.MARK_LIVE_WATCH_NUMBER + liveInfo.getId(), 0);
         return liveInfo.getId();
     }
@@ -57,14 +57,12 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Override
     public LiveInfo getById(Integer id) {
-        LiveInfo liveInfo = new LiveInfo();
-        liveInfo.setId(id);
-        liveInfo.setDel(0);
-        List<LiveInfo> liveInfos = liveInfoService.select(liveInfo);
-        liveInfo = liveInfos != null && liveInfos.size() == 1 ? liveInfos.get(0) : null;
-        if(liveInfo!=null&&liveInfo.getState()!=null&&liveInfo.getState().equals(1))
-            liveInfo.setWatchNumber(liveInfoService.getLiveWatcherNumber(liveInfo.getId()));
-        return  liveInfo;
+        return liveInfoService.getById(id);
+    }
+
+    @Override
+    public LiveInfoVo getLiveInfo(LiveInfoParam para) {
+        return  liveInfoService.getLiveInfo(para);
     }
 
     @Override
