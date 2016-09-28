@@ -29,11 +29,25 @@ public interface SearchMapper extends BaseMapper<Combination> {
     List<SearchAccountVo> searchAccount(SearchParam searchParam);
 
     /**
+     * 查询当前用户未关注的用户
+     * @param searchParam
+     * @return
+     */
+    List<SearchAccountVo> searchAccountByNO(SearchParam searchParam);
+
+    /**
      * 查询圈子模块
      * @param searchParam
      * @return
      */
     List<SearchCirleVo> searchCirle(SearchParam searchParam);
+
+    /**
+     * 查询未关注的圈子模块
+     * @param searchParam
+     * @return
+     */
+    List<SearchCirleVo> searchCirleByNo(SearchParam searchParam);
 
     /**
      * 查询直播模块

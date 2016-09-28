@@ -15,4 +15,19 @@ public interface SearchService {
      * @return
      */
     Map<String, Object> modularSearch(SearchParam searchParam);
+
+    /**
+     * 查询当前用户未关注的用户
+     * @param searchParam
+     * @return
+     */
+    Map<String, Object> searchAccountByNO(SearchParam searchParam);
+
+    /**
+     * 查询当前用户未关注的圈子
+     * @param searchParam
+     * @return
+     */
+    Map<String, Object> searchCirleByNo(SearchParam searchParam);
+
 }

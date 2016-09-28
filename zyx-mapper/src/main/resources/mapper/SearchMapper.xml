@@ -27,7 +27,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <!--<result column="is_atten" property="isAtten" jdbcType="VARCHAR"/>-->
+        <result column="is_atten" property="isAtten" jdbcType="VARCHAR"/>
         <result column="authenticate" property="authenticate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="auth" column="id" select="authByUserId"></association>
@@ -39,7 +39,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
-        <!--<result column="is_atten" property="isAtten" jdbcType="TINYINT"/>-->
+        <result column="is_atten" property="isAtten" jdbcType="TINYINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="account" column="create_id"
                      select="searchUserAndAuth"></association>
@@ -114,9 +114,23 @@
         SELECT * FROM user_auth where user_id = #{id}
     </select>
 
+
+    <!-- 用户所有数据 -->
     <select id="searchAccount" parameterType="com.zyx.param.system.SearchParam" resultMap="queryAccount">
+        SELECT u.id,u.nickname,u.avatar,u.create_time, u.authenticate,
+        NOT ISNULL(a.id) as is_atten
+        FROM user u LEFT JOIN USER_ATTENTION a ON u.id = a.to_user_id AND a.rel_type = 1 and a.from_user_id = #{userId}
+        where u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0
+        ORDER BY u.create_time desc
+        <if test="pageNumber != null and pages != null">
+            limit #{pages}, #{pageNumber}
+        </if>
+    </select>
+
+    <!-- 未关注的用户数据 -->
+    <select id="searchAccountByNO" parameterType="com.zyx.param.system.SearchParam" resultMap="queryAccount">
         SELECT u.id,u.nickname,u.avatar,u.create_time, u.authenticate FROM user u where
-        u.nickname LIKE CONCAT('%',#{character},'%') AND u.mask = 0 AND u.del = 0
+        u.mask = 0 AND u.del = 0
         <if test="userId != null">
             and u.id != #{userId}
             AND u.id NOT IN (SELECT to_user_id FROM USER_ATTENTION a WHERE a.from_user_id = #{userId})
@@ -127,10 +141,21 @@
         </if>
     </select>
 
-    <!--圈子-->
+    <!--所有圈子-->
     <select id="searchCirle" parameterType="com.zyx.param.system.SearchParam" resultMap="queryCirle">
         SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id FROM circle c where
-        c.title LIKE CONCAT('%',#{character},'%') AND  c.state != -1 AND c.state != -2
+        c.title LIKE CONCAT('%',#{character},'%') AND  c.state != -1 AND c.state != -2 AND c.create_id != #{userId} AND c.id NOT IN
+        (SELECT concern_id FROM myconcern m WHERE m.account_id = #{userId})
+        ORDER BY c.create_time desc
+        <if test="pageNumber != null and pages != null">
+            limit #{pages}, #{pageNumber}
+        </if>
+    </select>
+
+    <!--未关注的圈子-->
+    <select id="searchCirleByNo" parameterType="com.zyx.param.system.SearchParam" resultMap="queryCirle">
+        SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id FROM circle c where
+        c.state != -1 AND c.state != -2
         <if test="userId != null">
             AND c.create_id != #{userId}
             AND c.id NOT IN (SELECT concern_id FROM myconcern m WHERE m.account_id = #{userId})
