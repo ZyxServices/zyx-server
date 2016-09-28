@@ -41,11 +41,35 @@ public class MsgFacadeImpl implements MsgFacade {
     public Map<String, Object> insertMsg(UserMsgParam userMsgParam) {
         try {
             // 判断token是否失效
-            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getFromUserId());
             if (map != null) {
                 return map;
             }
-            int result = userMsgService.save(buildUserMsgInfo(userMsgParam));
+            UserMsgInfo userMsgInfo = checkAndBuildUserMsgInfo(userMsgParam);
+            if (userMsgInfo == null) {
+                return Constants.MAP_PARAM_MISS;
+            }
+            int result = userMsgService.save(userMsgInfo);
+            if (result == 1) {
+                return MapUtils.buildSuccessMap(result);
+            } else {
+                return MapUtils.buildErrorMap(Constants.ERROR, Constants.ERROR_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> deleteMsg(UserMsgParam userMsgParam) {
+        try {
+            // 判断token是否失效
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getFromUserId());
+            if (map != null) {
+                return map;
+            }
+            int result = userMsgService.deleteMsg(userMsgParam);
             if (result == 1) {
                 return MapUtils.buildSuccessMap(result);
             } else {
@@ -87,7 +111,7 @@ public class MsgFacadeImpl implements MsgFacade {
         }
     }
 
-    private UserMsgInfo buildUserMsgInfo(UserMsgParam userMsgParam) {
+    private UserMsgInfo checkAndBuildUserMsgInfo(UserMsgParam userMsgParam) {
         UserMsgInfo userMsgInfo = new UserMsgInfo();
         userMsgInfo.setFromUserId(userMsgParam.getFromUserId());
         userMsgInfo.setToUserId(userMsgParam.getToUserId());

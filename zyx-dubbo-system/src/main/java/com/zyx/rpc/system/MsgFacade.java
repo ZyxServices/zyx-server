@@ -16,6 +16,8 @@ public interface MsgFacade {
 
     Map<String, Object> insertMsg(UserMsgParam userMsgParam);
 
+    Map<String, Object> deleteMsg(UserMsgParam userMsgParam);
+
     Map<String, Object> queryMsgCount(UserMsgParam userMsgParam);
 
     Map<String, Object> queryMsgList(UserMsgParam userMsgParam);

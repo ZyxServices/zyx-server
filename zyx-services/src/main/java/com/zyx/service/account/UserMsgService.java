@@ -19,4 +19,6 @@ public interface UserMsgService extends BaseService<UserMsgInfo> {
     Long queryMsgCount(UserMsgParam userMsgParam);
 
     List<MsgVo> queryMsgList(UserMsgParam userMsgParam);
+
+    int deleteMsg(UserMsgParam userMsgParam);
 }
