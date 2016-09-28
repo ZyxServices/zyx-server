@@ -143,9 +143,9 @@
 
     <!--所有圈子-->
     <select id="searchCirle" parameterType="com.zyx.param.system.SearchParam" resultMap="queryCirle">
-        SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id FROM circle c where
-        c.title LIKE CONCAT('%',#{character},'%') AND  c.state != -1 AND c.state != -2 AND c.create_id != #{userId} AND c.id NOT IN
-        (SELECT concern_id FROM myconcern m WHERE m.account_id = #{userId})
+        SELECT c.id, c.title, c.head_img_url,c.create_time,c.create_id, NOT ISNULL(m.id) as is_atten
+        FROM circle c LEFT JOIN myconcern m ON c.id = m.concern_id AND m.concern_type = 4 AND m.account_id = #{userId}
+        WHERE title LIKE CONCAT('%',#{character},'%') AND c.state != -1 AND c.state != -2
         ORDER BY c.create_time desc
         <if test="pageNumber != null and pages != null">
             limit #{pages}, #{pageNumber}
