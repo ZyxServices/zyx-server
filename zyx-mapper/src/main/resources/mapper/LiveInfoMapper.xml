@@ -57,19 +57,28 @@
 	</select>
 
 	<select id="selectLiveInfo" parameterType="com.zyx.param.live.LiveInfoParam" resultMap="LiveInfoVo">
-		SELECT
-		live.id,live.create_time,auth,type,start_time,end_time,live.user_id,title,lab,bgm_url,vedio_url,group_id,live.state,
-		CASE
+	SELECT
+	live.id,live.create_time,auth,TYPE,start_time,end_time,live.user_id,title,lab,bgm_url,vedio_url,group_id,live.state,
+	CASE
 		COUNT(coll.id)
 		WHEN 0 THEN FALSE
 		ELSE
 		TRUE
-		END
-		AS isColl
-		FROM
-		t_live live LEFT JOIN t_collection coll ON live.`id`= coll.`model_id` AND coll.`user_id` = #{viewUserId}
-  		WHERE
-		live.id=#{id}
+	END
+	AS isColl,
+	CASE
+		COUNT(zan.`id`)
+		WHEN 0 THEN FALSE
+		ELSE
+		TRUE
+	END
+	AS isZan
+	FROM
+	t_live live
+	LEFT JOIN t_collection coll ON live.`id`= coll.`model_id` AND coll.`user_id` = #{viewUserId}
+	LEFT JOIN zan  ON zan.`body_id` = live.`id` AND zan.`body_type`=4 AND zan.`account_id` = #{viewUserId}
+	WHERE
+	live.id=#{id}
 	</select>
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"

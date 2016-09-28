@@ -29,6 +29,7 @@ public class LiveInfoVo implements Serializable {
     private Integer watchNumber;
     private Long liveTime;
     private boolean isColl;
+    private boolean isZan;
 
     public boolean getIsColl() {
         return isColl;
@@ -36,6 +37,14 @@ public class LiveInfoVo implements Serializable {
 
     public void setColl(boolean coll) {
         isColl = coll;
+    }
+
+    public boolean getIsZan() {
+        return isZan;
+    }
+
+    public void setZan(boolean zan) {
+        isZan = zan;
     }
 
     public Integer getWatchNumber() {
