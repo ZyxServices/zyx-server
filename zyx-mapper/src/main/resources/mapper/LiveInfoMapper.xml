@@ -9,6 +9,7 @@
 		<id column="id" property="id" />
 		<id column="creat_time" property="createTime" />
 		<id column="auth" property="auth" />
+		<id column="user_id" property="userId" />
 		<id column="type" property="type" />
 		<id column="start_time" property="startTime" />
 		<id column="end_time" property="endTime" />
@@ -18,6 +19,7 @@
 		<id column="vedio_url" property="vedioUrl" />
 		<id column="group_id" property="groupId" />
 		<id column="state" property="state" />
+		<id column="isColl" property="isColl" />
 		<association property="userIconVo" column="user_id" select="selectUserIcon"></association>
 		<association property="zanCount" column="id" select="zanSelect"/>
 	</resultMap>
@@ -46,6 +48,28 @@
 		del = 0
 		AND
 		<![CDATA[ START_TIME < NOW()]]>
+	</select>
+
+	<select id="selectById" parameterType="java.lang.Integer" resultType="com.zyx.entity.live.LiveInfo">
+		select id,create_time,auth,type,start_time,end_time,user_id,title,lab,bgm_url,vedio_url,group_id,state
+		from t_live
+		id=#{id}
+	</select>
+
+	<select id="selectLiveInfo" parameterType="com.zyx.param.live.LiveInfoParam" resultMap="LiveInfoVo">
+		SELECT
+		live.id,live.create_time,auth,type,start_time,end_time,live.user_id,title,lab,bgm_url,vedio_url,group_id,live.state,
+		CASE
+		COUNT(coll.id)
+		WHEN 0 THEN FALSE
+		ELSE
+		TRUE
+		END
+		AS isColl
+		FROM
+		t_live live LEFT JOIN t_collection coll ON live.`id`= coll.`model_id` AND coll.`user_id` = #{viewUserId}
+  		WHERE
+		live.id=#{id}
 	</select>
 
 	<select id="selectLives" parameterType="com.zyx.param.live.LiveInfoParam"

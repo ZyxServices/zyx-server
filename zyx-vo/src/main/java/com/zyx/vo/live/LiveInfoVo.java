@@ -14,6 +14,7 @@ public class LiveInfoVo implements Serializable {
     private Integer id;
     private Integer auth;
     private Integer type;
+    private Integer userId;
     private Long startTime;
     private Long endTime;
     private UserIconVo userIconVo;
@@ -25,10 +26,17 @@ public class LiveInfoVo implements Serializable {
     private Integer state;
     // 用户认证标签
     private String authInfo;
-
     private Integer watchNumber;
-
     private Long liveTime;
+    private boolean isColl;
+
+    public boolean getIsColl() {
+        return isColl;
+    }
+
+    public void setColl(boolean coll) {
+        isColl = coll;
+    }
 
     public Integer getWatchNumber() {
         return watchNumber;
@@ -75,6 +83,13 @@ public class LiveInfoVo implements Serializable {
         this.type = type;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public void setUserIconVo(UserIconVo userIconVo) {
         this.userIconVo = userIconVo;

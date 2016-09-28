@@ -137,6 +137,16 @@ public class FastDFSClient {
      */
     public static int deleteFile(String fileId) {
         try {
+            TrackerClient trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
+            TrackerServer trackerServer = trackerClient.getConnection();
+            if (trackerServer == null) {
+                logger.error("getConnection return null");
+            }
+            StorageServer storageServer = trackerClient.getStoreStorage(trackerServer);
+            if (storageServer == null) {
+                logger.error("getStoreStorage return null");
+            }
+            storageClient1 = new StorageClient1(trackerServer, storageServer);
             int result = storageClient1.delete_file1(fileId);
             return result;
         } catch (Exception ex) {

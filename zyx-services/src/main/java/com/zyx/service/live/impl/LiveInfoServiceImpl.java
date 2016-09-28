@@ -2,6 +2,7 @@ package com.zyx.service.live.impl;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.constants.live.LiveConstants;
@@ -39,9 +40,20 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
     @Override
     public void saveLiveInfo(LiveInfo liveInfo) {
         liveInfoMapper.saveLiveInfo(liveInfo);
+        System.out.println(JSON.toJSONString(liveInfo));
         if (liveInfo != null && liveInfo.getId() != null) {
-            concernService.fromConcern(liveInfo.getId(), Constants.DYNAMIC_ACTIVITY, liveInfo);
+            concernService.fromConcern(liveInfo.getId(), 1, liveInfo);
         }
+    }
+
+    @Override
+    public LiveInfo getById(Integer id) {
+        return liveInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public LiveInfoVo getLiveInfo(LiveInfoParam param) {
+        return liveInfoMapper.selectLiveInfo(param);
     }
 
     @Override

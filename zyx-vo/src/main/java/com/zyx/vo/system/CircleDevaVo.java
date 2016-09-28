@@ -5,9 +5,8 @@ package com.zyx.vo.system;
  */
 public class CircleDevaVo extends BaseDevaVo {
     private String title;
-//    private Integer createId;
-//    private Long createTime;
-    private Integer itemCount;
+//    private Integer itemCount;
+    private Integer circleItemCount;
 
     public String getTitle() {
         return title;
@@ -25,11 +24,12 @@ public class CircleDevaVo extends BaseDevaVo {
 //        this.createId = createId;
 //    }
 
-    public Integer getItemCount() {
-        return itemCount;
+    public Integer getCircleItemCount() {
+        return circleItemCount;
     }
 
-    public void setItemCount(Integer itemCount) {
-        this.itemCount = itemCount;
+    public void setCircleItemCount(Integer circleItemCount) {
+        this.circleItemCount = circleItemCount;
     }
+
 }

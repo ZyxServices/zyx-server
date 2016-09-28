@@ -25,7 +25,7 @@ import java.util.Map;
 public class MyConcernFacadeImpl implements MyConcernFacade {
 
     @Autowired
-    private ConcernService concrenService;
+    private ConcernService concernService;
 
     @Autowired
     private TokenFacade tokenFacade;
@@ -38,7 +38,7 @@ public class MyConcernFacadeImpl implements MyConcernFacade {
             if (map != null) {
                 return map;
             }
-            List<MyFollowVo> _list = concrenService.queryMyConcernList(userConcernParam);
+            List<MyFollowVo> _list = concernService.queryMyConcernList(userConcernParam);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, _list);
         } catch (Exception e) {
             e.printStackTrace();

@@ -38,16 +38,18 @@ public interface LiveInfoFacade {
 	 * @update 2016年6月22日 上午10:29:15
 	 */
 	public void updateNotNull(LiveInfo liveInfo);
+
+	public LiveInfo getById(Integer id);
 	/**
 	 *
-	 * @param id
 	 * @return
 	 * @description 获取直播 单个
 	 * @version 1.0
 	 * @author MrDeng
 	 * @update 2016年6月22日 上午10:30:44
 	 */
-	public LiveInfo getById(Integer id);
+	public LiveInfoVo getLiveInfo(LiveInfoParam para);
+
 
 	/**
 	 *

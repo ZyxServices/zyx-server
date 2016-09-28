@@ -136,6 +136,16 @@ public class ActivityVo implements Serializable {
      */
     private Integer mask;
 
+    /**
+     * 当前活动点赞数
+     */
+    private Integer zanCount;
+
+    /**
+     * 当前活动点赞数
+     */
+    private Integer commentCount;
+
     public Integer getId() {
         return id;
     }
@@ -331,4 +341,19 @@ public class ActivityVo implements Serializable {
         this.mask = mask;
     }
 
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Integer getZanCount() {
+        return zanCount;
+    }
+
+    public void setZanCount(Integer zanCount) {
+        this.zanCount = zanCount;
+    }
 }

@@ -47,6 +47,37 @@
         <association property="userVo" column="user_id" select="userSelect"/>
         <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
     </resultMap>
+
+    <resultMap id="ConcernMyMapSwitch" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernResultMap">
+        <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
+        <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="userVo" column="user_id" select="userSelect"/>
+        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <discriminator javaType="java.lang.Integer" column="from_type">
+            <case value="1" resultMap="LiveInfoMap"/>
+            <case value="2" resultMap="ActivityMap"/>
+            <case value="3" resultMap="CircleItemMap"/>
+        </discriminator>
+    </resultMap>
+
+
+    <resultMap id="LiveInfoMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernMyMapSwitch">
+        <association property="zanCounts" column="from_id" select="LiveZanSelect"/>
+        <association property="commentCounts" column="from_id" select="LiveCommentSelect"/>
+    </resultMap>
+
+    <resultMap id="ActivityMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernMyMapSwitch">
+        <association property="zanCounts" column="from_id" select="ActivityZanSelect"/>
+        <association property="commentCounts" column="from_id" select="ActivityCommentSelect"/>
+    </resultMap>
+
+    <resultMap id="CircleItemMap" type="com.zyx.vo.pg.MyFollowVo" extends="ConcernMyMapSwitch">
+        <association property="zanCounts" column="from_id" select="CircleItemZanSelect"/>
+        <association property="commentCounts" column="from_id" select="CircleItemCommentSelect"/>
+    </resultMap>
+
     <resultMap id="userAttentionResultMap" type="com.zyx.entity.attention.UserAttention">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="from_user_id" property="fromUserId" jdbcType="INTEGER"/>
@@ -64,11 +95,32 @@
     </select>
 
     <select id="zanSelect" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM zan WHERE zan.body_id=#{concernId}
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{concernId}
+    </select>
+    <select id="LiveZanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=4 AND zan.body_id=#{concernId}
+    </select>
+    <select id="ActivityZanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=3 AND zan.body_id=#{concernId}
+    </select>
+    <select id="CircleItemZanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=5 AND zan.body_id=#{concernId}
     </select>
 
     <select id="commentSelect" parameterType="int" resultType="int">
      SELECT COUNT(id) FROM comment WHERE comment.comment_type=3 AND comment_id=#{concernId}
+    </select>
+
+    <select id="LiveCommentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=4 AND comment_id=#{concernId}
+    </select>
+
+    <select id="ActivityCommentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=2 AND comment_id=#{concernId}
+    </select>
+
+    <select id="CircleItemCommentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=1 AND comment_id=#{concernId}
     </select>
 
     <select id="getAttentionIds" parameterType="int" resultMap="userAttentionResultMap">
@@ -94,14 +146,14 @@
         SELECT count(id) FROM concern WHERE user_id = #{accountId} AND  state = 0
     </select>
 
-    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMap">
+    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMapSwitch">
         SELECT * FROM concern WHERE concern.user_id=#{userId} AND state = 0 ORDER BY concern.create_time DESC
         <if test="page != null">
             limit #{page}, #{pageSize}
         </if>
     </select>
 
-    <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMap">
+    <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMapSwitch">
         SELECT * FROM concern WHERE user_id IN
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
@@ -111,7 +163,7 @@
         LIMIT #{start},#{end}
     </select>
 
-    <select id="starConcern" resultMap="ConcernMyMap">
+    <select id="starConcern" resultMap="ConcernMyMapSwitch">
         SELECT
         concern.id,
         concern.user_id,

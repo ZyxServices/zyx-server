@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.account.UserMsgMapper">
+
+    <resultMap id="MsgResultMap" type="com.zyx.vo.account.MsgVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="from_content" property="fromContent" jdbcType="VARCHAR"/>
+        <result column="to_content" property="toContent" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="body_id" property="bodyId" jdbcType="INTEGER"/>
+        <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
+        <discriminator javaType="java.lang.Integer" column="body_type">
+            <case value="0" resultMap="CircleMap"/>
+            <case value="1" resultMap="CircleItemMap"/>
+            <case value="2" resultMap="ActivityMap"/>
+            <case value="3" resultMap="ConcernMap"/>
+            <case value="4" resultMap="LiveMap"/>
+            <case value="5" resultMap="UserMap"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="MsgToResultMap" type="com.zyx.vo.account.MsgToVo">
+        <result column="to_uri" property="toUri" jdbcType="VARCHAR"/>
+        <result column="to_content" property="toContent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="CircleMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="CircleMapSelect"/>
+    </resultMap>
+
+    <resultMap id="CircleItemMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="CircleItemMapSelect"/>
+    </resultMap>
+
+    <resultMap id="ActivityMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="ActivityMapSelect"/>
+    </resultMap>
+
+    <resultMap id="ConcernMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="ConcernMapSelect"/>
+    </resultMap>
+
+    <resultMap id="LiveMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="LiveMapSelect"/>
+    </resultMap>
+
+    <resultMap id="UserMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="UserMapSelect"/>
+    </resultMap>
+
+    <select id="queryMsgCount" parameterType="com.zyx.param.account.UserMsgParam" resultType="long">
+        SELECT count(id) FROM t_user_msg WHERE to_user_id = #{toUserId}
+    </select>
+
+    <select id="queryMsgList" parameterType="com.zyx.param.account.UserMsgParam" resultMap="MsgResultMap">
+        select * from t_user_msg where to_user_id = #{toUserId}
+        <if test="pager.pageNum != null and pager.pageSize != null">
+            limit #{pager.offset}, #{pager.pageSize}
+        </if>
+    </select>
+
+    <select id="CircleMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.head_img_url as to_uri,c.title as to_content from circle c where c.id = #{bodyId}
+    </select>
+
+    <select id="CircleItemMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.img_url as to_uri,c.title as to_content from circle_item c where c.id = #{bodyId}
+    </select>
+
+    <select id="ActivityMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.img_urls as to_uri,c.title as to_content from activity c where c.id = #{bodyId}
+    </select>
+
+    <select id="ConcernMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.img_url as to_uri,c.topic_content as to_content from concern c where c.id = #{bodyId}
+    </select>
+
+    <select id="LiveMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.bgm_url as to_uri,c.title as to_content from t_live c where c.id = #{bodyId}
+    </select>
+
+    <select id="UserMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.avatar as to_uri,c.nickname as to_content from user c where c.id = #{bodyId}
+    </select>
+
+    <delete id="deleteMsg" parameterType="com.zyx.param.account.UserMsgParam">
+        delete from t_user_msg where id = #{id}
+    </delete>
+
+</mapper>

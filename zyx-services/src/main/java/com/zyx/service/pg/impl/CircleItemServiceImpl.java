@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.pg.PgConstants;
 import com.zyx.entity.pg.CircleItem;
 import com.zyx.mapper.collection.CollectionMapper;
+import com.zyx.mapper.pg.ZanMapper;
 import com.zyx.param.collection.CollectionParam;
 import com.zyx.service.activity.PageViwesService;
 import com.zyx.service.pg.ConcernService;
@@ -35,6 +36,9 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
 
     @Resource
     private ConcernService concernService;
+
+    @Resource
+    private ZanMapper zanMapper;
 
 
     @Resource
@@ -92,14 +96,14 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                     circleItem.setContent(circleItem.getContent() + sb.toString());
                 } else {
                     StringBuilder sb = new StringBuilder();
-                    if(!Objects.equals(circleItem.getImgUrl(),null)||!Objects.equals(circleItem.getImgUrl(),"")){
-                        sb.append("<img src='http://image.tiyujia.com/" + circleItem.getImgUrl()     + "'></img>");
+                    if (!Objects.equals(circleItem.getImgUrl(), null) || !Objects.equals(circleItem.getImgUrl(), "")) {
+                        sb.append("<img src='http://image.tiyujia.com/" + circleItem.getImgUrl() + "'></img>");
                         circleItem.setContent(circleItem.getContent() + sb.toString());
                     }
                 }
             }
             save(circleItem);
-            concernService.fromConcern(circleItem.getId(),Constants.DYNAMIC_CIRCLE_ITEM,circleItem);
+            concernService.fromConcern(circleItem.getId(), Constants.DYNAMIC_CIRCLE_ITEM, circleItem);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,14 +155,14 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         try {
             CircleItem circleItemFind = circleItemMapper.findById(circleItemId);
             if (circleItemFind != null) {
-                if (circleItemFind.getCreateId() == createThisId) {
-                    Integer result = circleItemMapper.delByThisUser(createThisId, circleItemId);
-                    if (result > 0) {
-                        return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG);
-                    }
-                } else {
-                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+//                if (Objects.equals(circleItemFind.getCreateId(),createThisId)) {
+                Integer result = circleItemMapper.delByThisUser(createThisId, circleItemId);
+                if (result > 0) {
+                    return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG);
                 }
+//                } else {
+//                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+//                }
             } else {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
             }
@@ -193,6 +197,8 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             CircleItemLunBoVo vo = circleItemMapper.getOneCircleItem(circleItemId);
             CollectionParam param = new CollectionParam();
             Boolean isCollection = false;
+            Boolean isZan = false;
+            Map resultMap = new HashMap<>();
             if (!Objects.equals(accountId, null)) {
                 param.setUserId(accountId);
                 param.setModel(Constants.MODEL_CIRCLE_ITEM);
@@ -201,10 +207,12 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
                 if (!Objects.equals(collectionFind, null)) {
                     isCollection = true;
                 }
+                isZan = zanMapper.exist(circleItemId, 5, accountId) > 0 ? true : false;
+
             }
-            Map resultMap = new HashMap<>();
             resultMap.put("circleItem", vo);
             resultMap.put("isCollection", isCollection);
+            resultMap.put("isZan", isZan);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
         } catch (Exception e) {
             e.printStackTrace();

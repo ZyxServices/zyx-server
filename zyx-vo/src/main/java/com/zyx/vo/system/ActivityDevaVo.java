@@ -5,7 +5,6 @@ package com.zyx.vo.system;
  */
 public class ActivityDevaVo extends BaseDevaVo {
     private String title;
-//    private String bgmUrl;
     public String getTitle() {
         return title;
     }
@@ -13,12 +12,4 @@ public class ActivityDevaVo extends BaseDevaVo {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    public String getBgmUrl() {
-//        return bgmUrl;
-//    }
-//
-//    public void setBgmUrl(String bgmUrl) {
-//        this.bgmUrl = bgmUrl;
-//    }
 }
