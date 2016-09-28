@@ -23,6 +23,8 @@ public class MsgVo implements Serializable {
 
     private Long createTime;
 
+    private UserIconVo userVo;
+
     private MsgToVo toObject;
 
     public Integer getId() {
@@ -71,6 +73,14 @@ public class MsgVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public UserIconVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserIconVo userVo) {
+        this.userVo = userVo;
     }
 
     public MsgToVo getToObject() {

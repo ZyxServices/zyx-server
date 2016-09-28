@@ -33,6 +33,7 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="body_id" property="bodyId" jdbcType="INTEGER"/>
         <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
+        <association property="userVo" column="from_user_id" select="UserVoSelect"/>
         <discriminator javaType="java.lang.Integer" column="body_type">
             <case value="0" resultMap="CircleMap"/>
             <case value="1" resultMap="CircleItemMap"/>
@@ -72,6 +73,12 @@
         <association property="toObject" column="body_id" select="UserMapSelect"/>
     </resultMap>
 
+    <resultMap id="UserVoResultMap" type="com.zyx.vo.account.UserIconVo">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="queryMsgCount" parameterType="com.zyx.param.account.UserMsgParam" resultType="long">
         SELECT count(id) FROM t_user_msg WHERE to_user_id = #{toUserId}
     </select>
@@ -105,6 +112,10 @@
 
     <select id="UserMapSelect" parameterType="int" resultMap="MsgToResultMap">
         select c.avatar as to_uri,c.nickname as to_content from user c where c.id = #{bodyId}
+    </select>
+
+    <select id="UserVoSelect" parameterType="int" resultMap="UserVoResultMap">
+        select c.id, c.avatar, c.nickname from user c where c.id = #{formUserId}
     </select>
 
     <delete id="deleteMsg" parameterType="com.zyx.param.account.UserMsgParam">
