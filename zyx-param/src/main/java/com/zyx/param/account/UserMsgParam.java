@@ -14,6 +14,8 @@ import com.zyx.param.Pager;
 public class UserMsgParam extends BaseParam {
     private static final long serialVersionUID = -398290103454317282L;
 
+    private Integer id;
+
     private Integer fromUserId;
     private Integer toUserId;
     private Integer bodyId;
@@ -26,6 +28,14 @@ public class UserMsgParam extends BaseParam {
     private String toContent;
 
     private Pager pager;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getFromUserId() {
         return fromUserId;

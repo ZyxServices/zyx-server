@@ -97,6 +97,38 @@ public class SearchServiceImpl implements SearchService {
         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
     }
 
+    @Override
+    public Map<String, Object> searchAccountByNO(SearchParam searchParam) {
+        if (searchParam != null && searchParam.getPageNumber() != null && searchParam.getPages() != null) {
+            searchParam.setPages((searchParam.getPages() - 1) * searchParam.getPageNumber());
+
+            List<SearchAccountVo> searchAccountVos = searchMapper.searchAccountByNO(searchParam);
+            if (searchAccountVos.size() > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchAccountVos);
+            } else {
+                return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
+            }
+        } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> searchCirleByNo(SearchParam searchParam) {
+        if (searchParam != null && searchParam.getPageNumber() != null && searchParam.getPages() != null) {
+            searchParam.setPages((searchParam.getPages() - 1) * searchParam.getPageNumber());
+
+            List<SearchCirleVo> searchCirleVos = searchMapper.searchCirleByNo(searchParam);
+            if (searchCirleVos.size() > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchCirleVos);
+            } else {
+                return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
+            }
+        } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
     private Integer getPageViwes(int model, Integer id) {
         PageViews pageViews = pageViwesService.getPageViwesByInternal(model, id);
         return pageViews.getPageviews();

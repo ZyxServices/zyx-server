@@ -226,7 +226,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
             List<ActivityVo> activities = activityHistory
                     .stream()
-                    .filter(e -> e != null && (e.getEndTime() - e.getStartTime()) <= 0)
+                    .filter(e -> e != null && (e.getEndTime() - e.getStartTime()) > 0)
                     .collect(Collectors.toList());
 
             if (activities != null && activities.size() > 0) {

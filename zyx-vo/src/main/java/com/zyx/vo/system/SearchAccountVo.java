@@ -21,7 +21,7 @@ public class SearchAccountVo implements Serializable {
      */
     private String avatar;
 
-//    private boolean isAtten;
+    private boolean isAtten;
 
     private Integer authenticate;
 
@@ -75,5 +75,14 @@ public class SearchAccountVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public boolean isAtten() {
+        return isAtten;
+    }
+
+    public void setAtten(boolean atten) {
+        System.out.println(atten);
+        isAtten = atten;
     }
 }

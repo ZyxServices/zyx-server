@@ -22,8 +22,6 @@ public class UserMsgInfo extends BaseEntity {
     private Integer bodyId;
     private Integer bodyType;
 
-    private Long createTime;
-
     private String fromContent;
 
     private String toContent;
@@ -58,16 +56,6 @@ public class UserMsgInfo extends BaseEntity {
 
     public void setBodyType(Integer bodyType) {
         this.bodyType = bodyType;
-    }
-
-    @Override
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
     }
 
     public String getFromContent() {

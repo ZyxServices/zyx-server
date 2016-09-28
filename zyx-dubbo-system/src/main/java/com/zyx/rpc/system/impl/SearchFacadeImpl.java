@@ -27,12 +27,37 @@ public class SearchFacadeImpl implements SearchFacade {
             return searchService.modularSearch(searchParam);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e);
-            Map<String, Object> map = new HashMap<>();
-            map.put(Constants.STATE, Constants.ERROR_500);
-            map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
-            return map;
+            return return500(e);
         }
 
+    }
+
+    @Override
+    public Map<String, Object> searchAccountByNO(SearchParam searchParam) {
+        try {
+            return searchService.searchAccountByNO(searchParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return return500(e);
+        }
+    }
+
+    @Override
+    public Map<String, Object> searchCirleByNo(SearchParam searchParam) {
+        try {
+            return searchService.searchCirleByNo(searchParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return return500(e);
+        }
+    }
+
+
+    private Map<String, Object> return500(Exception e) {
+        logger.error(e);
+        Map<String, Object> map = new HashMap<>();
+        map.put(Constants.STATE, Constants.ERROR_500);
+        map.put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+        return map;
     }
 }

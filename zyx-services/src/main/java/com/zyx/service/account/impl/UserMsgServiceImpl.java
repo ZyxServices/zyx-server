@@ -29,7 +29,6 @@ public class UserMsgServiceImpl extends BaseServiceImpl<UserMsgInfo> implements 
         super(UserMsgInfo.class);
     }
 
-
     @Override
     public Long queryMsgCount(UserMsgParam userMsgParam) {
         return userMsgMapper.queryMsgCount(userMsgParam);
@@ -37,6 +36,11 @@ public class UserMsgServiceImpl extends BaseServiceImpl<UserMsgInfo> implements 
 
     @Override
     public List<MsgVo> queryMsgList(UserMsgParam userMsgParam) {
-        return null;
+        return userMsgMapper.queryMsgList(userMsgParam);
+    }
+
+    @Override
+    public int deleteMsg(UserMsgParam userMsgParam) {
+        return userMsgMapper.deleteMsg(userMsgParam);
     }
 }
