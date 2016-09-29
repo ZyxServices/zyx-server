@@ -84,7 +84,7 @@
     </select>
 
     <select id="queryMsgList" parameterType="com.zyx.param.account.UserMsgParam" resultMap="MsgResultMap">
-        select * from t_user_msg where to_user_id = #{toUserId}
+        select * from t_user_msg where to_user_id = #{toUserId} ORDER BY create_time DESC
         <if test="pager.pageNum != null and pager.pageSize != null">
             limit #{pager.offset}, #{pager.pageSize}
         </if>
