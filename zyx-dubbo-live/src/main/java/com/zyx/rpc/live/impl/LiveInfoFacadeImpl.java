@@ -33,10 +33,10 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     public Integer add(LiveInfo liveInfo) {
         // 修正开始时间 默认状态
         long now = System.currentTimeMillis();
-        if(null != liveInfo.getStartTime() && liveInfo.getStartTime() < now){
-            liveInfo.setStartTime(now );
+        if (null != liveInfo.getStartTime() && liveInfo.getStartTime() < now) {
+            liveInfo.setStartTime(now);
             liveInfo.setState(1);
-        }else{
+        } else {
             liveInfo.setState(0);
         }
         liveInfo.setDel(0);
@@ -47,8 +47,8 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Override
     public void updateNotNull(LiveInfo liveInfo) {
-        if(liveInfo!=null&&liveInfo.getState()!=null){
-            if(liveInfo.getState().equals(-1)){
+        if (liveInfo != null && liveInfo.getState() != null) {
+            if (liveInfo.getState().equals(-1)) {
                 liveInfoService.endLiveWatcherNumber(liveInfo.getId());
             }
         }
@@ -62,7 +62,10 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Override
     public LiveInfoVo getLiveInfo(LiveInfoParam para) {
-        return  liveInfoService.getLiveInfo(para);
+        LiveInfoVo liveVo = liveInfoService.getLiveInfo(para);
+        if(liveVo!=null&&liveVo.getId()!=null)
+            liveVo.setWatchNumber(getWatchNumber(liveVo.getId()));
+        return liveVo;
     }
 
     @Override
@@ -73,13 +76,13 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
     @Override
     public List<LiveInfoVo> getList(LiveInfoParam liveInfoParam) {
         List<LiveInfoVo> list = liveInfoService.selectLives(liveInfoParam);
-        if(liveInfoParam.getPager()==null||liveInfoParam.getPager().getPageNum()==null||liveInfoParam.getPager().getPageSize()==null){
-            liveInfoParam.setPager(new Pager(1,10));
+        if (liveInfoParam.getPager() == null || liveInfoParam.getPager().getPageNum() == null || liveInfoParam.getPager().getPageSize() == null) {
+            liveInfoParam.setPager(new Pager(1, 10));
         }
-        if(null!=list&&!list.isEmpty()){
-            for(LiveInfoVo vo:list){
-                if(vo.getState().equals(1))
-                vo.setWatchNumber(liveInfoService.getLiveWatcherNumber(vo.getId()));
+        if (null != list && !list.isEmpty()) {
+            for (LiveInfoVo vo : list) {
+                if (vo.getState().equals(1))
+                    vo.setWatchNumber(liveInfoService.getLiveWatcherNumber(vo.getId()));
             }
         }
         return list;
@@ -98,25 +101,17 @@ public class LiveInfoFacadeImpl implements LiveInfoFacade {
 
     @Override
     public void inOrOutLive(Integer liveId, Integer inOrOut) {
-        if(inOrOut!=null){
-            if (inOrOut.equals(0)){
+        if (inOrOut != null) {
+            if (inOrOut.equals(0)) {
                 liveInfoService.outLiveWatcherNumber(liveId);
-            }else if(inOrOut.equals(1)){
+            } else if (inOrOut.equals(1)) {
                 liveInfoService.inLiveWatcherNumber(liveId);
             }
         }
     }
 
-//    @Override
-//    public Map<Integer, Integer> getLiveWatchNum(List<Integer> liveIds) {
-//        Random rand = new Random(System.currentTimeMillis());
-//        Map<Integer, Integer> numMap = new HashMap<Integer, Integer>();
-//        // TODO 获取到直播的当前观看人数
-//        for (Integer liveId : liveIds) {
-//            numMap.put(liveId, rand.nextInt(1000));
-//        }
-//        return numMap;
-//    }
-
-
+    @Override
+    public Integer getWatchNumber(Integer liveId) {
+        return liveInfoService.getLiveWatcherNumber(liveId);
+    }
 }

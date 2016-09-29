@@ -46,12 +46,6 @@ public interface LiveInfoService extends BaseService<LiveInfo> {
      */
     void endLiveWatcherNumber(Integer liveId);
 
-    //	/**
-//	 * 获取直播观看人数
-//	 * @param liveId
-//	 * @return
-//     */
-//	public Integer getLiveWatcherNumber(Integer liveId);
     public LiveInfoVo endLive(Integer id);
 
 
