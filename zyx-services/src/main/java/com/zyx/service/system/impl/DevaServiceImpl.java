@@ -2,10 +2,14 @@ package com.zyx.service.system.impl;
 
 import java.util.List;
 
+import com.zyx.entity.live.LiveInfo;
 import com.zyx.entity.system.Devaluation;
 import com.zyx.mapper.system.DevaMapper;
 import com.zyx.param.system.DevaParam;
+import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.system.DevaService;
+import com.zyx.vo.live.LiveInfoVo;
+import com.zyx.vo.system.LiveDevaVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,8 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
     @Autowired
     RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    LiveInfoService liveInfoService;
     public DevaServiceImpl() {
         super(Devaluation.class);
     }
@@ -49,6 +55,10 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
                     break;
                 case 2:
                     rsList = devaMapper.queryLiveDevas(area);
+                    for (Object vo:rsList){
+                        LiveDevaVo deva = (LiveDevaVo)vo;
+                        deva.setWatchNumber(liveInfoService.getLiveWatcherNumber(deva.getId()));
+                    }
                     break;
                 case 3:
                     rsList = devaMapper.queryCircleDevas(area);
