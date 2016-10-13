@@ -51,7 +51,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--211.157.152.200:  192.168.1.200:-->
         <property name="url"
-                  value="jdbc:mysql://192.168.1.200:3306/zyx?characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
+                  value="jdbc:mysql://119.61.66.55:3306/zyx?characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
         <property name="username" value="tiyujia"/>
         <property name="password" value="tiyujia_2016"/>
         <!-- 配置初始化大小、最小、最大 -->
