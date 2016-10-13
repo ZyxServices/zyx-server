@@ -112,6 +112,14 @@ public class MsgFacadeImpl implements MsgFacade {
     }
 
     private UserMsgInfo checkAndBuildUserMsgInfo(UserMsgParam userMsgParam) {
+        if (userMsgParam.getFromUserId() == null || userMsgParam.getToUserId() == null) {
+            return null;
+        }
+
+        if (userMsgParam.getFromUserId().equals(userMsgParam.getToUserId())) {
+            return null;
+        }
+
         UserMsgInfo userMsgInfo = new UserMsgInfo();
         userMsgInfo.setFromUserId(userMsgParam.getFromUserId());
         userMsgInfo.setToUserId(userMsgParam.getToUserId());

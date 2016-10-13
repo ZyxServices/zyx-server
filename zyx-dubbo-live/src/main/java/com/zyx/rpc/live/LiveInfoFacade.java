@@ -106,4 +106,6 @@ public interface LiveInfoFacade {
 	 * @param inOrOut
 	 */
 	public void  inOrOutLive(Integer liveId,Integer inOrOut);
+
+	public Integer getWatchNumber(Integer liveId);
 }

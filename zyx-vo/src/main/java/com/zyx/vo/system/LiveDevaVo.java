@@ -17,6 +17,7 @@ public class LiveDevaVo extends BaseDevaVo{
     private Long groupId;
     private Integer state;
     private UserIconVo userIconVo;
+    private Integer watchNumber;
     public Integer getAuth() {
         return auth;
     }
@@ -95,5 +96,13 @@ public class LiveDevaVo extends BaseDevaVo{
 
     public void setUserIconVo(UserIconVo userIconVo) {
         this.userIconVo = userIconVo;
+    }
+
+    public Integer getWatchNumber() {
+        return watchNumber;
+    }
+
+    public void setWatchNumber(Integer watchNumber) {
+        this.watchNumber = watchNumber;
     }
 }
